@@ -7,7 +7,7 @@ const app = express();
 // enable parsing of URL-encoded form data
 app.use(express.urlencoded({ extended: true }));
 
-app.get('/', (req, res) => res.send('hello'));
+app.get('/api', (req, res) => res.send('hello'));
 
 app.use('*', (req, res) => {
     res.status(404).send('Not Found');
