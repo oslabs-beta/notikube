@@ -1,22 +1,45 @@
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
+const cors = require('cors')
 require('dotenv').config();
 const app = express();
 const db = require('./model/model');
 
+const passport = require('passport')
+const session = require('express-session')
+const LocalStrategy = require('passport-local').Strategy
+
 // enable parsing of URL-encoded form data
 app.use(express.urlencoded({ extended: true }));
+
+app.use(express.json())
+
+
+app.use(session({
+    secret: 'secret',
+    resave: false,
+    saveUninitialized: true
+}))
+
+app.use(passport.initialize())
+app.use(passport.session())
+
+const authRouter = require('./routes/authRouter.js')
+
+app.use('/api/auth', authRouter);
 
 app.get('/api', (req, res) => res.send('hello'));
 
 app.get('/api/dbTest', (req, res) => {
-  const text = "INSERT INTO users (name, email) VALUES ('test', 'test@gmail.com');"
+    const text = "INSERT INTO users (name, email) VALUES ('test', 'test@gmail.com');"
 
-  db.query(text);
+    db.query(text);
 
-  res.sendStatus(200);
+    res.sendStatus(200);
 })
+
+
 
 app.use('*', (req, res) => {
     res.status(404).send('Not Found');
