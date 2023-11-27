@@ -1,31 +1,41 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 
 const Login = () => {
 
+  const navigate = useNavigate();
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  function submit(e) {
+  async function submit(e) {
     e.preventDefault()
     //Use the alert snackbar here
     if (email == '' || password == '') {
       return
     }
     const params = {
-      email: email,
+      username: email,
       password: password
     }
 
-    fetch('/api/login', {
+    let result = await fetch('/api/auth/login', {
       method: 'POST',
       headers: {
-        'Content-type': 'application/json'
+        'Content-type': 'application/json',
       },
-      body: JSON.stringify(params)
+      body: JSON.stringify(params),
+      credentials: 'include'
     })
-      .then(res => res.json())
-      .then(data => console.log(data))
+
+    if (result.status == 401) {
+      console.log('unAuthorized')
+      alert('Incorrect Email/Password')
+    }
+    else {
+      await result.json()
+      console.log(result)
+      navigate('/dashboard')
+    }
 
   }
 

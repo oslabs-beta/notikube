@@ -9,7 +9,7 @@ import './index.css'
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: '/dashboard',
     element: <App />
   },
   {
@@ -17,7 +17,7 @@ const router = createBrowserRouter([
     element: <Profile />
   },
   {
-    path: '/login',
+    path: '/',
     element: <Login />
   },
   {
