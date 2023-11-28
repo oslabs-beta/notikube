@@ -2,7 +2,6 @@ const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 const db = require('../model/model.js')
 const bcrypt = require('bcrypt')
-const SALT_FACTOR = 10
 
 module.exports = function () {
   passport.use(new LocalStrategy(async (username, password, done) => {
