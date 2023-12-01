@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Dashboard from './Dashboard';
+import Dashboard from './views/Dashboard.jsx';
 import Profile from './components/Profile';
 import Login from './views/Login.jsx';
 import Signup from './views/Signup.jsx';

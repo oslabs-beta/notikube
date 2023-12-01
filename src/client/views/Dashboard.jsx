@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Sidemenu from './components/Sidemenu';
+import Sidemenu from '../components/Sidemenu';
 
-import '../client/App.css';
+import '../App.css';
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -15,9 +15,10 @@ function Dashboard() {
         setName(data.name);
         setIsLoaded(true);
       }
-      else {
-        navigate('/');
-      }
+      // --LEAVE THIS COMMENTED OUT UNTIL WE ARE READY TO GO LIVE--
+      // else {
+      //   navigate('/');
+      // }
     });
 
   async function logout() {
@@ -30,7 +31,8 @@ function Dashboard() {
     }
   }
 
-  if (isLoaded) {
+  // --LEAVE THIS COMMENTED OUT UNTIL WE ARE READY TO GO LIVE--
+  // if (isLoaded) {
     return (
       <div>
         <Sidemenu/>
@@ -38,10 +40,10 @@ function Dashboard() {
         <button onClick={logout}>LogOut</button>
       </div>
     );
-  }
-  else {
-    return;
-  }
+  // }
+  // else {
+  //   return;
+  // }
 }
 
 export default Dashboard;
