@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 
 import '../client/App.css'
 
-function App() {
+function Dashboard() {
   const navigate = useNavigate();
   const [name, setName] = useState('')
   const [isLoaded, setIsLoaded] = useState(false)
@@ -42,4 +42,4 @@ function App() {
   }
 }
 
-export default App
+export default Dashboard

@@ -31,7 +31,7 @@ const Signup = () => {
       .then(data => {
         if (data.newUser) {
           alert('Account created!')
-          navigate('/')
+          navigate('/login')
         }
         else {
           alert('User already exists')
