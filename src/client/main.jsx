@@ -14,21 +14,33 @@ const router = createBrowserRouter([
     element: <LandingPage />
   },
   {
-    path: '/dashboard',
-    element: <Dashboard />
-  },
-  {
-    path: '/profile',
-    element: <Profile />
+    path: '/signup',
+    element: <Signup />
   },
   {
     path: '/login',
     element: <Login />
   },
   {
-    path: '/signup',
-    element: <Signup />
-  }
+    path: '/dashboard',
+    element: <Dashboard />
+  },
+  {
+    path: '/incident-log',
+    // element: <IncidentLog />
+  },
+  {
+    path: '/notifications',
+    // element: <Notifications />
+  },
+  {
+    path: '/connect-cluster',
+    // element: <ConnectCluster />
+  },
+  {
+    path: '/profile',
+    element: <Profile />
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
