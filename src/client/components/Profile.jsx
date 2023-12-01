@@ -8,7 +8,7 @@ function Profile() {
           })}
           >click me</button>
          </div>
-    )
+    );
   }
   
-  export default Profile
+  export default Profile;

@@ -1,31 +1,31 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import '../client/App.css'
+import '../client/App.css';
 
 function Dashboard() {
   const navigate = useNavigate();
-  const [name, setName] = useState('')
-  const [isLoaded, setIsLoaded] = useState(false)
+  const [name, setName] = useState('');
+  const [isLoaded, setIsLoaded] = useState(false);
   fetch('/api/auth/checkauth')
     .then(res => res.json())
     .then(data => {
       if (data.user) {
-        setName(data.name)
-        setIsLoaded(true)
+        setName(data.name);
+        setIsLoaded(true);
       }
       else {
-        navigate('/')
+        navigate('/');
       }
-    })
+    });
 
   async function logout() {
-    let result = await fetch('/api/auth/logout')
+    const result = await fetch('/api/auth/logout');
     if (result.status == 200) {
-      navigate('/')
+      navigate('/');
     }
     else {
-      alert('There was a problem with logging out')
+      alert('There was a problem with logging out');
     }
   }
 
@@ -35,11 +35,11 @@ function Dashboard() {
         <h1>Hello {name}, This is Notikube</h1>
         <button onClick={logout}>LogOut</button>
       </div>
-    )
+    );
   }
   else {
     return;
   }
 }
 
-export default Dashboard
+export default Dashboard;

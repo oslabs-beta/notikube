@@ -2,12 +2,12 @@
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
-const cors = require('cors')
+const cors = require('cors');
 require('dotenv').config();
 const app = express();
 const db = require('./model/model');
-const passport = require('passport')
-const session = require('express-session')
+const passport = require('passport');
+const session = require('express-session');
 
 app.use(cors());
 app.use(cookieParser());
@@ -15,7 +15,7 @@ app.use(cookieParser());
 // enable parsing of URL-encoded form data
 app.use(express.urlencoded({ extended: true }));
 
-app.use(express.json())
+app.use(express.json());
 
 
 // Express session
@@ -28,17 +28,17 @@ app.use(session({
         httpOnly: false,
         maxAge: 1000 * 60 * 10
     }
-}))
+}));
 
 //Passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
 
 //Passport config
-require('./config/passport.js')(passport)
+require('./config/passport.js')(passport);
 
 //Auth route
-const authRouter = require('./routes/authRouter.js')
+const authRouter = require('./routes/authRouter.js');
 app.use('/api/auth', authRouter);
 
 app.get('/api', (req, res) => res.send('hello'));
