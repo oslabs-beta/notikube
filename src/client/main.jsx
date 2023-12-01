@@ -1,23 +1,34 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
-import App from '../client/App'
+import Dashboard from './Dashboard'
 import Profile from './components/Profile'
+import Login from './views/Login.jsx'
+import Signup from './views/Signup.jsx'
+import LandingPage from './views/LandingPage'
 import Dashboard from './components/Dashboard'
 import './index.css'
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <App />
+    element: <LandingPage />
+  },
+  {
+    path: '/dashboard',
+    element: <Dashboard />
   },
   {
     path: '/profile',
     element: <Profile />
   },
   {
-    path: '/dashboard',
-    element: <Dashboard />
+    path: '/login',
+    element: <Login />
+  },
+  {
+    path: '/signup',
+    element: <Signup />
   }
 ]);
 
