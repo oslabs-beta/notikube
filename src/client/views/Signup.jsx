@@ -51,7 +51,7 @@ const Signup = () => {
         <input type='text' onChange={(e) => setPassword(e.target.value)} />
         <input type='submit' value='Submit' onClick={(e) => submit(e)} />
       </form>
-      <h3>Already have an account? <Link to='/'>Log in</Link></h3>
+      <h3>Already have an account? <Link to='/login'>Log in</Link></h3>
     </>
   )
 }
