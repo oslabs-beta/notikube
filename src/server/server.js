@@ -4,11 +4,14 @@ const cookieParser = require('cookie-parser');
 require('dotenv').config();
 const app = express();
 const db = require('./model/model');
+const apiRouter = require('./routes/api')
+
 
 // enable parsing of URL-encoded form data
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json())
 
-app.get('/api', (req, res) => res.send('hello'));
+app.use('/api', apiRouter);
 
 app.get('/api/dbTest', (req, res) => {
   const text = "INSERT INTO users (name, email) VALUES ('test', 'test@gmail.com');"
