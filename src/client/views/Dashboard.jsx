@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Sidemenu from '../components/Sidemenu';
+import Sidebar from '../components/Sidebar';
 
 import '../App.css';
 
@@ -35,8 +35,8 @@ function Dashboard() {
   // if (isLoaded) {
     return (
       <div>
-        <Sidemenu/>
-        <h1>Hello {name}, This is Notikube</h1>
+        <Sidebar/>
+        <h1>Hello {name}, This is Notikube.</h1>
         <button onClick={logout}>LogOut</button>
       </div>
     );

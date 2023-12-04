@@ -20,6 +20,7 @@ module.exports = {
     "prefer-const": "warn",
     "quotes": ["warn", "single"],
     "semi": ["warn", "always"],
-    "space-infix-ops": "warn"
+    "space-infix-ops": "warn",
+    "react/no-unescaped-entities": 0 
   },
 }
