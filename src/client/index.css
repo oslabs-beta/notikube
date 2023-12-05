@@ -18,6 +18,7 @@ a {
   color: black;
   text-decoration: inherit;
 }
+
 a:hover {
   color: #EC0001;
 }
@@ -25,7 +26,7 @@ a:hover {
 body {
   margin: 0;
   display: flex;
-  place-items: center;
+  /* place-items: center; */
   min-width: 320px;
   min-height: 100vh;
 }
@@ -33,6 +34,10 @@ body {
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+}
+
+.Alerts {
+  width: 90vw
 }
 
 button {
@@ -46,13 +51,16 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
   border-color: #EC0001;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
+
 
 @media (prefers-color-scheme: light) {
   :root {
@@ -65,4 +73,5 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+
 }

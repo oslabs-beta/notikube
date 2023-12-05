@@ -6,6 +6,8 @@ const cors = require('cors');
 require('dotenv').config();
 const app = express();
 const db = require('./model/model');
+const apiRouter = require('./routes/api')
+
 const passport = require('passport');
 const session = require('express-session');
 
@@ -41,7 +43,7 @@ require('./config/passport.js')(passport);
 const authRouter = require('./routes/authRouter.js');
 app.use('/api/auth', authRouter);
 
-app.get('/api', (req, res) => res.send('hello'));
+app.use('/api', apiRouter);
 
 app.get('/api/dbTest', (req, res) => {
     const text = 'INSERT INTO users (name, email) VALUES (\'test\', \'test@gmail.com\');';
