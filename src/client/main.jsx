@@ -6,6 +6,7 @@ import Signup from './views/Signup.jsx';
 import Login from './views/Login.jsx';
 import Dashboard from './views/Dashboard.jsx';
 import Profile from './views/Profile.jsx';
+import Alerts from './components/Alerts.jsx';
 
 import './index.css';
 
@@ -26,14 +27,6 @@ const router = createBrowserRouter([
     path: '/dashboard',
     element: <Dashboard />
   },
-  // {
-  //   path: '/incidents',
-  //   element: <Incidents />
-  // },
-  // {
-  //   path: '/incidents/:id',
-  //   element: <IncidentDetails />
-  // },
   {
     path: '/connect-cluster',
     // element: <ConnectCluster />
@@ -42,6 +35,10 @@ const router = createBrowserRouter([
     path: '/profile',
     element: <Profile />
   },
+  {
+    path: '/alerts',
+    element: <Alerts />
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
