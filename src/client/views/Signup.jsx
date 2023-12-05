@@ -1,24 +1,24 @@
-import { useState } from "react"
-import { useNavigate, Link } from "react-router-dom"
+import { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 
 const Signup = () => {
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const [fullName, setFullName] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [fullName, setFullName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   function submit(e) {
-    e.preventDefault()
+    e.preventDefault();
     if (fullName == '' || email == '' || password == '') {
-      return
+      return;
     }
     const params = {
       fullName: fullName,
       email: email,
       password: password
-    }
+    };
 
     fetch('/api/auth/signup', {
       method: 'POST',
@@ -30,13 +30,13 @@ const Signup = () => {
       .then(res => res.json())
       .then(data => {
         if (data.newUser) {
-          alert('Account created!')
-          navigate('/login')
+          alert('Account created!');
+          navigate('/login');
         }
         else {
-          alert('User already exists')
+          alert('User already exists');
         }
-      })
+      });
 
   }
 
@@ -53,7 +53,7 @@ const Signup = () => {
       </form>
       <h3>Already have an account? <Link to='/'>Log in</Link></h3>
     </>
-  )
-}
+  );
+};
 
-export default Signup
+export default Signup;

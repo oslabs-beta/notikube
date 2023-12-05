@@ -1,12 +1,13 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import { createBrowserRouter, RouterProvider } from "react-router-dom"
-import Dashboard from './Dashboard'
-import Profile from './components/Profile'
-import Login from './views/Login.jsx'
-import Signup from './views/Signup.jsx'
-import LandingPage from './views/LandingPage'
-import './index.css'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import LandingPage from './views/LandingPage';
+import Signup from './views/Signup.jsx';
+import Login from './views/Login.jsx';
+import Dashboard from './views/Dashboard.jsx';
+import Profile from './views/Profile.jsx';
+
+import './index.css';
 
 const router = createBrowserRouter([
   {
@@ -14,24 +15,36 @@ const router = createBrowserRouter([
     element: <LandingPage />
   },
   {
-    path: '/dashboard',
-    element: <Dashboard />
-  },
-  {
-    path: '/profile',
-    element: <Profile />
+    path: '/signup',
+    element: <Signup />
   },
   {
     path: '/login',
     element: <Login />
   },
   {
-    path: '/signup',
-    element: <Signup />
-  }
+    path: '/dashboard',
+    element: <Dashboard />
+  },
+  // {
+  //   path: '/incidents',
+  //   element: <Incidents />
+  // },
+  // {
+  //   path: '/incidents/:id',
+  //   element: <IncidentDetails />
+  // },
+  {
+    path: '/connect-cluster',
+    // element: <ConnectCluster />
+  },
+  {
+    path: '/profile',
+    element: <Profile />
+  },
 ]);
 
-ReactDOM.createRoot(document.getElementById("root")).render(
+ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <RouterProvider router={router} />
   </React.StrictMode>
