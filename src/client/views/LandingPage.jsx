@@ -460,8 +460,8 @@ function LandingPage() {
               Managing Incidents for Modern Day DevOps Teams
             </h2>
             <p className="mb-4 font-light">
-              NotiKube is a lightweight incident management tool that combines
-              Prometheus Alert Manager and traditional incident management tools
+              NotiKube is a lightweight incident management tool that utilizes
+              Prometheus Alert Manager and combines traditional incident management tools
               like OpsGenie and ServiceNow into a centralized platform
             </p>
             <p className="mb-4 font-medium">
