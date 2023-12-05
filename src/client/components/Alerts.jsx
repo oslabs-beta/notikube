@@ -40,9 +40,9 @@ function Alerts() {
 
     const customStyles = {
         
-        headCells: {
+        headRow: {
             style: {
-                paddingLeft: '20px', // override the cell padding for head cells
+                //paddingLeft: '0px', // override the cell padding for head cells
                 paddingRight: '8px',
                 backgroundColor: 'silver',
                 fontWeight: 'bold',
@@ -50,11 +50,13 @@ function Alerts() {
         },
         cells: {
             style: {
-                paddingLeft: '20px', // override the cell padding for data cells
+                //paddingLeft: '20px', // override the cell padding for data cells
                 paddingRight: '8px',
             },
         },
     };
+
+    const ExpandedComponent = ({ data }) => <pre>{JSON.stringify(data.description, null, 2)}</pre>;
 
 
 
@@ -84,11 +86,13 @@ function Alerts() {
         <DataTable
           columns={columns}
           data={data}
-          //selectableRows
           progressPending={loading}
           pagination={true}
           fixedHeader={true}
           customStyles={customStyles}
+          expandableRows 
+          expandableRowsComponent={ExpandedComponent}
+          selectableRows
         />
         </div>
     )
