@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 
 function LandingPage() {
 
-  const navigate = useNavigate();
 
   return (
     <div>
