@@ -6,7 +6,6 @@ import Profile from './components/Profile'
 import Login from './views/Login.jsx'
 import Signup from './views/Signup.jsx'
 import LandingPage from './views/LandingPage'
-import Dashboard from './components/Dashboard'
 import './index.css'
 
 const router = createBrowserRouter([
