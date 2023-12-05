@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import App from '../client/App'
 import Profile from './components/Profile'
-import Notifications from './components/Notofications'
+import Alerts from './components/Alerts'
 import './index.css'
 
 const router = createBrowserRouter([
@@ -16,8 +16,8 @@ const router = createBrowserRouter([
     element: <Profile />
   },
   {
-    path: '/notifications',
-    element: <Notifications />
+    path: '/alerts',
+    element: <Alerts />
   }
 ]);
 

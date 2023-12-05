@@ -14,7 +14,6 @@ function Notifications() {
     const [ phoneState, setPhoneState ] = useState(false);
     const [configuration, setConfiguration] = useState({});
     const [isLoading, setLoading] = useState(true);
-    const navigate = useNavigate();
 
     useEffect(() => {
         getConfig();

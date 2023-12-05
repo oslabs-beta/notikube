@@ -41,5 +41,15 @@ router.post('/notificationUpdate', (req, res) => {
 
 })
 
+router.get('/tableData', (req, res) => {
+
+  const userid = process.env.userID
+  const text = 'SELECT * FROM testAlerts WHERE userid =$1'
+  db.query(text, [userid])
+    .then((data) => res.locals.tableData = data.rows)
+    .then(() => console.log('data rows', res.locals.tableData))
+    .then(() => res.status(200).send(res.locals.tableData))
+})
+
 
 module.exports = router;
