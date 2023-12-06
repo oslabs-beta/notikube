@@ -1,6 +1,7 @@
 
-import { useEffect, useState } from "react";
-import DataTable from "react-data-table-component";
+import { useEffect, useState } from 'react';
+import DataTable from 'react-data-table-component';
+import Sidebar from './Sidebar';
 
 function Alerts() {
 
@@ -61,21 +62,21 @@ function Alerts() {
 
 
     useEffect(() => {
-        fetchData()
+        fetchData();
     },[]);
 
     function fetchData() {
       setLoading(true);
       //const URL = 'http://jsonplaceholder.typicode.com/users'
-      const URL = '/api/tableData'
+      const URL = '/api/tableData';
       fetch(URL)
         .then((res) => {
-            return res.json()
+            return res.json();
         })
         .then((json) => {
-            console.log('json', json)
-            setData(json)
-        })
+            console.log('json', json);
+            setData(json);
+        });
  
       setLoading(false);
     }
@@ -83,6 +84,7 @@ function Alerts() {
     return (
         <div className="Alerts">
         <h1>NotiKube Alert History</h1>
+        <Sidebar/>
         <DataTable
           columns={columns}
           data={data}
@@ -95,7 +97,7 @@ function Alerts() {
           selectableRows
         />
         </div>
-    )
+    );
 
 }
 

@@ -6,7 +6,7 @@ const cors = require('cors');
 require('dotenv').config();
 const app = express();
 const db = require('./model/model');
-const apiRouter = require('./routes/api')
+const apiRouter = require('./routes/api');
 
 const passport = require('passport');
 const session = require('express-session');
