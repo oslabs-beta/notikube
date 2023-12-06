@@ -61,8 +61,15 @@ export default function Sidebar() {
             {/* Incident Link */}
             <li>
               <NavLink
-                to="/incidents"
+                to="/alerts"
                 className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                style={({ isActive, isPending, isTransitioning }) => {
+                  return {
+                    fontWeight: isActive ? "bold" : "",
+                    color: isActive ? "var(--theme-color-NotikubeRed)" : isPending ? "red" : "black",
+                    transition: isTransitioning ? "slide" : "",
+                  };
+                }}
               >
                 <svg
                   aria-hidden="true"
@@ -80,7 +87,7 @@ export default function Sidebar() {
                     />
                   </g>
                 </svg>
-                <span className="ml-3">Incidents</span>
+                <span className="ml-3">Alerts</span>
               </NavLink>
             </li>
 
@@ -89,6 +96,13 @@ export default function Sidebar() {
               <NavLink
                 to="/connect-cluster"
                 className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                style={({ isActive, isPending, isTransitioning }) => {
+                  return {
+                    fontWeight: isActive ? "bold" : "",
+                    color: isActive ? "var(--theme-color-NotikubeRed)" : isPending ? "red" : "black",
+                    transition: isTransitioning ? "slide" : "",
+                  };
+                }}
               >
                 <svg
                   aria-hidden="true"
