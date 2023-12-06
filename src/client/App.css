@@ -31,7 +31,7 @@ a {
 }
 
 a:hover {
-  color: #EC0001;
+  color: #ec0001;
 }
 
 body {
@@ -48,7 +48,7 @@ h1 {
 }
 
 .Alerts {
-  width: 90vw
+  width: 90vw;
 }
 
 button {
@@ -64,15 +64,13 @@ button {
 }
 
 button:hover {
-  border-color: #EC0001;
+  border-color: #ec0001;
 }
 
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
-
-
 
 .logo {
   height: 6em;
@@ -108,14 +106,12 @@ button:focus-visible {
     background-color: #ffffff;
   }
   a:hover {
-    color: #F04438;
+    color: #f04438;
   }
   button {
     background-color: #f9f9f9;
   }
-
 }
-
 
 .card {
   padding: 2em;
@@ -124,4 +120,3 @@ button:focus-visible {
 .read-the-docs {
   color: #888;
 }
-
