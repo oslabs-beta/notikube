@@ -15,5 +15,10 @@ router.get('/tableData', (req, res) => {
     .then(() => res.status(200).send(res.locals.tableData))
 })
 
+router.post('/alert', (req, res) => {
+  console.log('req.body', req.body);
+  res.sendStatus(200);
+})
+
 
 module.exports = router;
