@@ -6,7 +6,7 @@ import '../App.css';
 
 function Dashboard() {
   const navigate = useNavigate();
-  const [ipAddress, setIpAddress] = useState('127.0.0.1:51984');
+  const [ipAddress, setIpAddress] = useState('127.0.0.1:57485');
   const [clusterName, setClusterName] = useState('Test1');
   const [name, setName] = useState('Jesse');
   const [isLoaded, setIsLoaded] = useState(false);
@@ -41,7 +41,7 @@ function Dashboard() {
         <div className='p-4 sm:ml-64'>
           <h1 className="text-left pl-8 py-5 text-5xl font-extrabold dark:text-white">Dashboard</h1>
           <h2 className="">{clusterName}</h2>
-          <h2 className="">Current IP Address: {ipAddress}</h2>
+          <h2 className="">Current Grafana IP Address: {ipAddress}</h2>
           <div id='metrics'>
             <h3 className="text-left pl-8 text-3xl font-bold dark:text-white py-3">Cluster</h3>
             <section id='cluster'>
