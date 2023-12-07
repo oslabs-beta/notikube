@@ -9,6 +9,8 @@ function Dashboard() {
   const [ipAddress, setIpAddress] = useState('127.0.0.1:57485');
   const [clusterName, setClusterName] = useState('Test1');
   const [name, setName] = useState('Jesse');
+  const [numOfAlerts, setNumOfAlerts] = useState(12);
+  const [inProgress, setInProgress] = useState(3);
   const [isLoaded, setIsLoaded] = useState(false);
   fetch('/api/auth/checkauth')
     .then(res => res.json())
@@ -43,23 +45,33 @@ function Dashboard() {
           <h2 className="">{clusterName}</h2>
           <h2 className="">Current Grafana IP Address: {ipAddress}</h2>
           <div id='metrics'>
+            <section>
+              <div id='dashboard-alerts'className='my-5 display: inline-flex'>
+                <a href="#" className="block m-3 max-w-sm w-80 p-10 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                  <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">All Open Alerts</h5>
+                  <p className="font-normal text-gray-700 dark:text-gray-400">{numOfAlerts}</p>
+                </a>
+                <a href="#" className="block m-3 max-w-sm w-80 p-10 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                  <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">In Progress Alerts</h5>
+                  <p className="font-normal text-gray-700 dark:text-gray-400">{inProgress}</p>
+                </a>
+              </div>
+            </section>
             <h3 className="text-left pl-8 text-3xl font-bold dark:text-white py-3">Cluster</h3>
             <section id='cluster'>
               <div id='cluster-row-1'className='display: inline-flex'>
-                <iframe className="rounded-lg m-3" src={`http://${ipAddress}/d-solo/garysdevil-kube-state-metrics-v2/kube-state-metrics-v2?orgId=1&from=${Date.now() - 3600000}&to=${Date.now()}&panelId=4`} width="350" height="250" frameborder="0"></iframe>
                 <iframe className="rounded-lg m-3" src={`http://${ipAddress}/d-solo/garysdevil-kube-state-metrics-v2/kube-state-metrics-v2?orgId=1&from=${Date.now() - 3600000}&to=${Date.now()}&panelId=5`} width="350" height="250" frameborder="0"></iframe>
                 <iframe className="rounded-lg m-3" src={`http://${ipAddress}/d-solo/garysdevil-kube-state-metrics-v2/kube-state-metrics-v2?orgId=1&from=${Date.now() - 3600000}&to=${Date.now()}&panelId=6`} width="350" height="250" frameborder="0"></iframe>
               </div>
               <div id='cluster-row-2' className='display: inline-flex'>
-                <iframe className="rounded-lg m-3" src={`http://${ipAddress}/d-solo/garysdevil-kube-state-metrics-v2/kube-state-metrics-v2?orgId=1&from=${Date.now() - 3600000}&to=${Date.now()}&panelId=9`} width="350" height="250" frameborder="0"></iframe>
                 <iframe className="rounded-lg m-3" src={`http://${ipAddress}/d-solo/garysdevil-kube-state-metrics-v2/kube-state-metrics-v2?orgId=1&from=${Date.now() - 3600000}&to=${Date.now()}&panelId=10`} width="350" height="250" frameborder="0"></iframe>
                 <iframe className="rounded-lg m-3" src={`http://${ipAddress}/d-solo/garysdevil-kube-state-metrics-v2/kube-state-metrics-v2?orgId=1&from=${Date.now() - 3600000}&to=${Date.now()}&panelId=11`} width="350" height="250" frameborder="0"></iframe>
               </div>
            </section>
            <h3 className="text-left pl-8 text-3xl font-bold dark:text-white py-3">Nodes</h3>
               <section id='nodes' className='display: inline-flex'>
-                <iframe className="rounded-lg m-3" src={`http://${ipAddress}/d-solo/garysdevil-kube-state-metrics-v2/kube-state-metrics-v2?orgId=1&from=${Date.now() - 3600000}&to=${Date.now()}&panelId=24`} width="300" height="200" frameborder="0"></iframe>
-                <iframe className="rounded-lg m-3" src={`http://${ipAddress}/d-solo/garysdevil-kube-state-metrics-v2/kube-state-metrics-v2?orgId=1&from=${Date.now() - 3600000}&to=${Date.now()}&panelId=26`} width="300" height="200" frameborder="0"></iframe>
+                <iframe className="rounded-lg m-3" src={`http://${ipAddress}/d-solo/garysdevil-kube-state-metrics-v2/kube-state-metrics-v2?orgId=1&from=${Date.now() - 3600000}&to=${Date.now()}&panelId=24`} width="350" height="250" frameborder="0"></iframe>
+                <iframe className="rounded-lg m-3" src={`http://${ipAddress}/d-solo/garysdevil-kube-state-metrics-v2/kube-state-metrics-v2?orgId=1&from=${Date.now() - 3600000}&to=${Date.now()}&panelId=26`} width="350" height="250" frameborder="0"></iframe>
               </section>
           </div>
         </div>
@@ -70,3 +82,5 @@ function Dashboard() {
   //   return;
   // }
 }
+
+export default Dashboard;
