@@ -82,9 +82,10 @@ function Alerts() {
     }
 
     return (
-        <div className="Alerts">
-        <h1>NotiKube Alert History</h1>
+      <div>
         <Sidebar/>
+        <div className="" >
+        <h1>NotiKube Alert History</h1>
         <DataTable
           columns={columns}
           data={data}
@@ -97,6 +98,7 @@ function Alerts() {
           selectableRows
         />
         </div>
+      </div>
     );
 
 }
