@@ -33,7 +33,11 @@ export default function Sidebar() {
                 style={({ isActive, isPending, isTransitioning }) => {
                   return {
                     fontWeight: isActive ? "bold" : "",
-                    color: isActive ? "var(--theme-color-NotikubeRed)" : isPending ? "red" : "black",
+                    color: isActive
+                      ? "var(--theme-color-NotikubeRed)"
+                      : isPending
+                      ? "red"
+                      : "black",
                     transition: isTransitioning ? "slide" : "",
                   };
                 }}
@@ -66,7 +70,11 @@ export default function Sidebar() {
                 style={({ isActive, isPending, isTransitioning }) => {
                   return {
                     fontWeight: isActive ? "bold" : "",
-                    color: isActive ? "var(--theme-color-NotikubeRed)" : isPending ? "red" : "black",
+                    color: isActive
+                      ? "var(--theme-color-NotikubeRed)"
+                      : isPending
+                      ? "red"
+                      : "black",
                     transition: isTransitioning ? "slide" : "",
                   };
                 }}
@@ -99,7 +107,11 @@ export default function Sidebar() {
                 style={({ isActive, isPending, isTransitioning }) => {
                   return {
                     fontWeight: isActive ? "bold" : "",
-                    color: isActive ? "var(--theme-color-NotikubeRed)" : isPending ? "red" : "black",
+                    color: isActive
+                      ? "var(--theme-color-NotikubeRed)"
+                      : isPending
+                      ? "red"
+                      : "black",
                     transition: isTransitioning ? "slide" : "",
                   };
                 }}
@@ -123,38 +135,81 @@ export default function Sidebar() {
                 <span className="ml-3">Connect Cluster</span>
               </NavLink>
             </li>
-          </ul>
-        </div>
 
-        {/* Setting Icon at Bottom */}
-        <div className="hidden absolute bottom-0 left-0 justify-center p-4 space-x-4 w-full lg:flex bg-white dark:bg-gray-800 z-20 border-r border-gray-200 dark:border-gray-700">
-          <NavLink
-            to="/profile"
-            data-tooltip-target="tooltip-settings"
-            className="inline-flex justify-center p-2 text-gray-500 rounded cursor-pointer dark:text-gray-400 dark:hover:text-white hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-600"
-          >
-            <svg
-              aria-hidden="true"
-              className="w-6 h-6"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fillRule="evenodd"
-                d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z"
-                clipRule="evenodd"
-              ></path>
-            </svg>
-          </NavLink>
-          <div
-            id="tooltip-settings"
-            role="tooltip"
-            className="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip"
-          >
-            Settings page
-            <div className="tooltip-arrow" data-popper-arrow></div>
-          </div>
+            {/* Profile Link */}
+            <li>
+              <NavLink
+                to="/profile"
+                className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                style={({ isActive, isPending, isTransitioning }) => {
+                  return {
+                    fontWeight: isActive ? "bold" : "",
+                    color: isActive
+                      ? "var(--theme-color-NotikubeRed)"
+                      : isPending
+                      ? "red"
+                      : "black",
+                    transition: isTransitioning ? "slide" : "",
+                  };
+                }}
+              >
+                <svg
+                  aria-hidden="true"
+                  className="w-6 h-6 text-gray-400 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                  fill="currentColor"
+                  viewBox="0 0"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g opacity="0.4">
+                    <path
+                      fillRule="evenodd"
+                      clipRule="evenodd"
+                      d="M20.4023 13.58C20.76 13.77 21.036 14.07 21.2301 14.37C21.6083 14.99 21.5776 15.75 21.2097 16.42L20.4943 17.62C20.1162 18.26 19.411 18.66 18.6855 18.66C18.3278 18.66 17.9292 18.56 17.6022 18.36C17.3365 18.19 17.0299 18.13 16.7029 18.13C15.6911 18.13 14.8429 18.96 14.8122 19.95C14.8122 21.1 13.872 22 12.6968 22H11.3069C10.1215 22 9.18125 21.1 9.18125 19.95C9.16081 18.96 8.31259 18.13 7.30085 18.13C6.96361 18.13 6.65702 18.19 6.40153 18.36C6.0745 18.56 5.66572 18.66 5.31825 18.66C4.58245 18.66 3.87729 18.26 3.49917 17.62L2.79402 16.42C2.4159 15.77 2.39546 14.99 2.77358 14.37C2.93709 14.07 3.24368 13.77 3.59115 13.58C3.87729 13.44 4.06125 13.21 4.23498 12.94C4.74596 12.08 4.43937 10.95 3.57071 10.44C2.55897 9.87 2.23194 8.6 2.81446 7.61L3.49917 6.43C4.09191 5.44 5.35913 5.09 6.38109 5.67C7.27019 6.15 8.425 5.83 8.9462 4.98C9.10972 4.7 9.20169 4.4 9.18125 4.1C9.16081 3.71 9.27323 3.34 9.4674 3.04C9.84553 2.42 10.5302 2.02 11.2763 2H12.7172C13.4735 2 14.1582 2.42 14.5363 3.04C14.7203 3.34 14.8429 3.71 14.8122 4.1C14.7918 4.4 14.8838 4.7 15.0473 4.98C15.5685 5.83 16.7233 6.15 17.6226 5.67C18.6344 5.09 19.9118 5.44 20.4943 6.43L21.179 7.61C21.7718 8.6 21.4447 9.87 20.4228 10.44C19.5541 10.95 19.2475 12.08 19.7687 12.94C19.9322 13.21 20.1162 13.44 20.4023 13.58ZM9.10972 12.01C9.10972 13.58 10.4076 14.83 12.0121 14.83C13.6165 14.83 14.8838 13.58 14.8838 12.01C14.8838 10.44 13.6165 9.18 12.0121 9.18C10.4076 9.18 9.10972 10.44 9.10972 12.01Z"
+                      fill="#030229"
+                    />
+                  </g>
+                </svg>
+                <span className="ml-3">Profile</span>
+              </NavLink>
+            </li>
+
+            {/* Sign Out Link */}
+            <li>
+              <NavLink
+                to="/"
+                className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                style={({ isActive, isPending, isTransitioning }) => {
+                  return {
+                    fontWeight: isActive ? "bold" : "",
+                    color: isActive
+                      ? "var(--theme-color-NotikubeRed)"
+                      : isPending
+                      ? "red"
+                      : "black",
+                    transition: isTransitioning ? "slide" : "",
+                  };
+                }}
+              >
+                <svg
+                  aria-hidden="true"
+                  className="w-6 h-6 text-gray-400 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                  fill="currentColor"
+                  viewBox="0 0"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g opacity="0.4">
+                    <path
+                      fillRule="evenodd"
+                      clipRule="evenodd"
+                      d="M9.5989 11.23C9.17783 11.23 8.84489 11.57 8.84489 12C8.84489 12.42 9.17783 12.77 9.5989 12.77H15.4743V17.55C15.4743 20 13.5257 22 11.1167 22H6.34782C3.94869 22 2 20.01 2 17.56V6.45C2 3.99 3.95848 2 6.35762 2H11.1363C13.5257 2 15.4743 3.99 15.4743 6.44V11.23H9.5989ZM18.9686 8.54019L21.779 11.4502C21.9234 11.6002 22.0004 11.7902 22.0004 12.0002C22.0004 12.2002 21.9234 12.4002 21.779 12.5402L18.9686 15.4502C18.8243 15.6002 18.6318 15.6802 18.4489 15.6802C18.2564 15.6802 18.0639 15.6002 17.9196 15.4502C17.6308 15.1502 17.6308 14.6602 17.9196 14.3602L19.4595 12.7702H15.4749V11.2302H19.4595L17.9196 9.64019C17.6308 9.34019 17.6308 8.85019 17.9196 8.55019C18.2083 8.24019 18.6799 8.24019 18.9686 8.54019Z"
+                      fill="#030229"
+                    />
+                  </g>
+                </svg>
+                <span className="ml-3">Sign Out</span>
+              </NavLink>
+            </li>
+          </ul>
         </div>
       </aside>
     </div>
