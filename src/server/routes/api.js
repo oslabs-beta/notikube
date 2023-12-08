@@ -27,5 +27,10 @@ router.post('/updateAlerts', (req, res) => {
       .then((data) => res.status(200).send(req.body));
 });
 
+router.post('/alert', (req, res) => {
+  console.log('req.body', req.body);
+  res.sendStatus(200);
+})
+
 
 module.exports = router;
