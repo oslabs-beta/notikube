@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import LogInImage from '../../assets/NotiKubeLogin.svg';
+import Logo from '../../assets/logo.svg';
 
 const Login = () => {
 
@@ -40,16 +42,32 @@ const Login = () => {
   }
 
   return (
-    <>
-      <form>
-        <label>Email</label>
-        <input type='text' placeholder="example@gmail.com" onChange={(e) => setEmail(e.target.value)} />
-        <label>Password</label>
-        <input type='text' onChange={(e) => setPassword(e.target.value)} />
-        <input type='submit' onClick={(e) => submit(e)} value='Submit' />
-      </form>
-      <h3>Register here: <Link to='/signup'>Sign up</Link></h3>
-    </>
+    <div className='grid grid-cols-1 sm:grid-cols-2 w-full'>
+      <div className='flex flex-col justify-center'>
+        <form className='max-w-[400px] w-full mx-auto bg-white p-4'>
+          <div className='flex justify-center text-4xl font-bold text-center py-6 pr-8'>
+            <img className='px-5' src={Logo} />
+            <span>NotiKube</span>
+          </div>
+          <h3 className='text-2xl py-6'>Login</h3>
+          <button>Github</button>
+          <hr className='my-5' />
+          <div className='flex flex-col py-2'>
+            <label>Email</label>
+            <input className='rounded' type='text' placeholder="example@gmail.com" onChange={(e) => setEmail(e.target.value)} />
+          </div>
+          <div className='flex flex-col py-2'>
+            <label>Password</label>
+            <input className='rounded' type='text' onChange={(e) => setPassword(e.target.value)} />
+          </div>
+          <input className='rounded border w-full my-5 py-2 bg-NotikubeRed hover:bg-primary-300 cursor-pointer text-white' type='submit' onClick={(e) => submit(e)} value='Submit' />
+          <p>Don't have an account yet? <Link className='text-NotikubeRed hover:text-primary-300' to='/signup'>Create an account</Link></p>
+        </form>
+      </div>
+      <div className='hidden bg-gray-100 border-red-900 sm:block'>
+        <img className='w-full h-screen border-red-5 p-6' src={LogInImage} />
+      </div>
+    </div>
   );
 };
 
