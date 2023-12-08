@@ -7,8 +7,9 @@ import Login from './views/Login.jsx';
 import Dashboard from './views/Dashboard.jsx';
 import Profile from './views/Profile.jsx';
 import Alerts from './components/Alerts.jsx';
+import ConnectCluster from './views/ConnectCluster.jsx';
 
-import './index.css';
+import './App.css';
 
 const router = createBrowserRouter([
   {
@@ -29,7 +30,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/connect-cluster',
-    // element: <ConnectCluster />
+    element: <ConnectCluster />
   },
   {
     path: '/profile',
