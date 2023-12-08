@@ -11,9 +11,21 @@ router.get('/tableData', (req, res) => {
   const text = 'SELECT * FROM testAlerts WHERE userid =$1'
   db.query(text, [userid])
     .then((data) => res.locals.tableData = data.rows)
-    .then(() => console.log('data rows', res.locals.tableData))
-    .then(() => res.status(200).send(res.locals.tableData))
-})
+    //.then(() => console.log('data rows', res.locals.tableData))
+    .then(() => res.status(200).send(res.locals.tableData));
+});
+
+router.post('/updateAlerts', (req, res) => {
+   // console.log('req body', req.body.alertid);
+   // console.log('request body', req.body);
+    console.log('another test');
+    const { timestamp, description, priority, status, alertid } = req.body;
+    req.body.id = timestamp;
+    console.log('timestamp', timestamp, typeof(timestamp))
+    const text = 'UPDATE testAlerts SET description=$1, priority=$2, status=$3 WHERE alertid=$4 ;';
+    db.query(text, [description, priority, status, alertid])
+      .then((data) => res.status(200).send(req.body));
+});
 
 router.post('/alert', (req, res) => {
   console.log('req.body', req.body);
