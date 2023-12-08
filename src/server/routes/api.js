@@ -16,7 +16,15 @@ router.get('/tableData', (req, res) => {
 })
 
 router.post('/alert', (req, res) => {
-  console.log('req.body', req.body);
+  console.log('Incoming Alert: ', req.body);
+  const alertName = req.body.alerts[0].labels.alertname;
+  const description = req.body.alerts[0].annotations.description;
+  const priority = req.body.alerts[0].labels.severity;
+  const userid = process.env.userID;
+  const text = 'INSERT INTO testalerts (type, description, priority, status, userid) VALUES ($1, $2, $3, $4, $5);';
+  db.query(text, [alertName, description, priority, 'Open', userid])
+    .then((data) => console.log('alert added to table'))
+    .catch((err) => console.log(`Error adding alert to table: ${err}`));
   res.sendStatus(200);
 })
 
