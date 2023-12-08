@@ -20,7 +20,7 @@ router.post('/updateAlerts', (req, res) => {
     console.log('another test');
     const { timestamp, description, priority, status, alertid } = req.body;
     req.body.id = timestamp;
-    console.log('timestamp', timestamp, typeof(timestamp))
+    console.log('timestamp', timestamp, typeof(timestamp));
     const text = 'UPDATE testAlerts SET description=$1, priority=$2, status=$3 WHERE alertid=$4 ;';
     db.query(text, [description, priority, status, alertid])
       .then((data) => res.status(200).send(req.body));

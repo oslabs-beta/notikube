@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
 import Sidebar from '../components/Sidebar';
+import { useNavigate } from 'react-router-dom';
 import '../App.css';
 
 export default function ConnectCluster() {
+  const navigate = useNavigate();
+
   const [isModalVisible, setModalVisible] = useState(false);
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
 
+  // This function takes the passed in form data and sends it to the server
   async function newCluster(e) {
     e.preventDefault();
   
@@ -29,6 +33,7 @@ export default function ConnectCluster() {
     })
       .then(() => {
         console.log('Data sent successfully');
+        navigate('/dashboard', {newIpAddress: clusterIP, newClusterName: clusterName });
       })
       .catch((error) => {
         console.error('Error sending data:', error);

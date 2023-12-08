@@ -6,13 +6,14 @@ const dbController = {};
 dbController.newClusterConnection = async (req, res, next) => {
 
   // Grab the necessary data from the req.body
-  const { userID, clusterName, clusterIP, date } = req.body;
+  const { clusterName, clusterIP } = req.body;
   // Insert new cluster into clusters table
   const newClusterQuery = {
-    text: 'INSERT INTO clusters (userid, clusterName, clusterIP, date) VALUES($1, $2, $3, $4)',
-    values: [userID, clusterName, clusterIP, date],
+    text: 'INSERT INTO clusters (clusterName, clusterIP ) VALUES($1, $2)',
+    values: [clusterName, clusterIP],
   };
 
+  // Query the database and put the data into the clusters table
   try {
     db.query(newClusterQuery)
       .then(() => 'Data successfully added to database');
