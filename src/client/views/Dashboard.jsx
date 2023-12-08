@@ -1,17 +1,28 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom'
 import Sidebar from '../components/Sidebar';
 
 import '../App.css';
 
 function Dashboard() {
   const navigate = useNavigate();
-  const [ipAddress, setIpAddress] = useState('127.0.0.1:52489');
+  const location = useLocation();
+  const [ipAddress, setIpAddress] = useState('');
   const [clusterName, setClusterName] = useState('Test1');
   const [name, setName] = useState('Jesse');
   const [numOfAlerts, setNumOfAlerts] = useState(12);
   const [inProgress, setInProgress] = useState(3);
   const [isLoaded, setIsLoaded] = useState(false);
+
+  const newIpAddress = location.newIpAddress;
+  const newClusterName = location.newClusterName;
+
+  useEffect(() => {
+    setIpAddress(newIpAddress);
+    setClusterName(newClusterName);
+  }, [newIpAddress, newClusterName]);
+
   fetch('/api/auth/checkauth')
     .then(res => res.json())
     .then(data => {
