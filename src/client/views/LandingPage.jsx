@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 
 function LandingPage() {
+
+
   return (
     <div>
       {/* Navbar */}
