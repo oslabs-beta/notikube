@@ -37,7 +37,7 @@ function Dashboard() {
   // if (isLoaded) {
     return (
       <div>
-        <Sidebar/>
+        <Sidebar />
         <div className='p-4 sm:ml-64'>
           <h1 className="text-left pl-8 py-5 text-5xl font-extrabold dark:text-white">Dashboard</h1>
           <h2 className="">{clusterName}</h2>

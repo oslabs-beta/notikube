@@ -62,7 +62,7 @@ function Alerts() {
     <div style={{ height: 400, width: '100%' }}>
       <Sidebar />
       <div className='p-4 sm:ml-64'>
-      <h1 style={{ color: 'black', textAlign: 'left'}}>Incident History</h1>
+      <h1 className="text-left pl-0 py-3 text-5xl font-extrabold dark:text-white">Incident History</h1>
       <br></br>
       <br></br>
       <DataGrid
