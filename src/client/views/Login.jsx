@@ -64,8 +64,8 @@ const Login = () => {
           <p>Don't have an account yet? <Link className='text-NotikubeRed hover:text-primary-300' to='/signup'>Create an account</Link></p>
         </form>
       </div>
-      <div className='hidden bg-gray-100 border-red-900 sm:block'>
-        <img className='w-full h-screen border-red-5 p-6' src={LogInImage} />
+      <div className='hidden bg-gray-100 sm:block'>
+        <img className='w-full h-screen p-6' src={LogInImage} />
       </div>
     </div>
   );

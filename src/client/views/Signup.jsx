@@ -43,9 +43,9 @@ const Signup = () => {
   }
 
   return (
-    <div className='gird grid-cols-1 sm:grid-cols-2 w-full'>
+    <div className='grid grid-cols-1 sm:grid-cols-2 w-full'>
       <div className='flex flex-col justify-center'>
-        <form className='max-w-[400] w-full mx-auto bg-white p-4'>
+        <form className='max-w-[400px] w-full mx-auto bg-white p-4'>
           <div className='flex justify-center text-4xl font-bold text-center py-6 pr-8'>
             <img className='px-5' src={Logo} />
             <span>NotiKube</span>
@@ -68,7 +68,7 @@ const Signup = () => {
         </form>
       </div>
       <div className='hidden bg-gray-100 sm:block'>
-        <img className='w-full h-screen p-6' src={SignUpImage} />
+        <img className='w-full h-screen p-8' src={SignUpImage} />
       </div>
     </div>
   );
