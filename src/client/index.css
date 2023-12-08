@@ -13,6 +13,12 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.column-header {
+  background-color: grey;
+  color: white;
+  font-style: bold;
+}
+
 a {
   font-weight: 500;
   color: white;

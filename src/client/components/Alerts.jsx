@@ -5,6 +5,7 @@ import {
   
 } from '@mui/x-data-grid';
 import { useState, useEffect, useCallback } from 'react';
+import Sidebar from './Sidebar';
 
 
 
@@ -57,8 +58,12 @@ function Alerts() {
 
 
   return (
+    
     <div style={{ height: 400, width: '100%' }}>
-      <h1 style={{ color: 'black'}}>Incident History</h1>
+      <Sidebar />
+      <div className='p-4 sm:ml-64'>
+      <h1 style={{ color: 'black', textAlign: 'left'}}>Incident History</h1>
+      <br></br>
       <br></br>
       <DataGrid
         sx={{
@@ -81,6 +86,7 @@ function Alerts() {
         }}
       />
     </div>
+    </div>
   );
 }
 
@@ -88,8 +94,9 @@ const columns = [
   { 
     field: 'timestamp', 
     headerName: 'Timestamp', 
-    width: 180, 
-    editable: false 
+    width: 225, 
+    editable: false ,
+    headerClassName: 'column-header',
   },
   {
     field: 'type',
@@ -98,27 +105,34 @@ const columns = [
     editable: true,
     align: 'left',
     headerAlign: 'left',
+    width: 150,
+    headerClassName: 'column-header', 
   },
   {
     field: 'description',
     headerName: 'Description',
     type: 'string',
-    width: 180,
+    width: 450,
     editable: true,
+    headerClassName: 'column-header',
   },
   {
     field: 'priority',
     headerName: 'Priority',
-    type: 'string',
-    width: 220,
+    type: 'singleSelect',
+    width: 125,
     editable: true,
+    headerClassName: 'column-header',
+    valueOptions: ['High', 'Med', 'Low']
   },
   {
     field: 'status',
     headerName: 'Status',
-    type: 'string',
-    width: 220,
+    type: 'singleSelect',
+    width: 125,
     editable: true,
+    headerClassName: 'column-header',
+    valueOptions: ['Open', 'Closed', 'Reassigned', 'In Progress']
   },
 ];
 
