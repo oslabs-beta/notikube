@@ -66,7 +66,7 @@ export default function ConnectCluster() {
           {/* Main modal */}
           <div
             id="defaultModal"
-            tabIndex="-1"
+            tabIndex={-1}
             aria-hidden="true"
             className={`${
               isModalVisible ? 'fixed' : 'hidden'
@@ -113,7 +113,7 @@ export default function ConnectCluster() {
                       </label>
                       <textarea
                         id="clusterName"
-                        rows="1"
+                        rows={1}
                         className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                         placeholder="Write Cluster Name Here"
                       ></textarea>
@@ -127,7 +127,7 @@ export default function ConnectCluster() {
                       </label>
                       <textarea
                         id="clusterIP"
-                        rows="1"
+                        rows={1}
                         className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                         placeholder="Write IP Address Here"
                       ></textarea>
