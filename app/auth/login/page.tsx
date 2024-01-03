@@ -7,7 +7,7 @@ import LogInImage from '../../../public/NotiKubeLogin.svg';
 import Logo from "../../../public/logo.svg";
 
 const Login = () => {
-  const router = useRouter();
+  // const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -79,7 +79,7 @@ const Login = () => {
             Don't have an account yet?{" "}
             <Link
               className="text-NotikubeRed hover:text-primary-300"
-              href="/signup"
+              href="/auth/signup"
             >
               Create an account
             </Link>

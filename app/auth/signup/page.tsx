@@ -36,7 +36,8 @@ const Signup = () => {
       .then(data => {
         if (data.newUser) {
           alert('Account created!');
-          navigate('/login');
+          //this might not work - used to be react router dom
+          '/auth/login';
         }
         else {
           alert('User already exists');
