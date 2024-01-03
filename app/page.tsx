@@ -44,7 +44,7 @@ export default function Home() {
               Incident management for Kubernetes clusters
             </h1>
             <p className="mb-6 max-w-2xl font-light text-gray-500 lg:mb-8 md:text-lg lg:text-left lg:text-xl dark:text-gray-400">
-              Stay on hrefp of critical alerts with NotiKube's intuitive dashboard
+              Stay on top of critical alerts with NotiKube's intuitive dashboard
               for complete incident lifecycle management.
             </p>
             <div className="flex justify-center lg:justify-start">
@@ -135,7 +135,7 @@ export default function Home() {
           <div className="gap-16 items-center py-8 px-4 mx-auhref max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-8 lg:px-6 lg:text-left">
             <div className="font-light text-gray-500 sm:text-lg dark:text-gray-400">
               <h2 className="mb-4 text-4xl font-extrabold text-gray-900 dark:text-white">
-                Monihrefr Your Alerts Alongside Cluster Health
+                Monitor Your Alerts Alongside Cluster Health
               </h2>
               <p className="mb-4">
                 See the most critical incident metrics pulled directly from
