@@ -8,6 +8,7 @@ import Logo from '../../../public/logo.svg'
 
 const Signup = () => {
 
+  const navigate = useNavigate();
 
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
@@ -35,8 +36,7 @@ const Signup = () => {
       .then(data => {
         if (data.newUser) {
           alert('Account created!');
-          //this might not work - used to be react router dom
-          '/auth/login';
+          navigate('/login');
         }
         else {
           alert('User already exists');
