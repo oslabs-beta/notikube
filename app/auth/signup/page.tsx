@@ -2,13 +2,13 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import SignUpImage from '../../assets/NotiKubeSignUp.svg'
-import Logo from '../../assets/logo.svg'
+// import { useNavigate } from 'react-router-dom';
+// import SignUpImage from '../../assets/NotiKubeSignUp.svg'
+// import Logo from '../../assets/logo.svg'
 
 const Signup = () => {
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
@@ -36,7 +36,7 @@ const Signup = () => {
       .then(data => {
         if (data.newUser) {
           alert('Account created!');
-          navigate('/login');
+          // navigate('/login');
         }
         else {
           alert('User already exists');
