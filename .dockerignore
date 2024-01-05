@@ -4,15 +4,6 @@
 node_modules
 
 # Exclude development and build files
-*.log
-*.json
-*.lock
-*.md
-*.yml
-*.yaml
-.DS_Store
 .git
 .gitignore
 .dockerignore
-.docker
-.vscode
