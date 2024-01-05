@@ -1,13 +1,13 @@
 'use client';
 
 import * as React from 'react';
-import {
-  DataGrid,
-  GridCellModes,
+// import {
+//   DataGrid,
+//   GridCellModes,
   
-} from '@mui/x-data-grid';
+// } from '@mui/x-data-grid';
 import { useState, useEffect, useCallback } from 'react';
-import Sidebar from '../../components/Sidebar';
+// import Sidebar from '../../components/Sidebar';
 
 export default function Incidents() {
 
@@ -37,32 +37,32 @@ export default function Incidents() {
   },[]);
     
 
-  const updateTable = React.useCallback(
-    async (newRow) => {
-      const updatedRow = { ...newRow };
-      updatedRow.id = newRow.timestamp;
-      fetch('/api/updateAlerts', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(newRow)
-      });
-      console.log('updated row', updatedRow);
-      return updatedRow;
-      },[]);
+  // const updateTable = React.useCallback(
+  //   async (newRow) => {
+  //     const updatedRow = { ...newRow };
+  //     updatedRow.id = newRow.timestamp;
+  //     fetch('/api/updateAlerts', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json'
+  //       },
+  //       body: JSON.stringify(newRow)
+  //     });
+  //     console.log('updated row', updatedRow);
+  //     return updatedRow;
+  //     },[]);
   
 
 
   return (
     
     <div style={{ height: 400, width: '100%' }}>
-      <Sidebar />
+      {/* <Sidebar /> */}
       <div className='p-4 sm:ml-64'>
       <h1 className="text-left pl-0 py-3 text-5xl font-extrabold dark:text-white">Incident History</h1>
       <br></br>
       <br></br>
-      <DataGrid
+      {/* <DataGrid
         sx={{
         boxShadow: 2,
         border: 2,
@@ -80,8 +80,7 @@ export default function Incidents() {
         onProcessRowUpdateError={(() => console.log('Error processing row update'))}
         onRowEditStop={(params) => {
           console.log(params);
-        }}
-      />
+        }} */}
     </div>
     </div>
   );

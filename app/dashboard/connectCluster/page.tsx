@@ -2,11 +2,11 @@
 
 import React, { useState } from 'react';
 import Sidebar from '../../_components/Sidebar';
-import { useNavigate } from 'react-router-dom';
-import '../App.css';
+// import { useNavigate } from 'react-router-dom';
+// import '../App.css';
 
 export default function ConnectCluster() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const [isModalVisible, setModalVisible] = useState(false);
 
@@ -15,36 +15,42 @@ export default function ConnectCluster() {
   };
 
   // This function takes the passed in form data and sends it to the server
-  async function newCluster(e) {
+  async function newCluster(e: React.FormEvent) {
     e.preventDefault();
   
     // Get the values from the form fields
-    const clusterName = document.getElementById('clusterName').value;
-    const clusterIP = document.getElementById('clusterIP').value;
+    const clusterNameElement = document.getElementById('clusterName') as HTMLInputElement | null;
+    const clusterIPElement = document.getElementById('clusterIP') as HTMLInputElement | null;
   
-    // Prepare the data to be sent
-    const data = {
-      clusterName,
-      clusterIP,
-    };
+    if (clusterNameElement && clusterIPElement) {
+      const clusterName = clusterNameElement.value;
+      const clusterIP = clusterIPElement.value;
   
-    await fetch('/api/newClusterConnection', {
-      method: 'POST',
-      body: JSON.stringify(data),
-      headers: { 'Content-Type': 'application/json' },
-    })
-      .then(() => {
+      // Prepare the data to be sent
+      const data = {
+        clusterName,
+        clusterIP,
+      };
+  
+      try {
+        await fetch('/api/newClusterConnection', {
+          method: 'POST',
+          body: JSON.stringify(data),
+          headers: { 'Content-Type': 'application/json' },
+        });
         console.log('Data sent successfully');
-        navigate('/dashboard', {newIpAddress: clusterIP, newClusterName: clusterName });
-      })
-      .catch((error) => {
+        // navigate('/dashboard', {newIpAddress: clusterIP, newClusterName: clusterName });
+      } catch (error) {
         console.error('Error sending data:', error);
-      });
+      }
   
-    // Close the modal after form submission
-    toggleModal();
+      // Close the modal after form submission
+      toggleModal();
+    } else {
+      console.error('Cluster name or IP element is null.');
+    }
   }
-
+  
   return (
     <div>
       <Sidebar />
