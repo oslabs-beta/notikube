@@ -6,3 +6,9 @@ Team
 3. Emmanuel Ikhalea
 4. Apiraam Selvaskbaran
 5. Dane Smith
+
+Technologies Used
+- FE: Next.js, Typescript/Javascript, Tailwind CSS, Flowbite
+- BE: Node.js, PostgreSQL (Supabase)
+- Testing: Jest
+- CI/CD: AWS, Docker, Github Actions

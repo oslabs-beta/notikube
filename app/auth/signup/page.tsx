@@ -2,19 +2,19 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import SignUpImage from '../../assets/NotiKubeSignUp.svg'
-import Logo from '../../assets/logo.svg'
+// import { useNavigate } from 'react-router-dom';
+import SignUpImage from '../../../public/NotiKubeSignUp.svg'
+import Logo from '../../../public/logo.svg'
 
 const Signup = () => {
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  function submit(e) {
+  function submit(e: Event) {
     e.preventDefault();
     if (fullName == '' || email == '' || password == '') {
       return;
@@ -36,7 +36,7 @@ const Signup = () => {
       .then(data => {
         if (data.newUser) {
           alert('Account created!');
-          navigate('/login');
+          // navigate('/login');
         }
         else {
           alert('User already exists');
@@ -66,8 +66,8 @@ const Signup = () => {
             <label>Password</label>
             <input className='rounded' type='text' onChange={(e) => setPassword(e.target.value)} />
           </div>
-          <input className='rounded border w-full my-5 py-2 bg-NotikubeRed hover:text-primary-300' type='submit' value='Submit' onClick={(e) => submit(e)} />
-          <p>Already have an account? <Link className='text-NotikubeRed hover:text-primary-300' to='/login'>Log in</Link></p>
+          {/* <input className='rounded border w-full my-5 py-2 bg-NotikubeRed hover:text-primary-300' type='submit' value='Submit' onClick={(e) => submit(e)} /> */}
+          <p>Already have an account? <Link className='text-NotikubeRed hover:text-primary-300' href='/login'>Log in</Link></p>
         </form>
       </div>
       <div className='hidden bg-gray-100 sm:block'>
