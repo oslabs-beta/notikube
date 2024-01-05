@@ -1,5 +1,5 @@
 # Dockerfile
-FROM node:18-alpine
+FROM node:20-alpine
 # Set the working directory
 WORKDIR /app
 
@@ -7,6 +7,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install dependencies
+RUN npm install -g npm@latest
 RUN npm install
 
 # Copy the entire project to the working directory
