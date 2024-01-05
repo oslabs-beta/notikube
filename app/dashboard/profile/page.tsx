@@ -4,9 +4,13 @@ import sql from '../../utils/db';
 
 export default async function Profile() {
 
+  const name = 'derek'
+  const email = 'derek@test.com'
+
   const users = await sql`
-    select * from users where name='jesse'
+    insert into users (name, email) values (${name}, ${email})
   `
+
   return (
     <>
       <h1>This is the Profile Page</h1>

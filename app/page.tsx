@@ -44,7 +44,7 @@ export default function Home() {
               Incident management for Kubernetes clusters
             </h1>
             <p className="mb-6 max-w-2xl font-light text-gray-500 lg:mb-8 md:text-lg lg:text-left lg:text-xl dark:text-gray-400">
-              Stay on top of critical alerts with NotiKube's intuitive dashboard
+              Stay on top of critical alerts with NotiKube&aposs intuitive dashboard
               for complete incident lifecycle management.
             </p>
             <div className="flex justify-center lg:justify-start">
@@ -481,7 +481,7 @@ export default function Home() {
               platform
             </p>
             <p className="mb-4 font-medium">
-              Read our Medium article href learn more about the problem we're
+              Read our Medium article href learn more about the problem we&aposre
               tackling and how we landed on the idea
             </p>
             <a
