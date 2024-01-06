@@ -11,8 +11,8 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  async function submit() {
-    // e.preventDefault();
+  async function submit(e: any) {
+    e.preventDefault();
     //Use the alert snackbar here
     if (email == "" || password == "") {
       return;
@@ -72,7 +72,7 @@ const Login = () => {
           <input
             className="rounded border w-full my-5 py-2 bg-NotikubeRed hover:bg-primary-300 cursor-pointer text-white"
             type="submit"
-            // onClick={(e) => submit(e)}
+            onClick={(e) => submit(e)}
             value="Submit"
           />
           <p>

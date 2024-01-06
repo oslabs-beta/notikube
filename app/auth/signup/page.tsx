@@ -8,16 +8,14 @@ import Logo from '../../../public/logo.svg'
 
 const Signup = () => {
 
-  const navigate = useNavigate();
-
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  function submit(e: any) {
+  async function submit(e: any) {
     e.preventDefault();
     if (fullName == '' || email == '' || password == '') {
-      return;
+      return alert('Fill in all of the fields!');
     }
     const params = {
       fullName: fullName,
@@ -25,23 +23,17 @@ const Signup = () => {
       password: password
     };
 
-    fetch('/api/auth/signup', {
+    let res = await fetch('/api/register', {
       method: 'POST',
       headers: {
         'Content-type': 'application/json'
       },
       body: JSON.stringify(params)
     })
-      .then(res => res.json())
-      .then(data => {
-        if (data.newUser) {
-          alert('Account created!');
-          navigate('/login');
-        }
-        else {
-          alert('User already exists');
-        }
-      });
+    res.json()
+    if (res.ok) {
+      console.log(res)
+    }
 
   }
 
