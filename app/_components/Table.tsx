@@ -1,6 +1,7 @@
  'use client';
 
  import * as React from 'react';
+ import { useState, use } from 'react';
  import {
    DataGrid,
    GridCellModes,
@@ -14,88 +15,107 @@
 
 //const fetcher = (...args) => fetch(...args).then((res) => res.json())
 
+type User = {
+  userid: number,
+  name: string,
+  email: string,
+  phone: number,
+  slack: string,
+}
+
+async function fetchData(): Promise<User[]> {
+  const res = await fetch('/api/incidents')
+  return res.json()
+}
+
+const userPromise = fetchData()
+
 
 const Table = () => {
 
-  fetch('/api/incidents')
-    .then((res) => {
-      return res.json()
-    })
-    .then((data) => console.log(data))
+  const users: User[] = use(userPromise)
 
+  console.log('users', users)
 
-}
+//  const { data, error, isLoading } = useSWR('https://jsonplaceholder.typicode.com/posts', fetcher) 
 
-//    //const { data, error, isLoading } = useSWR('https://jsonplaceholder.typicode.com/posts', fetcher) 
+//    if (error) return <div> failed to load</div>
+//    if (isLoading) return <div>loading...</div>
 
-// //    if (error) return <div> failed to load</div>
-// //    if (isLoading) return <div>loading...</div>
-
-//    //console.log('data', data);
-
-//    return (
-//     <div>
-//        <DataGrid
-//          sx={{
-//          boxShadow: 2,
-//          border: 2,
-//          borderColor: 'black',
-//          '& .MuiDataGrid-cell:hover': {
-//            color: 'primary.main',
-//          },
-//          color: 'black',
-//          }}
-//          editMode='row'
-//          getRowId={(alerts) => alerts.id}
-//          //rows={data}
-//          columns={columns}
-//          //processRowUpdate={updateTable}
-//          //onProcessRowUpdateError={(() => console.log('Error processing row update'))}
-//          //onRowEditStop={(params) => {
-//            //console.log(params);
-//          //}}
-//        />
-//      </div>
-//    );
-//  }
+   return (
+    <div>
+       <DataGrid
+         sx={{
+         boxShadow: 2,
+         border: 2,
+         borderColor: 'black',
+         '& .MuiDataGrid-cell:hover': {
+           color: 'primary.main',
+         },
+         color: 'black',
+         }}
+         editMode='row'
+         getRowId={(users) => users.userid}
+         rows={users}
+         columns={columns}
+         //processRowUpdate={updateTable}
+         //onProcessRowUpdateError={(() => console.log('Error processing row update'))}
+         //onRowEditStop={(params) => {
+           //console.log(params);
+         //}}
+       />
+     </div>
+   );
+ }
  
-//  const columns: GridColDef[] = [
-//    { 
-//      field: 'userId', 
-//      headerName: 'User ID', 
-//      width: 225, 
-//      editable: false ,
-//      type: 'number',
-//      headerClassName: 'column-header',
-//    },
-//    {
-//      field: 'id',
-//      headerName: 'Alert ID',
-//      type: 'number',
-//      editable: false,
-//      align: 'left',
-//      headerAlign: 'left',
-//      width: 150,
-//      headerClassName: 'column-header', 
-//    },
-//    {
-//      field: 'title',
-//      headerName: 'Title',
-//      type: 'string',
-//      width: 450,
-//      editable: true,
-//      headerClassName: 'column-header',
-//    },
-//    {
-//      field: 'body',
-//      headerName: 'Post',
-//      type: 'string',
-//      width: 125,
-//      editable: true,
-//      headerClassName: 'column-header'
-//    },
-//  ];
+ const columns: GridColDef[] = [
+   { 
+     field: 'userid', 
+     headerName: 'User ID', 
+     width: 400, 
+     editable: false ,
+     type: 'number',
+     headerClassName: 'column-header',
+     align: 'left',
+     headerAlign: 'left',
+   },
+   {
+     field: 'name',
+     headerName: 'Name',
+     type: 'string',
+     editable: false,
+     align: 'left',
+     headerAlign: 'left',
+     width: 150,
+     headerClassName: 'column-header', 
+   },
+   {
+     field: 'email',
+     headerName: 'Email',
+     type: 'string',
+     width: 450,
+     editable: true,
+     headerClassName: 'column-header',
+   },
+   {
+     field: 'slack',
+     headerName: 'Slack',
+     type: 'string',
+     width: 125,
+     editable: true,
+     headerClassName: 'column-header'
+   },
+   {
+    field: 'phone',
+    headerName: 'Phone',
+    type: 'number',
+    width: 125,
+    editable: true,
+    headerClassName: 'column-header'
+  },
+ ];
  
+
  // const columns: GridColDef[] = [
  //   { 
  //     field: 'timestamp', 
@@ -142,46 +162,5 @@ const Table = () => {
  //   },
  // ];
 
-
-
-
-
- 
- // import React from 'react'
- 
- // interface Alert {
- //   userId: number;
- //   id: number;
- //   title: string;
- //   body: string;
- // }
- 
- // const Incidents = async () => {
- 
- //   const res = await fetch('https://jsonplaceholder.typicode.com/posts')
- //   const posts: Alert[] = await res.json();
- 
- 
- 
- //   return (
- //     <>
- //     <h1>Posts</h1>
- //     <ul>
- //       {posts.map(post => <li key={post.id} style={{marginLeft: 350, marginRight: 100, marginBottom: 50, textAlign: 'center'}}>{post.body}</li>)}
- //     </ul>
- //     </>
- //   )
- 
- // }
- 
-//  export const getServerSideProps = async () => {
-//     const apiData = await fetch('https://jsonplaceholder.typicode.com/posts')
-//     const response = await apiData.json();
-//     return {
-//         props: {
-//             alerts: response
-//         }
-//     }
-//  }
 
  export default Table

@@ -15,7 +15,7 @@ export async function GET() {
     const users: User[] = await sql`
     select * from users
   `
-    await console.log('users', users)
+    await console.log('users', users[0])
 
   return NextResponse.json(users);
 }
