@@ -13,7 +13,7 @@ const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  function submit(e: Event) {
+  async function submit(e: Event) {
     e.preventDefault();
     if (fullName == '' || email == '' || password == '') {
       return alert('Fill in all of the fields!');
@@ -31,9 +31,20 @@ const Signup = () => {
       },
       body: JSON.stringify(params)
     })
-    res.json()
-    if (res.ok) {
-      console.log(res)
+    
+    const data = await res.json()
+    if (data.newUser) {
+      alert('New User created!')
+      setEmail('')
+      setFullName('')
+      setPassword('')
+      const textFields = document.querySelectorAll('input[type=text]')
+      for (let i = 0; i < textFields.length; i++) {
+        (textFields[i] as HTMLInputElement).value = ''
+      }
+    }
+    else {
+      alert('User already exists')
     }
 
   }
