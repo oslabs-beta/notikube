@@ -12,81 +12,89 @@
  import useSWR from 'swr'
 
 
-const fetcher = (...args) => fetch(...args).then((res) => res.json())
+//const fetcher = (...args) => fetch(...args).then((res) => res.json())
 
 
-const Table = (props: Array<Object>) => {
+const Table = () => {
+
+  fetch('/api/incidents')
+    .then((res) => {
+      return res.json()
+    })
+    .then((data) => console.log(data))
 
 
-   const { data, error, isLoading } = useSWR('https://jsonplaceholder.typicode.com/posts', fetcher) 
+}
 
-   if (error) return <div> failed to load</div>
-   if (isLoading) return <div>loading...</div>
+//    //const { data, error, isLoading } = useSWR('https://jsonplaceholder.typicode.com/posts', fetcher) 
 
-   console.log('data', data);
+// //    if (error) return <div> failed to load</div>
+// //    if (isLoading) return <div>loading...</div>
 
-   return (
-    <div>
-       <DataGrid
-         sx={{
-         boxShadow: 2,
-         border: 2,
-         borderColor: 'black',
-         '& .MuiDataGrid-cell:hover': {
-           color: 'primary.main',
-         },
-         color: 'black',
-         }}
-         editMode='row'
-         getRowId={(alerts) => alerts.id}
-         rows={data}
-         columns={columns}
-         //processRowUpdate={updateTable}
-         //onProcessRowUpdateError={(() => console.log('Error processing row update'))}
-         //onRowEditStop={(params) => {
-           //console.log(params);
-         //}}
-       />
-     </div>
-   );
- }
+//    //console.log('data', data);
+
+//    return (
+//     <div>
+//        <DataGrid
+//          sx={{
+//          boxShadow: 2,
+//          border: 2,
+//          borderColor: 'black',
+//          '& .MuiDataGrid-cell:hover': {
+//            color: 'primary.main',
+//          },
+//          color: 'black',
+//          }}
+//          editMode='row'
+//          getRowId={(alerts) => alerts.id}
+//          //rows={data}
+//          columns={columns}
+//          //processRowUpdate={updateTable}
+//          //onProcessRowUpdateError={(() => console.log('Error processing row update'))}
+//          //onRowEditStop={(params) => {
+//            //console.log(params);
+//          //}}
+//        />
+//      </div>
+//    );
+//  }
  
- const columns: GridColDef[] = [
-   { 
-     field: 'userId', 
-     headerName: 'User ID', 
-     width: 225, 
-     editable: false ,
-     type: 'number',
-     headerClassName: 'column-header',
-   },
-   {
-     field: 'id',
-     headerName: 'Alert ID',
-     type: 'number',
-     editable: false,
-     align: 'left',
-     headerAlign: 'left',
-     width: 150,
-     headerClassName: 'column-header', 
-   },
-   {
-     field: 'title',
-     headerName: 'Title',
-     type: 'string',
-     width: 450,
-     editable: true,
-     headerClassName: 'column-header',
-   },
-   {
-     field: 'body',
-     headerName: 'Post',
-     type: 'string',
-     width: 125,
-     editable: true,
-     headerClassName: 'column-header'
-   },
- ];
+//  const columns: GridColDef[] = [
+//    { 
+//      field: 'userId', 
+//      headerName: 'User ID', 
+//      width: 225, 
+//      editable: false ,
+//      type: 'number',
+//      headerClassName: 'column-header',
+//    },
+//    {
+//      field: 'id',
+//      headerName: 'Alert ID',
+//      type: 'number',
+//      editable: false,
+//      align: 'left',
+//      headerAlign: 'left',
+//      width: 150,
+//      headerClassName: 'column-header', 
+//    },
+//    {
+//      field: 'title',
+//      headerName: 'Title',
+//      type: 'string',
+//      width: 450,
+//      editable: true,
+//      headerClassName: 'column-header',
+//    },
+//    {
+//      field: 'body',
+//      headerName: 'Post',
+//      type: 'string',
+//      width: 125,
+//      editable: true,
+//      headerClassName: 'column-header'
+//    },
+//  ];
  
  // const columns: GridColDef[] = [
  //   { 

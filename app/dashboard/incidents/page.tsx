@@ -4,7 +4,7 @@ import * as React from 'react';
 import Table from '../../_components/Table'
 
 
-const Incidents = async () => {
+const Incidents = () => {
 
 
   return (
