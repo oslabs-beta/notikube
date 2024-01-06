@@ -1,0 +1,9 @@
+# .dockerignore
+
+# Exclude node_modules directory
+node_modules
+
+# Exclude development and build files
+.git
+.gitignore
+.dockerignore

@@ -11,7 +11,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  async function submit(e: any) {
+  async function submit(e: Event) {
     e.preventDefault();
     //Use the alert snackbar here
     if (email == "" || password == "") {
@@ -46,7 +46,7 @@ const Login = () => {
       <div className="flex flex-col justify-center">
         <form className="max-w-[400px] w-full mx-auto bg-white p-4">
           <div className="flex justify-center text-4xl font-bold text-center py-6 pr-8">
-            <img className="px-5" src={Logo} />
+            <img className="px-5" src={Logo} alt="logo" />
             <span>NotiKube</span>
           </div>
           <h3 className="text-2xl py-6">Login</h3>
@@ -76,7 +76,7 @@ const Login = () => {
             value="Submit"
           />
           <p>
-            Don't have an account yet?{" "}
+            Don&apost have an account yet?{" "}
             <Link
               className="text-NotikubeRed hover:text-primary-300"
               href="/auth/signup"

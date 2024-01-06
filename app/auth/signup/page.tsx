@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+// import { useNavigate } from 'react-router-dom';
 import SignUpImage from '../../../public/NotiKubeSignUp.svg'
 import Logo from '../../../public/logo.svg'
 
@@ -12,7 +13,7 @@ const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  async function submit(e: any) {
+  function submit(e: Event) {
     e.preventDefault();
     if (fullName == '' || email == '' || password == '') {
       return alert('Fill in all of the fields!');
