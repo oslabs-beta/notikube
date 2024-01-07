@@ -1,13 +1,14 @@
 'use client';
 
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import LogInImage from '../../../public/NotiKubeLogin.svg';
 import Logo from "../../../public/logo.svg";
+import { SignInResponse, signIn } from "next-auth/react";
 
 const Login = () => {
-  // const router = useRouter();
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -22,22 +23,21 @@ const Login = () => {
       password: password,
     };
 
-    const result = await fetch("/api/auth/login", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(params),
-      credentials: "include",
-    });
+    try {
+      const res : any = await signIn('credentials', {
+        email, 
+        password, 
+        redirect: false
+      })
 
-    if (result.status == 401) {
-      console.log("unAuthorized");
-      alert("Incorrect Email/Password");
-    } else {
-      await result.json();
-      console.log(result);
-      "/dashboard";
+      if (res.error) {
+        alert('User not found!')
+        return;
+      }
+      router.replace('/dashboard/incidents')
+    }
+    catch(e) {
+      console.log(e)
     }
   }
 
