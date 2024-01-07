@@ -55,7 +55,6 @@ export default function Incidents() {
 
 
   return (
-    
     <div style={{ height: 400, width: '100%' }}>
       {/* <Sidebar /> */}
       <div className='p-4 sm:ml-64'>
