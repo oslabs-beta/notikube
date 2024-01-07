@@ -1,0 +1,33 @@
+name: deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  unit_testing:
+    runs-on: ubuntu-latest
+    steps: 
+      - uses: actions/checkout@v3
+      - run: docker-compose -f docker-compose-test.yml up --abort-on-container-exit
+  deploy:
+    needs: unit_testing
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+      - run: python3 -m pip install --upgrade pip
+      - run: python3 -m pip install --user awscli
+      - run: python3 -m pip install --user awsebcli
+
+      - run: python3 -m pip uninstall -y boto3 botocore s3transfer
+      - run: python3 -m pip install boto3==1.33.1 botocore==1.33.1 s3transfer==0.8.0
+
+      - run: sh ./scripts/deploy.sh
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      GITHUB_SHA: ${{ github.sha }}
