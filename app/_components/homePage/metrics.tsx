@@ -1,12 +1,11 @@
 import React from 'react'
 import Link from 'next/link'
-import numTotalAlerts from '../../lib/homePage/numTotalAlerts';
-import numProgressAlerts from '../../lib/homePage/numProgressAlerts';
+import { numProgressAlerts, numTotalAlerts } from '../../lib/homePage/numOfAlerts';
 
 export default async function Metrics() {
-  const totalAlerts = await numTotalAlerts();
   const totalInProgressAlerts = await numProgressAlerts();
-  
+  const totalAlerts = await numTotalAlerts();
+
   return (
     <div id='metrics'>
         <section>

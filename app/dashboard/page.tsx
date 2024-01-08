@@ -1,33 +1,33 @@
-//'use client';
 
 import type { Metadata } from 'next';
 import Metrics from "../_components/homePage/metrics";
+import { clusterInfo } from '../lib/homePage/clusterInfo';
 
 
 //import '../globals.css'
 
+//Can you add metadata for specific pages?
 // export const metadata: Metadata = {
 //   title: 'Dashboard',
 //   description: 'Cluster dashboard current alerts and health visualizations'
 // }
 
 //ADD APIRAM'S AUTH CODE
-//ADD REACT CONTEXT TO TREE HEAD FOR CLUSTER IP
 
-export default function Dashboard() {
-  //Grab react context - IP address and Cluster Name
+export default async function Dashboard() {
   //Grab user name from authentication
+  const { clustername, clusterip } = await clusterInfo();
 
     return (
       <div>
         <div className='p-4 sm:ml-64'>
           <h1 className="text-left pl-8 py-5 text-5xl font-extrabold dark:text-white">Dashboard</h1>
-          <h2 className="">{/*ClusterName*/}</h2>
-          <h2 className="">Current Grafana IP Address: {/*ipAddress*/}</h2>
+          <h2 className="">{clustername}</h2>
+          <h2 className="">Cluster IP Address: {clusterip}</h2>
           <div>
 
           <Metrics/>
-          
+
             <h3 className="text-left pl-8 text-3xl font-bold dark:text-white py-3">Cluster</h3>
             <section id='cluster'>
               <div id='cluster-row-1'className='display: inline-flex'>
