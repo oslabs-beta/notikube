@@ -1,11 +1,10 @@
-import React from 'react'
 import Link from 'next/link'
 import { numProgressAlerts, numTotalAlerts } from '../../lib/homePage/numOfAlerts';
+import sql from "../../utils/db";
 
 export default async function Metrics() {
   const totalInProgressAlerts = await numProgressAlerts();
   const totalAlerts = await numTotalAlerts();
-
   return (
     <div id='metrics'>
         <section>

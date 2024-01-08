@@ -1,8 +1,8 @@
+//dynamic rendered server side component
 
-import type { Metadata } from 'next';
-import Metrics from "../_components/homePage/metrics";
+//import Link from 'next/link'; LINK IS CURRENTLY CAUSING ERROR:Internal error: TypeError: Cannot read properties of null (reading 'useContext')
+import { numProgressAlerts, numTotalAlerts } from '../lib/homePage/numOfAlerts'
 import { clusterInfo } from '../lib/homePage/clusterInfo';
-
 
 //import '../globals.css'
 
@@ -12,11 +12,14 @@ import { clusterInfo } from '../lib/homePage/clusterInfo';
 //   description: 'Cluster dashboard current alerts and health visualizations'
 // }
 
-//ADD APIRAM'S AUTH CODE
+//ADD APIRAAM'S AUTH CODE
+  //GRAB USER NAME
 
 export default async function Dashboard() {
   //Grab user name from authentication
   const { clustername, clusterip } = await clusterInfo();
+  const totalInProgressAlerts = await numProgressAlerts();
+  const totalAlerts = await numTotalAlerts();
 
     return (
       <div>
@@ -26,7 +29,20 @@ export default async function Dashboard() {
           <h2 className="">Cluster IP Address: {clusterip}</h2>
           <div>
 
-          <Metrics/>
+          <div id='metrics'>
+            <section>
+              <div id='dashboard-alerts'className='my-5 display: inline-flex'>
+                <a href="/dashboard/incidents" className="block m-3 max-w-sm w-80 p-10 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                  <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">All Open Alerts</h5>
+                  <p className="font-normal text-gray-700 dark:text-gray-400">{totalAlerts}</p>
+                </a>
+                <a href="/dashboard/incidents" className="block m-3 max-w-sm w-80 p-10 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                  <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">In Progress Alerts</h5>
+                  <p className="font-normal text-gray-700 dark:text-gray-400">{totalInProgressAlerts}</p>
+                </a>
+              </div>
+           </section>
+          </div> 
 
             <h3 className="text-left pl-8 text-3xl font-bold dark:text-white py-3">Cluster</h3>
             <section id='cluster'>
@@ -53,14 +69,16 @@ export default async function Dashboard() {
 
 
 //Ideally switch to dynamic server side rendering.
-//Generate search params for cluster ID to SSR content?
+
 //Parallel route the node and cluster health sections to load at the same time? https://nextjs.org/docs/app/building-your-application/data-fetching/patterns#parallel-data-fetching
   //create modal with this technique for cluster connection? https://nextjs.org/docs/app/building-your-application/routing/parallel-routes#modals
-//add streaming/suspense to cluster node health while slow data loads?
-  //wrap all alerts and open alerts into seperate client components and import them here?
+
 //turn dashboard into layout with side bar, alerts, cluster, and node health components?
-//revalidate cached data from fetching promql queries and alerts? https://nextjs.org/docs/app/building-your-application/routing/route-handlers#revalidating-cached-data
-//use react cache hook when making requests to DB? https://nextjs.org/docs/app/building-your-application/data-fetching/fetching-caching-and-revalidating#fetching-data-on-the-server-with-third-party-libraries
+
+//revalidate results from fetching promql queries and alerts? https://nextjs.org/docs/app/building-your-application/routing/route-handlers#revalidating-cached-data
+
+//using react suspense (see example) for promql visuals @https://nextjs.org/learn/dashboard-app/streaming
+//group requests for node and cluster to avoid card popping? @https://nextjs.org/learn/dashboard-app/streaming#grouping-components
 
 //review optimizations when done: https://nextjs.org/docs/app/building-your-application/optimizing
 //testing with JEST: https://nextjs.org/docs/app/building-your-application/testing/jest
