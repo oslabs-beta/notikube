@@ -1,6 +1,6 @@
 import React from 'react'
 
-//add dashboard skeleton from '@/app/ui/skeletons'?
+//add custom loading skelton?
 export default function Loading() {
   return <p>Loading...</p>
 }
