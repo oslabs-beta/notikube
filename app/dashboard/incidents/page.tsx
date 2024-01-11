@@ -1,6 +1,7 @@
 'use client';
 
 import * as React from 'react';
+import { useSession } from 'next-auth/react';
 // import {
 //   DataGrid,
 //   GridCellModes,
@@ -10,6 +11,11 @@ import { useState, useEffect, useCallback } from 'react';
 // import Sidebar from '../../components/Sidebar';
 
 export default function Incidents() {
+
+  const session = useSession().data
+  
+  //Getting userid data from the session
+  console.log('User ID: ', session?.user.userid)
 
   const [ count, setCount ] = useState(0);
   const [ data, setData ] = useState([]);

@@ -1,10 +1,10 @@
 import NextAuth, { NextAuthOptions } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
+import GithubProvider from 'next-auth/providers/github'
 import sql from '../../../utils/db'
-import { NextResponse } from 'next/server'
 import bcrypt from 'bcrypt'
 
-const authOptions: NextAuthOptions = {
+export const authOptions: NextAuthOptions = {
     providers: [
         CredentialsProvider({
             name: 'credentials',
@@ -22,15 +22,14 @@ const authOptions: NextAuthOptions = {
                     if (!passwordsMatch) {
                         return null
                     }
-                    return res[0].userid
+                    console.log(res[0].userid)
+                    return res[0]
                 }
                 catch(e) {
                     console.log(e)
                     return null
                 }
             }, 
-
-
         })
     ], 
     session: {
@@ -39,6 +38,21 @@ const authOptions: NextAuthOptions = {
     secret: process.env.NEXTAUTH_SECRET, 
     pages: {
         signIn:'/auth/login'
+    }, 
+    callbacks: {
+        async session({session, user}) {
+            if (!session) return
+            try {
+                let res = await sql`SELECT * FROM users WHERE email=${session.user.email}`
+                console.log(res[0].userid)
+                session.user.userid = res[0].userid
+                return session
+            }
+            catch(e) {
+                console.log(e)
+                return
+            } 
+        }
     }
 }
 
