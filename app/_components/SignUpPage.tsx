@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 // import { useNavigate } from 'react-router-dom';
@@ -53,7 +54,7 @@ const Signup = () => {
       <div className='flex flex-col justify-center'>
         <form className='max-w-[400px] w-full mx-auto bg-white p-4'>
           <div className='flex justify-center text-4xl font-bold text-center py-6 pr-8'>
-            <img className='px-5' src={Logo} />
+          <Link href={'/'}><Image className="px-5" src={Logo} alt="logo" width={55}/></Link>
             <span>NotiKube</span>
           </div>
           <h3 className='text-2xl py-6'>Sign Up</h3>
@@ -74,7 +75,7 @@ const Signup = () => {
         </form>
       </div>
       <div className='hidden bg-gray-100 sm:block'>
-        <img className='w-full h-screen p-8' src={SignUpImage} />
+        <Image className='w-full h-screen p-8' src={SignUpImage} alt='Sign Up'/>
       </div>
     </div>
   );
