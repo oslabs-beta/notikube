@@ -1,4 +1,4 @@
-'use client';
+ 'use client';
 
 import * as React from 'react';
 import { useSession } from 'next-auth/react';
@@ -58,82 +58,23 @@ export default function Incidents() {
   //     return updatedRow;
   //     },[]);
   
+import Table from '../../_components/Table'
+
+
+const Incidents = () => {
 
 
   return (
     
     <div style={{ height: 400, width: '100%' }}>
-      {/* <Sidebar /> */}
       <div className='p-4 sm:ml-64'>
       <h1 className="text-left pl-0 py-3 text-5xl font-extrabold dark:text-white">Incident History</h1>
       <br></br>
       <br></br>
-      {/* <DataGrid
-        sx={{
-        boxShadow: 2,
-        border: 2,
-        borderColor: 'black',
-        '& .MuiDataGrid-cell:hover': {
-          color: 'primary.main',
-        },
-        color: 'black',
-        }}
-        editMode='row'
-        getRowId={(data) => data.timestamp}
-        rows={data}
-        columns={columns}
-        processRowUpdate={updateTable}
-        onProcessRowUpdateError={(() => console.log('Error processing row update'))}
-        onRowEditStop={(params) => {
-          console.log(params);
-        }} */}
-    </div>
-    </div>
-  );
-}
+      <Table />
+      </div>
+      </div>
+      )
+      }
 
-const columns = [
-  { 
-    field: 'timestamp', 
-    headerName: 'Timestamp', 
-    width: 225, 
-    editable: false ,
-    headerClassName: 'column-header',
-  },
-  {
-    field: 'type',
-    headerName: 'Type',
-    type: 'string',
-    editable: true,
-    align: 'left',
-    headerAlign: 'left',
-    width: 150,
-    headerClassName: 'column-header', 
-  },
-  {
-    field: 'description',
-    headerName: 'Description',
-    type: 'string',
-    width: 450,
-    editable: true,
-    headerClassName: 'column-header',
-  },
-  {
-    field: 'priority',
-    headerName: 'Priority',
-    type: 'singleSelect',
-    width: 125,
-    editable: true,
-    headerClassName: 'column-header',
-    valueOptions: ['High', 'Med', 'Low']
-  },
-  {
-    field: 'status',
-    headerName: 'Status',
-    type: 'singleSelect',
-    width: 125,
-    editable: true,
-    headerClassName: 'column-header',
-    valueOptions: ['Open', 'Closed', 'Reassigned', 'In Progress']
-  },
-];
+export default Incidents
