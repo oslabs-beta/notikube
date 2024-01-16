@@ -4,12 +4,13 @@ import { unstable_noStore as noStore } from 'next/cache';
 import { Cluster } from '../definitions'
 
 //return cluster info
-export async function clusterInfo() {
+//PASSING IN WRONG DATA - NEED TO UPDATE AFTER CLUSTER TABLE IS FIXED
+export async function clusterInfo(userid: number) {
   noStore();
   try{
     //NEED TO EDIT THIS QUERY AFTER DB UPDATE
-    const result = await sql<Cluster[]>`SELECT clustername, clusterip FROM clusters WHERE clusterip=12345;`;
-    //console.log('cluster result: ', result)
+    const result = await sql<Cluster[]>`SELECT clustername, clusterip FROM clusters WHERE clusterip=${userid};`;
+    //console.log('cluster result: ', result[0])
     return result[0]
   }
   catch (error) {
