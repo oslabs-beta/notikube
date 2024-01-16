@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import { useSession } from 'next-auth/react';
+import Table from '../../_components/Table'
 // import {
 //   DataGrid,
 //   GridCellModes,
@@ -57,12 +58,6 @@ export default function Incidents() {
   //     console.log('updated row', updatedRow);
   //     return updatedRow;
   //     },[]);
-  
-import Table from '../../_components/Table'
-
-
-const Incidents = () => {
-
 
   return (
     
@@ -75,6 +70,4 @@ const Incidents = () => {
       </div>
       </div>
       )
-      }
-
-export default Incidents
+  }
