@@ -1,5 +1,5 @@
 
-export function ClusterHealth() {
+export async function ClusterHealth() {
   return (
     <div>
       
