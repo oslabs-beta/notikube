@@ -3,6 +3,7 @@
 // import { Link } from "react-router-dom";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { signOut } from "next-auth/react";
 
 export default function Sidebar() {
 
@@ -138,8 +139,8 @@ export default function Sidebar() {
 
             {/* Sign Out Link */}
             <li>
-              <Link
-                href="/"
+              <p
+                onClick={() => signOut()}
                 className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
                 <svg
@@ -159,7 +160,7 @@ export default function Sidebar() {
                   </g>
                 </svg>
                 <span className="ml-3">Sign Out</span>
-              </Link>
+              </p>
             </li>
           </ul>
         </div>
