@@ -11,6 +11,7 @@
    GridRowsProp,
  } from '@mui/x-data-grid';
  import useSWR from 'swr'
+ import { useSession } from 'next-auth/react'
 
 
 //const fetcher = (...args) => fetch(...args).then((res) => res.json())
@@ -21,10 +22,11 @@ type User = {
   email: string,
   phone: number,
   slack: string,
+  phoneString: string,
 }
 
 async function fetchData(): Promise<User[]> {
-  const res = await fetch('/api/incidents')
+  const res = await fetch('http://localhost:3000/api/incidents/getAlerts')
   return res.json()
 }
 
@@ -33,9 +35,50 @@ const userPromise = fetchData()
 
 const Table = () => {
 
-  const users: User[] = use(userPromise)
+  // const session = useSession().data;
 
-  console.log('users', users)
+  // const userId = session?.user.userid;
+
+  let users: User[] = use(userPromise)
+
+  // let numString: string
+
+  // for (let key in users) {
+
+  //   console.log('start of loop', users[key].phoneString)
+
+  //   if (users[key].phone !== null) {
+  //     numString = users[key].phone.toString();
+  //   } else {
+  //      numString = 'false';
+  //   }
+
+  //   if (numString.length === 10 && users[key].phoneString === null) {
+  //     users[key].phoneString = '(' + numString.slice(0,2) + ') ' + numString.slice(3,5) + '-' + numString.slice(4);
+  //   } else if (users[key].phoneString === null && numString.length !== null) {
+  //     users[key].phoneString = '--- --- ----'
+  //   } else if (users[key].phoneString !== '--- --- ----' && users[key].phoneString.length !== 14) {
+  //     users[key].phoneString = '(' + users[key].phoneString.slice(0,3) + ') ' + users[key].phoneString.slice(3,6) + '-' + users[key].phoneString.slice(6);
+  //   }
+
+  //   console.log('end of loop', users[key].phoneString)
+
+  // }
+
+  const updateTable = React.useCallback(
+    async (newRow: GridRowModel) => {
+      const updatedRow = { ...newRow };
+      updatedRow.id = newRow.userid;
+      fetch('http://localhost:3000/api/incidents/update', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newRow)
+      });
+      console.log('updated row', updatedRow);
+      return updatedRow;
+      },[]);
 
 //  const { data, error, isLoading } = useSWR('https://jsonplaceholder.typicode.com/posts', fetcher) 
 
@@ -58,11 +101,11 @@ const Table = () => {
          getRowId={(users) => users.userid}
          rows={users}
          columns={columns}
-         //processRowUpdate={updateTable}
-         //onProcessRowUpdateError={(() => console.log('Error processing row update'))}
-         //onRowEditStop={(params) => {
-           //console.log(params);
-         //}}
+         processRowUpdate={updateTable}
+         onProcessRowUpdateError={(() => console.log('Error processing row update'))}
+         onRowEditStop={(params) => {
+           console.log('params', params);
+         }}
        />
      </div>
    );
@@ -72,7 +115,7 @@ const Table = () => {
    { 
      field: 'userid', 
      headerName: 'User ID', 
-     width: 400, 
+     width: 300, 
      editable: false ,
      type: 'number',
      headerClassName: 'column-header',
@@ -83,17 +126,17 @@ const Table = () => {
      field: 'name',
      headerName: 'Name',
      type: 'string',
-     editable: false,
+     editable: true,
      align: 'left',
      headerAlign: 'left',
-     width: 150,
+     width: 175,
      headerClassName: 'column-header', 
    },
    {
      field: 'email',
      headerName: 'Email',
      type: 'string',
-     width: 450,
+     width: 175,
      editable: true,
      headerClassName: 'column-header',
    },
@@ -101,15 +144,15 @@ const Table = () => {
      field: 'slack',
      headerName: 'Slack',
      type: 'string',
-     width: 125,
+     width: 175,
      editable: true,
      headerClassName: 'column-header'
    },
    {
     field: 'phone',
     headerName: 'Phone',
-    type: 'number',
-    width: 125,
+    type: 'string',
+    width: 200,
     editable: true,
     headerClassName: 'column-header'
   },
