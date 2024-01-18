@@ -1,7 +1,7 @@
 //dynamically rendered server side component (ideally)
 
 //import Link from 'next/link'; //LINK IS CURRENTLY CAUSING ERROR:Internal error: TypeError: Cannot read properties of null (reading 'useContext')
-import Metrics from '../_components/homePage/metrics';
+import HomeAlerts from '../_components/homePage/homeAlerts';
 import { ClusterHealth, NodeHealth } from '../_components/homePage/clusterHealth';
 import ClusterDetails from '../_components/homePage/clusterDetails';
 import LoadingSpinner from '../_components/homePage/loadingSpinner';
@@ -29,7 +29,7 @@ export default function Dashboard() {
           </Suspense>
           <div>
             <Suspense fallback={<LoadingSpinner />}>
-              <Metrics />
+              <HomeAlerts />
             </Suspense>
             <h3 className="text-left pl-8 text-3xl font-bold dark:text-white py-3">Cluster</h3>
             <Suspense fallback={<LoadingSpinner />}>

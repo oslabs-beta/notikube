@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { numProgressAlerts, numTotalAlerts } from '../../lib/homePage/numOfAlerts';
 
-export default async function Metrics() {
+export default async function homeAlerts() {
   const totalInProgressAlerts = await numProgressAlerts();
   const totalAlerts = await numTotalAlerts();
   return (

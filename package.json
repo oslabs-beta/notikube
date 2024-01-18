@@ -13,8 +13,10 @@
   "dependencies": {
     "@emotion/react": "latest",
     "@emotion/styled": "latest",
+    "@heroicons/react": "^1.0.6",
     "@mui/material": "^5.15.3",
     "@mui/x-data-grid": "latest",
+    "@tremor/react": "^3.13.1",
     "bcrypt": "^5.1.1",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",

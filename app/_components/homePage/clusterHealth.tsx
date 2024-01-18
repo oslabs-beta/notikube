@@ -1,8 +1,12 @@
+import { Card, Text, Metric } from "@tremor/react";
+import { 
+  numOfNodes 
+} from "../../lib/queries";
 
 export async function ClusterHealth() {
+  
   return (
     <div>
-      
         <section id='cluster'>
           <div id='cluster-row-1'className='display: inline-flex'>
             <iframe className="rounded-lg m-3" src={`http:///*ipAddress*//d-solo/garysdevil-kube-state-metrics-v2/kube-state-metrics-v2?orgId=1&from=${Date.now() - 3600000}&to=${Date.now()}&panelId=5`} width="325" height="225" frameBorder="0"></iframe>
@@ -17,13 +21,16 @@ export async function ClusterHealth() {
   )
 }
 
-export function NodeHealth() {
+export async function NodeHealth() {
+  const numOfNodesResult = await numOfNodes()
     return (
       <div>
         
         <section id='nodes' className='display: inline-flex'>
-          <iframe className="rounded-lg m-3" src={`http:///*ipAddress*//d-solo/garysdevil-kube-state-metrics-v2/kube-state-metrics-v2?orgId=1&from=${Date.now() - 3600000}&to=${Date.now()}&panelId=24`} width="325" height="225" frameBorder="0"></iframe>
-          <iframe className="rounded-lg m-3" src={`http:///*ipAddress*//d-solo/garysdevil-kube-state-metrics-v2/kube-state-metrics-v2?orgId=1&from=${Date.now() - 3600000}&to=${Date.now()}&panelId=26`} width="325" height="225" frameBorder="0"></iframe>
+          <Card className="max-w-xs mx-auto">
+            <Text>Nodes</Text>
+            <Metric>{numOfNodesResult}</Metric>
+          </Card>
         </section>
       </div>
     )
