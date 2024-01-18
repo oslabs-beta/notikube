@@ -1,7 +1,9 @@
 'use client';
-
 import React, { useState } from 'react';
-import Sidebar from '../../_components/Sidebar';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
+// import React, { useState } from 'react';
+// import Sidebar from '../../_components/Sidebar';
 // import { useNavigate } from 'react-router-dom';
 // import '../App.css';
 
@@ -10,51 +12,54 @@ export default function ConnectCluster() {
 
   const [isModalVisible, setModalVisible] = useState(false);
 
+  // const router = useRouter();
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
 
-  // This function takes the passed in form data and sends it to the server
-  async function newCluster(e: React.FormEvent) {
+  const navigate = () => {
+    <Link href="/dashboard"></Link>
+  }
+  
+   async function newCluster(e) {
     e.preventDefault();
   
     // Get the values from the form fields
-    const clusterNameElement = document.getElementById('clusterName') as HTMLInputElement | null;
-    const clusterIPElement = document.getElementById('clusterIP') as HTMLInputElement | null;
+    const clusterName = document.getElementById('clusterName').value;
+    const clusterIP = document.getElementById('clusterIP').value;
   
-    if (clusterNameElement && clusterIPElement) {
-      const clusterName = clusterNameElement.value;
-      const clusterIP = clusterIPElement.value;
+    // Prepare the data to be sent
+    const data = {
+      clusterName,
+      clusterIP,
+    };
   
-      // Prepare the data to be sent
-      const data = {
-        clusterName,
-        clusterIP,
-      };
-  
-      try {
-        await fetch('/api/newClusterConnection', {
-          method: 'POST',
-          body: JSON.stringify(data),
-          headers: { 'Content-Type': 'application/json' },
-        });
+    await fetch('/api/newClusterConnection', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: { 'Content-Type': 'application/json' },
+    })
+      .then(() => {
         console.log('Data sent successfully');
         // navigate('/dashboard', {newIpAddress: clusterIP, newClusterName: clusterName });
-      } catch (error) {
+      })
+      .catch((error) => {
         console.error('Error sending data:', error);
-      }
+      });
   
-      // Close the modal after form submission
-      toggleModal();
-    } else {
-      console.error('Cluster name or IP element is null.');
-    }
+    // Close the modal after form submission
+    toggleModal();
   }
-  
+
   return (
-    <div>
-      <Sidebar />
-      <div className="p4 flex justify-between">
+    // <div className='p-4 sm:ml-64'>
+    //     <button>
+    //   <Link href="/dashboard">Click here to read more</Link>
+    // </button>
+    // </div>
+    <div className='p-4 sm:ml-64'>
+      <div className="p4 flex justify-between"
+      >
         <h1 className="text-left pl-8 py-5 text-5xl font-extrabold dark:text-white">
           Your Clusters
         </h1>
@@ -66,17 +71,17 @@ export default function ConnectCluster() {
         >
           + Add New Cluster
         </button>
-        <div className="ClusterTable text-left">
+        <div className="ClusterTable  text-left">
           {/* Modal toggle */}
 
           {/* Main modal */}
           <div
             id="defaultModal"
-            tabIndex={-1}
+            tabIndex="-1"
             aria-hidden="true"
-            className={`${
+            className= {`${
               isModalVisible ? 'fixed' : 'hidden'
-            } overflow-y-auto overflow-x-hidden top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full`}
+            }  p-4 sm:ml-64 w-full md:inset-0 h-modal md:h-full`}
           >
             <div className="relative p-4 w-full max-w-2xl h-full md:h-auto">
               {/* Modal content */}
@@ -119,7 +124,7 @@ export default function ConnectCluster() {
                       </label>
                       <textarea
                         id="clusterName"
-                        rows={1}
+                        rows="1"
                         className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                         placeholder="Write Cluster Name Here"
                       ></textarea>
@@ -133,7 +138,7 @@ export default function ConnectCluster() {
                       </label>
                       <textarea
                         id="clusterIP"
-                        rows={1}
+                        rows="1"
                         className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                         placeholder="Write IP Address Here"
                       ></textarea>
@@ -153,4 +158,5 @@ export default function ConnectCluster() {
       </div>
     </div>
   );
+ 
 }
