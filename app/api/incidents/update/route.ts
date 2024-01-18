@@ -7,6 +7,7 @@ type User = {
     email: string,
     phone: number,
     slack: string,
+    notes?: string,
 }
 
 export async function POST(req: NextRequest) {
@@ -15,7 +16,7 @@ export async function POST(req: NextRequest) {
 
     async function updateUser(user: User) {
         await sql`
-    update users SET name=${user.name}, email=${user.email}, slack=${user.slack}, phone=${user.phone} where userid=${user.userid}
+    update users SET name=${user.name}, email=${user.email}, slack=${user.slack}, phone=${user.phone}, notes=${user.notes} where userid=${user.userid}
     `
     }
 

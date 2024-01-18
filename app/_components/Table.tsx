@@ -23,6 +23,7 @@ type User = {
   phone: number,
   slack: string,
   phoneString: string,
+  notes?: string
 }
 
 async function fetchData(): Promise<User[]> {
@@ -112,16 +113,7 @@ const Table = () => {
  }
  
  const columns: GridColDef[] = [
-   { 
-     field: 'userid', 
-     headerName: 'User ID', 
-     width: 300, 
-     editable: false ,
-     type: 'number',
-     headerClassName: 'column-header',
-     align: 'left',
-     headerAlign: 'left',
-   },
+  
    {
      field: 'name',
      headerName: 'Name',
@@ -156,6 +148,16 @@ const Table = () => {
     editable: true,
     headerClassName: 'column-header'
   },
+  { 
+    field: 'notes', 
+    headerName: 'Notes', 
+    width: 300, 
+    editable: true ,
+    type: 'string',
+    headerClassName: 'column-header',
+    align: 'left',
+    headerAlign: 'left',
+  }
  ];
  
 
