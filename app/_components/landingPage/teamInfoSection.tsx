@@ -44,8 +44,8 @@ export default function TeamInfoSection() {
       role: "Software Engineer",
     },
   ];
-    return(
-      <section className="bg-gray-50 dark:bg-gray-800">
+  return (
+    <section className="bg-gray-50 dark:bg-gray-800">
       <div className="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-">
         <div className="mx-auto mb-8 max-w-screen-sm lg:mb-16">
           <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
@@ -62,6 +62,5 @@ export default function TeamInfoSection() {
         </div>
       </div>
     </section>
-
-    )
+  );
 }

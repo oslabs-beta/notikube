@@ -1,18 +1,7 @@
 // Components
 import Sidebar from "../ui/dashboard/sidenav"
 
-// export default function DashboardLayout({
-//   children, // will be a page or nested layout
-// }: {
-//   children: React.ReactNode
-// }) {
-//   return (
-//     <section>
-//       <Sidebar/> 
-//       {children}
-//     </section>
-//   )
-// }
+
 export default function Layout ({ children } : {children : React.ReactNode }) {
 
   return (

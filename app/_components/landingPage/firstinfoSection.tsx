@@ -1,9 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
 export default function FirstInfoSection() {
-    return (
-        <div>
-    <section className="bg-gray-50 dark:bg-gray-800">
+  return (
+    <div>
+      <section className="bg-gray-50 dark:bg-gray-800">
         <div className="py-4 px-2 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
           <div className="gap-16 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-8 lg:px-6 lg:text-left">
             <div className="font-light text-gray-500 sm:text-lg dark:text-gray-400">
@@ -31,6 +31,6 @@ export default function FirstInfoSection() {
           </div>
         </div>
       </section>
-        </div>
-    )
+    </div>
+  );
 }

@@ -1,17 +1,19 @@
 import Link from "next/link";
 import Image from "next/image";
 export default function TitleSection() {
-
-    return(
-        <div>
-         <section className="bg-white dark:bg-gray-900">
+  return (
+    <div>
+      <section className="bg-white dark:bg-gray-900">
         <div className="grid py-8 px-4 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
-          <div className="place-self-center mx-auto lg:col-span-7 pr-8"> {/* Added pr-8 (padding-right) */}
+          <div className="place-self-center mx-auto lg:col-span-7 pr-8">
+            {" "}
+            {/* Added pr-8 (padding-right) */}
             <h1 className="mb-4 max-w-2xl text-4xl font-extrabold leading-none md:text-5xl lg:text-left xl:text-6xl dark:text-white">
               Incident management for Kubernetes clusters
             </h1>
             <p className="mb-6 max-w-2xl font-light text-gray-500 lg:mb-8 md:text-lg lg:text-left lg:text-xl dark:text-gray-400">
-              Stay on top of critical alerts with NotiKube&apos;s intuitive dashboard for complete incident lifecycle management.
+              Stay on top of critical alerts with NotiKube&apos;s intuitive
+              dashboard for complete incident lifecycle management.
             </p>
             <div className="hidden lg:mt-0 lg:flex">
               <Link
@@ -44,6 +46,6 @@ export default function TitleSection() {
           </div>
         </div>
       </section>
-        </div>
-    )
+    </div>
+  );
 }

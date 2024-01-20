@@ -1,9 +1,8 @@
 import Link from "next/link";
 
 export default function MediumArticleSection() {
-
-    return (
-      <section className="bg-white dark:bg-gray-900 flex items-center">
+  return (
+    <section className="bg-white dark:bg-gray-900 flex items-center">
       <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
         <div className="max-w-screen-lg text-gray-500 sm:text-lg dark:text-gray-400">
           <h2 className="mb-4 text-4xl font-bold text-gray-900 dark:text-white">
@@ -40,5 +39,5 @@ export default function MediumArticleSection() {
         </div>
       </div>
     </section>
-    )
+  );
 }

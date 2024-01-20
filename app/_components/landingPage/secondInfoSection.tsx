@@ -1,9 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
 export default function SecondInfoSection() {
-
-    return (
-      <section className="bg-white dark:bg-gray-900">
+  return (
+    <section className="bg-white dark:bg-gray-900">
       <div className="gap-16 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-16 lg:px-6 lg:text-left">
         <div className="grid gap-4 mt-8">
           <Image
@@ -29,6 +28,5 @@ export default function SecondInfoSection() {
         </div>
       </div>
     </section>
-        
-    )
+  );
 }

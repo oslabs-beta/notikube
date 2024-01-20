@@ -5,8 +5,9 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import LogInImage from '../../public/NotiKubeLogin.svg';
-import Logo from "../../public/logo.svg";
+// import Logo from "../../public/logo.svg";
 import { SignInResponse, signIn } from "next-auth/react";
+import Logo from "../../public/assets/logo.svg"
 
 const LoginPage = () => {
   const router = useRouter();
