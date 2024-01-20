@@ -25,7 +25,7 @@ export default function Dashboard() {
         <div className='p-4 sm:ml-64'>
           <h1 className="text-left pl-8 py-5 text-5xl font-extrabold dark:text-white">Dashboard</h1>
           <Suspense fallback={<LoadingSpinner />}>
-            <ClusterDetails userid={12345} />
+            <ClusterDetails userid={'12345'} />
           </Suspense>
           <div>
             <Suspense fallback={<LoadingSpinner />}>

@@ -1,20 +1,53 @@
-import { Card, Text, Metric } from "@tremor/react";
+import { Card, Text, Metric, Title, BarChart, Subtitle} from "@tremor/react";
 import { 
-  numOfNodes 
+  numOfReadyNodes,
+  numByNamePods,
+  numOfUnhealthyNodes,
+  restartByNamePods,
 } from "../../lib/queries";
+import { NameSpacePods } from "../../lib/definitions";
 
 export async function ClusterHealth() {
-  
+
+  const numByNamePodsResult = await numByNamePods();
+  const restartByNamePodsResult = await restartByNamePods();
+
+  const chartData1 = numByNamePodsResult.map((n: NameSpacePods) => {return {name: n.metric.namespace, 'Number of Pods': Number(n.value[1])} })
+  const chartData2 = restartByNamePodsResult.map((n: NameSpacePods) => {return {name: n.metric.namespace, 'Number of Restarted Pods': Number(n.value[1])} })
+
   return (
     <div>
         <section id='cluster'>
-          <div id='cluster-row-1'className='display: inline-flex'>
-            <iframe className="rounded-lg m-3" src={`http:///*ipAddress*//d-solo/garysdevil-kube-state-metrics-v2/kube-state-metrics-v2?orgId=1&from=${Date.now() - 3600000}&to=${Date.now()}&panelId=5`} width="325" height="225" frameBorder="0"></iframe>
-            <iframe className="rounded-lg m-3" src={`http:///*ipAddress*//d-solo/garysdevil-kube-state-metrics-v2/kube-state-metrics-v2?orgId=1&from=${Date.now() - 3600000}&to=${Date.now()}&panelId=6`} width="325" height="225" frameBorder="0"></iframe>
+
+          <div id='cluster-row-2'className='display: inline-flex pl-8 py-1'>
+            <Card>
+              <Title>Number of Pods</Title>
+              <Subtitle>By Namespace</Subtitle>
+              <BarChart
+                className="mt-6"
+                data={chartData1}
+                index="name"
+                categories={["Number of Pods"]}
+                colors={["red"]}
+                yAxisWidth={48}
+                showAnimation={true}
+              />
+            </Card>
           </div>
-          <div id='cluster-row-2' className='display: inline-flex'>
-            <iframe className="rounded-lg m-3" src={`http:///*ipAddress*//d-solo/garysdevil-kube-state-metrics-v2/kube-state-metrics-v2?orgId=1&from=${Date.now() - 3600000}&to=${Date.now()}&panelId=10`} width="325" height="225" frameBorder="0"></iframe>
-            <iframe className="rounded-lg m-3" src={`http:///*ipAddress*//d-solo/garysdevil-kube-state-metrics-v2/kube-state-metrics-v2?orgId=1&from=${Date.now() - 3600000}&to=${Date.now()}&panelId=11`} width="325" height="225" frameBorder="0"></iframe>
+          <div id='cluster-row-2'className='display: inline-flex pl-8 py-3'>
+            <Card>
+              <Title>Number of restarted pods per namespace</Title>
+              <Subtitle>By Namepace - Five Minutes</Subtitle>
+              <BarChart
+                className="mt-6"
+                data={chartData2}
+                index="name"
+                categories={["Number of Restarted Pods"]}
+                colors={["red"]}
+                yAxisWidth={48}
+                showAnimation={true}
+              />
+            </Card>
           </div>
         </section>
     </div>
@@ -22,14 +55,24 @@ export async function ClusterHealth() {
 }
 
 export async function NodeHealth() {
-  const numOfNodesResult = await numOfNodes()
+
+  const numOfReadyNodesResult = await numOfReadyNodes();
+  const numOfUnhealthyNodesResult = await numOfUnhealthyNodes();
+
     return (
       <div>
-        
         <section id='nodes' className='display: inline-flex'>
           <Card className="max-w-xs mx-auto">
-            <Text>Nodes</Text>
-            <Metric>{numOfNodesResult}</Metric>
+            <Text>Ready Nodes</Text>
+            <Metric>{numOfReadyNodesResult}</Metric>
+          </Card>
+          <Card className="max-w-xs mx-auto">
+            <Text>Unavailable Nodes</Text>
+            <Metric>{numOfUnhealthyNodesResult}</Metric>
+          </Card>
+          <Card className="max-w-xs mx-auto">
+            <Text>TBD</Text>
+            <Metric></Metric>
           </Card>
         </section>
       </div>

@@ -3,6 +3,11 @@ export type Count = {
 }
 
 export type Cluster = {
-  clustername: string,
-  clusterip: number,
+  clusterName: string,
+  clusterIp: number,
+}
+
+export type NameSpacePods = {
+  metric: {namespace: string}
+  value: (string | number)[],
 }
