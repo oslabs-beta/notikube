@@ -15,6 +15,7 @@
     "@emotion/styled": "latest",
     "@mui/material": "^5.15.3",
     "@mui/x-data-grid": "latest",
+    "@types/node-fetch": "^2.6.11",
     "bcrypt": "^5.1.1",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",

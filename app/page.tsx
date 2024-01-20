@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import TeamMember from "./_components/landingPage/TeamMember";
+import TeamMember from "./_components/LandingPage/TeamMember";
 
 export default function LandingPage() {
   

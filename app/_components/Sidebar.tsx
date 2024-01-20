@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
 // import { Link } from "react-router-dom";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { signOut } from "next-auth/react";
 
 export default function Sidebar() {
-
-  const pathname = usePathname(); 
+  const pathname = usePathname();
 
   return (
     <div>
@@ -21,10 +21,12 @@ export default function Sidebar() {
         <div className="overflow-y-auto py-5 px-3 h-full bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700">
           {/* This link component contains the NotiKube link and logo */}
           <Link href="/" className="flex items-center ps-10 mb-5">
-            <img
-              src="src/assets/logo.svg"
+            <Image
+              src="/logo.svg"
               className="h-10 me-5 sm:h-10"
               alt="NotiKube Logo"
+              width={50}
+              height={50}
             />
             <span className="self-center text-xl font whitespace-nowrap dark:text-white">
               NotiKube
@@ -37,7 +39,11 @@ export default function Sidebar() {
             <li>
               <Link
                 href="/dashboard"
-                className={pathname === "/dashboard" ? "font-semibold" : "flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"}
+                className={
+                  pathname === "/dashboard"
+                    ? "font-semibold"
+                    : "flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                }
               >
                 <svg
                   aria-hidden="true"
@@ -63,7 +69,11 @@ export default function Sidebar() {
             <li>
               <Link
                 href="/alerts"
-                className={pathname === "/alerts" ? "font-semibold" : "flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"}
+                className={
+                  pathname === "/alerts"
+                    ? "font-semibold"
+                    : "flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                }
               >
                 <svg
                   aria-hidden="true"
@@ -89,7 +99,11 @@ export default function Sidebar() {
             <li>
               <Link
                 href="/connectCluster"
-                className={pathname === "/connectCluster" ? "font-semibold" : "flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"}
+                className={
+                  pathname === "/connectCluster"
+                    ? "font-semibold"
+                    : "flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                }
               >
                 <svg
                   aria-hidden="true"
@@ -115,7 +129,11 @@ export default function Sidebar() {
             <li>
               <Link
                 href="/profile"
-                className={pathname === "/profile" ? "font-semibold" : "flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"}
+                className={
+                  pathname === "/profile"
+                    ? "font-semibold"
+                    : "flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                }
               >
                 <svg
                   aria-hidden="true"
