@@ -1,12 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
+
 export default function TitleSection() {
   return (
     <div>
       <section className="bg-white dark:bg-gray-900">
         <div className="grid py-8 px-4 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
           <div className="place-self-center mx-auto lg:col-span-7 pr-8">
-            {" "}
             {/* Added pr-8 (padding-right) */}
             <h1 className="mb-4 max-w-2xl text-4xl font-extrabold leading-none md:text-5xl lg:text-left xl:text-6xl dark:text-white">
               Incident management for Kubernetes clusters

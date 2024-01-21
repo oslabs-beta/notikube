@@ -1,5 +1,5 @@
-import Link from "next/link";
 import TeamMember from "./TeamMember";
+
 export default function TeamInfoSection() {
   const teamMembers = [
     {

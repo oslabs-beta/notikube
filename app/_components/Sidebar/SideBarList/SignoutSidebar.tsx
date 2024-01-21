@@ -1,9 +1,11 @@
 import { signOut } from "next-auth/react";
+import Link from "next/link";
 
 export default function SignoutSideBar() {
   return (
     <>
-      <p
+      <Link
+        href=""
         onClick={() => signOut()}
         className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
       >
@@ -24,7 +26,7 @@ export default function SignoutSideBar() {
           </g>
         </svg>
         <span className="ml-3">Sign Out</span>
-      </p>
+      </Link>
     </>
   );
 }

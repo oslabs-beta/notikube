@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+
 export default function Footer() {
   return (
     <footer className="p-4 bg-gray-50 sm:p-6 dark:bg-gray-800">
@@ -8,7 +9,7 @@ export default function Footer() {
           <div className="mb-6 md:mb-0">
             <Link href="/" className="flex items-center">
               <Image
-                src="/logo.svg"
+                src="/assets/logo.svg"
                 className="h-10 me-5 sm:h-10"
                 alt="NotiKube Logo"
                 height={200}
@@ -73,7 +74,7 @@ export default function Footer() {
             >
               <Image
                 src="/landingPage/footerSection/linkedin.svg"
-                alt="GitHub Logo"
+                alt="LinkedIn Logo"
                 width={25}
                 height={25}
               />

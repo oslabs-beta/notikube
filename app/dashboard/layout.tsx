@@ -1,6 +1,5 @@
 // Components
-import Sidebar from "../ui/dashboard/sidenav"
-
+import Sidebar from "../_components/Sidebar/Sidebar"
 
 export default function Layout ({ children } : {children : React.ReactNode }) {
 

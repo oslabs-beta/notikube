@@ -1,10 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
-export default function CoreTechSection() {
 
-    return (
-        <div>
-            <section className="bg-white dark:bg-gray-900 py-8 px-4 mx-auto max-w-screen-xl lg:py-16">
+export default function CoreTechSection() {
+  return (
+    <div>
+      <section className="bg-white dark:bg-gray-900 py-8 px-4 mx-auto max-w-screen-xl lg:py-16">
         <h2 className="mb-2 text-3xl font-extrabold tracking-tight leading-tight text-center text-gray-900 lg:mb-6 dark:text-white md:text-4xl">
           Core Technologies Used
         </h2>
@@ -31,8 +31,6 @@ export default function CoreTechSection() {
           ))}
         </div>
       </section>
-
-          
-        </div>
-    )
+    </div>
+  );
 }
