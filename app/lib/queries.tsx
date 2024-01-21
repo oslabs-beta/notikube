@@ -3,13 +3,13 @@ import { unstable_noStore as noStore } from 'next/cache';
 // ** REPLACE ALL IPs WITH PASSED IN IP ADDRESS AS A PARAMETER **
 
 // Returns number of nodes in the ready condition for the cluster as a number
-export async function numOfReadyNodes(){
+export async function numOfReadyNodes(ip: string){
     noStore();
     try{
          // Define the Prometheus API query
         const prometheusQuery = "sum(kube_node_status_condition{condition='Ready', status='true'}==1)";
         // Replace <prometheus-server-ip> with the actual IP address of your Prometheus server (parameter)
-        const prometheusServerIP = '34.168.131.121:80';
+        const prometheusServerIP = `${ip}`;
         const prometheusEndpoint = `http://${prometheusServerIP}/api/v1/query?query=${encodeURIComponent(prometheusQuery)}`;
         // Make the fetch request to Prometheus API
         const response = await fetch(prometheusEndpoint);
@@ -30,13 +30,13 @@ export async function numOfReadyNodes(){
 }
 
 // Returns the total number of pods in the cluster as a number
-export async function numOfReadyPods(){
+export async function numOfReadyPods(ip: string){
     noStore();
     try{
          // Define the Prometheus API query
         const prometheusQuery = "count(kube_pod_info)";
         // Replace <prometheus-server-ip> with the actual IP address of your Prometheus server (passed in parameter)
-        const prometheusServerIP = '34.168.131.121:80';
+        const prometheusServerIP = `${ip}`;
         const prometheusEndpoint = `http://${prometheusServerIP}/api/v1/query?query=${encodeURIComponent(prometheusQuery)}`;
         // Make the fetch request to Prometheus API
         const response = await fetch(prometheusEndpoint);
@@ -57,13 +57,13 @@ export async function numOfReadyPods(){
 }
 
 // Returns the total number of pods in the cluster that are not in the 'ready' condition as a number
-export async function numOfUnhealthyPods(){
+export async function numOfUnhealthyPods(ip: string){
     noStore();
     try{
          // Define the Prometheus API query
         const prometheusQuery = "sum by (namespace) (kube_pod_status_ready{condition='false'})";
         // Replace <prometheus-server-ip> with the actual IP address of your Prometheus server (passed in parameter)
-        const prometheusServerIP = '34.168.131.121:80';
+        const prometheusServerIP = `${ip}`;
         const prometheusEndpoint = `http://${prometheusServerIP}/api/v1/query?query=${encodeURIComponent(prometheusQuery)}`;
         // Make the fetch request to Prometheus API
         const response = await fetch(prometheusEndpoint);
@@ -84,13 +84,13 @@ export async function numOfUnhealthyPods(){
 }
 
 // Returns the number of pods per namepsace as an object with two properties
-export async function numByNamePods(){
+export async function numByNamePods(ip: string){
     noStore();
     try{
          // Define the Prometheus API query
         const prometheusQuery = "sum by (namespace) (kube_pod_info)";
         // Replace <prometheus-server-ip> with the actual IP address of your Prometheus server (passed in parameter)
-        const prometheusServerIP = '34.168.131.121:80';
+        const prometheusServerIP = `${ip}`;
         const prometheusEndpoint = `http://${prometheusServerIP}/api/v1/query?query=${encodeURIComponent(prometheusQuery)}`;
         // Make the fetch request to Prometheus API
         const response = await fetch(prometheusEndpoint);
@@ -111,13 +111,13 @@ export async function numByNamePods(){
 }
 
 // Returns number of pods that didn't have a ready status in the last five minutes by namespace as an object.
-export async function restartByNamePods(){
+export async function restartByNamePods(ip: string){
     noStore();
     try{
          // Define the Prometheus API query
         const prometheusQuery = "sum by (namespace)(changes(kube_pod_status_ready{condition='true'}[5m]))";
         // Replace <prometheus-server-ip> with the actual IP address of your Prometheus server (parameter)
-        const prometheusServerIP = '34.168.131.121:80';
+        const prometheusServerIP = `${ip}`;
         const prometheusEndpoint = `http://${prometheusServerIP}/api/v1/query?query=${encodeURIComponent(prometheusQuery)}`;
         // Make the fetch request to Prometheus API
         const response = await fetch(prometheusEndpoint);
@@ -139,13 +139,13 @@ export async function restartByNamePods(){
 }
 
 // Return the number of nodes that have expereinced a 'not ready' condition in the last 15m as a number
-export async function numOfUnhealthyNodes(){
+export async function numOfUnhealthyNodes(ip: string){
     noStore();
     try{
          // Define the Prometheus API query
         const prometheusQuery = "sum(changes(kube_node_status_condition{status='true',condition='Ready'}[15m])) by (node) > 2";
         // Replace <prometheus-server-ip> with the actual IP address of your Prometheus server (parameter)
-        const prometheusServerIP = '34.168.131.121:80';
+        const prometheusServerIP = `${ip}`;
         const prometheusEndpoint = `http://${prometheusServerIP}/api/v1/query?query=${encodeURIComponent(prometheusQuery)}`;
         // Make the fetch request to Prometheus API
         const response = await fetch(prometheusEndpoint);
@@ -165,13 +165,13 @@ export async function numOfUnhealthyNodes(){
 }
 
 // Return CPU Utilization By Node - as object
-export async function cpuUtilByNode(){
+export async function cpuUtilByNode(ip: string){
     noStore();
     try{
          // Define the Prometheus API query
         const prometheusQuery = "100 - (avg by (instance) (irate(node_cpu_seconds_total{mode='idle'}[10m]) * 100) * on(instance) group_left(nodename) (node_uname_info))";
         // Replace <prometheus-server-ip> with the actual IP address of your Prometheus server (parameter)
-        const prometheusServerIP = '34.168.131.121:80';
+        const prometheusServerIP = `${ip}`;
         const prometheusEndpoint = `http://${prometheusServerIP}/api/v1/query?query=${encodeURIComponent(prometheusQuery)}`;
         // Make the fetch request to Prometheus API
         const response = await fetch(prometheusEndpoint);

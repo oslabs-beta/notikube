@@ -9,7 +9,7 @@ export async function clusterInfo(userid: string) {
   noStore();
   try{
     //NEED TO EDIT THIS QUERY AFTER DB UPDATE
-    const result = await sql<Cluster[]>`SELECT cluster_name, cluster_ip FROM clusters WHERE cluster_ip=${userid};`;
+    const result = await sql<Cluster[]>`SELECT clusters.cluster_name, clusters.cluster_ip FROM clusters JOIN users ON clusters.cluster_id=users.cluster_id WHERE users.user_id=${userid};`;
     //console.log('cluster result: ', result[0])
     return result[0]
   }

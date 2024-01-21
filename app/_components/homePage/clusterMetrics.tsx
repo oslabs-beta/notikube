@@ -11,8 +11,8 @@ import {
 import { NameSpacePods, CircleNode } from "../../lib/definitions";
 import NodeCircle from "./nodeCircle";
 
-export async function NodeCPUHealth() {
-  const cpuUtilByNodeResult = await cpuUtilByNode();
+export async function NodeCPUHealth({ cluster_ip }: {cluster_ip: string}) {
+  const cpuUtilByNodeResult = await cpuUtilByNode(cluster_ip);
   const nodeCircles = cpuUtilByNodeResult.map((n: CircleNode) => {return <NodeCircle key={n.metric.nodename} name={n.metric.nodename} value={Number(n.value[1])}/>})
 
   return (
@@ -25,8 +25,8 @@ export async function NodeCPUHealth() {
   )
 }
 
-export async function PodHealth() {
-  const numByNamePodsResult = await numByNamePods();
+export async function PodHealth({ cluster_ip }: {cluster_ip: string}) {
+  const numByNamePodsResult = await numByNamePods(cluster_ip);
   const chartData1 = numByNamePodsResult.map((n: NameSpacePods) => {return {name: n.metric.namespace, 'Number of Pods': Number(n.value[1])} })
 
   return (
@@ -48,8 +48,8 @@ export async function PodHealth() {
   )
 }
 
-export async function PodRestartHealth() {
-  const restartByNamePodsResult = await restartByNamePods();
+export async function PodRestartHealth({ cluster_ip }: {cluster_ip: string}) {
+  const restartByNamePodsResult = await restartByNamePods(cluster_ip);
   const chartData2 = restartByNamePodsResult.map((n: NameSpacePods) => {return {name: n.metric.namespace, 'Number of Restarted Pods': Number(n.value[1])} })
  
   return (
@@ -71,12 +71,12 @@ export async function PodRestartHealth() {
   )
 }
 
-export async function ClusterHealth() {
+export async function ClusterHealth({ cluster_ip }: {cluster_ip: string}) {
 
-  const numOfReadyNodesResult = await numOfReadyNodes();
-  const numOfUnhealthyNodesResult = await numOfUnhealthyNodes();
-  const numOfReadyPodsResult = await numOfReadyPods();
-  const numOfUnhealthyPodsResult = await numOfUnhealthyPods();
+  const numOfReadyNodesResult = await numOfReadyNodes(cluster_ip);
+  const numOfUnhealthyNodesResult = await numOfUnhealthyNodes(cluster_ip);
+  const numOfReadyPodsResult = await numOfReadyPods(cluster_ip);
+  const numOfUnhealthyPodsResult = await numOfUnhealthyPods(cluster_ip);
 
     return (
       <div>

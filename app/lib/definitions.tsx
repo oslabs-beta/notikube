@@ -4,7 +4,7 @@ export type Count = {
 
 export type Cluster = {
   cluster_name: string,
-  cluster_ip: number,
+  cluster_ip: string,
 }
 
 export type NameSpacePods = {

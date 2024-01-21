@@ -1,9 +1,8 @@
 import { clusterInfo } from "../../lib/homePage/clusterInfo";
 import { Divider } from "@tremor/react";
 
-export default async function clusterDetails({ userid } : {userid: string}) {
-  //Grab user name from authentication
-  const { cluster_name, cluster_ip } = await clusterInfo(userid);
+export default async function clusterDetails({ cluster_name, cluster_ip } : { cluster_name: string, cluster_ip: string}) {
+
   return (
     <div>
       <div className="flex justify-between">

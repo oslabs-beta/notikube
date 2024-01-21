@@ -4,23 +4,23 @@ import { unstable_noStore as noStore } from 'next/cache';
 import { Count } from "../definitions";
 
 //return total number of alerts
-export async function numTotalAlerts() {
+export async function numTotalAlerts(clusterip:string) {
   noStore();
   try{
-    const result = await sql<Count[]>`SELECT COUNT(*) FROM incidents`;
+    const result = await sql<Count[]>`SELECT COUNT(*) FROM incidents JOIN clusters ON clusters.cluster_id=incidents.cluster_id WHERE clusters.cluster_ip=${clusterip}`;
     return result[0].count
   }
   catch (error) {
     console.error('Database Error:', error);
-    throw new Error('Failed to fetch number of alerts.');
+    throw new Error('Failed to fetch total number of alerts.');
   }
 }
 
 //return number of Open status alerts
-export async function numOpenAlerts(){
+export async function numOpenAlerts(clusterip:string){
   noStore();
   try{
-    const result = await sql<Count[]>`SELECT COUNT(*) FROM incidents WHERE incident_status='Open'`;
+    const result = await sql<Count[]>`SELECT COUNT(*) FROM incidents JOIN clusters ON clusters.cluster_id=incidents.cluster_id WHERE incidents.incident_status='Open' AND clusters.cluster_ip=${clusterip}`;
     return result[0].count
   }
   catch (error) {
@@ -30,10 +30,10 @@ export async function numOpenAlerts(){
 }
 
 //return number of In Progress status alerts
-export async function numProgressAlerts(){
+export async function numProgressAlerts(clusterip:string){
   noStore();
   try{
-    const result = await sql<Count[]>`SELECT COUNT(*) FROM incidents WHERE incident_status='In Progress'`;
+    const result = await sql<Count[]>`SELECT COUNT(*) FROM incidents JOIN clusters ON clusters.cluster_id=incidents.cluster_id WHERE incidents.incident_status='In Progress' AND clusters.cluster_ip=${clusterip}`;
     return result[0].count
   }
   catch (error) {
@@ -43,14 +43,14 @@ export async function numProgressAlerts(){
 }
 
 //return number of In Progress status alerts
-export async function numCriticalAlerts(){
+export async function numCriticalAlerts(cluster_ip:string){
   noStore();
   try{
-    const result = await sql<Count[]>`SELECT COUNT(*) FROM incidents WHERE priority_level='Critical'`;
+    const result = await sql<Count[]>`SELECT COUNT(*) FROM incidents JOIN clusters ON clusters.cluster_id=incidents.cluster_id WHERE incidents.priority_level='Critical' AND clusters.cluster_ip=${cluster_ip}`;
     return result[0].count
   }
   catch (error) {
     console.error('Database Error:', error);
-    throw new Error('Failed to fetch number of In Progress alerts.');
+    throw new Error('Failed to fetch number of Critical alerts.');
   }
 }

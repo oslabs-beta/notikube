@@ -4,33 +4,33 @@
 import HomeAlerts from '../_components/homePage/homeAlerts';
 import { ClusterHealth, NodeCPUHealth, PodHealth, PodRestartHealth } from '../_components/homePage/clusterMetrics';
 import ClusterDetails from '../_components/homePage/clusterDetails';
+import { clusterInfo } from '../lib/homePage/clusterInfo';
 import LoadingSpinner from '../_components/homePage/loadingSpinner';
 import { Suspense } from 'react'
 import type { Metadata } from "next";
+import { redirect } from "next/navigation"
 import { Tab, TabList, TabGroup, TabPanel, TabPanels, Divider } from "@tremor/react";
-
-//import '../globals.css'
 
 export const metadata: Metadata = {
   title: 'Dashboard',
   description: 'Cluster dashboard current alerts and health visualizations'
 }
 
-//ADD APIRAAM'S AUTH CODE
-  //GRAB USER ID AND PASS TO CLUSTER DETAILS
+//**GRAB USER ID AND PASS TO CLUSTER INFO IN LINE 24**
 
-export default function Dashboard() {
-
+export default async function Dashboard() {
+  try{
+    const { cluster_name, cluster_ip } = await clusterInfo('3304a580-19c8-48a8-b8c7-52823dce750e')
     return (
-      <div className="w-screen">
-        <div className='p-2 sm:ml-64'>
-          <h1 className="text-left pl-8 py-5 text-5xl font-extrabold dark:text-white">Dashboard</h1>
+      <div className="">
+        <div className=''>
+          <h1 className="text-left pl-8 text-5xl font-extrabold dark:text-white">Dashboard</h1>
           <Suspense fallback={<LoadingSpinner />}>
-            <ClusterDetails userid={'12345'} />
+            <ClusterDetails cluster_name={cluster_name} cluster_ip={cluster_ip} />
           </Suspense>
           <div>
             <Suspense fallback={<LoadingSpinner />}>
-              <HomeAlerts />
+              <HomeAlerts cluster_ip={cluster_ip}/>
             </Suspense>
             <Divider>Metrics</Divider>
             <TabGroup className="pl-8">
@@ -43,22 +43,22 @@ export default function Dashboard() {
               <TabPanels >
                 <TabPanel>
                   <Suspense fallback={<LoadingSpinner />}>
-                    <NodeCPUHealth />
+                    <NodeCPUHealth cluster_ip={cluster_ip}/>
                   </Suspense>
                 </TabPanel>
                 <TabPanel>
                   <Suspense fallback={<LoadingSpinner />}>
-                    <PodHealth />
+                    <PodHealth cluster_ip={cluster_ip}/>
                   </Suspense>
                 </TabPanel>
                 <TabPanel>
                   <Suspense fallback={<LoadingSpinner />}>
-                    <PodRestartHealth />
+                    <PodRestartHealth cluster_ip={cluster_ip}/>
                   </Suspense>
                 </TabPanel>
                 <TabPanel>
                   <Suspense fallback={<LoadingSpinner />}>
-                    <ClusterHealth />
+                    <ClusterHealth cluster_ip={cluster_ip}/>
                   </Suspense>
                 </TabPanel>
               </TabPanels>
@@ -67,6 +67,11 @@ export default function Dashboard() {
         </div>
       </div>
     );
+  }  
+  catch(error){
+    console.log('Error fetching user clusterip, redirecting to connect cluster', error);
+    redirect('/dashboard/connect-cluster')
+  }
 }
 
 //Parallel route the node and cluster health sections to load at the same time? https://nextjs.org/docs/app/building-your-application/data-fetching/patterns#parallel-data-fetching
