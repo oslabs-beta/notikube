@@ -1,6 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
-import NotiKubeLogo from "../../ui/dashboard/SideBarList/notikube-logo";
+import NotiKubeLogo from "../Sidebar/SideBarList/NotiKubeLogo";
 export default function Navbar() {
   return (
     <header>

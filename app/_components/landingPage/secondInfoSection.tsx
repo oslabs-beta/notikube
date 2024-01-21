@@ -1,5 +1,5 @@
-import Link from "next/link";
 import Image from "next/image";
+
 export default function SecondInfoSection() {
   return (
     <section className="bg-white dark:bg-gray-900">

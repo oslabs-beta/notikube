@@ -1,16 +1,12 @@
 "use client";
 
-// import { Link } from "react-router-dom";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import NotiKubeLogo from "./SideBarList/notikube-logo";
-import NavLinks from "./nav-links";
+import NotiKubeLogo from "./SideBarList/NotiKubeLogo";
+import NavLinks from "./NavLinks";
 
 export default function Sidebar() {
-  const pathname = usePathname();
 
   return (
-    <div>
+    <>
       {/* Main HTML tag where Sidebar component is */}
       <aside
         id="default-sidebar"
@@ -19,11 +15,11 @@ export default function Sidebar() {
       >
         {/* Top Section of Sidebar component */}
         <div className="overflow-y-auto py-5 px-3 h-full bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700">
-          {/* This link component contains the NotiKube link and logo */}
+          {/* NotiKube logo component and NavLinks */}
           <NotiKubeLogo />
           <NavLinks />
         </div>
       </aside>
-    </div>
+    </>
   );
 }

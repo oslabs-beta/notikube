@@ -1,8 +1,9 @@
-import DashboardSideBar from "./SideBarList/dashboard";
-import AlertsSideBar from "./SideBarList/alerts";
-import ConnectClusterSideBar from "./SideBarList/connect-cluster";
-import ProfileeSideBar from "./SideBarList/profile";
-import SignoutSideBar from "./SideBarList/signout";
+import DashboardSideBar from "./SideBarList/DashboardSidebar";
+import IncidentsSideBar from "./SideBarList/IncidentsSidebar";
+import ConnectClusterSideBar from "./SideBarList/ConnectClusterSidebar";
+import ProfileeSideBar from "./SideBarList/ProfileSidebar";
+import SignoutSideBar from "./SideBarList/SignoutSidebar";
+
 export default function NavLinks() {
   return (
     <>
@@ -12,7 +13,7 @@ export default function NavLinks() {
         </li>
 
         <li>
-          <AlertsSideBar />
+          <IncidentsSideBar />
         </li>
 
         <li>

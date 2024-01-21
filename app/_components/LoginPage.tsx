@@ -4,8 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import LogInImage from "../../public/NotiKubeLogin.svg";
-// import Logo from "../../public/logo.svg";
+import LogInImage from "../../public/assets/NotiKubeLogin.svg";
 import { SignInResponse, signIn } from "next-auth/react";
 import Logo from "../../public/assets/logo.svg"
 
@@ -36,7 +35,7 @@ const LoginPage = () => {
         alert("User not found!");
         return;
       }
-      router.replace("/dashboard/incidents");
+      router.replace("/dashboard/connect-cluster");
     } catch (e) {
       console.log(e);
     }

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import Sidebar from '../_components/Sidebar';
+import Sidebar from '../_components/Sidebar/Sidebar';
 
 import '../globals.css'
 
