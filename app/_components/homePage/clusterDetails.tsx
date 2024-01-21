@@ -1,12 +1,16 @@
 import { clusterInfo } from "../../lib/homePage/clusterInfo";
+import { Divider } from "@tremor/react";
 
 export default async function clusterDetails({ userid } : {userid: string}) {
-    //Grab user name from authentication
-    const { clusterName, clusterIp } = await clusterInfo(userid);
+  //Grab user name from authentication
+  const { cluster_name, cluster_ip } = await clusterInfo(userid);
   return (
     <div>
-      <h2 className="pl-8 py-1 ">{clusterName}</h2>
-      <h2 className="pl-8 py-1 ">Cluster IP Address: {clusterIp}</h2>
+      <div className="flex justify-between">
+        <p className="px-8 text-left">{cluster_name}</p>
+        <p className="px-8 text-right">Cluster IP Address: {cluster_ip}</p>
+       </div>
+      <Divider>Alerts</Divider>
     </div>
   )
 }

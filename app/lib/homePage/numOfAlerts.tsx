@@ -3,13 +3,11 @@ import sql from "../../utils/db";
 import { unstable_noStore as noStore } from 'next/cache';
 import { Count } from "../definitions";
 
-//return total number of in progress alerts
-export async function numProgressAlerts() {
+//return total number of alerts
+export async function numTotalAlerts() {
   noStore();
   try{
-    //NEED TO SWITCH THIS TO ACTUAL TABLE
-    const result = await sql<Count[]>`SELECT COUNT(*) FROM users`;
-    //console.log(result)
+    const result = await sql<Count[]>`SELECT COUNT(*) FROM incidents`;
     return result[0].count
   }
   catch (error) {
@@ -18,16 +16,41 @@ export async function numProgressAlerts() {
   }
 }
 
-//return total number of alerts
-export async function numTotalAlerts() {
+//return number of Open status alerts
+export async function numOpenAlerts(){
   noStore();
   try{
-    //NEED TO SWITCH THIS TO ACTUAL TABLE
-    const result = await sql<Count[]>`SELECT COUNT(*) FROM users`;
+    const result = await sql<Count[]>`SELECT COUNT(*) FROM incidents WHERE incident_status='Open'`;
     return result[0].count
   }
   catch (error) {
     console.error('Database Error:', error);
-    throw new Error('Failed to fetch number of alerts.');
+    throw new Error('Failed to fetch number of Open alerts.');
+  }
+}
+
+//return number of In Progress status alerts
+export async function numProgressAlerts(){
+  noStore();
+  try{
+    const result = await sql<Count[]>`SELECT COUNT(*) FROM incidents WHERE incident_status='In Progress'`;
+    return result[0].count
+  }
+  catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch number of In Progress alerts.');
+  }
+}
+
+//return number of In Progress status alerts
+export async function numCriticalAlerts(){
+  noStore();
+  try{
+    const result = await sql<Count[]>`SELECT COUNT(*) FROM incidents WHERE priority_level='Critical'`;
+    return result[0].count
+  }
+  catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch number of In Progress alerts.');
   }
 }

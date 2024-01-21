@@ -2,11 +2,12 @@
 
 //import Link from 'next/link'; //LINK IS CURRENTLY CAUSING ERROR:Internal error: TypeError: Cannot read properties of null (reading 'useContext')
 import HomeAlerts from '../_components/homePage/homeAlerts';
-import { ClusterHealth, NodeHealth } from '../_components/homePage/clusterHealth';
+import { ClusterHealth, NodeCPUHealth, PodHealth, PodRestartHealth } from '../_components/homePage/clusterMetrics';
 import ClusterDetails from '../_components/homePage/clusterDetails';
 import LoadingSpinner from '../_components/homePage/loadingSpinner';
 import { Suspense } from 'react'
 import type { Metadata } from "next";
+import { Tab, TabList, TabGroup, TabPanel, TabPanels, Divider } from "@tremor/react";
 
 //import '../globals.css'
 
@@ -21,8 +22,8 @@ export const metadata: Metadata = {
 export default function Dashboard() {
 
     return (
-      <div>
-        <div className='p-4 sm:ml-64'>
+      <div className="w-screen">
+        <div className='p-2 sm:ml-64'>
           <h1 className="text-left pl-8 py-5 text-5xl font-extrabold dark:text-white">Dashboard</h1>
           <Suspense fallback={<LoadingSpinner />}>
             <ClusterDetails userid={'12345'} />
@@ -31,17 +32,40 @@ export default function Dashboard() {
             <Suspense fallback={<LoadingSpinner />}>
               <HomeAlerts />
             </Suspense>
-            <h3 className="text-left pl-8 text-3xl font-bold dark:text-white py-3">Cluster</h3>
-            <Suspense fallback={<LoadingSpinner />}>
-              <ClusterHealth />
-            </Suspense>
-            <h3 className="text-left pl-8 text-3xl font-bold dark:text-white py-3">Nodes</h3>
-            <Suspense fallback={<LoadingSpinner />}>
-              <NodeHealth />
-            </Suspense>
+            <Divider>Metrics</Divider>
+            <TabGroup className="pl-8">
+              <TabList color="red" variant="solid">
+                <Tab>Node CPU</Tab>
+                <Tab>Pod By NameSpace</Tab>
+                <Tab>Pod Restarts</Tab>
+                <Tab>Cluster</Tab>
+              </TabList>
+              <TabPanels >
+                <TabPanel>
+                  <Suspense fallback={<LoadingSpinner />}>
+                    <NodeCPUHealth />
+                  </Suspense>
+                </TabPanel>
+                <TabPanel>
+                  <Suspense fallback={<LoadingSpinner />}>
+                    <PodHealth />
+                  </Suspense>
+                </TabPanel>
+                <TabPanel>
+                  <Suspense fallback={<LoadingSpinner />}>
+                    <PodRestartHealth />
+                  </Suspense>
+                </TabPanel>
+                <TabPanel>
+                  <Suspense fallback={<LoadingSpinner />}>
+                    <ClusterHealth />
+                  </Suspense>
+                </TabPanel>
+              </TabPanels>
+            </TabGroup>
           </div>
         </div>
-    </div>
+      </div>
     );
 }
 
