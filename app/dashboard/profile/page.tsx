@@ -12,7 +12,7 @@ export default function Profile() {
   return (
     <>
       <h1>This is the Profile Page</h1>
-      {JSON.stringify(users)}
+      {/* {JSON.stringify(users)} */}
       <Link href='/'>Go Home</Link>
     </>
   );
