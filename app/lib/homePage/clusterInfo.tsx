@@ -1,7 +1,7 @@
 import sql from "../../utils/db";
 //Opting out of static rending for dynamic (no caching) @https://nextjs.org/docs/app/api-reference/functions/unstable_noStore
 import { unstable_noStore as noStore } from 'next/cache';
-import { Cluster } from '../definitions'
+import { Cluster } from '../../../types/definitions'
 
 //return cluster info
 //PASSING IN WRONG DATA - NEED TO UPDATE AFTER CLUSTER TABLE IS FIXED

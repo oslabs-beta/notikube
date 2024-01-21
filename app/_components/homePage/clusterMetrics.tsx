@@ -8,7 +8,7 @@ import {
   numOfReadyPods,
   numOfUnhealthyPods,
 } from "../../lib/queries";
-import { NameSpacePods, CircleNode } from "../../lib/definitions";
+import { NameSpacePods, CircleNode } from "../../../types/definitions";
 import NodeCircle from "./nodeCircle";
 
 export async function NodeCPUHealth({ cluster_ip }: {cluster_ip: string}) {
@@ -35,7 +35,7 @@ export async function PodHealth({ cluster_ip }: {cluster_ip: string}) {
         <Title>Number of Pods</Title>
         <Subtitle>By Namespace</Subtitle>
         <BarChart
-          className="mt-6 "
+          className="mt-3"
           data={chartData1}
           index="name"
           categories={["Number of Pods"]}
@@ -80,31 +80,25 @@ export async function ClusterHealth({ cluster_ip }: {cluster_ip: string}) {
 
     return (
       <div>
-        <section id='nodes' className='display: inline-flex pl-8 py-4 space-x-5'>
-          <Card className="max-w-lg mx-auto" decoration="top" decorationColor="red">
-            <Text>Ready Nodes</Text>
-            <Metric>{numOfReadyNodesResult}</Metric>
+        <section id='cluster-health' className='display: inline-flex pl-8 py-4 space-x-5'>
+          <Card className="max-w-lg  mx-auto" decoration="top" decorationColor="red">
+            <Text className="p-2">Ready Nodes</Text>
+            <Metric className="p-2">{numOfReadyNodesResult}</Metric>
           </Card>
           <Card className="max-w-lg  mx-auto" decoration="top" decorationColor="red">
-            <Text>Unavailable Nodes</Text>
-            <Metric>{numOfUnhealthyNodesResult}</Metric>
+            <Text className="p-2">Unavailable Nodes</Text>
+            <Metric className="p-2">{numOfUnhealthyNodesResult}</Metric>
           </Card>
           <Card className="max-w-lg  mx-auto" decoration="top" decorationColor="red">
-            <Text>Ready Pods</Text>
-            <Metric>{numOfReadyPodsResult}</Metric>
+            <Text className="p-2">Ready Pods</Text>
+            <Metric className="p-2">{numOfReadyPodsResult}</Metric>
           </Card>
           <Card className="max-w-lg  mx-auto" decoration="top" decorationColor="red">
-            <Text>Unavailable Pods</Text>
-            <Metric>{numOfUnhealthyPodsResult}</Metric>
+            <Text className="p-2">Unavailable Pods</Text>
+            <Metric className="p-2">{numOfUnhealthyPodsResult}</Metric>
           </Card>
         </section>
       </div>
     )
 }
-
-//revalidate results from fetching promql queries and alerts? https://nextjs.org/docs/app/building-your-application/routing/route-handlers#revalidating-cached-data
-       
-// For data visualization UI, check out:
-// https://www.tremor.so/
-// https://www.chartjs.org/
-// https://airbnb.io/visx/    
+        
