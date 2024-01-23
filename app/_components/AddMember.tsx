@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation'
 import sql from '../utils/db';
 import { getServerSession } from 'next-auth';
 
+
 const CryptoJS = require('crypto-js');
 
 type User = {
@@ -19,10 +20,10 @@ type User = {
 export default async function AddMemberPage() {
 
     const session = await getServerSession();
-    const userEmail: (string | undefined | null) = session?.user.email;
+    const userEmail: (string | null | undefined) = session?.user?.email;
 
     while (userEmail === undefined) {
-        return <div>...loading</div>
+        return (<div>...loading</div>)
     }
 
     const user: User[] = await sql`
@@ -38,7 +39,7 @@ export default async function AddMemberPage() {
         const clusterName: string = user[0].cluster_name;
 
         const urlParams: string =  clusterId + '$' + email;
-        let cipherText: string = CryptoJS.AES.encrypt(urlParams, process.env.CIPHER_KEY).toString();
+        let cipherText: any = CryptoJS.AES.encrypt(urlParams, process.env.CIPHER_KEY).toString();
         const encodedURL: string = cipherText.replaceAll('/', 'notikube')
 
     

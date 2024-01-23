@@ -33,7 +33,9 @@ type UserName = {
 const Table = () => {
 
   const session = useSession().data;
-  const userId: (string | undefined) = session?.user.userid;
+  console.log('session', session)
+  const userId = session?.user?.userid;
+  console.log('user id', userId)
 
   let [incidentList, setIncidentList] = useState<Incident[]>([]);
   let [memberList, setMemberList] = useState<UserName[]>([]);
