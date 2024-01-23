@@ -35,7 +35,7 @@ const LoginPage = () => {
         alert('User not found!')
         return;
       }
-      router.replace('/dashboard/incidents')
+      router.replace('/dashboard')
     }
     catch(e) {
       console.log(e)
