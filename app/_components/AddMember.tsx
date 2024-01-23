@@ -46,12 +46,12 @@ export default async function AddMemberPage() {
         if (email) {
             sendMail(
                 email,
-                'NotiKube: Invitation to Join Cluster',
+                `NotiKube: Invitation to Join ${userName}\'s Cluster`,
                 `You have been invited to join <b>${userName}</b>\'s NotiKube team: <b><i>${clusterName}</i></b>.<br><br>
 
-                If you already have a NotiKube user account, <a href="http://localhost:3000/api/addMember/${encodedURL}">click here</a> to connect to <b>${userName}</b>\'s cluster.<br><br>
+                If you already have a NotiKube user account, <a href="http://localhost:3000/api/addMember/${encodedURL}">click here</a> to connect to <i><b>${clusterName}</b></i>.<br><br>
 
-                If you\'re not already a registered user, <a href="http://localhost:3000/auth/signup">click here</a> to create a NotiKube account, then click the link above to connect to <b>${userName}</b>\'s cluster.<br><br>`
+                If you\'re not already a registered user, <a href="http://localhost:3000/auth/signup">click here</a> to create a NotiKube account, then click the link above to connect to <i><b>${clusterName}</b></i>.`
 
             )
         } 

@@ -33,17 +33,14 @@ type UserName = {
 const Table = () => {
 
   const session = useSession().data;
-  console.log('session', session)
   const userId = session?.user?.userid;
-  console.log('user id', userId)
 
   let [incidentList, setIncidentList] = useState<Incident[]>([]);
   let [memberList, setMemberList] = useState<UserName[]>([]);
-  let [isLoading, setLoading] = useState(true)
-
- useEffect(() => {
-  fetchData(userId);
- },[userId])
+  // let [isLoading, setLoading] = useState(true)
+  let [updateRow, setUpdateRow] = useState(0)
+  // let [incidentCache, setIncidentCache] = useState<(Incident[] | undefined)>(undefined)
+  // let [memberCache, setMemberCache] = useState<(UserName[] | undefined)>(undefined)
 
   async function fetchData(user_id: (string | undefined)) {
     if (user_id !== undefined) {
@@ -51,7 +48,7 @@ const Table = () => {
     const data: [Incident[], UserName[]] = await res.json();
     setIncidentList(data[0]);
     setMemberList(data[1]);
-    setLoading(false);
+    // setLoading(false);
     }
   }
 
@@ -65,20 +62,24 @@ const Table = () => {
 
   members.push('');
 
-
   const updateTable = React.useCallback(
     async (newRow: GridRowModel) => {
       const updatedRow = { ...newRow };
       updatedRow.id = newRow.incident_id;
-      fetch('http://localhost:3000/api/incidents/update', {
+      fetch(`http://localhost:3000/api/incidents/update`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(newRow)
       });
+      window.location.reload();
       return updatedRow;
       },[]);
+
+  useEffect(() => {
+    fetchData(userId);
+  },[userId])
 
 
 const columns: GridColDef[] = [
@@ -93,7 +94,7 @@ const columns: GridColDef[] = [
   {
     field: 'incident_type',
     headerName: 'Type',
-    minWidth: 100,
+    minWidth: 125,
     type: 'string',
     editable: false,
     headerClassName: 'column-header'
@@ -101,7 +102,7 @@ const columns: GridColDef[] = [
   {
    field: 'description',
    headerName: 'Description',
-   minWidth: 175,
+   minWidth: 350,
    type: 'string',
    editable: true,
    headerClassName: 'column-header'
@@ -115,7 +116,7 @@ const columns: GridColDef[] = [
    headerClassName: 'column-header',
    align: 'left',
    headerAlign: 'left',
-   valueOptions: ['Warning', 'Critical', 'Moderate', 'High'],
+   valueOptions: ['Critical', 'Moderate', 'Low'],
  },
  { 
    field: 'incident_title', 
@@ -136,7 +137,7 @@ const columns: GridColDef[] = [
    headerClassName: 'column-header',
    align: 'left',
    headerAlign: 'left',
-   valueOptions: ['Open', 'In Progress', 'Closed'],
+   valueOptions: ['Open', 'Closed', 'In Progress'],
  },
  { 
    field: 'comment', 
@@ -161,9 +162,9 @@ const columns: GridColDef[] = [
 }
 ];
 
-while (isLoading) {
-  return <div>... Loading</div>
-}
+// while (isLoading) {
+//   return <div>... Loading</div>
+// }
 
    return (
     <div>
@@ -176,6 +177,24 @@ while (isLoading) {
            color: 'primary.main',
          },
          color: 'black',
+         ".red": {
+          bgcolor:"#F2D7D5",
+          "&:hover": {
+            bgcolor:"darkgray"
+          }
+         },
+         ".green": {
+          bgcolor:"#D5F5E3",
+          "&:hover": {
+            bgcolor:"darkgray"
+          }
+         },
+         ".orange": {
+          bgcolor:"#FAE5D3",
+          "&:hover": {
+            bgcolor:"darkgray"
+          }
+         }
          }}
          editMode='row'
          getRowId={(incidents) => incidents.incident_id}
@@ -186,6 +205,16 @@ while (isLoading) {
          onRowEditStop={(params) => {
            console.log('params', params);
          }}
+         getRowClassName={(params) => {
+          if (params.row.priority_level === 'Critical') {
+            return "red"
+          } else if (params.row.priority_level === 'Moderate') {
+            return "orange"
+          } else {
+            return "green"
+          }
+        }
+         }
        />
      </div>
    );

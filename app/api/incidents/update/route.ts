@@ -17,13 +17,14 @@ type Incident = {
 
 export async function POST(req: NextRequest) {
 
-    const cluster_id: string = '26b751f6-8a3d-4c0c-afb6-84dc5ed0c128';
-
     const incident: Incident = await req.json();
 
     const assignedTo: Incident[] = await sql`
     select incident_assigned_to from incidents where incident_id=${incident.incident_id}
     `
+    // const email: Array<object> = await sql`
+    // select email from users where name=${assignedTo[0].incident_assigned_to} AND cluster_id=${}
+    // `
 
     if (assignedTo[0].incident_assigned_to !== incident.incident_assigned_to) {
 

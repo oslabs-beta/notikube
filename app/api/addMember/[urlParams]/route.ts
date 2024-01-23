@@ -25,7 +25,7 @@ type Incident = {
     metric_data_id: string,
 }
 
-export async function GET(request: NextRequest, {params}: {params: {urlParams: string}}) {
+export async function GET(request: NextRequest, {params}: {params: {urlParams: any}}) {
 
     let { urlParams } = params; 
     let cipherText: string = urlParams.replaceAll('notikube', '/')

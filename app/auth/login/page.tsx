@@ -5,7 +5,9 @@ import {authOptions} from "../../api/auth/[...nextauth]/route"
 
 export default async function Login() {
   const session = await getServerSession(authOptions)
-  if (session) redirect('/dashboard/incidents')
-  
+  if (session) {
+    console.log('User ID: ', session.user.userid)
+    redirect('/dashboard')
+  }
   return <LoginPage />
 }

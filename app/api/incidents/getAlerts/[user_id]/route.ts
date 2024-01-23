@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse} from 'next/server';
 import sql from '../../../../utils/db';
 
-type Incident = {
+type TableData = {
   incident_id: string,
   incident_date: Date,
   incident_type: string,
@@ -26,13 +26,15 @@ export async function GET(request: NextRequest, {params}: {params: {user_id: str
     const cluster_id: ClusterRes[] = await sql`
       select cluster_id from users where user_id=${user_id}
     `
-    const incidents: Incident[] = await sql`
+    const incidents: TableData[] = await sql`
     select * from incidents where cluster_id=${cluster_id[0].cluster_id}
-  `
+    `
+    console.log('incidents', incidents)
     const members: Array<object> = await sql`
     select name, email from users where cluster_id=${cluster_id[0].cluster_id}
     `
-
+    console.log('members', members)
+    
   return NextResponse.json([incidents, members]);
   
 }
