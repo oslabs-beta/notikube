@@ -33,7 +33,8 @@ export const authOptions: NextAuthOptions = {
         })
     ], 
     session: {
-        strategy: 'jwt'
+        strategy: 'jwt', 
+        maxAge: 2 * 60 * 60
     }, 
     secret: process.env.NEXTAUTH_SECRET, 
     pages: {
@@ -43,9 +44,10 @@ export const authOptions: NextAuthOptions = {
         async session({session, user}) {
             if (!session) return
             try {
+                console.log('Email from session to query db: ', session.user.email)
                 let res = await sql`SELECT * FROM users WHERE email=${session.user.email}`
-                console.log(res[0].userid)
-                session.user.userid = res[0].userid
+                console.log('UserId from database: ', res[0].user_id)
+                session.user.userid = res[0].user_id
                 return session
             }
             catch(e) {

@@ -1,15 +1,19 @@
 "use client";
 
-import Link from "next/link";
-import Image from "next/image";
-import { useState } from "react";
-import SignUpImage from "../../public/assets/NotiKubeSignUp.svg";
-import Logo from "../../public/assets/logo.svg";
+import Link from 'next/link';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';;
+import { useState } from 'react';
+// import { useNavigate } from 'react-router-dom';
+import SignUpImage from '../../public/NotiKubeSignUp.svg'
+import Logo from '../../public/logo.svg'
 
 const Signup = () => {
-  const [fullName, setFullName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [fullName, setFullName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const router = useRouter()
 
   async function submit(e: Event) {
     e.preventDefault();
@@ -32,16 +36,11 @@ const Signup = () => {
 
     const data = await res.json();
     if (data.newUser) {
-      alert("New User created!");
-      setEmail("");
-      setFullName("");
-      setPassword("");
-      const textFields = document.querySelectorAll("input[type=text]");
-      for (let i = 0; i < textFields.length; i++) {
-        (textFields[i] as HTMLInputElement).value = "";
+      alert('New User created!')
+      router.push('/auth/login')
       }
-    } else {
-      alert("User already exists");
+    else {
+      alert('User already exists')
     }
   }
 

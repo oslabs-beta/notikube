@@ -35,9 +35,10 @@ const LoginPage = () => {
         alert("User not found!");
         return;
       }
-      router.replace("/dashboard/connect-cluster");
-    } catch (e) {
-      console.log(e);
+      router.replace('/dashboard')
+    }
+    catch(e) {
+      console.log(e)
     }
   }
 
@@ -69,7 +70,7 @@ const LoginPage = () => {
             <label>Password</label>
             <input
               className="rounded"
-              type="text"
+              type="password"
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
