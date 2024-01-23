@@ -1,6 +1,4 @@
-//dynamically rendered server side component 
 
-//import Link from 'next/link'; //LINK IS CURRENTLY CAUSING ERROR:Internal error: TypeError: Cannot read properties of null (reading 'useContext')
 import HomeAlerts from '../_components/homePage/homeAlerts';
 import { ClusterHealth, NodeCPUHealth, PodHealth, PodRestartHealth } from '../_components/homePage/clusterMetrics';
 import ClusterDetails from '../_components/homePage/clusterDetails';
@@ -9,8 +7,11 @@ import LoadingSpinner from '../_components/homePage/loadingSpinner';
 import { Suspense } from 'react'
 import type { Metadata } from "next";
 import { redirect } from "next/navigation"
-import { useSession } from 'next-auth/react';
+import { authOptions } from '../api/auth/[...nextauth]/route';
+import { getServerSession } from 'next-auth';
 import { Tab, TabList, TabGroup, TabPanel, TabPanels, Divider } from "@tremor/react";
+
+
 
 export const metadata: Metadata = {
   title: 'Dashboard',
@@ -21,9 +22,12 @@ export const metadata: Metadata = {
 
 
 export default async function Dashboard() {
-
+  const session = await getServerSession(authOptions);
+  let currentUserID = session?.user.userid === undefined ? null : session.user.userid;
+  console.log('session id:', session?.user)
+  console.log('user id:', currentUserID)
   try{
-    const { cluster_name, cluster_ip } = await clusterInfo('3304a580-19c8-48a8-b8c7-52823dce750e')
+    const { cluster_name, cluster_ip } = await clusterInfo(currentUserID)
     return (
       <div >
         <div>

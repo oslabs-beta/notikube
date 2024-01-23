@@ -4,13 +4,10 @@ import { unstable_noStore as noStore } from 'next/cache';
 import { Cluster } from '../../../types/definitions'
 
 //return cluster info
-//PASSING IN WRONG DATA - NEED TO UPDATE AFTER CLUSTER TABLE IS FIXED
-export async function clusterInfo(userid: string) {
+export async function clusterInfo(userid: string | null) {
   noStore();
   try{
-    //NEED TO EDIT THIS QUERY AFTER DB UPDATE
     const result = await sql<Cluster[]>`SELECT clusters.cluster_name, clusters.cluster_ip FROM clusters JOIN users ON clusters.cluster_id=users.cluster_id WHERE users.user_id=${userid};`;
-    //console.log('cluster result: ', result[0])
     return result[0]
   }
   catch (error) {

@@ -23,6 +23,29 @@ export async function numOfReadyNodes(ip: string) {
     }
 }
 
+// Return the number of nodes that have expereinced a 'not ready' condition in the last 15m as a number
+export async function numOfUnhealthyNodes(ip: string) {
+    noStore();
+    try {
+        // Define the Prometheus API query
+        const prometheusQuery = "sum(changes(kube_node_status_condition{status='true',condition='Ready'}[15m])) by (node) > 2";
+        const prometheusServerIP = `${ip}`;
+        const prometheusEndpoint = `http://${prometheusServerIP}/api/v1/query?query=${encodeURIComponent(prometheusQuery)}`;
+        // Make the fetch request to Prometheus API
+        const response = await fetch(prometheusEndpoint);
+        if (!response.ok) {
+            throw new Error(`Failed to fetch data from Prometheus. Status: ${response.status}`);
+        }
+        const responseData = await response.json()
+        const result = responseData.data.result.length === 0 ? 0 : responseData.data.result[1];
+        return result;
+    }
+    catch (error) {
+        console.error('Error:', error);
+        return 'error'
+    }
+}
+
 // Returns the total number of pods in the cluster as a number
 export async function numOfReadyPods(ip: string) {
     noStore();
@@ -107,29 +130,6 @@ export async function restartByNamePods(ip: string) {
         }
         const responseData = await response.json()
         const result = responseData.data.result;
-        return result;
-    }
-    catch (error) {
-        console.error('Error:', error);
-        return 'error'
-    }
-}
-
-// Return the number of nodes that have expereinced a 'not ready' condition in the last 15m as a number
-export async function numOfUnhealthyNodes(ip: string) {
-    noStore();
-    try {
-        // Define the Prometheus API query
-        const prometheusQuery = "sum(changes(kube_node_status_condition{status='true',condition='Ready'}[15m])) by (node) > 2";
-        const prometheusServerIP = `${ip}`;
-        const prometheusEndpoint = `http://${prometheusServerIP}/api/v1/query?query=${encodeURIComponent(prometheusQuery)}`;
-        // Make the fetch request to Prometheus API
-        const response = await fetch(prometheusEndpoint);
-        if (!response.ok) {
-            throw new Error(`Failed to fetch data from Prometheus. Status: ${response.status}`);
-        }
-        const responseData = await response.json()
-        const result = responseData.data.result.length === 0 ? 0 : responseData.data.result[1];
         return result;
     }
     catch (error) {
