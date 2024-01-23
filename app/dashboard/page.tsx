@@ -11,22 +11,16 @@ import { authOptions } from '../api/auth/[...nextauth]/route';
 import { getServerSession } from 'next-auth';
 import { Tab, TabList, TabGroup, TabPanel, TabPanels, Divider } from "@tremor/react";
 
-
-
 export const metadata: Metadata = {
   title: 'Dashboard',
   description: 'Cluster dashboard current alerts and health visualizations'
 }
 
-//**GRAB USER ID AND PASS TO CLUSTER INFO IN LINE 23**
-
-
 export default async function Dashboard() {
   const session = await getServerSession(authOptions);
   let currentUserID = session?.user.userid === undefined ? null : session.user.userid;
-  console.log('session id:', session?.user)
-  console.log('user id:', currentUserID)
-  try{
+
+  try {
     const { cluster_name, cluster_ip } = await clusterInfo(currentUserID)
     return (
       <div >
@@ -37,7 +31,7 @@ export default async function Dashboard() {
           </Suspense>
           <div>
             <Suspense fallback={<LoadingSpinner />}>
-              <HomeAlerts cluster_ip={cluster_ip}/>
+              <HomeAlerts cluster_ip={cluster_ip} />
             </Suspense>
             <Divider>Metrics</Divider>
             <TabGroup className="pl-8">
@@ -50,22 +44,22 @@ export default async function Dashboard() {
               <TabPanels >
                 <TabPanel>
                   <Suspense fallback={<LoadingSpinner />}>
-                    <NodeCPUHealth cluster_ip={cluster_ip}/>
+                    <NodeCPUHealth cluster_ip={cluster_ip} />
                   </Suspense>
                 </TabPanel>
                 <TabPanel>
                   <Suspense fallback={<LoadingSpinner />}>
-                    <PodHealth cluster_ip={cluster_ip}/>
+                    <PodHealth cluster_ip={cluster_ip} />
                   </Suspense>
                 </TabPanel>
                 <TabPanel>
                   <Suspense fallback={<LoadingSpinner />}>
-                    <PodRestartHealth cluster_ip={cluster_ip}/>
+                    <PodRestartHealth cluster_ip={cluster_ip} />
                   </Suspense>
                 </TabPanel>
                 <TabPanel>
                   <Suspense fallback={<LoadingSpinner />}>
-                    <ClusterHealth cluster_ip={cluster_ip}/>
+                    <ClusterHealth cluster_ip={cluster_ip} />
                   </Suspense>
                 </TabPanel>
               </TabPanels>
@@ -74,8 +68,8 @@ export default async function Dashboard() {
         </div>
       </div>
     );
-  }  
-  catch(error){
+  }
+  catch (error) {
     console.log('Error fetching user cluster, redirecting to connect cluster:', error);
     redirect('/dashboard/connect-cluster')
   }
