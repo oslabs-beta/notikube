@@ -1,8 +1,9 @@
+import { String } from "aws-sdk/clients/acm";
 import { NextResponse } from "next/server";
 
 var nodemailer = require('nodemailer');
 
-export async function sendMail(toEmail: string, emailSubject: string, optText: string) {
+export async function sendMail(toEmail: string, emailSubject: string, html: String) {
     let transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -15,7 +16,7 @@ export async function sendMail(toEmail: string, emailSubject: string, optText: s
         from: process.env.NODEMAILER_EMAIL,
         to: toEmail,
         subject: emailSubject,
-        text: optText,
+        html: html,
     };
 
     await new Promise((resolve, reject) => {

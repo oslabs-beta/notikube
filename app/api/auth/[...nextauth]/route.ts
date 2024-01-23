@@ -45,7 +45,7 @@ export const authOptions: NextAuthOptions = {
             try {
                 let res = await sql`SELECT * FROM users WHERE email=${session.user.email}`
                 console.log(res[0].userid)
-                session.user.userid = res[0].userid
+                session.user.userid = res[0].user_id
                 return session
             }
             catch(e) {
