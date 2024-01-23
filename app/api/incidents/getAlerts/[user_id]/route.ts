@@ -29,12 +29,10 @@ export async function GET(request: NextRequest, {params}: {params: {user_id: str
     const incidents: TableData[] = await sql`
     select * from incidents where cluster_id=${cluster_id[0].cluster_id}
     `
-    console.log('incidents', incidents)
     const members: Array<object> = await sql`
     select name, email from users where cluster_id=${cluster_id[0].cluster_id}
     `
-    console.log('members', members)
-    
+
   return NextResponse.json([incidents, members]);
   
 }

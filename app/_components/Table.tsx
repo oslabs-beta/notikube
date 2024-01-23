@@ -37,10 +37,6 @@ const Table = () => {
 
   let [incidentList, setIncidentList] = useState<Incident[]>([]);
   let [memberList, setMemberList] = useState<UserName[]>([]);
-  // let [isLoading, setLoading] = useState(true)
-  let [updateRow, setUpdateRow] = useState(0)
-  // let [incidentCache, setIncidentCache] = useState<(Incident[] | undefined)>(undefined)
-  // let [memberCache, setMemberCache] = useState<(UserName[] | undefined)>(undefined)
 
   async function fetchData(user_id: (string | undefined)) {
     if (user_id !== undefined) {
@@ -48,7 +44,6 @@ const Table = () => {
     const data: [Incident[], UserName[]] = await res.json();
     setIncidentList(data[0]);
     setMemberList(data[1]);
-    // setLoading(false);
     }
   }
 
@@ -57,7 +52,7 @@ const Table = () => {
   let members: Array<string> = [];
  
   for (let key in memberArray) {
-    members.push(memberArray[key].email)
+    members.push(memberArray[key].name)
   }
 
   members.push('');
@@ -161,10 +156,6 @@ const columns: GridColDef[] = [
    valueOptions: members,
 }
 ];
-
-// while (isLoading) {
-//   return <div>... Loading</div>
-// }
 
    return (
     <div>

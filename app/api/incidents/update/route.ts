@@ -13,6 +13,11 @@ type Incident = {
     comment: string,
     incident_assigned_to: string,
     metric_data_id: string,
+    cluster_id: string,
+  }
+
+  type Email = {
+    email: string,
   }
 
 export async function POST(req: NextRequest) {
@@ -22,14 +27,16 @@ export async function POST(req: NextRequest) {
     const assignedTo: Incident[] = await sql`
     select incident_assigned_to from incidents where incident_id=${incident.incident_id}
     `
-    // const email: Array<object> = await sql`
-    // select email from users where name=${assignedTo[0].incident_assigned_to} AND cluster_id=${}
-    // `
+    const email: Email[] = await sql`
+    select email from users where name=${incident.incident_assigned_to} AND cluster_id=${incident.cluster_id}
+    `
 
     if (assignedTo[0].incident_assigned_to !== incident.incident_assigned_to) {
 
+        console.log('sending mail to:', email[0].email)
+
         sendMail(
-            incident.incident_assigned_to,
+            email[0].email,
             'NotiKube: You have been assigned a new incident',
             `You have been assigned a new NotiKube incident: <b>${incident.incident_title}</b>.
             <br><br> 
