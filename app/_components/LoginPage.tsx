@@ -68,7 +68,7 @@ const LoginPage = () => {
             <label>Password</label>
             <input
               className="rounded"
-              type="text"
+              type="password"
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
