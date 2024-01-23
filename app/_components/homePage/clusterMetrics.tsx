@@ -29,7 +29,7 @@ export async function NodeCPUHealth({ cluster_ip }: { cluster_ip: string }) {
     console.log('Error - NodeCPUHealth:', e)
     return (
       <div>
-        <Title className="text-center">Data Error</Title>
+        <Title className="text-center m-10 ml-5">Data Error</Title>
       </div>
     )
   }
@@ -61,7 +61,7 @@ export async function PodHealth({ cluster_ip }: { cluster_ip: string }) {
     console.log('Error - PodHealth:', e)
     return (
       <div>
-        <Title className="text-center">Data Error</Title>
+        <Title className="text-center m-10 ml-5">Data Error</Title>
       </div>
     )
   }
@@ -93,7 +93,7 @@ export async function PodRestartHealth({ cluster_ip }: { cluster_ip: string }) {
     console.log('Error - PodRestartHealth:', e)
     return (
       <div>
-        <Title className="text-center">Data Error</Title>
+        <Title className="text-center m-10 ml-5">Data Error</Title>
       </div>
     )
   }
@@ -132,7 +132,7 @@ export async function ClusterHealth({ cluster_ip }: { cluster_ip: string }) {
     console.log('Error - ClusterHealth:', e)
     return (
       <div>
-        <Title className="text-center">Data Error</Title>
+        <Title className="text-center m-10 ml-5">Data Error</Title>
       </div>
     )
   }
