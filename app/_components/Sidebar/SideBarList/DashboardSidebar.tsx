@@ -17,7 +17,7 @@ export default function DashboardSideBar() {
           aria-hidden="true"
           className="w-6 h-6 text-gray-400 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
           fill="currentColor"
-          viewBox="0 0"
+          viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
         >
           <g opacity="0.4">

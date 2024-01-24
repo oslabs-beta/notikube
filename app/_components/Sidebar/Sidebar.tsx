@@ -15,12 +15,8 @@ export default function Sidebar() {
         {/* Top Section of Sidebar component */}
         <div className="overflow-y-auto py-5 px-3 h-full bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700">
           {/* Apply absolute position to child elements */}
-          <div style={{ position: "absolute" }}>
             <NotiKubeLogo />
-          </div>
-          <div style={{ position: "absolute", top: "100px" }}>
             <NavLinks />
-          </div>
         </div>
       </aside>
     </>
