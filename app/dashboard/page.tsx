@@ -1,4 +1,4 @@
-
+import React from 'react';
 import HomeAlerts from '../_components/homePage/homeAlerts';
 import { ClusterHealth, NodeCPUHealth, PodHealth, PodRestartHealth } from '../_components/homePage/clusterMetrics';
 import ClusterDetails from '../_components/homePage/clusterDetails';
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 
 export default async function Dashboard() {
   const session = await getServerSession(authOptions);
-  let currentUserID = session?.user.userid === undefined ? null : session.user.userid;
+  let currentUserID = session?.user?.userid === undefined ? null : session.user.userid;
 
   try {
     const { cluster_name, cluster_ip } = await clusterInfo(currentUserID)

@@ -66,3 +66,17 @@ export type UserName = {
   name: string,
   email: string,
 }
+
+export type IncidentDetail = {
+  incident_id: string,
+  incident_date: Date | null,
+  incident_type: string,
+  description: string,
+  priority_level: string,
+  incident_title: string,
+  incident_status: string, 
+  comment: string,
+  incident_assigned_to: string,
+  metric_data_id: string | null,
+  cluster_id: string,
+}
