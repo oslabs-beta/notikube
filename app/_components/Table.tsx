@@ -1,13 +1,16 @@
  'use client';
 
  import * as React from 'react';
- import { useState, use, useEffect } from 'react';
+ import { useState, useEffect } from 'react';
  import {
    DataGrid,
    GridRowModel,
+   GridRowSelectionModel,
    GridColDef,
+   GRID_CHECKBOX_SELECTION_COL_DEF, 
  } from '@mui/x-data-grid';
  import { useSession } from 'next-auth/react';
+ import { useRouter } from 'next/navigation';
 
 
 type Incident = {
@@ -32,11 +35,14 @@ type UserName = {
 
 const Table = () => {
 
+  const router = useRouter();
+
   const session = useSession().data;
   const userId = session?.user?.userid;
 
   let [incidentList, setIncidentList] = useState<Incident[]>([]);
   let [memberList, setMemberList] = useState<UserName[]>([]);
+  let [selectedRow, setSelectedRow] = useState<GridRowSelectionModel>();
 
   async function fetchData(user_id: (string | undefined)) {
     if (user_id !== undefined) {
@@ -68,7 +74,7 @@ const Table = () => {
         },
         body: JSON.stringify(newRow)
       });
-      window.location.reload();
+      //window.location.reload();
       return updatedRow;
       },[]);
 
@@ -81,7 +87,7 @@ const columns: GridColDef[] = [
   {
     field: 'incident_date',
     headerName: 'Timestamp',
-    minWidth: 200,
+    minWidth: 275,
     type: 'string',
     editable: false,
     headerClassName: 'column-header',
@@ -116,7 +122,7 @@ const columns: GridColDef[] = [
  { 
    field: 'incident_title', 
    headerName: 'Title', 
-   minWidth: 150,
+   minWidth: 225,
    editable: true ,
    type: 'string',
    headerClassName: 'column-header',
@@ -185,12 +191,19 @@ const columns: GridColDef[] = [
           "&:hover": {
             bgcolor:"darkgray"
           }
-         }
+         },
+         "& .MuiDataGrid-columnHeaderCheckbox .MuiDataGrid-columnHeaderTitleContainer": {
+            display: "none",   
+          },
+         "& .MuiDataGrid-columnHeaders": {
+            bgcolor: 'GrayText',   
+        },
          }}
-         editMode='row'
+         editMode='cell'
          getRowId={(incidents) => incidents.incident_id}
          rows={incidents}
          columns={columns}
+         //getRowHeight={() => 'auto'}
          processRowUpdate={updateTable}
          onProcessRowUpdateError={(() => console.log('Error processing row update'))}
          onRowEditStop={(params) => {
@@ -206,7 +219,14 @@ const columns: GridColDef[] = [
           }
         }
          }
+         onRowSelectionModelChange={(newSelection) => {
+            console.log('new selection', newSelection)
+            router.push(`http://localhost:3000/dashboard/incident-details/${newSelection}`)
+         }}
+         disableRowSelectionOnClick
+         checkboxSelection={true}
        />
+       <h2 style={{marginTop:5}}>Select a Row to View Incident Details</h2>
      </div>
    );
 

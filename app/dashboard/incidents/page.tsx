@@ -4,6 +4,7 @@ import Table from '../../_components/Table'
 import AddMemberComponent from '../../_components/AddMember';
 
 
+
 export default function Incidents() {
 
   return (
