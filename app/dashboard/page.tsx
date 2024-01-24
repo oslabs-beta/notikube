@@ -51,8 +51,8 @@ function Dashboard() {
     return (
       <div>
         <Sidebar />
-        <div className=''>
-          <h1 className="text-left py-5 text-5xl font-extrabold dark:text-white">Dashboard</h1>
+        <div className='p-4 sm:ml-64'>
+          <h1 className="text-left pl-8 py-5 text-5xl font-extrabold dark:text-white">Dashboard</h1>
           <h2 className="">{clusterName}</h2>
           <h2 className="">Current Grafana IP Address: {ipAddress}</h2>
           <div id='metrics'>
@@ -68,7 +68,7 @@ function Dashboard() {
                 </a>
               </div>
             </section>
-            <h3 className="text-left text-3xl font-bold dark:text-white py-3">Cluster</h3>
+            <h3 className="text-left pl-8 text-3xl font-bold dark:text-white py-3">Cluster</h3>
             <section id='cluster'>
               <div id='cluster-row-1'className='display: inline-flex'>
                 <iframe className="rounded-lg m-3" src={`http://${ipAddress}/d-solo/garysdevil-kube-state-metrics-v2/kube-state-metrics-v2?orgId=1&from=${Date.now() - 3600000}&to=${Date.now()}&panelId=5`} width="325" height="225" frameBorder="0"></iframe>
@@ -79,7 +79,7 @@ function Dashboard() {
                 <iframe className="rounded-lg m-3" src={`http://${ipAddress}/d-solo/garysdevil-kube-state-metrics-v2/kube-state-metrics-v2?orgId=1&from=${Date.now() - 3600000}&to=${Date.now()}&panelId=11`} width="325" height="225" frameBorder="0"></iframe>
               </div>
            </section>
-           <h3 className="text-left text-3xl font-bold dark:text-white py-3">Nodes</h3>
+           <h3 className="text-left pl-8 text-3xl font-bold dark:text-white py-3">Nodes</h3>
               <section id='nodes' className='display: inline-flex'>
                 <iframe className="rounded-lg m-3" src={`http://${ipAddress}/d-solo/garysdevil-kube-state-metrics-v2/kube-state-metrics-v2?orgId=1&from=${Date.now() - 3600000}&to=${Date.now()}&panelId=24`} width="325" height="225" frameBorder="0"></iframe>
                 <iframe className="rounded-lg m-3" src={`http://${ipAddress}/d-solo/garysdevil-kube-state-metrics-v2/kube-state-metrics-v2?orgId=1&from=${Date.now() - 3600000}&to=${Date.now()}&panelId=26`} width="325" height="225" frameBorder="0"></iframe>
