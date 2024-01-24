@@ -7,30 +7,10 @@
    GridRowModel,
    GridRowSelectionModel,
    GridColDef,
-   GRID_CHECKBOX_SELECTION_COL_DEF, 
  } from '@mui/x-data-grid';
  import { useSession } from 'next-auth/react';
  import { useRouter } from 'next/navigation';
-
-
-type Incident = {
-  incident_id: string,
-  incident_date: Date,
-  incident_type: string,
-  description: string,
-  priority_level: string,
-  incident_title: string,
-  incident_status: string, 
-  comment: string,
-  incident_assigned_to: string,
-  metric_data_id: string,
-  cluster_id: string,
-}
-
-type UserName = {
-  name: string,
-  email: string,
-}
+ import { Incident, UserName } from '../../types/definitions';
 
 
 const Table = () => {

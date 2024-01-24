@@ -2,19 +2,9 @@ import {sendMail} from '../../service/mailService';
 import { redirect } from 'next/navigation'
 import sql from '../utils/db';
 import { getServerSession } from 'next-auth';
-
+import { User } from '../../types/definitions'
 
 const CryptoJS = require('crypto-js');
-
-type User = {
-    user_id: string,
-    name: string,
-    email: string,
-    phone: string,
-    slack: string,
-    cluster_id: string,
-    cluster_name: string,
-};
 
 
 export default async function AddMemberPage() {
@@ -35,8 +25,8 @@ export default async function AddMemberPage() {
 
         const email = data.get('email')?.toString();
         const userName: string = user[0].name;
-        const clusterId: string = user[0].cluster_id;
-        const clusterName: string = user[0].cluster_name;
+        const clusterId: (string | undefined) = user[0].cluster_id;
+        const clusterName: (string | undefined) = user[0].cluster_name;
 
         const urlParams: string =  clusterId + '$' + email;
         let cipherText: any = CryptoJS.AES.encrypt(urlParams, process.env.CIPHER_KEY).toString();

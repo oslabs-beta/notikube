@@ -1,29 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import sql from '../../../utils/db';
+import { User, Incident } from '../../../../types/definitions';
 
 const CryptoJS = require('crypto-js');
 
-type User = {
-    user_id: number,
-    name: string,
-    email: string,
-    phone: number,
-    slack: string,
-    cluster_id?: string
-}
-
-type Incident = {
-    incident_id: string,
-    incident_date: Date,
-    incident_type: string,
-    description: string,
-    priority_level: string,
-    incident_title: string,
-    incident_status: string, 
-    comment: string,
-    incident_assigned_to: string,
-    metric_data_id: string,
-}
 
 export async function GET(request: NextRequest, {params}: {params: {urlParams: any}}) {
 

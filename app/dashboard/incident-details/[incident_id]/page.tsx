@@ -2,20 +2,8 @@
 
 import * as React from 'react';
 import { useState, useEffect } from 'react';
+import { Incident } from '../../../../types/definitions';
 
-type Incident = {
-  incident_id: string,
-  incident_date: Date,
-  incident_type: string,
-  description: string,
-  priority_level: string,
-  incident_title: string,
-  incident_status: string, 
-  comment: string,
-  incident_assigned_to: string,
-  metric_data_id: string,
-  cluster_id: string,
-}
 
 export default function IncidentDetails({params}: {params: {incident_id: any}}) {
 
@@ -37,6 +25,8 @@ export default function IncidentDetails({params}: {params: {incident_id: any}}) 
   console.log('incident details state', incidentDetails?.incident_date)
 
   return (
-    <h1>This is the Incident Details page</h1>
+    <div>
+    <h1>These are the details of incident: <b>{incidentDetails?.incident_title}</b></h1><br></br>
+    </div>
   )
 }

@@ -1,24 +1,8 @@
 import { NextRequest, NextResponse} from 'next/server';
 import sql from '../../../utils/db';
 import {sendMail} from '../../../../service/mailService'
+import { Incident, Email } from '../../../../types/definitions'
 
-type Incident = {
-    incident_id: string,
-    incident_date: Date,
-    incident_type: string,
-    description: string,
-    priority_level: string,
-    incident_title: string,
-    incident_status: string, 
-    comment: string,
-    incident_assigned_to: string,
-    metric_data_id: string,
-    cluster_id: string,
-  }
-
-  type Email = {
-    email: string,
-  }
 
 export async function POST(req: NextRequest) {
 
