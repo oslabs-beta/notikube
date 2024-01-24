@@ -22,7 +22,7 @@ export const authOptions: NextAuthOptions = {
                     if (!passwordsMatch) {
                         return null
                     }
-                    console.log(res[0].userid)
+                    //console.log(res[0].userid)
                     return res[0]
                 }
                 catch(e) {
@@ -44,9 +44,9 @@ export const authOptions: NextAuthOptions = {
         async session({session, user}) {
             if (!session) return
             try {
-                console.log('Email from session to query db: ', session.user.email)
+                //console.log('Email from session to query db: ', session.user.email)
                 let res = await sql`SELECT * FROM users WHERE email=${session.user.email}`
-                console.log('UserId from database: ', res[0].user_id)
+                //console.log('UserId from database: ', res[0].user_id)
                 session.user.userid = res[0].user_id
                 return session
             }
