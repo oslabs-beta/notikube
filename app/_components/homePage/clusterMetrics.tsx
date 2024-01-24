@@ -7,6 +7,7 @@ import {
   cpuUtilByNode,
   numOfReadyPods,
   numOfUnhealthyPods,
+  activeCluster
 } from "../../lib/queries";
 import { NameSpacePods, CircleNode } from "../../../types/definitions";
 import NodeCircle from "./nodeCircle";
