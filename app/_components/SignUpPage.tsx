@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';;
 import { useState } from 'react';
-import SignUpImage from '../../public/assets/NotiKubeSignUp';
+import SignUpImage from '../../public/assets/NotiKubeSignUp.svg';
 import Logo from '../../public/assets/logo.svg'
 
 const Signup = () => {

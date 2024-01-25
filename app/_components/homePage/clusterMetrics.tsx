@@ -19,7 +19,7 @@ export async function NodeCPUHealth({ cluster_ip }: { cluster_ip: string }) {
     return (
       <div>
         <Title className="text-center">CPU Utilization By Node</Title>
-        <div id='NodeCPUHealth-row-1' className='display: inline-flex pl-8 py-1'>
+        <div id='NodeCPUHealth-row-1' className='display: inline-flex py-4'>
           {nodeCircles}
         </div>
       </div>
@@ -40,7 +40,7 @@ export async function PodHealth({ cluster_ip }: { cluster_ip: string }) {
     const numByNamePodsResult = await numByNamePods(cluster_ip);
     const chartData1 = numByNamePodsResult.map((n: NameSpacePods) => { return { name: n.metric.namespace, 'Number of Pods': Number(n.value[1]) } })
     return (
-      <div id='PodHealth-row-1' className='display: block p-6'>
+      <div id='PodHealth-row-1' className='display: block py-4'>
         <Card>
           <Title>Number of Pods</Title>
           <Subtitle>By Namespace</Subtitle>
@@ -72,7 +72,7 @@ export async function PodRestartHealth({ cluster_ip }: { cluster_ip: string }) {
     const restartByNamePodsResult = await restartByNamePods(cluster_ip);
     const chartData2 = restartByNamePodsResult.map((n: NameSpacePods) => { return { name: n.metric.namespace, 'Number of Restarted Pods': Number(n.value[1]) } })
     return (
-      <div id='podRestartHealth-row-1' className='display: block p-6'>
+      <div id='podRestartHealth-row-1' className='display: block py-4'>
         <Card>
           <Title>Number of restarted pods per namespace</Title>
           <Subtitle>By Namepace ~ 5 Minutes</Subtitle>
