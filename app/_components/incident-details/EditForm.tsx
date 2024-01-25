@@ -100,10 +100,10 @@ const EditForm = (props: EditDetails) => {
           <div className="grid grid-cols-2 gap-8 w-5/6">
             <div className="w-full">
                 <p className="font-bold pb-2 text-xl">Title:</p>
-                <input name="title" className="border-2 border-red-800 p-2 pl-4 shadow-lg rounded-md w-full" placeholder={props.title} />
+                <input name="title" className="border-2 border-red-800 p-2 pl-4 shadow-xl rounded-md w-full" placeholder={props.title} />
                 <br></br>
                 <p className="font-bold pb-2 pt-6 text-xl">Priority:</p>
-                <select name="priority" className="border-2 border-red-800 p-2 pl-4 shadow-lg rounded-md w-full">
+                <select name="priority" className="border-2 border-red-800 p-2 pl-4 shadow-xl rounded-md w-full">
                     <option defaultValue={props.priority}>{props.priority}</option>
                     <option value="Critical">Critical</option>
                     <option value="Error">Error</option>
@@ -112,28 +112,28 @@ const EditForm = (props: EditDetails) => {
                 </select>
                 <br></br>
                 <p className="font-bold pb-2 pt-6 text-xl">Assigned By:</p>
-                <select name="assigned_by" className="border-2 border-red-800 p-2 pl-4 shadow-lg rounded-md w-full">
+                <select name="assigned_by" className="border-2 border-red-800 p-2 pl-4 shadow-xl rounded-md w-full">
                     {
                         props.members.map((e) => <option key={e} value={e}>{e}</option>)
                     }
                 </select>
                 <br></br>
                 <p className="font-bold pb-2 pt-6 text-xl">Due Date:</p>
-                <input name="due_date" className="border-2 border-red-800 p-2 pl-4 shadow-lg rounded-md w-full" placeholder={props.due_date} />
+                <input name="due_date" className="border-2 border-red-800 p-2 pl-4 shadow-xl rounded-md w-full" placeholder={props.due_date} />
                 <br></br>
                 <p className="font-bold pb-2 pt-6 text-xl">Notes:</p>
-                <input name="notes" className="border-2 border-red-800 p-2 pl-4 shadow-lg rounded-md w-full text-wrap" placeholder={props.notes} />
+                <input name="notes" className="border-2 border-red-800 p-2 pl-4 shadow-xl rounded-md w-full text-wrap" placeholder={props.notes} />
                 <br></br>
                 <br></br>
                 <br></br>
-                <button className="border-2 border-red-800 bg-red-800 text-white p-2 pl-4 shadow-lg rounded-md min-w-40 min-h-12" type="submit">Submit Changes</button>
+                <button className="border-2 border-red-800 bg-red-800 text-white p-2 pl-4 shadow-xl rounded-md min-w-40 min-h-12" type="submit">Submit Changes</button>
             </div>
             <div className="w-full">
                 <p className="font-bold pb-2 text-xl">Description:</p>
-                <input name="description" className="border-2 border-red-800 p-2 pl-4 shadow-lg rounded-md w-full" placeholder={props.description} />
+                <input name="description" className="border-2 border-red-800 p-2 pl-4 shadow-xl rounded-md w-full" placeholder={props.description} />
                 <br></br>
                 <p className="font-bold pb-2 pt-6 text-xl">Status:</p>
-                <select name="status" className="border-2 border-red-800 p-2 pl-4 shadow-lg rounded-md w-full">
+                <select name="status" className="border-2 border-red-800 p-2 pl-4 shadow-xl rounded-md w-full">
                     <option defaultValue={props.status}>{props.status}</option>
                     <option value="Open">Open</option>
                     <option value="Closed">Closed</option>
@@ -141,17 +141,17 @@ const EditForm = (props: EditDetails) => {
                 </select>
                 <br></br>
                 <p className="font-bold pb-2 pt-6 text-xl">Assigned To:</p>
-                <select name="assigned_to" className="border-2 border-red-800 p-2 pl-4 shadow-lg rounded-md w-full">
+                <select name="assigned_to" className="border-2 border-red-800 p-2 pl-4 shadow-xl rounded-md w-full">
                     {
                         props.members.map((e) => <option key={e} value={e}>{e}</option>)
                     }
                     </select>
                 <br></br>
                 <p className="font-bold pb-2 pt-6 text-xl">Assigned Date:</p>
-                <input name="assigned_date" className="border-2 border-red-800 p-2 pl-4 shadow-lg rounded-md w-full" placeholder={props.assigned_date} />
+                <input name="assigned_date" className="border-2 border-red-800 p-2 pl-4 shadow-xl rounded-md w-full" placeholder={props.assigned_date} />
                 <br></br>
                 <p className="font-bold pb-2 pt-6 text-xl">Type of Incident:</p>
-                <input name="type" className="border-2 border-red-800 p-2 pl-4 shadow-lg rounded-md w-full" placeholder={props.type} />
+                <input name="type" className="border-2 border-red-800 p-2 pl-4 shadow-xl rounded-md w-full" placeholder={props.type} />
                 <br></br>
                 <br></br>
             </div>
