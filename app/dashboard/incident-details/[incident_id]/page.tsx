@@ -63,6 +63,8 @@ return (
     <br></br>
     <br></br>
     <EditForm incident_id={incident_id} title={incidentDetails?.incident_title} description={incidentDetails?.description} priority={incidentDetails?.priority_level} status={incidentDetails?.incident_status} notes={incidentDetails?.comment} assigned_to={incidentDetails?.incident_assigned_to} assigned_by={incidentDetails?.incident_assigned_by} assigned_date={incidentDetails?.incident_assigned_date} due_date={incidentDetails?.incident_assigned_date} type={incidentDetails?.incident_type} members={memberArray} cluster_id={incidentDetails?.cluster_id} />
+    <br></br>
+    <button className="bg-red-800 text-white min-w-40 min-h-12" onClick={() => setEdit(false)}>Cancel</button>
   </div>
 )
 
