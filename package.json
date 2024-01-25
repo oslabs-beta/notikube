@@ -13,17 +13,22 @@
   "dependencies": {
     "@emotion/react": "latest",
     "@emotion/styled": "latest",
+    "@heroicons/react": "^1.0.6",
     "@mui/material": "^5.15.3",
     "@mui/x-data-grid": "latest",
+    "aws-sdk": "^2.1539.0",
+    "@tremor/react": "^3.13.1",
     "@types/node-fetch": "^2.6.11",
     "bcrypt": "^5.1.1",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
+    "crypto-js": "^4.2.0",
     "dotenv": "^16.3.1",
     "flowbite": "^2.2.1",
     "flowbite-react": "^0.7.2",
     "next": "^14.1.0",
     "next-auth": "^4.24.5",
+    "nodemailer": "^6.9.8",
     "node": "^21.2.0",
     "passport": "^0.7.0",
     "passport-local": "^1.0.0",
@@ -31,7 +36,8 @@
     "postgres": "^3.4.3",
     "react": "^18",
     "react-dom": "^18",
-    "swr": "^2.2.4"
+    "swr": "^2.2.4",
+    "urlencode": "^2.0.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.1.6",

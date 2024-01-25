@@ -10,6 +10,6 @@ export default async function GET() {
     // let userCluster = res
     // return NextResponse.json({userCluster})
   } catch (err) {
-    console.error('Error. Not able to get users clusters', err)
+    console.error('Error. Not able to get user\'s clusters', err)
   }
 }

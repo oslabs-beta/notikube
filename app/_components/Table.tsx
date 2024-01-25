@@ -1,46 +1,147 @@
  'use client';
 
  import * as React from 'react';
- import { useState, use } from 'react';
+ import { useState, useEffect } from 'react';
  import {
    DataGrid,
-   GridCellModes,
    GridRowModel,
+   GridRowSelectionModel,
    GridColDef,
-   GridRowId,
-   GridRowsProp,
  } from '@mui/x-data-grid';
- import useSWR from 'swr'
-
-
-//const fetcher = (...args) => fetch(...args).then((res) => res.json())
-
-type User = {
-  userid: number,
-  name: string,
-  email: string,
-  phone: number,
-  slack: string,
-}
-
-async function fetchData(): Promise<User[]> {
-  const res = await fetch('/api/incidents')
-  return res.json()
-}
-
-const userPromise = fetchData()
+ import { useSession } from 'next-auth/react';
+ import { useRouter } from 'next/navigation';
+ import { Incident, UserName } from '../../types/definitions';
 
 
 const Table = () => {
 
-  const users: User[] = use(userPromise)
+  const router = useRouter();
 
-  console.log('users', users)
+  const session = useSession().data;
+  const userId = session?.user?.userid;
 
-//  const { data, error, isLoading } = useSWR('https://jsonplaceholder.typicode.com/posts', fetcher) 
+  let [incidentList, setIncidentList] = useState<Incident[]>([]);
+  let [memberList, setMemberList] = useState<UserName[]>([]);
+  let [selectedRow, setSelectedRow] = useState<GridRowSelectionModel>();
 
-//    if (error) return <div> failed to load</div>
-//    if (isLoading) return <div>loading...</div>
+  async function fetchData(user_id: (string | undefined)) {
+    if (user_id !== undefined) {
+    let res = await fetch(`http://localhost:3000/api/incidents/getAlerts/${user_id}`)
+    const data: [Incident[], UserName[]] = await res.json();
+    setIncidentList(data[0]);
+    setMemberList(data[1]);
+    }
+  }
+
+  let incidents: Incident[] = incidentList;
+  let memberArray: UserName[] = memberList;
+  let members: Array<string> = [];
+ 
+  for (let key in memberArray) {
+    members.push(memberArray[key].name)
+  }
+
+  members.push('');
+
+  const updateTable = React.useCallback(
+    async (newRow: GridRowModel) => {
+      const updatedRow = { ...newRow };
+      updatedRow.id = newRow.incident_id;
+      fetch(`http://localhost:3000/api/incidents/update`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newRow)
+      });
+      //window.location.reload();
+      return updatedRow;
+      },[]);
+
+  useEffect(() => {
+    fetchData(userId);
+  },[userId])
+
+
+const columns: GridColDef[] = [
+  {
+    field: 'incident_date',
+    headerName: 'Timestamp',
+    minWidth: 275,
+    type: 'string',
+    editable: false,
+    headerClassName: 'column-header',
+  },
+  {
+    field: 'incident_type',
+    headerName: 'Type',
+    minWidth: 125,
+    type: 'string',
+    editable: false,
+    headerClassName: 'column-header'
+  },
+  {
+   field: 'description',
+   headerName: 'Description',
+   minWidth: 350,
+   type: 'string',
+   editable: true,
+   headerClassName: 'column-header'
+ },
+ { 
+   field: 'priority_level', 
+   headerName: 'Priority',
+   minWidth: 100, 
+   editable: true ,
+   type: 'singleSelect',
+   headerClassName: 'column-header',
+   align: 'left',
+   headerAlign: 'left',
+   valueOptions: ['Critical', 'Moderate', 'Low'],
+ },
+ { 
+   field: 'incident_title', 
+   headerName: 'Title', 
+   minWidth: 225,
+   editable: true ,
+   type: 'string',
+   headerClassName: 'column-header',
+   align: 'left',
+   headerAlign: 'left',
+ },
+ { 
+   field: 'incident_status', 
+   headerName: 'Status', 
+   minWidth: 125,
+   editable: true ,
+   type: 'singleSelect',
+   headerClassName: 'column-header',
+   align: 'left',
+   headerAlign: 'left',
+   valueOptions: ['Open', 'Closed', 'In Progress'],
+ },
+ { 
+   field: 'comment', 
+   headerName: 'Notes',
+   minWidth: 400, 
+   editable: true ,
+   type: 'string',
+   headerClassName: 'column-header',
+   align: 'left',
+   headerAlign: 'left',
+ },
+ { 
+   field: 'incident_assigned_to', 
+   headerName: 'Assigned To', 
+   minWidth: 200,
+   editable: true ,
+   type: 'singleSelect',
+   headerClassName: 'column-header',
+   align: 'left',
+   headerAlign: 'left',
+   valueOptions: members,
+}
+];
 
    return (
     <div>
@@ -53,114 +154,64 @@ const Table = () => {
            color: 'primary.main',
          },
          color: 'black',
+         ".red": {
+          bgcolor:"#F2D7D5",
+          "&:hover": {
+            bgcolor:"darkgray"
+          }
+         },
+         ".green": {
+          bgcolor:"#D5F5E3",
+          "&:hover": {
+            bgcolor:"darkgray"
+          }
+         },
+         ".orange": {
+          bgcolor:"#FAE5D3",
+          "&:hover": {
+            bgcolor:"darkgray"
+          }
+         },
+         "& .MuiDataGrid-columnHeaderCheckbox .MuiDataGrid-columnHeaderTitleContainer": {
+            display: "none",   
+          },
+         "& .MuiDataGrid-columnHeaders": {
+            bgcolor: 'GrayText',   
+        },
          }}
-         editMode='row'
-         getRowId={(users) => users.userid}
-         rows={users}
+         editMode='cell'
+         getRowId={(incidents) => incidents.incident_id}
+         rows={incidents}
          columns={columns}
-         //processRowUpdate={updateTable}
-         //onProcessRowUpdateError={(() => console.log('Error processing row update'))}
-         //onRowEditStop={(params) => {
-           //console.log(params);
-         //}}
+         //getRowHeight={() => 'auto'}
+         processRowUpdate={updateTable}
+         onProcessRowUpdateError={(() => console.log('Error processing row update'))}
+         onRowEditStop={(params) => {
+           console.log('params', params);
+         }}
+         getRowClassName={(params) => {
+          if (params.row.priority_level === 'Critical') {
+            return "red"
+          } else if (params.row.priority_level === 'Moderate') {
+            return "orange"
+          } else {
+            return "green"
+          }
+        }
+         }
+         onRowSelectionModelChange={(newSelection) => {
+            console.log('new selection', newSelection)
+            router.push(`http://localhost:3000/dashboard/incident-details/${newSelection}`)
+         }}
+         disableRowSelectionOnClick
+         checkboxSelection={true}
        />
+       <h2 style={{marginTop:5}}>Select a Row to View Incident Details</h2>
      </div>
    );
- }
- 
- const columns: GridColDef[] = [
-   { 
-     field: 'userid', 
-     headerName: 'User ID', 
-     width: 400, 
-     editable: false ,
-     type: 'number',
-     headerClassName: 'column-header',
-     align: 'left',
-     headerAlign: 'left',
-   },
-   {
-     field: 'name',
-     headerName: 'Name',
-     type: 'string',
-     editable: false,
-     align: 'left',
-     headerAlign: 'left',
-     width: 150,
-     headerClassName: 'column-header', 
-   },
-   {
-     field: 'email',
-     headerName: 'Email',
-     type: 'string',
-     width: 450,
-     editable: true,
-     headerClassName: 'column-header',
-   },
-   {
-     field: 'slack',
-     headerName: 'Slack',
-     type: 'string',
-     width: 125,
-     editable: true,
-     headerClassName: 'column-header'
-   },
-   {
-    field: 'phone',
-    headerName: 'Phone',
-    type: 'number',
-    width: 125,
-    editable: true,
-    headerClassName: 'column-header'
-  },
- ];
- 
 
- // const columns: GridColDef[] = [
- //   { 
- //     field: 'timestamp', 
- //     headerName: 'Timestamp', 
- //     width: 225, 
- //     editable: false ,
- //     headerClassName: 'column-header',
- //   },
- //   {
- //     field: 'type',
- //     headerName: 'Type',
- //     type: 'string',
- //     editable: true,
- //     align: 'left',
- //     headerAlign: 'left',
- //     width: 150,
- //     headerClassName: 'column-header', 
- //   },
- //   {
- //     field: 'description',
- //     headerName: 'Description',
- //     type: 'string',
- //     width: 450,
- //     editable: true,
- //     headerClassName: 'column-header',
- //   },
- //   {
- //     field: 'priority',
- //     headerName: 'Priority',
- //     type: 'singleSelect',
- //     width: 125,
- //     editable: true,
- //     headerClassName: 'column-header',
- //     valueOptions: ['High', 'Med', 'Low']
- //   },
- //   {
- //     field: 'status',
- //     headerName: 'Status',
- //     type: 'singleSelect',
- //     width: 125,
- //     editable: true,
- //     headerClassName: 'column-header',
- //     valueOptions: ['Open', 'Closed', 'Reassigned', 'In Progress']
- //   },
- // ];
+}
+
 
 
  export default Table
