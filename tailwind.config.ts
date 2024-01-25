@@ -3,6 +3,7 @@ import colors from 'tailwindcss/colors'
 /*eslint-env node*/
 /** @type {import('tailwindcss').Config} */
 const config: Config = {
+  mode: 'jit',
   content: [
     './app/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './app/components/**/*.{js,ts,jsx,tsx,mdx}',

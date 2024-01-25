@@ -12,7 +12,7 @@ export async function GET(request: NextRequest, {params}: {params: {user_id: str
       select cluster_id from users where user_id=${user_id}
     `
     const incidents: TableData[] = await sql`
-    select * from incidents where cluster_id=${cluster_id[0].cluster_id}
+    select * from incidents left join clusters using (cluster_id) where cluster_id=${cluster_id[0].cluster_id}
     `
     const members: Array<object> = await sql`
     select name, email from users where cluster_id=${cluster_id[0].cluster_id}
