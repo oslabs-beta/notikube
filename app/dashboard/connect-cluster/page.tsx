@@ -15,27 +15,32 @@ export default function ConnectCluster() {
   };
 
   return (
-    <div className="flex flex-col justify-between">
-      <div className="flex justify-between">
-        <h1 className="text-left pl-8 py-5 text-5xl font-extrabold dark:text-white">
+    <div>
+      <div className="flex justify-between items-center">
+        <h1 className="text-left py-5 text-5xl font-extrabold dark:text-white">
           Your Clusters
         </h1>
         <button
           id="defaultModalButton"
           onClick={toggleModal}
-          className="block text-white bg-primary-500 hover:bg-primary-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+          className="text-white bg-primary-500 hover:bg-primary-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-3 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
           type="button"
         >
           + Add New Cluster
         </button>
       </div>
 
+      {/* If the Modal is Visible, grey out the background */}
+      {isModalVisible && (
+        <div className="fixed top-0 left-0 w-full h-full bg-gray-800 opacity-50 z-50"></div>
+      )}
+
       {/* Modal That Appears When you Click + Add New Cluster */}
       <ConnectClusterModal
         isModalVisible={isModalVisible}
         toggleModal={toggleModal}
       />
-      
+
       {/* Table for Clusters associated with Users */}
       <UserClusters />
     </div>

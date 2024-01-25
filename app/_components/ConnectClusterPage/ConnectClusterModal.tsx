@@ -8,6 +8,13 @@ export default function ConnectClusterModal({
   const router = useRouter();
   const [clusterName, setClusterName] = useState("");
   const [clusterIp, setClusterIp] = useState("");
+  const [error, setError] = useState("");
+
+  const resetFields = () => {
+    setClusterName("");
+    setClusterIp("");
+    setError("");
+  };
 
   // This function takes the passed in form data and sends it to the server
   async function newCluster(e: React.FormEvent) {
@@ -28,16 +35,22 @@ export default function ConnectClusterModal({
       });
       const data = await res.json();
       if (!data.newCluster) {
-        alert("Cluster unable to be added to database. Please try again");
+        setError(data.error);
       } else {
         router.push("/dashboard");
+        toggleModal();
+        resetFields();
       }
     } catch (error) {
+      setError("An error occurred while adding your cluster. Please try again");
       console.error("Error sending data:", error);
-    } 
-    // Close the modal after form submission
-    toggleModal();
+    }
   }
+
+  const handleClose = () => {
+    toggleModal();
+    resetFields();
+  };
 
   return (
     <div className={`modal ${isModalVisible ? "is-active" : ""}`}>
@@ -48,8 +61,10 @@ export default function ConnectClusterModal({
         tabIndex={-1}
         aria-hidden="true"
         className={`${
-          isModalVisible ? "fixed" : "hidden"
-        } overflow-y-auto overflow-x-hidden top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full`}
+          isModalVisible
+            ? "fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+            : "hidden"
+        } overflow-y-auto overflow-x-hidden z-50 w-full max-w-2xl`}
       >
         <div className="relative p-4 w-full max-w-2xl h-full md:h-auto">
           {/* Modal content */}
@@ -62,7 +77,7 @@ export default function ConnectClusterModal({
               <button
                 type="button"
                 className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                onClick={toggleModal}
+                onClick={handleClose}
               >
                 <svg
                   aria-hidden="true"
@@ -118,6 +133,12 @@ export default function ConnectClusterModal({
                   />
                 </div>
               </div>
+
+              {/* This error populates when the fetch request sends back an error */}
+              {error && (
+                <p className="text-NotikubeRed text-xs pb-4">{error}</p>
+              )}
+
               {/* Save Button */}
               <button
                 type="submit"
