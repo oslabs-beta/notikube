@@ -100,7 +100,7 @@ const EditForm = (props: EditDetails) => {
           <div className="grid grid-cols-2 gap-8 w-5/6">
             <div className="w-full">
                 <p className="font-bold pb-2 text-xl">Title:</p>
-                <input name="title" className="border-2 border-red-800 p-2 pl-4 shadow-lg rounded-md w-full" placeholder={props.title}/>
+                <input name="title" className="border-2 border-red-800 p-2 pl-4 shadow-lg rounded-md w-full" placeholder={props.title} />
                 <br></br>
                 <p className="font-bold pb-2 pt-6 text-xl">Priority:</p>
                 <select name="priority" className="border-2 border-red-800 p-2 pl-4 shadow-lg rounded-md w-full">
