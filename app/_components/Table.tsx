@@ -11,6 +11,7 @@
  import { useSession } from 'next-auth/react';
  import { useRouter } from 'next/navigation';
  import { Incident, UserName } from '../../types/definitions';
+import IncidentDetails from '../dashboard/incident-details/[incident_id]/page';
 
 
 const Table = () => {
@@ -22,7 +23,6 @@ const Table = () => {
 
   let [incidentList, setIncidentList] = useState<Incident[]>([]);
   let [memberList, setMemberList] = useState<UserName[]>([]);
-  let [selectedRow, setSelectedRow] = useState<GridRowSelectionModel>();
 
   async function fetchData(user_id: (string | undefined)) {
     if (user_id !== undefined) {
@@ -45,6 +45,7 @@ const Table = () => {
 
   const updateTable = React.useCallback(
     async (newRow: GridRowModel) => {
+      console.log('new row', newRow)
       const updatedRow = { ...newRow };
       updatedRow.id = newRow.incident_id;
       fetch(`http://localhost:3000/api/incidents/update`, {
@@ -54,7 +55,6 @@ const Table = () => {
         },
         body: JSON.stringify(newRow)
       });
-      //window.location.reload();
       return updatedRow;
       },[]);
 
@@ -67,7 +67,7 @@ const columns: GridColDef[] = [
   {
     field: 'incident_date',
     headerName: 'Timestamp',
-    minWidth: 275,
+    minWidth: 200,
     type: 'string',
     editable: false,
     headerClassName: 'column-header',
@@ -150,10 +150,10 @@ const columns: GridColDef[] = [
          boxShadow: 2,
          border: 2,
          borderColor: 'black',
+         color: 'black',
          '& .MuiDataGrid-cell:hover': {
            color: 'primary.main',
          },
-         color: 'black',
          ".red": {
           bgcolor:"#F2D7D5",
           "&:hover": {
@@ -176,14 +176,17 @@ const columns: GridColDef[] = [
             display: "none",   
           },
          "& .MuiDataGrid-columnHeaders": {
-            bgcolor: 'GrayText',   
+            bgcolor: 'white',   
         },
+        ".column-header": {
+          bgcolor:"white",
+          color:"black"
+        }
          }}
          editMode='cell'
          getRowId={(incidents) => incidents.incident_id}
          rows={incidents}
          columns={columns}
-         //getRowHeight={() => 'auto'}
          processRowUpdate={updateTable}
          onProcessRowUpdateError={(() => console.log('Error processing row update'))}
          onRowEditStop={(params) => {
