@@ -5,7 +5,7 @@ export default async function clusterDetails({ cluster_name, cluster_ip }: { clu
   return (
     <div>
       <div className="flex justify-between">
-        <p className="px-8 text-left">{cluster_name}</p>
+        <p className="py-2 text-left">{cluster_name}</p>
         <p className="px-8 text-right">Cluster IP Address: {cluster_ip}</p>
       </div>
       <Divider>Alerts</Divider>

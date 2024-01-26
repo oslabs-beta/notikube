@@ -107,7 +107,7 @@ export async function ClusterHealth({ cluster_ip }: { cluster_ip: string }) {
     const numOfUnhealthyPodsResult = await numOfUnhealthyPods(cluster_ip);
     return (
       <div>
-        <section id='cluster-health' className='display: inline-flex pl-8 py-4 space-x-5'>
+        <section id='cluster-health' className='display: inline-flex py-4 space-x-5'>
           <Card className="max-w-lg  mx-auto" decoration="top" decorationColor="red">
             <Text className="p-2">Ready Nodes</Text>
             <Metric className="p-2">{numOfReadyNodesResult}</Metric>
