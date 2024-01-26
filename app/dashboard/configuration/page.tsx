@@ -11,7 +11,7 @@ export default function Configuration() {
     const session = useSession().data;
     const userId = session?.user?.userid;
     const [alertType, setAlertType] = useState('')
-    const [team, setTeam] = useState('')
+    const [team, setTeam] = useState([])
     const [rule, setRule] = useState({
         user_id: userId,
         alert_title: '',
@@ -22,19 +22,26 @@ export default function Configuration() {
         alert_due_date: null
     })
 
-    function getTeam(user_id: string){
-        fetch(`http://localhost:3000/api/configuration/${user_id}`)
-            .then((res) => res.json())
-            .then((teamOptions) => setTeam(teamOptions))
-            .catch((e) => console.log('getTeam: failed to retrieve team:', e))
+    async function getTeam(user_id: string | undefined){
+        if (user_id !== undefined){
+           fetch(`http://localhost:3000/api/configurations/get-team/${user_id}`)
+            .then(res => res.json())
+            .then(teamOptions => {
+                setTeam(teamOptions)
+            })
+            .catch(e => console.log('getTeam: failed to retrieve team:', e))
+        }
     }
 
     function NextFormOptions({alertType} : { alertType: string}){
+        const teamOptions = team.map((member, index) => {
+            return <option key={index} value={member.email}>{member.name}</option>
+        })
         switch(alertType){
             case 'Assign By Severity':
                 return(
                     <>
-                    <div className=''>
+                    <div>
                         <div className="mb-2 block">
                             <Label htmlFor="alert_severity" value="Which Severity?" />
                         </div>
@@ -66,8 +73,7 @@ export default function Configuration() {
                                 }) 
                             }}
                             required shadow >
-                            <option value='Derek Coughlan'>Derek Coughlan</option>
-                            <option value='Jesse Chou'>Jesse Chou</option>
+                            {teamOptions}
                         </Select>
                     </div>
                 </>
@@ -93,6 +99,23 @@ export default function Configuration() {
                             <option value='Warning'>Warning</option>
                         </Select>
                     </div>
+                    <div>
+                        <div className="mb-2 block">
+                            <Label htmlFor="alert_assign" value="Who do you want to assign it to?" />
+                        </div>
+                        <Select 
+                            id="alert_assign" 
+                            value={rule.alert_assign}
+                            onChange={e => {
+                            setRule({
+                                ...rule,
+                                alert_assign: e.target.value
+                                }) 
+                            }}
+                            required shadow >
+                            {teamOptions}
+                        </Select>
+                    </div>
                     </>
                 );
             default:
@@ -106,7 +129,7 @@ export default function Configuration() {
 
   useEffect(() => {
     getTeam(userId)
-  }, [])
+  }, [userId])
 
   return (
     <div>
