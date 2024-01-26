@@ -11,7 +11,7 @@
  import { useSession } from 'next-auth/react';
  import { useRouter } from 'next/navigation';
  import { Incident, UserName } from '../../types/definitions';
-import IncidentDetails from '../dashboard/incident-details/[incident_id]/page';
+import ClusterDetails from '../_components/homePage/clusterDetails'
 
 
 const Table = () => {
@@ -23,6 +23,7 @@ const Table = () => {
 
   let [incidentList, setIncidentList] = useState<Incident[]>([]);
   let [memberList, setMemberList] = useState<UserName[]>([]);
+  let [loading, setLoading] = useState<boolean>(true);
 
   async function fetchData(user_id: (string | undefined)) {
     if (user_id !== undefined) {
@@ -30,6 +31,7 @@ const Table = () => {
     const data: [Incident[], UserName[]] = await res.json();
     setIncidentList(data[0]);
     setMemberList(data[1]);
+    setLoading(false);
     }
   }
 
@@ -45,7 +47,6 @@ const Table = () => {
 
   const updateTable = React.useCallback(
     async (newRow: GridRowModel) => {
-      console.log('new row', newRow)
       const updatedRow = { ...newRow };
       updatedRow.id = newRow.incident_id;
       fetch(`http://localhost:3000/api/incidents/update`, {
@@ -67,7 +68,7 @@ const columns: GridColDef[] = [
   {
     field: 'incident_date',
     headerName: 'Timestamp',
-    minWidth: 250,
+    minWidth: 225,
     type: 'string',
     editable: false,
     headerClassName: 'column-header',
@@ -75,7 +76,7 @@ const columns: GridColDef[] = [
   {
     field: 'incident_type',
     headerName: 'Type',
-    minWidth: 200,
+    minWidth: 125,
     type: 'string',
     editable: false,
     headerClassName: 'column-header'
@@ -83,7 +84,7 @@ const columns: GridColDef[] = [
   {
    field: 'description',
    headerName: 'Description',
-   minWidth: 350,
+   minWidth: 275,
    type: 'string',
    editable: true,
    headerClassName: 'column-header'
@@ -91,7 +92,7 @@ const columns: GridColDef[] = [
  { 
    field: 'priority_level', 
    headerName: 'Priority',
-   minWidth: 150, 
+   minWidth: 125, 
    editable: true ,
    type: 'singleSelect',
    headerClassName: 'column-header',
@@ -102,7 +103,7 @@ const columns: GridColDef[] = [
  { 
    field: 'incident_title', 
    headerName: 'Title', 
-   minWidth: 300,
+   minWidth: 250,
    editable: true ,
    type: 'string',
    headerClassName: 'column-header',
@@ -123,7 +124,7 @@ const columns: GridColDef[] = [
  { 
    field: 'incident_assigned_to', 
    headerName: 'Assigned To', 
-   minWidth: 200,
+   minWidth: 150,
    editable: true ,
    type: 'singleSelect',
    headerClassName: 'column-header',
@@ -133,8 +134,19 @@ const columns: GridColDef[] = [
 }
 ];
 
+while (loading) {
+  return <div>... loading incidents</div>
+}
+
+console.log('incidents cluster name', incidents[0].cluster_ip)
+
    return (
     <div>
+     <div className="flex justify-between">
+        <p className="px-0 pt-2 text-left">{incidents[0].cluster_name}</p>
+        <p className="px-0 pt-2 text-right">Cluster IP Address: {incidents[0].cluster_ip}</p>
+     </div>
+     <br></br>
        <DataGrid
          sx={{
          boxShadow: 2,

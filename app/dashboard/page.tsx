@@ -23,7 +23,7 @@ export default async function Dashboard() {
   try {
     const { cluster_name, cluster_ip } = await clusterInfo(currentUserID)
     return (
-      <div >
+      <div>
         <div>
           <h1 className="text-left pl-8 text-5xl font-extrabold dark:text-white">Dashboard</h1>
           <Suspense fallback={<LoadingSpinner />}>
