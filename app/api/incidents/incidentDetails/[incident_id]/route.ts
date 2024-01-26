@@ -6,12 +6,18 @@ import { Incident } from '../../../../../types/definitions';
 export async function GET(request: NextRequest, {params}: {params: {incident_id: string}}) {
 
     const { incident_id } = params;
-    console.log('incident_id', incident_id)
 
     const incidentDetails: Incident[] = await sql`
       select * from incidents where incident_id=${incident_id}
     `
-    console.log(incidentDetails[0])
+    const clusterName: Incident[] = await sql`
+    select cluster_name from clusters where cluster_id=${incidentDetails[0].cluster_id}
+    `
+    const members: [{name:string, email:string}] = await sql`
+    select name, email from users where cluster_id=${incidentDetails[0].cluster_id}
+    `
+    incidentDetails[0].cluster_name = clusterName[0].cluster_name
+    incidentDetails[0].members = members
 
   return NextResponse.json(incidentDetails);
   

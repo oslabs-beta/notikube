@@ -11,6 +11,7 @@
  import { useSession } from 'next-auth/react';
  import { useRouter } from 'next/navigation';
  import { Incident, UserName } from '../../types/definitions';
+import IncidentDetails from '../dashboard/incident-details/[incident_id]/page';
 
 
 const Table = () => {
@@ -22,7 +23,6 @@ const Table = () => {
 
   let [incidentList, setIncidentList] = useState<Incident[]>([]);
   let [memberList, setMemberList] = useState<UserName[]>([]);
-  let [selectedRow, setSelectedRow] = useState<GridRowSelectionModel>();
 
   async function fetchData(user_id: (string | undefined)) {
     if (user_id !== undefined) {
@@ -45,6 +45,7 @@ const Table = () => {
 
   const updateTable = React.useCallback(
     async (newRow: GridRowModel) => {
+      console.log('new row', newRow)
       const updatedRow = { ...newRow };
       updatedRow.id = newRow.incident_id;
       fetch(`http://localhost:3000/api/incidents/update`, {
@@ -54,7 +55,6 @@ const Table = () => {
         },
         body: JSON.stringify(newRow)
       });
-      //window.location.reload();
       return updatedRow;
       },[]);
 
@@ -67,7 +67,7 @@ const columns: GridColDef[] = [
   {
     field: 'incident_date',
     headerName: 'Timestamp',
-    minWidth: 275,
+    minWidth: 250,
     type: 'string',
     editable: false,
     headerClassName: 'column-header',
@@ -75,7 +75,7 @@ const columns: GridColDef[] = [
   {
     field: 'incident_type',
     headerName: 'Type',
-    minWidth: 125,
+    minWidth: 200,
     type: 'string',
     editable: false,
     headerClassName: 'column-header'
@@ -91,18 +91,18 @@ const columns: GridColDef[] = [
  { 
    field: 'priority_level', 
    headerName: 'Priority',
-   minWidth: 100, 
+   minWidth: 150, 
    editable: true ,
    type: 'singleSelect',
    headerClassName: 'column-header',
    align: 'left',
    headerAlign: 'left',
-   valueOptions: ['Critical', 'Moderate', 'Low'],
+   valueOptions: ['Critical', 'Warning', 'Error', 'Info'],
  },
  { 
    field: 'incident_title', 
    headerName: 'Title', 
-   minWidth: 225,
+   minWidth: 300,
    editable: true ,
    type: 'string',
    headerClassName: 'column-header',
@@ -112,23 +112,13 @@ const columns: GridColDef[] = [
  { 
    field: 'incident_status', 
    headerName: 'Status', 
-   minWidth: 125,
+   minWidth: 150,
    editable: true ,
    type: 'singleSelect',
    headerClassName: 'column-header',
    align: 'left',
    headerAlign: 'left',
    valueOptions: ['Open', 'Closed', 'In Progress'],
- },
- { 
-   field: 'comment', 
-   headerName: 'Notes',
-   minWidth: 400, 
-   editable: true ,
-   type: 'string',
-   headerClassName: 'column-header',
-   align: 'left',
-   headerAlign: 'left',
  },
  { 
    field: 'incident_assigned_to', 
@@ -150,10 +140,10 @@ const columns: GridColDef[] = [
          boxShadow: 2,
          border: 2,
          borderColor: 'black',
+         color: 'black',
          '& .MuiDataGrid-cell:hover': {
            color: 'primary.main',
          },
-         color: 'black',
          ".red": {
           bgcolor:"#F2D7D5",
           "&:hover": {
@@ -176,23 +166,26 @@ const columns: GridColDef[] = [
             display: "none",   
           },
          "& .MuiDataGrid-columnHeaders": {
-            bgcolor: 'GrayText',   
+            bgcolor: 'white',   
         },
+        ".column-header": {
+          bgcolor:"white",
+          color:"black"
+        }
          }}
          editMode='cell'
          getRowId={(incidents) => incidents.incident_id}
          rows={incidents}
          columns={columns}
-         //getRowHeight={() => 'auto'}
          processRowUpdate={updateTable}
          onProcessRowUpdateError={(() => console.log('Error processing row update'))}
          onRowEditStop={(params) => {
            console.log('params', params);
          }}
          getRowClassName={(params) => {
-          if (params.row.priority_level === 'Critical') {
+          if (params.row.priority_level === 'Critical' || params.row.priority_level === 'Error') {
             return "red"
-          } else if (params.row.priority_level === 'Moderate') {
+          } else if (params.row.priority_level === 'Warning') {
             return "orange"
           } else {
             return "green"
@@ -200,13 +193,12 @@ const columns: GridColDef[] = [
         }
          }
          onRowSelectionModelChange={(newSelection) => {
-            console.log('new selection', newSelection)
             router.push(`http://localhost:3000/dashboard/incident-details/${newSelection}`)
          }}
          disableRowSelectionOnClick
          checkboxSelection={true}
        />
-       <h2 style={{marginTop:5}}>Select a Row to View Incident Details</h2>
+       <h2 style={{marginTop:5, fontWeight:'bold'}}>Select a Row to View Incident Details</h2>
      </div>
    );
 

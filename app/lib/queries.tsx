@@ -204,6 +204,30 @@ export async function clusterCpuUsage10mAvg(ip : string) {
     }
 }
 
+// Checks if Cluster is Active and returns boolean
+export async function activeCluster(ip: string) {
+  noStore();
+  try {
+      // Define the Prometheus API query
+      const prometheusQuery = "up==1";
+      const prometheusServerIP = `${ip}`;
+      const prometheusEndpoint = `http://${prometheusServerIP}/api/v1/query?query=${encodeURIComponent(prometheusQuery)}`;
+      // Make the fetch request to Prometheus API
+      const response = await fetch(prometheusEndpoint);
+      if (!response.ok) {
+          throw new Error(`Failed to fetch data from Prometheus. Status: ${response.status}`);
+      }
+      const responseData = await response.json()
+      //console.log('active cluster:', responseData.data.result)
+      const result = responseData.data.result;
+      return result.length > 0;
+  }
+  catch (error) {
+      console.error('Error:', error);
+      return false
+  }
+}
+
 //Returns memory available by Node as object - **WORKS NEED TO DEFINE WHAT 'MEMORY' IS BEING RETURNED**
 // export async function memAvailByNode(){
 //     noStore();
