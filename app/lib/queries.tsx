@@ -161,6 +161,7 @@ export async function cpuUtilByNode(ip: string) {
     }
 }
 
+// Returning Cluster Memory Usage - returns string value
 export async function clusterMemoryUsage(ip : string) {
     try {
         const prometheusQuery = 'sum (container_memory_working_set_bytes{id="/",kubernetes_io_hostname=~"^.*$"}) / sum (machine_memory_bytes{kubernetes_io_hostname=~"^.*$"}) * 100'
@@ -182,6 +183,7 @@ export async function clusterMemoryUsage(ip : string) {
     }
 }
 
+// Returning Cluster CPU Usage at a 10m average - returns string value
 export async function clusterCpuUsage10mAvg(ip : string) {
     try {
         const prometheusQuery = 'sum (rate (container_cpu_usage_seconds_total{id="/",kubernetes_io_hostname=~"^.*$"}[10m])) / sum (machine_cpu_cores{kubernetes_io_hostname=~"^.*$"}) * 100'
