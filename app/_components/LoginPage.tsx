@@ -8,7 +8,7 @@ import { useState } from "react";
 import LogInImage from "../../public/assets/NotiKubeLogin.svg";
 import { SignInResponse, signIn } from "next-auth/react";
 import Logo from "../../public/assets/logo.svg"
-import githubLogo from "../../public/assets/github.svg"
+import githubLogo from "../../public/assets/github-mark.svg"
 
 const LoginPage = () => {
   const router = useRouter();
@@ -56,9 +56,9 @@ const LoginPage = () => {
           </div>
           <div className="flex flex-col justify-center">
             <h3 className="text-center text-2xl py-6">Login</h3>
-            <button className="content-center">
-              <Image className="px-3 pt-3" src={githubLogo} alt="Github" width={75} />
-              <p>Github</p>
+            <button className="flex justify-center">
+              <Image src={githubLogo} alt="Github" width={25} />
+              <p className='text-lg px-3'>Github</p>
             </button>
           </div>
           <hr className="my-5" />
