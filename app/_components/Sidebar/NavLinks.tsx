@@ -3,6 +3,7 @@ import IncidentsSideBar from "./SideBarList/IncidentsSidebar";
 import ConnectClusterSideBar from "./SideBarList/ConnectClusterSidebar";
 import ProfileeSideBar from "./SideBarList/ProfileSidebar";
 import SignoutSideBar from "./SideBarList/SignoutSidebar";
+import ConfigurationsSidebar from "./SideBarList/ConfigurationsSidebar";
 
 export default function NavLinks() {
   return (
@@ -18,6 +19,10 @@ export default function NavLinks() {
 
         <li>
           <ConnectClusterSideBar />
+        </li>
+
+        <li>
+          <ConfigurationsSidebar />
         </li>
 
         <li>

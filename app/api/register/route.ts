@@ -11,7 +11,7 @@ export async function POST(req: any) {
         console.log('email: ', email)
 
         const result = await sql`SELECT * FROM users WHERE email=${email}`;
-        console.log(result)
+        console.log('result', result)
 
         if (!result.length) {
             const hashedPassword = await bcrypt.hash(password, SALT_FACTOR)

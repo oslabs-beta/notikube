@@ -4,9 +4,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';;
 import { useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
-import SignUpImage from '../../public/NotiKubeSignUp.svg'
-import Logo from '../../public/logo.svg'
+import SignUpImage from '../../public/assets/NotiKubeSignUp.svg';
+import Logo from '../../public/assets/logo.svg'
 
 const Signup = () => {
   const [fullName, setFullName] = useState('');
