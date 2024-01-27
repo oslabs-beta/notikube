@@ -1,10 +1,12 @@
 "use client";
 
+import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';;
 import { useState } from 'react';
-import SignUpImage from '../../public/assets/NotiKubeSignUp.svg';
+// import { useNavigate } from 'react-router-dom';
+import SignUpImage from '../../public/assets/NotiKubeSignUp.svg'
 import Logo from '../../public/assets/logo.svg'
 
 const Signup = () => {
@@ -53,7 +55,7 @@ const Signup = () => {
             </Link>
             <span>NotiKube</span>
           </div>
-          <h3 className="text-2xl py-6">Sign Up</h3>
+          <h3 className="text-center text-2xl py-6">Sign Up</h3>
           <div className="flex flex-col py-2">
             <label>Full Name</label>
             <input
@@ -81,7 +83,7 @@ const Signup = () => {
             />
           </div>
           <input
-            className="rounded border w-full my-5 py-2 bg-NotikubeRed hover:text-primary-300"
+            className="rounded border w-full my-5 py-2 bg-NotikubeRed hover:bg-primary-300 cursor-pointer text-white"
             type="submit"
             value="Submit"
             onClick={(e) => submit(e)}
