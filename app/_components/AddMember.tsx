@@ -52,9 +52,9 @@ export default async function AddMemberPage() {
     return (
         <div style={{margin:0, padding:0 }} className='AddMember'>
             <h3 style={{margin:0, padding:0, fontWeight:"bold" }} className='memberForm'>Invite other users to join this cluster:</h3>
-            <form action={addMember}>
-                <input name='email' type='email' required placeholder='example@email.com' style={{width: 350}}></input>
-                <button type='submit' style={{background:'grey', color:'white'}}>Submit</button>
+            <form className="space-x-1" action={addMember}>
+                <input className="h-12 shadow-2xl" name='email' type='email' required placeholder='example@email.com' style={{width: 350}}></input>
+                <button className="border-2 border-black bg-gray-300 text-black shadow-2xl rounded-md min-w-24 h-12 text-center" type="submit">Submit</button>
             </form>
         </div>
     )
