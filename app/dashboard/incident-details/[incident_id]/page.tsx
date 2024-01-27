@@ -38,15 +38,20 @@ export default function IncidentDetails({params}: {params: {incident_id: any}}) 
     memberArrayFunc();
 }
 
+console.log('incidentDetails', incidentDetails)
+
   while (edit === false) {
 
   return (
     <div className='w-screen'>
-    <p className="text-2xl" >Incident Details: <b>{incidentDetails?.incident_title}</b></p>
+    <p className="text-5xl font-extrabold" >Incident Details</p>
+    <div className="flex justify-between w-4/5">
+        <p className="px-0 pt-2 text-left">{incidentDetails?.cluster_name}</p>
+        <p className="px-0 pt-2 text-right">Cluster IP Address: {incidentDetails?.cluster_ip}</p>
+     </div>
     <br></br>
     <br></br>
     <PermanentDetails date={incidentDetails?.incident_date} cluster_name={incidentDetails?.cluster_name} />
-    <br></br>
     <EditDetails title={incidentDetails?.incident_title} description={incidentDetails?.description} priority={incidentDetails?.priority_level} status={incidentDetails?.incident_status} notes={incidentDetails?.comment} assigned_to={incidentDetails?.incident_assigned_to} assigned_by={incidentDetails?.incident_assigned_by} assigned_date={incidentDetails?.incident_assigned_date} due_date={incidentDetails?.incident_due_date} type={incidentDetails?.incident_type} />
     <br></br>
     <button className="bg-red-800 text-white min-w-40 min-h-12" onClick={() => setEdit(true)}>Edit</button>
@@ -56,11 +61,14 @@ export default function IncidentDetails({params}: {params: {incident_id: any}}) 
 
 return (
   <div className='w-screen'>
-    <h2 className="text-2xl">Incident Details: <b>{incidentDetails?.incident_title}</b></h2>
+    <p className="text-5xl font-extrabold" >Incident Details</p>
+    <div className="flex justify-between w-4/5">
+        <p className="px-0 pt-2 text-left">{incidentDetails?.cluster_name}</p>
+        <p className="px-0 pt-2 text-right">Cluster IP Address: {incidentDetails?.cluster_ip}</p>
+     </div>
     <br></br>
     <br></br>
     <PermanentDetails date={incidentDetails?.incident_date} cluster_name={incidentDetails?.cluster_name} />
-    <br></br>
     <br></br>
     <EditForm incident_id={incident_id} title={incidentDetails?.incident_title} description={incidentDetails?.description} priority={incidentDetails?.priority_level} status={incidentDetails?.incident_status} notes={incidentDetails?.comment} assigned_to={incidentDetails?.incident_assigned_to} assigned_by={incidentDetails?.incident_assigned_by} assigned_date={incidentDetails?.incident_assigned_date} due_date={incidentDetails?.incident_assigned_date} type={incidentDetails?.incident_type} members={memberArray} cluster_id={incidentDetails?.cluster_id} />
     <br></br>
