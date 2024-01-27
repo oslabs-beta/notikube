@@ -61,6 +61,7 @@ const LoginPage = () => {
             <label>Email</label>
             <input
               className="rounded"
+              name='username'
               type="text"
               placeholder="example@gmail.com"
               onChange={(e) => setEmail(e.target.value)}
@@ -70,6 +71,7 @@ const LoginPage = () => {
             <label>Password</label>
             <input
               className="rounded"
+              name='password'
               type="password"
               onChange={(e) => setPassword(e.target.value)}
             />
@@ -77,6 +79,7 @@ const LoginPage = () => {
           <input
             className="rounded border w-full my-5 py-2 bg-NotikubeRed hover:bg-primary-300 cursor-pointer text-white"
             type="submit"
+            name='Submit'
             onClick={(e) => submit(e)}
             value="Submit"
           />
