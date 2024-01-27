@@ -30,6 +30,7 @@ export type Incident = {
   metric_data_id: string,
   cluster_id: string,
   cluster_name: string,
+  cluster_ip: string,
   incident_assigned_by?: string,
   incident_assigned_date?: string,
   incident_due_date?: string,
