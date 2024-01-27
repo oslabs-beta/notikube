@@ -22,7 +22,7 @@ export default function FirstInfoSection() {
             <div className="grid gap-4 mt-8">
               <Image
                 className="w-full rounded-lg"
-                src="/landingPage/Dashboard.png"
+                src='/landingPage/Dashboard.png'
                 width={2000}
                 height={2000}
                 alt="dashboard"

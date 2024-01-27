@@ -1,7 +1,7 @@
 import DashboardSideBar from "./SideBarList/DashboardSidebar";
 import IncidentsSideBar from "./SideBarList/IncidentsSidebar";
 import ConnectClusterSideBar from "./SideBarList/ConnectClusterSidebar";
-import ProfileeSideBar from "./SideBarList/ProfileSidebar";
+import ProfileSideBar from "./SideBarList/ProfileSidebar";
 import SignoutSideBar from "./SideBarList/SignoutSidebar";
 import ConfigurationsSidebar from "./SideBarList/ConfigurationsSidebar";
 
@@ -26,11 +26,7 @@ export default function NavLinks() {
         </li>
 
         <li>
-          <ProfileeSideBar />
-        </li>
-
-        <li>
-          <SignoutSideBar />
+          <ProfileSideBar />
         </li>
       </ul>
     </>
