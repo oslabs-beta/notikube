@@ -6,19 +6,22 @@ import { Incident } from '../../../../types/definitions';
 import PermanentDetails from '../../../_components/incident-details/PermanentDetails';
 import EditDetails from '../../../_components/incident-details/EditDetails';
 import EditForm from '../../../_components/incident-details/EditForm';
-
+import SnapshotData from '../../../_components/incident-details/SnapshotData/SnapshotData';
+import { SnapshotDataDefinition } from '../../../../types/definitions';
 
 export default function IncidentDetails({params}: {params: {incident_id: any}}) {
 
   const {incident_id} = params;
   const [incidentDetails, setIncidentDetails] = useState<Incident>();
+  const [snapshotData, setSnapshotData] = useState({})
   const [edit, setEdit] = useState<boolean>(false);
 
   async function fetchIncident() {
     if (incident_id !== undefined) {
     let res = await fetch(`http://localhost:3000/api/incidents/incidentDetails/${incident_id}`)
-    const data: Incident[] = await res.json();
-    setIncidentDetails(data[0]);
+    const data = await res.json();
+    setIncidentDetails(data.incidentDetails[0]);
+    setSnapshotData(data.snapshotData)
     }
   }
 
@@ -41,7 +44,8 @@ export default function IncidentDetails({params}: {params: {incident_id: any}}) 
   while (edit === false) {
 
   return (
-    <div className='w-screen'>
+    <div>
+    <div className='py-10'>
     <p className="text-2xl" >Incident Details: <b>{incidentDetails?.incident_title}</b></p>
     <br></br>
     <br></br>
@@ -50,6 +54,8 @@ export default function IncidentDetails({params}: {params: {incident_id: any}}) 
     <EditDetails title={incidentDetails?.incident_title} description={incidentDetails?.description} priority={incidentDetails?.priority_level} status={incidentDetails?.incident_status} notes={incidentDetails?.comment} assigned_to={incidentDetails?.incident_assigned_to} assigned_by={incidentDetails?.incident_assigned_by} assigned_date={incidentDetails?.incident_assigned_date} due_date={incidentDetails?.incident_due_date} type={incidentDetails?.incident_type} />
     <br></br>
     <button className="bg-red-800 text-white min-w-40 min-h-12" onClick={() => setEdit(true)}>Edit</button>
+    <SnapshotData data={snapshotData} />
+    </div>
     </div>
   )
 }

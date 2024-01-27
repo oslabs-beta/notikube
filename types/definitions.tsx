@@ -41,6 +41,17 @@ export type Incident = {
   ],
 }
 
+export type SnapshotDataDefinition = {
+  metric_data_id: string, 
+  incident_id: string, 
+  ready_nodes: string, 
+  unhealthy_nodes: string, 
+  ready_pods: string, 
+  unhealthy_pods: string, 
+  cluster_memory_usage: string, 
+  cluster_cpu_usage: string
+}
+
 export type User = {
   user_id: number,
   name: string,
