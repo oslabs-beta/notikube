@@ -45,8 +45,9 @@ export default function IncidentDetails({params}: {params: {incident_id: any}}) 
 
   return (
     <div>
-    <div className='py-10'>
+    <div className='py-0'>
     <p className="text-2xl" >Incident Details: <b>{incidentDetails?.incident_title}</b></p>
+    <SnapshotData data={snapshotData} />
     <br></br>
     <br></br>
     <PermanentDetails date={incidentDetails?.incident_date} cluster_name={incidentDetails?.cluster_name} />
@@ -54,7 +55,6 @@ export default function IncidentDetails({params}: {params: {incident_id: any}}) 
     <EditDetails title={incidentDetails?.incident_title} description={incidentDetails?.description} priority={incidentDetails?.priority_level} status={incidentDetails?.incident_status} notes={incidentDetails?.comment} assigned_to={incidentDetails?.incident_assigned_to} assigned_by={incidentDetails?.incident_assigned_by} assigned_date={incidentDetails?.incident_assigned_date} due_date={incidentDetails?.incident_due_date} type={incidentDetails?.incident_type} />
     <br></br>
     <button className="bg-red-800 text-white min-w-40 min-h-12" onClick={() => setEdit(true)}>Edit</button>
-    <SnapshotData data={snapshotData} />
     </div>
     </div>
   )

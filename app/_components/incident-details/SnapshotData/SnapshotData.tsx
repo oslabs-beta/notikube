@@ -14,6 +14,7 @@ const SnapshotData = (props) => {
     console.log('data from snapshotData: ', metrics)
 
     return (
+      <div className='pt-5'>
 
     <Accordion>
       <Accordion.Panel>
@@ -24,6 +25,7 @@ const SnapshotData = (props) => {
         </Accordion.Content>
       </Accordion.Panel>
     </Accordion>
+    </div>
 
     )
     }
