@@ -26,6 +26,6 @@ export async function POST(req: any) {
         }
     }
     catch(e) {
-        return NextResponse.json({message: 'Error occured while registering the user.'}, {status: 500})
+        return NextResponse.json({message: 'Error occured while registering the user: ', e}, {status: 500})
     }
 }

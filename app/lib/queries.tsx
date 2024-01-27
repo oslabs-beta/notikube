@@ -161,6 +161,49 @@ export async function cpuUtilByNode(ip: string) {
     }
 }
 
+// Returning Cluster Memory Usage - returns string value
+export async function clusterMemoryUsage(ip : string) {
+    try {
+        const prometheusQuery = 'sum (container_memory_working_set_bytes{id="/",kubernetes_io_hostname=~"^.*$"}) / sum (machine_memory_bytes{kubernetes_io_hostname=~"^.*$"}) * 100'
+        const prometheusServerIP = `${ip}`;
+        const prometheusEndpoint = `http://${prometheusServerIP}/api/v1/query?query=${encodeURIComponent(prometheusQuery)}`;
+        // Make the fetch request to Prometheus API
+        const response = await fetch(prometheusEndpoint);
+        if (!response.ok) {
+            throw new Error(`Failed to fetch data from Prometheus. Status: ${response.status}`);
+        }
+        const responseData = await response.json()
+        const result = responseData.data.result[0].value[1]
+        return result;
+
+    }
+    catch(e) {
+        console.log('Error: ', e)
+        return e
+    }
+}
+
+// Returning Cluster CPU Usage at a 10m average - returns string value
+export async function clusterCpuUsage10mAvg(ip : string) {
+    try {
+        const prometheusQuery = 'sum (rate (container_cpu_usage_seconds_total{id="/",kubernetes_io_hostname=~"^.*$"}[10m])) / sum (machine_cpu_cores{kubernetes_io_hostname=~"^.*$"}) * 100'
+        const prometheusServerIP = `${ip}`;
+        const prometheusEndpoint = `http://${prometheusServerIP}/api/v1/query?query=${encodeURIComponent(prometheusQuery)}`;
+        // Make the fetch request to Prometheus API
+        const response = await fetch(prometheusEndpoint);
+        if (!response.ok) {
+            throw new Error(`Failed to fetch data from Prometheus. Status: ${response.status}`);
+        }
+        const responseData = await response.json()
+        const result = responseData.data.result[0].value[1]
+        return result;
+    }
+    catch(e) {
+        console.log('Error: ', e)
+        return e
+    }
+}
+
 // Checks if Cluster is Active and returns boolean
 export async function activeCluster(ip: string) {
   noStore();
