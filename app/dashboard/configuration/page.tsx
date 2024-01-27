@@ -35,7 +35,7 @@ export default function Configuration() {
 
     function NextFormOptions({alertType} : { alertType: string}){
         const teamOptions = team.map((member, index) => {
-            return <option key={index} value={member.email}>{member.name}</option>
+            return <option key={index} value={member['email']}>{member['name']}</option>
         })
         switch(alertType){
             case 'Assign By Severity':
