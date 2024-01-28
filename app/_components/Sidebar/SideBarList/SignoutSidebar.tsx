@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function SignoutSideBar() {
   return (
-    <>
+    <div className="border border-gray-300 rounded-lg">
       <Link
         href=""
         onClick={() => signOut()}
@@ -27,6 +27,6 @@ export default function SignoutSideBar() {
         </svg>
         <span className="ml-3">Sign Out</span>
       </Link>
-    </>
+    </div>
   );
 }
