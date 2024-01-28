@@ -1,5 +1,6 @@
 "use client";
 
+import React from 'react'
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -7,6 +8,7 @@ import { useState } from "react";
 import LogInImage from "../../public/assets/NotiKubeLogin.svg";
 import { SignInResponse, signIn } from "next-auth/react";
 import Logo from "../../public/assets/logo.svg"
+import githubLogo from "../../public/assets/github-mark.svg"
 
 const LoginPage = () => {
   const router = useRouter();
@@ -54,13 +56,17 @@ const LoginPage = () => {
           </div>
           <div className="flex flex-col justify-center">
             <h3 className="text-center text-2xl py-6">Login</h3>
-            <button className="content-center">Github</button>
+            <button className="flex justify-center">
+              <Image src={githubLogo} alt="Github" width={25} />
+              <p className='text-lg px-3'>Github</p>
+            </button>
           </div>
           <hr className="my-5" />
           <div className="flex flex-col py-2">
             <label>Email</label>
             <input
               className="rounded"
+              name='username'
               type="text"
               placeholder="example@gmail.com"
               onChange={(e) => setEmail(e.target.value)}
@@ -70,6 +76,7 @@ const LoginPage = () => {
             <label>Password</label>
             <input
               className="rounded"
+              name='password'
               type="password"
               onChange={(e) => setPassword(e.target.value)}
             />
@@ -77,6 +84,7 @@ const LoginPage = () => {
           <input
             className="rounded border w-full my-5 py-2 bg-NotikubeRed hover:bg-primary-300 cursor-pointer text-white"
             type="submit"
+            name='Submit'
             onClick={(e) => submit(e)}
             value="Submit"
           />
