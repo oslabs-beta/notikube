@@ -36,7 +36,7 @@ const EditForm = (props: EditDetailsType) => {
     let newState: Incident = body;
 
     for (let key in body) {
-      if (key !== 'members') {
+      if (key !== 'members' && key !== 'updateEdit') {
       for (let pair of formData.entries()) {
         if (key === pair[0] && body[key as keyof typeof body] !== pair[1].toString() && pair[1].toString() !== 'mm/dd/yyyy') {
           body[key as keyof typeof body] = pair[1].toString();
@@ -45,9 +45,7 @@ const EditForm = (props: EditDetailsType) => {
       }
     }
   }
-  console.log('new state', newState)
 
-  console.log('assigned_by', formData.get('incident_assigned_by'))
     
     if (props.updateEdit !== undefined) {
       props.updateEdit(newState);
