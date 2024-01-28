@@ -20,4 +20,4 @@ export async function GET(request: NextRequest, {params}: {params: {user_id: str
 
   return NextResponse.json([incidents, members]);
   
-}
+};

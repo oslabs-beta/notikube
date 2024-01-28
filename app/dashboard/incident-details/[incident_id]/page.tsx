@@ -8,75 +8,81 @@ import EditDetails from '../../../_components/incident-details/EditDetails';
 import EditForm from '../../../_components/incident-details/EditForm';
 
 
+
 export default function IncidentDetails({params}: {params: {incident_id: any}}) {
 
   const {incident_id} = params;
   const [incidentDetails, setIncidentDetails] = useState<Incident>();
   const [edit, setEdit] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
 
   async function fetchIncident() {
     if (incident_id !== undefined) {
-    let res = await fetch(`http://localhost:3000/api/incidents/incidentDetails/${incident_id}`)
-    const data: Incident[] = await res.json();
-    setIncidentDetails(data[0]);
+      let res = await fetch(`http://localhost:3000/api/incidents/incidentDetails/${incident_id}`)
+      const data: Incident[] = await res.json();
+      setIncidentDetails(data[0]);
+      setLoading(false);
     }
-  }
+  };
 
   useEffect(() => {
     fetchIncident();
-  },[])
+  },[]);
   
   const memberArray: Array<string> = [];
 
-  function memberArrayFunc() {
-    incidentDetails?.members.forEach((e) => {
-      memberArray.push(e.name)
-  })
-}
+  function updateEdit(body: Incident) {
 
-  if (incidentDetails?.members !== undefined) {
-    memberArrayFunc();
-}
+    if (incidentDetails) {
+    body.cluster_ip = incidentDetails.cluster_ip;
+    body.cluster_name = incidentDetails.cluster_name;
+    body.metric_data_id = incidentDetails?.metric_data_id;
+    }
 
-console.log('incidentDetails', incidentDetails)
+    console.log('body', body)
+    setIncidentDetails(body)
+    setEdit(false);
+    alert('Changes Saved')
+
+  };
+
+  while (loading) {
+    return <div>loading details ....</div>
+  }
 
   while (edit === false) {
 
+    return (
+      <div className='w-screen'>
+        <p className="text-5xl font-extrabold" >Incident Details</p>
+          <div className="flex justify-between w-4/5">
+            <p className="px-0 pt-2 text-left">{incidentDetails?.cluster_name}</p>
+            <p className="px-0 pt-2 text-right">Cluster IP Address: {incidentDetails?.cluster_ip}</p>
+          </div>
+          <br></br>
+          <br></br>
+            <PermanentDetails date={incidentDetails?.incident_date} cluster_name={incidentDetails?.cluster_name} />
+            <EditDetails incident_title={incidentDetails?.incident_title} description={incidentDetails?.description} priority_level={incidentDetails?.priority_level} incident_status={incidentDetails?.incident_status} comment={incidentDetails?.comment} incident_assigned_to={incidentDetails?.incident_assigned_to} incident_assigned_by={incidentDetails?.incident_assigned_by} incident_assigned_date={incidentDetails?.incident_assigned_date} incident_due_date={incidentDetails?.incident_due_date} incident_type={incidentDetails?.incident_type} />
+            <button className="text-white bg-primary-500 hover:bg-primary-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-3 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 w-40 mt-4 shadow-lg" onClick={() => {
+              setEdit(true)
+            }}>Edit</button>
+        </div>
+    )
+}
+
   return (
     <div className='w-screen'>
-    <p className="text-5xl font-extrabold" >Incident Details</p>
-    <div className="flex justify-between w-4/5">
-        <p className="px-0 pt-2 text-left">{incidentDetails?.cluster_name}</p>
-        <p className="px-0 pt-2 text-right">Cluster IP Address: {incidentDetails?.cluster_ip}</p>
-     </div>
-    <br></br>
-    <br></br>
-    <PermanentDetails date={incidentDetails?.incident_date} cluster_name={incidentDetails?.cluster_name} />
-    <EditDetails title={incidentDetails?.incident_title} description={incidentDetails?.description} priority={incidentDetails?.priority_level} status={incidentDetails?.incident_status} notes={incidentDetails?.comment} assigned_to={incidentDetails?.incident_assigned_to} assigned_by={incidentDetails?.incident_assigned_by} assigned_date={incidentDetails?.incident_assigned_date} due_date={incidentDetails?.incident_due_date} type={incidentDetails?.incident_type} />
-    <br></br>
-    <button className="bg-red-800 text-white min-w-40 min-h-12" onClick={() => setEdit(true)}>Edit</button>
-    </div>
+      <p className="text-5xl font-extrabold" >Incident Details</p>
+        <div className="flex justify-between w-4/5">
+          <p className="px-0 pt-2 text-left">{incidentDetails?.cluster_name}</p>
+          <p className="px-0 pt-2 text-right">Cluster IP Address: {incidentDetails?.cluster_ip}</p>
+        </div>
+        <br></br>
+        <br></br>
+          <PermanentDetails date={incidentDetails?.incident_date} cluster_name={incidentDetails?.cluster_name} />
+        <br></br>
+          <EditForm incident_id={incident_id} incident_title={incidentDetails?.incident_title} description={incidentDetails?.description} priority_level={incidentDetails?.priority_level} incident_status={incidentDetails?.incident_status} comment={incidentDetails?.comment} incident_assigned_to={incidentDetails?.incident_assigned_to} incident_assigned_by={incidentDetails?.incident_assigned_by} incident_assigned_date={incidentDetails?.incident_assigned_date} incident_due_date={incidentDetails?.incident_due_date} incident_type={incidentDetails?.incident_type} members={incidentDetails?.members} cluster_id={incidentDetails?.cluster_id} updateEdit={updateEdit} incident_date={incidentDetails?.incident_date}/>
+          <button className="text-white bg-primary-500 hover:bg-primary-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-3 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 w-40 mt-6 shadow-lg" onClick={() => setEdit(false)}>Cancel</button>
+      </div>
   )
-}
-
-return (
-  <div className='w-screen'>
-    <p className="text-5xl font-extrabold" >Incident Details</p>
-    <div className="flex justify-between w-4/5">
-        <p className="px-0 pt-2 text-left">{incidentDetails?.cluster_name}</p>
-        <p className="px-0 pt-2 text-right">Cluster IP Address: {incidentDetails?.cluster_ip}</p>
-     </div>
-    <br></br>
-    <br></br>
-    <PermanentDetails date={incidentDetails?.incident_date} cluster_name={incidentDetails?.cluster_name} />
-    <br></br>
-    <EditForm incident_id={incident_id} title={incidentDetails?.incident_title} description={incidentDetails?.description} priority={incidentDetails?.priority_level} status={incidentDetails?.incident_status} notes={incidentDetails?.comment} assigned_to={incidentDetails?.incident_assigned_to} assigned_by={incidentDetails?.incident_assigned_by} assigned_date={incidentDetails?.incident_assigned_date} due_date={incidentDetails?.incident_assigned_date} type={incidentDetails?.incident_type} members={memberArray} cluster_id={incidentDetails?.cluster_id} />
-    <br></br>
-    <button className="bg-red-800 text-white min-w-40 min-h-12" onClick={() => setEdit(false)}>Cancel</button>
-  </div>
-)
-
-
-
-
-}
+};
