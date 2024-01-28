@@ -1,6 +1,6 @@
 
 import HomeAlerts from '../_components/homePage/homeAlerts';
-import { ClusterHealth, NodeCPUHealth, PodHealth, PodRestartHealth } from '../_components/homePage/clusterMetrics';
+import { ClusterHealth, NodeCPUHealth, PodHealth, PodRestartHealth, ClusterCPUMem } from '../_components/homePage/clusterMetrics';
 import ClusterDetails from '../_components/homePage/clusterDetails';
 import { clusterInfo } from '../lib/homePage/clusterInfo';
 import LoadingSpinner from '../_components/homePage/loadingSpinner';
@@ -34,17 +34,23 @@ export default async function Dashboard() {
               <HomeAlerts cluster_ip={cluster_ip} />
             </Suspense>
             <Divider>Metrics</Divider>
-            <TabGroup className="pl-8">
+            <TabGroup className="pl-8 my-4">
               <TabList color="red" variant="solid">
                 <Tab>Node CPU</Tab>
+                <Tab>Cluster CPU/Mem</Tab>
                 <Tab>Pod By NameSpace</Tab>
                 <Tab>Pod Restarts</Tab>
-                <Tab>Cluster</Tab>
+                <Tab>Cluster Summary</Tab>
               </TabList>
               <TabPanels >
                 <TabPanel>
                   <Suspense fallback={<LoadingSpinner />}>
                     <NodeCPUHealth cluster_ip={cluster_ip} />
+                  </Suspense>
+                </TabPanel>
+                <TabPanel>
+                  <Suspense fallback={<LoadingSpinner />}>
+                    <ClusterCPUMem cluster_ip={cluster_ip} />
                   </Suspense>
                 </TabPanel>
                 <TabPanel>

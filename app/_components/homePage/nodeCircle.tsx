@@ -5,7 +5,7 @@ import { ProgressCircle, Card, Flex } from "@tremor/react";
 
 export default function NodeCircle({ name, value }: { name: string, value: number }) {
   return (
-    <div className="my-5 pr-10">
+    <div className="my-3 pr-10">
       <Card className="max-w-sm mx-auto" decoration="top" decorationColor="red">
         <p className="p-2 text-slate-500 text-sm text-center font-mono">{name}</p>
         <Flex className="space-x-5" justifyContent="center">
