@@ -1,9 +1,11 @@
 import * as React from 'react';
 import { Incident, EditDetailsType } from '../../../types/definitions'
-import Link from 'next/link';
+
 
 
 const EditDetails = (props: EditDetailsType) => {
+
+  console.log('incident assigned', props.incident_assigned_date)
 
   return (
     <div className="resize">

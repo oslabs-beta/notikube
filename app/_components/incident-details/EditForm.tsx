@@ -71,10 +71,10 @@ const EditForm = (props: EditDetailsType) => {
     incident_due_date = props.incident_due_date
   }
 
-  if (props.incident_due_date === '') {
+  if (props.incident_assigned_date === '') {
     incident_assigned_date = 'mm/dd/yyyy'
   } else {
-    incident_assigned_date = props.incident_due_date
+    incident_assigned_date = props.incident_assigned_date
   }
 
   return (
@@ -108,7 +108,7 @@ const EditForm = (props: EditDetailsType) => {
             <p className="font-bold pb-2 pt-6 text-xl">Notes:</p>
             <textarea name="comment" className="border-2 border-red-800 p-2 pl-4 rounded-md  text-wrap w-1/3 break-normal" defaultValue={props.comment}></textarea>
             <br></br>
-            <button className="text-white bg-primary-500 hover:bg-primary-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-3 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 w-40 h-12 mt-6 shadow-lg" type="submit">Submit Changes</button>
+            <button className="text-white bg-primary-500 hover:bg-primary-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-3 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 w-40 h-12 mt-6 shadow-lg" type="submit">Save</button>
           </div>
           <div className="w-screen">
             <p className="font-bold pb-2 text-xl">Description:</p>

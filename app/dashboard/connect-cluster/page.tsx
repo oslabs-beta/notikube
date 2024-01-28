@@ -68,8 +68,9 @@ export default function ConnectCluster() {
 
   // function to toggleModal with a warning message (if user with existing cluster clicks add cluster)
   const initiateAdd = () => {
-    alert('Adding a new cluster will remove the existing cluster. All cluster members will lose access to the existing cluster and must be added to the new cluster.')
+    if (confirm('Adding a new cluster will remove the existing cluster. All cluster members will lose access to the existing cluster and must be added to the new cluster.')) {
     setModalVisible(!isModalVisible);
+    }
   };
 
   // function to toggleModal without warning message (if user doesn't have existing cluster)
@@ -110,8 +111,8 @@ export default function ConnectCluster() {
   if (userData?.cluster_id === null) {
     
     return (
-      <div className="">
-        <h1 className="text-left py-5 text-2xl font-bold dark:text-white">
+      <div className="grid place-content-center">
+        <h1 className="text-left py-5 text-2xl font-bold dark:text-white mt-24">
             Add cluster details to start using NotiKube:
           </h1>
           {isModalVisible && (
@@ -153,6 +154,7 @@ export default function ConnectCluster() {
         </button>
       </div>
       <br></br>
+      <br></br>
 
       {/* If the Modal is Visible, grey out the background */}
       {isModalVisible && (
@@ -170,7 +172,7 @@ export default function ConnectCluster() {
       <br></br>
       <div className="flex justify-between">
       <button 
-          className="text-white bg-primary-500 hover:bg-primary-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-3 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 w-36 h-12" onClick={changeEdit}>
+          className="text-white bg-primary-500 hover:bg-primary-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-3 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 w-36 h-12 mt-6" onClick={changeEdit}>
           Edit Cluster
           </button>
           </div>
@@ -189,14 +191,16 @@ export default function ConnectCluster() {
 
   return (
     <div>
+      <div className="flex justify-between w-1/2">
       <h1 className="text-left py-5 text-5xl font-extrabold dark:text-white">
           Your Cluster
       </h1>
+      </div>
       <EditCluster clusterName={clusterName} clusterIp={clusterIp} cluster_id={userData?.cluster_id} change_cluster={changeCluster} change_edit={changeEdit}/>
       <button
           id="defaultModalButton"
           onClick={changeEdit}
-          className="text-white bg-primary-500 hover:bg-primary-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-3 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 w-32 h-12 mt-4"
+          className="text-white bg-primary-500 hover:bg-primary-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-3 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 w-36 h-12 mt-4"
           type="button">
           Cancel
       </button>

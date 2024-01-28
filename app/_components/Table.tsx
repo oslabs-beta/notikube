@@ -150,7 +150,7 @@ const Table = () => {
           },
           pagination: {paginationModel: {pageSize: 10}},
          }}
-         pageSizeOptions={[5,10,25]}
+         pageSizeOptions={[5,10,25,50]}
          sx={{
           boxShadow: 2,
           border: 2,
