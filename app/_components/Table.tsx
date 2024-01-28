@@ -147,8 +147,10 @@ const Table = () => {
          initialState={{
           sorting: {
             sortModel: [{field: 'incident_date', sort: 'desc'}]
-          }
+          },
+          pagination: {paginationModel: {pageSize: 10}},
          }}
+         pageSizeOptions={[5,10,25]}
          sx={{
           boxShadow: 2,
           border: 2,
