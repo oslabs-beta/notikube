@@ -1,4 +1,4 @@
-import { Card, Text, Metric, Title, BarChart, Subtitle } from "@tremor/react";
+import { Card, Text, Metric, Title, BarChart, Subtitle, ProgressCircle } from "@tremor/react";
 import {
   numOfReadyNodes,
   numByNamePods,
@@ -7,10 +7,12 @@ import {
   cpuUtilByNode,
   numOfReadyPods,
   numOfUnhealthyPods,
-  activeCluster
+  clusterMemoryUsage,
+  clusterCpuUsage10mAvg
 } from "../../lib/queries";
 import { NameSpacePods, CircleNode } from "../../../types/definitions";
 import NodeCircle from "./nodeCircle";
+import CPUMemCircle from "./cpuMemCircle";
 
 export async function NodeCPUHealth({ cluster_ip }: { cluster_ip: string }) {
   try {
@@ -19,7 +21,7 @@ export async function NodeCPUHealth({ cluster_ip }: { cluster_ip: string }) {
 
     return (
       <div>
-        <Title className="text-center">CPU Utilization By Node</Title>
+        <Title className="text-center py-3">CPU Utilization By Node</Title>
         <div id='NodeCPUHealth-row-1' className='display: inline-flex py-4'>
           {nodeCircles}
         </div>
@@ -131,6 +133,27 @@ export async function ClusterHealth({ cluster_ip }: { cluster_ip: string }) {
   }
   catch (e) {
     console.log('Error - ClusterHealth:', e)
+    return (
+      <div>
+        <Title className="text-center m-10 ml-5">Data Error</Title>
+      </div>
+    )
+  }
+}
+
+export async function ClusterCPUMem({ cluster_ip }: { cluster_ip: string }){
+  try{
+    const memory = await clusterMemoryUsage(cluster_ip);
+    const cpu = await clusterCpuUsage10mAvg(cluster_ip);
+
+    return(
+      <div className="display: inline-flex">
+        <CPUMemCircle cpu={Number(cpu)} memory={Number(memory)}/>
+      </div>
+    )
+  }
+  catch (e) {
+    console.log('Error - clusterCPUMem:', e)
     return (
       <div>
         <Title className="text-center m-10 ml-5">Data Error</Title>

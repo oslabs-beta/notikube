@@ -2,6 +2,7 @@ describe('Accessing the Dashboard', () => {
     beforeEach(() => {
         cy.login(Cypress.env('username'), Cypress.env('password'))
         cy.visit('/dashboard')
+        cy.viewport(1366, 768)
     })
 
     it('loads dashboard successfully', () => {
