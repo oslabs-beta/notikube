@@ -21,9 +21,9 @@ const Table = () => {
   const session = useSession().data;
   const userId = session?.user?.userid;
 
-  let [incidentList, setIncidentList] = useState<Incident[]>([]);
-  let [memberList, setMemberList] = useState<UserName[]>([]);
-  let [loading, setLoading] = useState<boolean>(true);
+  const [incidentList, setIncidentList] = useState<Incident[]>([]);
+  const [memberList, setMemberList] = useState<UserName[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   async function fetchData(user_id: (string | undefined)) {
     if (user_id !== undefined) {
@@ -144,6 +144,11 @@ const Table = () => {
         <p className="px-0 pt-2 text-right">Cluster IP Address: {incidentList[0].cluster_ip}</p>
      </div>
        <DataGrid
+         initialState={{
+          sorting: {
+            sortModel: [{field: 'incident_date', sort: 'desc'}]
+          }
+         }}
          sx={{
           boxShadow: 2,
           border: 2,

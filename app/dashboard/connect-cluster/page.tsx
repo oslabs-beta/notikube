@@ -51,6 +51,7 @@ export default function ConnectCluster() {
     }
   }
 
+  // get cluster data and user role
   useEffect(() => {
     if (userId != undefined) {
       getClusters();
@@ -195,7 +196,7 @@ export default function ConnectCluster() {
       <button
           id="defaultModalButton"
           onClick={changeEdit}
-          className="text-white bg-primary-500 hover:bg-primary-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-3 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 w-36 h-12 mt-4"
+          className="text-white bg-primary-500 hover:bg-primary-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-3 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 w-32 h-12 mt-4"
           type="button">
           Cancel
       </button>
@@ -216,7 +217,6 @@ export default function ConnectCluster() {
     </div>
 
   )
-  
 } 
 
 }
