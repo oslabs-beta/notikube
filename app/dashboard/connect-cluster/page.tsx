@@ -103,6 +103,15 @@ export default function ConnectCluster() {
   }
 }
 
+  const removeCluster = () => {
+    console.log('remove cluster')
+    if (confirm('Removing this cluster will revoke your access to all cluster incidents and details. To regain access to incidents and cluster details, you must be invited to rejoin the cluster by the cluster owner. Are you sure you want to remove this cluster?')) {
+      fetch(`http://localhost:3000/api/updateUser/removeCluster/${userId}`)
+      alert('Cluster removed')
+      window.location.reload();
+    }
+  }
+
   while (loading) {
     return <div>loading ...</div>
   }
@@ -217,7 +226,10 @@ export default function ConnectCluster() {
         </h1>
       <br></br>
       <UserClusters clusterName={clusterName} clusterIp={clusterIp} owner={userRole} edit={edit}/>
-      <h3 className="mt-4">* Cluster members cannot make changes to cluster name or cluster IP. Only owners can edit cluster details.</h3>
+      <div className="inline-flex">
+      <h3 className="mt-5">* Cluster members cannot make changes to cluster name or cluster IP. Only owners can edit cluster details. To be removed from this cluster <span className='mt-5 text-red-600' onClick={removeCluster}>click here</span>.</h3>
+      <br></br>
+      </div>
     </div>
 
   )

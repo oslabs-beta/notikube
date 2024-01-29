@@ -6,22 +6,25 @@ import { Incident } from '../../../../types/definitions';
 import PermanentDetails from '../../../_components/incident-details/PermanentDetails';
 import EditDetails from '../../../_components/incident-details/EditDetails';
 import EditForm from '../../../_components/incident-details/EditForm';
-
+import SnapshotData from '../../../_components/incident-details/SnapshotData/SnapshotData';
+import { SnapshotDataDefinition } from '../../../../types/definitions';
 
 
 export default function IncidentDetails({params}: {params: {incident_id: any}}) {
 
   const {incident_id} = params;
   const [incidentDetails, setIncidentDetails] = useState<Incident>();
+  const [snapshotData, setSnapshotData] = useState({})
   const [edit, setEdit] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
 
   async function fetchIncident() {
     if (incident_id !== undefined) {
-      let res = await fetch(`http://localhost:3000/api/incidents/incidentDetails/${incident_id}`)
-      const data: Incident[] = await res.json();
-      setIncidentDetails(data[0]);
-      setLoading(false);
+    let res = await fetch(`http://localhost:3000/api/incidents/incidentDetails/${incident_id}`)
+    const data = await res.json();
+    setIncidentDetails(data.incidentDetails[0]);
+    setSnapshotData(data.snapshotData)
+    setLoading(false)
     }
   };
 
@@ -52,24 +55,46 @@ export default function IncidentDetails({params}: {params: {incident_id: any}}) 
 
   while (edit === false) {
 
+  
+  // if snapshot === null and edit === false, return details without snapshot at top
+  if (snapshotData == null) {
     return (
       <div className='w-screen'>
         <p className="text-5xl font-extrabold" >Incident Details</p>
-          <div className="flex justify-between w-4/5">
-            <p className="px-0 pt-2 text-left">{incidentDetails?.cluster_name}</p>
-            <p className="px-0 pt-2 text-right">Cluster IP Address: {incidentDetails?.cluster_ip}</p>
-          </div>
-          <br></br>
-          <br></br>
-            <PermanentDetails date={incidentDetails?.incident_date} cluster_name={incidentDetails?.cluster_name} />
-            <EditDetails incident_title={incidentDetails?.incident_title} description={incidentDetails?.description} priority_level={incidentDetails?.priority_level} incident_status={incidentDetails?.incident_status} comment={incidentDetails?.comment} incident_assigned_to={incidentDetails?.incident_assigned_to} incident_assigned_by={incidentDetails?.incident_assigned_by} incident_assigned_date={incidentDetails?.incident_assigned_date} incident_due_date={incidentDetails?.incident_due_date} incident_type={incidentDetails?.incident_type} />
-            <button className="text-white bg-primary-500 hover:bg-primary-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-3 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 w-40 mt-4 shadow-lg" onClick={() => {
-              setEdit(true)
-            }}>Edit</button>
-        </div>
+      <div className="flex justify-between w-4/5">
+        <p className="px-0 pt-2 text-left">{incidentDetails?.cluster_name}</p>
+        <p className="px-0 pt-2 text-right">Cluster IP Address: {incidentDetails?.cluster_ip}</p>
+      </div>
+        <br></br>
+        <br></br>
+        <PermanentDetails date={incidentDetails?.incident_date} cluster_name={incidentDetails?.cluster_name} />
+        <EditDetails incident_title={incidentDetails?.incident_title} description={incidentDetails?.description} priority_level={incidentDetails?.priority_level} incident_status={incidentDetails?.incident_status} comment={incidentDetails?.comment} incident_assigned_to={incidentDetails?.incident_assigned_to} incident_assigned_by={incidentDetails?.incident_assigned_by} incident_assigned_date={incidentDetails?.incident_assigned_date} incident_due_date={incidentDetails?.incident_due_date} incident_type={incidentDetails?.incident_type} />
+        <br></br>
+        <button className="bg-red-800 text-white min-w-40 min-h-12" onClick={() => setEdit(true)}>Edit</button>
+      </div>
     )
-}
+  }
 
+  // if snapshot !== null and edit === false, return details with snapshot data
+    return (
+      <div>
+        <p className="text-5xl font-extrabold" >Incident Details</p>
+      <div className="flex justify-between w-4/5">
+        <p className="px-0 pt-2 text-left">{incidentDetails?.cluster_name}</p>
+        <p className="px-0 pt-2 text-right">Cluster IP Address: {incidentDetails?.cluster_ip}</p>
+      </div>
+        <SnapshotData data={snapshotData} />
+        <br></br>
+        <br></br>
+        <PermanentDetails date={incidentDetails?.incident_date} cluster_name={incidentDetails?.cluster_name} />
+        <EditDetails incident_title={incidentDetails?.incident_title} description={incidentDetails?.description} priority_level={incidentDetails?.priority_level} incident_status={incidentDetails?.incident_status} comment={incidentDetails?.comment} incident_assigned_to={incidentDetails?.incident_assigned_to} incident_assigned_by={incidentDetails?.incident_assigned_by} incident_assigned_date={incidentDetails?.incident_assigned_date} incident_due_date={incidentDetails?.incident_due_date} incident_type={incidentDetails?.incident_type} />
+        <br></br>
+        <button className="bg-red-800 text-white min-w-40 min-h-12" onClick={() => setEdit(true)}>Edit</button>
+      </div>
+    )
+  }
+
+  // if edit === true, return edit form
   return (
     <div className='w-screen'>
       <p className="text-5xl font-extrabold" >Incident Details</p>
@@ -85,4 +110,5 @@ export default function IncidentDetails({params}: {params: {incident_id: any}}) 
           <button className="text-white bg-primary-500 hover:bg-primary-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-3 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 w-40 mt-6 shadow-lg" onClick={() => setEdit(false)}>Cancel</button>
       </div>
   )
+
 };

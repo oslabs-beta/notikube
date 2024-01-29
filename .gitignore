@@ -8,6 +8,7 @@
 
 # testing
 /coverage
+cypress.env.json
 
 # next.js
 /.next/
@@ -40,5 +41,4 @@ package-lock.json
 
 #
 .env.local
-
 .env
