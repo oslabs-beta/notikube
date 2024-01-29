@@ -20,9 +20,8 @@ export async function GET(request: NextRequest, {params}: {params: {incident_id:
   incidentDetails[0].cluster_ip = clusterName[0].cluster_ip;
   incidentDetails[0].members = members;
 
-    const snapshotDataRow = await sql`SELECT * FROM metric_data WHERE incident_id=${incident_id}`
-    const snapshotData = snapshotDataRow[0]
-    console.log(snapshotData)
+  const snapshotDataRow = await sql`SELECT * FROM metric_data WHERE incident_id=${incident_id}`
+  const snapshotData = snapshotDataRow[0]
 
   return NextResponse.json({incidentDetails: incidentDetails, snapshotData: snapshotData});
   

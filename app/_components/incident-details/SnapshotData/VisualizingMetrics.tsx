@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Flex, ProgressCircle, Text, Metric} from '@tremor/react'
 
-function CpuOrMemoryCircle(props) {
+function CpuOrMemoryCircle(props: {memory: number, cpu: number}) {
     const {memory, cpu} = props
     return (
 <div className="space-y-3">
@@ -36,7 +36,7 @@ function CpuOrMemoryCircle(props) {
   )
 }
 
-function NodesAndPodsMetrics(props) {
+function NodesAndPodsMetrics(props: {readyNodes: number, unhealthyNodes: number, readyPods: number, unhealthyPods: number}) {
     const {readyNodes, unhealthyNodes, readyPods, unhealthyPods} = props
     return (
         <div className="flex justify-center py-5" >

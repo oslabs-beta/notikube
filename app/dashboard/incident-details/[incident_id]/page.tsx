@@ -70,7 +70,7 @@ export default function IncidentDetails({params}: {params: {incident_id: any}}) 
         <PermanentDetails date={incidentDetails?.incident_date} cluster_name={incidentDetails?.cluster_name} />
         <EditDetails incident_title={incidentDetails?.incident_title} description={incidentDetails?.description} priority_level={incidentDetails?.priority_level} incident_status={incidentDetails?.incident_status} comment={incidentDetails?.comment} incident_assigned_to={incidentDetails?.incident_assigned_to} incident_assigned_by={incidentDetails?.incident_assigned_by} incident_assigned_date={incidentDetails?.incident_assigned_date} incident_due_date={incidentDetails?.incident_due_date} incident_type={incidentDetails?.incident_type} />
         <br></br>
-        <button className="bg-red-800 text-white min-w-40 min-h-12" onClick={() => setEdit(true)}>Edit</button>
+        <button className="bg-primary-500 text-white min-w-40 min-h-12" onClick={() => setEdit(true)}>Edit</button>
       </div>
     )
   }
@@ -89,7 +89,7 @@ export default function IncidentDetails({params}: {params: {incident_id: any}}) 
         <PermanentDetails date={incidentDetails?.incident_date} cluster_name={incidentDetails?.cluster_name} />
         <EditDetails incident_title={incidentDetails?.incident_title} description={incidentDetails?.description} priority_level={incidentDetails?.priority_level} incident_status={incidentDetails?.incident_status} comment={incidentDetails?.comment} incident_assigned_to={incidentDetails?.incident_assigned_to} incident_assigned_by={incidentDetails?.incident_assigned_by} incident_assigned_date={incidentDetails?.incident_assigned_date} incident_due_date={incidentDetails?.incident_due_date} incident_type={incidentDetails?.incident_type} />
         <br></br>
-        <button className="bg-red-800 text-white min-w-40 min-h-12" onClick={() => setEdit(true)}>Edit</button>
+        <button className="bg-primary-500 text-white min-w-40 min-h-12" onClick={() => setEdit(true)}>Edit</button>
       </div>
     )
   }
