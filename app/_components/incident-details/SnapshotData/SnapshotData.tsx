@@ -1,6 +1,4 @@
-import React, {useState} from 'react'
 import { Accordion } from 'flowbite-react'
-import { SnapshotDataDefinition } from '../../../../types/definitions'
 import {CpuOrMemoryCircle, NodesAndPodsMetrics} from './VisualizingMetrics'
 
 const SnapshotData = (props: {data: {cluster_memory_usage: string, cluster_cpu_usage: string, ready_nodes: string, unhealthy_nodes: string, ready_pods: string, unhealthy_pods: string}}) => {
