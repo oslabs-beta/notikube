@@ -1,8 +1,9 @@
-import { Accordion } from 'flowbite-react'
-import {CpuOrMemoryCircle, NodesAndPodsMetrics} from './VisualizingMetrics'
+import { Accordion } from 'flowbite-react';
+import {CpuOrMemoryCircle, NodesAndPodsMetrics} from './VisualizingMetrics';
+import { SnapshotDataDefinition } from '../../../../types/definitions';
 
-const SnapshotData = (props: {data: {cluster_memory_usage: string, cluster_cpu_usage: string, ready_nodes: string, unhealthy_nodes: string, ready_pods: string, unhealthy_pods: string}}) => {
-  const metrics = props.data
+const SnapshotData = (props: {snapshotData: SnapshotDataDefinition}) => {
+  const metrics = props.snapshotData
   const clusterMemoryUsage = Math.round(parseInt(metrics.cluster_memory_usage))
   const clusterCpuUsage = Math.round(parseInt(metrics.cluster_cpu_usage))
   const readyNodes = parseInt(metrics.ready_nodes)

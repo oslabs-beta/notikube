@@ -14,17 +14,17 @@ export default function IncidentDetails({params}: {params: {incident_id: any}}) 
 
   const {incident_id} = params;
   const [incidentDetails, setIncidentDetails] = useState<Incident>();
-  const [snapshotData, setSnapshotData] = useState({})
+  const [snapshotData, setSnapshotData] = useState<SnapshotDataDefinition>();
   const [edit, setEdit] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
 
   async function fetchIncident() {
     if (incident_id !== undefined) {
     let res = await fetch(`http://localhost:3000/api/incidents/incidentDetails/${incident_id}`)
-    const data = await res.json();
+    const data: {incidentDetails: Incident[], snapshotData: SnapshotDataDefinition} = await res.json();
     setIncidentDetails(data.incidentDetails[0]);
-    setSnapshotData(data.snapshotData)
-    setLoading(false)
+    setSnapshotData(data.snapshotData);
+    setLoading(false);
     }
   };
 
@@ -42,10 +42,9 @@ export default function IncidentDetails({params}: {params: {incident_id: any}}) 
     body.metric_data_id = incidentDetails?.metric_data_id;
     }
 
-    console.log('body', body)
     setIncidentDetails(body)
     setEdit(false);
-    alert('Changes Saved')
+    alert('Changes Saved');
 
   };
 
@@ -83,7 +82,7 @@ export default function IncidentDetails({params}: {params: {incident_id: any}}) 
         <p className="px-0 pt-2 text-left">{incidentDetails?.cluster_name}</p>
         <p className="px-0 pt-2 text-right">Cluster IP Address: {incidentDetails?.cluster_ip}</p>
       </div>
-        <SnapshotData data={snapshotData} />
+        <SnapshotData snapshotData={snapshotData} />
         <br></br>
         <br></br>
         <PermanentDetails date={incidentDetails?.incident_date} cluster_name={incidentDetails?.cluster_name} />
