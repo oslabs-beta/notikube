@@ -129,9 +129,7 @@ const EditForm = (props: EditDetailsType) => {
             </select>
             <br></br>
             <p className="font-bold pb-2 pt-6 text-xl">Assigned Date:</p>
-            <input name="incident_assigned_date" className="border-2 border-red-800 p-2 pl-4 rounded-md w-1/3" defaultValue={incident_assigned_date} />                <br></br>
-            <p className="font-bold pb-2 pt-6 text-xl">Type of Incident:</p>
-            <input name="incident_type" className="border-2 border-red-800 p-2 pl-4 rounded-md w-1/3" defaultValue={props.incident_type} />
+            <input name="incident_assigned_date" className="border-2 border-red-800 p-2 pl-4 rounded-md w-1/3" defaultValue={incident_assigned_date} />
             <br></br>
             <br></br>
           </div>

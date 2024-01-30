@@ -39,9 +39,6 @@ const EditDetails = (props: EditDetailsType) => {
           <br></br>
           <p className="font-bold pb-2 text-xl">Assigned Date:</p>
           <h2 className="font-bold border-2 p-2 pl-4 border-red-800 shadow-xl rounded-md min-h-11">{props.incident_assigned_date}</h2>
-          <br></br>
-          <p className="font-bold pb-2 text-xl">Type of Incident:</p>
-          <h2 className="font-bold border-2 p-2 pl-4 border-red-800 shadow-xl rounded-md min-h-11">{props.incident_type}</h2>
         </div>
       </div>
     </div>

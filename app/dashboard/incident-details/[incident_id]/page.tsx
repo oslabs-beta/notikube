@@ -66,7 +66,7 @@ export default function IncidentDetails({params}: {params: {incident_id: any}}) 
       </div>
         <br></br>
         <br></br>
-        <PermanentDetails date={incidentDetails?.incident_date} cluster_name={incidentDetails?.cluster_name} />
+        <PermanentDetails date={incidentDetails?.incident_date} incident_type={incidentDetails?.incident_type} />
         <EditDetails incident_title={incidentDetails?.incident_title} description={incidentDetails?.description} priority_level={incidentDetails?.priority_level} incident_status={incidentDetails?.incident_status} comment={incidentDetails?.comment} incident_assigned_to={incidentDetails?.incident_assigned_to} incident_assigned_by={incidentDetails?.incident_assigned_by} incident_assigned_date={incidentDetails?.incident_assigned_date} incident_due_date={incidentDetails?.incident_due_date} incident_type={incidentDetails?.incident_type} />
         <br></br>
         <button className="bg-primary-500 text-white min-w-40 min-h-12" onClick={() => setEdit(true)}>Edit</button>
@@ -85,10 +85,9 @@ export default function IncidentDetails({params}: {params: {incident_id: any}}) 
         <SnapshotData snapshotData={snapshotData} />
         <br></br>
         <br></br>
-        <PermanentDetails date={incidentDetails?.incident_date} cluster_name={incidentDetails?.cluster_name} />
+        <PermanentDetails date={incidentDetails?.incident_date} incident_type={incidentDetails?.incident_type} />
         <EditDetails incident_title={incidentDetails?.incident_title} description={incidentDetails?.description} priority_level={incidentDetails?.priority_level} incident_status={incidentDetails?.incident_status} comment={incidentDetails?.comment} incident_assigned_to={incidentDetails?.incident_assigned_to} incident_assigned_by={incidentDetails?.incident_assigned_by} incident_assigned_date={incidentDetails?.incident_assigned_date} incident_due_date={incidentDetails?.incident_due_date} incident_type={incidentDetails?.incident_type} />
-        <br></br>
-        <button className="bg-primary-500 text-white min-w-40 min-h-12" onClick={() => setEdit(true)}>Edit</button>
+        <button className="text-white bg-primary-500 hover:bg-primary-600 font-medium rounded-lg text-sm px-5 py-3 text-center dark:bg-primary-600 dark:hover:bg-primary-700 w-36 mt-8 shadow-lg focus:outline-none" onClick={() => setEdit(true)}>Edit</button>
       </div>
     )
   }
@@ -103,10 +102,10 @@ export default function IncidentDetails({params}: {params: {incident_id: any}}) 
         </div>
         <br></br>
         <br></br>
-          <PermanentDetails date={incidentDetails?.incident_date} cluster_name={incidentDetails?.cluster_name} />
+          <PermanentDetails date={incidentDetails?.incident_date} incident_type={incidentDetails?.incident_type} />
         <br></br>
           <EditForm incident_id={incident_id} incident_title={incidentDetails?.incident_title} description={incidentDetails?.description} priority_level={incidentDetails?.priority_level} incident_status={incidentDetails?.incident_status} comment={incidentDetails?.comment} incident_assigned_to={incidentDetails?.incident_assigned_to} incident_assigned_by={incidentDetails?.incident_assigned_by} incident_assigned_date={incidentDetails?.incident_assigned_date} incident_due_date={incidentDetails?.incident_due_date} incident_type={incidentDetails?.incident_type} members={incidentDetails?.members} cluster_id={incidentDetails?.cluster_id} updateEdit={updateEdit} incident_date={incidentDetails?.incident_date}/>
-          <button className="text-white bg-primary-500 hover:bg-primary-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-3 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 w-40 mt-6 shadow-lg" onClick={() => setEdit(false)}>Cancel</button>
+          <button className="text-white bg-primary-500 hover:bg-primary-600 font-medium rounded-lg text-sm px-5 py-3 text-center dark:bg-primary-600 dark:hover:bg-primary-700 w-40 mt-6 shadow-lg focus:outline-none" onClick={() => setEdit(false)}>Cancel</button>
       </div>
   )
 

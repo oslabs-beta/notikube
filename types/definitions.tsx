@@ -121,5 +121,5 @@ export type EditDetailsType = {
 
 export type PermanentDetailsType = {
   date?: string,
-  cluster_name?: string,  
+  incident_type?: string,  
 }

@@ -35,7 +35,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
   // update incident row in database
   await sql`
-    update incidents SET incident_type=${data.incident_type}, description=${data.description}, priority_level=${data.priority_level}, incident_title=${data.incident_title}, incident_status=${data.incident_status}, comment=${data.comment}, incident_assigned_to=${data.incident_assigned_to}, incident_assigned_by=${data.incident_assigned_by}, incident_due_date=${data.incident_due_date}, incident_assigned_date=${data.incident_assigned_date} where incident_id=${data.incident_id}
+    update incidents SET description=${data.description}, priority_level=${data.priority_level}, incident_title=${data.incident_title}, incident_status=${data.incident_status}, comment=${data.comment}, incident_assigned_to=${data.incident_assigned_to}, incident_assigned_by=${data.incident_assigned_by}, incident_due_date=${data.incident_due_date}, incident_assigned_date=${data.incident_assigned_date} where incident_id=${data.incident_id}
   `
 
   return NextResponse.json({response: 'successfully updated incident'});
