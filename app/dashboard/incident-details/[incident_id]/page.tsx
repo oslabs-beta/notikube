@@ -78,7 +78,7 @@ export default function IncidentDetails({params}: {params: {incident_id: any}}) 
     return (
       <div>
         <p className="text-5xl font-extrabold" >Incident Details</p>
-      <div className="flex justify-between w-4/5">
+      <div className="flex justify-between">
         <p className="px-0 pt-2 text-left">{incidentDetails?.cluster_name}</p>
         <p className="px-0 pt-2 text-right">Cluster IP Address: {incidentDetails?.cluster_ip}</p>
       </div>
@@ -95,9 +95,9 @@ export default function IncidentDetails({params}: {params: {incident_id: any}}) 
 
   // if edit === true, return edit form
   return (
-    <div className='w-screen'>
+    <div className=''>
       <p className="text-5xl font-extrabold" >Incident Details</p>
-        <div className="flex justify-between w-4/5">
+        <div className="flex justify-between">
           <p className="px-0 pt-2 text-left">{incidentDetails?.cluster_name}</p>
           <p className="px-0 pt-2 text-right">Cluster IP Address: {incidentDetails?.cluster_ip}</p>
         </div>

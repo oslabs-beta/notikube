@@ -76,9 +76,9 @@ const EditForm = (props: EditDetailsType) => {
   }
 
   return (
-    <div className="w-screen" >
+    <div className="" >
       <form onSubmit={onSubmit}>   
-        <div className="grid grid-cols-2 gap-8 w-4/5 resize">
+        <div className="grid grid-cols-2 gap-8 resize">
           <div className="w-screen">
             <p className="font-bold pb-2 text-xl">Title:</p>
             <input name="incident_title" className="border-2 border-red-800 p-2 pl-4 rounded-md w-1/3" defaultValue={props.incident_title} />

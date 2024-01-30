@@ -74,7 +74,7 @@ const Table = () => {
     {
       field: 'incident_type',
       headerName: 'Type',
-      minWidth: 125,
+      minWidth: 425,
       type: 'string',
       editable: false,
       headerClassName: 'column-header'

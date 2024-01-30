@@ -9,7 +9,7 @@ const EditDetails = (props: EditDetailsType) => {
 
   return (
     <div className="resize">
-      <div className="grid grid-cols-2 gap-8 w-4/5 resize">
+      <div className="grid grid-cols-2 gap-8 resize">
         <div className="">
           <p className="font-bold pb-2 pt-6 text-xl">Title:</p>
           <h2 className="font-bold border-2 p-2 pl-4 border-red-800 shadow-xl rounded-md min-h-11">{props.incident_title}</h2>
