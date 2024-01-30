@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Incident, EditDetailsType } from '../../../types/definitions'
+import { EditDetailsType } from '../../../types/definitions'
 
 
 

@@ -12,11 +12,11 @@ export async function POST(req: NextRequest) {
     select incident_assigned_to from incidents where incident_id=${incident.incident_id}
   `
   const email: Email[] = await sql`
-    select email from users where name=${incident.incident_assigned_to} AND cluster_id=${incident.cluster_id}
+    select email, email_status from users where name=${incident.incident_assigned_to} AND cluster_id=${incident.cluster_id}
   `
   if (assignedTo[0].incident_assigned_to !== incident.incident_assigned_to) {
 
-    if (email[0].email) {
+    if (email[0].email && email[0].email_status) {
 
     console.log('sending mail to:', email[0].email)
 

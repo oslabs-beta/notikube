@@ -63,10 +63,12 @@ export type User = {
   cluster_id?: string,
   cluster_name?: string,
   cluster_owner: boolean,
+  email_status: boolean,
 }
 
 export type Email = {
   email?: string,
+  email_status: boolean,
 }
 
 export type TableData = {

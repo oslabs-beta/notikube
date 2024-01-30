@@ -15,11 +15,12 @@ export async function POST(req: NextRequest, res: NextResponse) {
   if (assignedTo[0].incident_assigned_to !== data.incident_assigned_to) {
 
     const email: Email[] = await sql`
-      select email from users where name=${data.incident_assigned_to} AND cluster_id=${data.cluster_id}
+      select email, email_status from users where name=${data.incident_assigned_to} AND cluster_id=${data.cluster_id}
     `
+
     if (data.incident_title === undefined) data.incident_title = 'Unnamed Cluster';
 
-    if (email[0].email) {
+    if (email[0].email && email[0].email_status ) {
 
       console.log('sending mail to:', email[0].email)
 
