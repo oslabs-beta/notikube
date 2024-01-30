@@ -1,9 +1,9 @@
 import * as React from 'react';
 import {sendMail} from '../../service/mailService';
-import { redirect } from 'next/navigation'
+import { redirect } from 'next/navigation';
 import sql from '../utils/db';
 import { getServerSession } from 'next-auth';
-import { User } from '../../types/definitions'
+import { User } from '../../types/definitions';
 
 const CryptoJS = require('crypto-js');
 
@@ -49,7 +49,7 @@ export default async function AddMemberPage() {
 
       )
     } 
-        
+    
     redirect('http://localhost:3000/dashboard/incidents')
 
   }
