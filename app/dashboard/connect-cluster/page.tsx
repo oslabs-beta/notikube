@@ -95,7 +95,7 @@ export default function ConnectCluster() {
 
   // function to handle the delete cluster button
   const deleteCluster = () => {
-    if (confirm('Deleting this cluster will remove all previous cluster incidents, and all members will lose access to the cluster. Are you sure you want to delete this cluster?')) {
+    if (confirm('Deleting this cluster will remove all previous cluster incidents and all members will lose access to the cluster. Are you sure you want to delete this cluster?')) {
     fetch(`http://localhost:3000/api/updateCluster/delete/${userData?.cluster_id}`)
     let newUserData = JSON.parse(JSON.stringify(userData))
     newUserData.cluster_id = null;
