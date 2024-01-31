@@ -1,24 +1,56 @@
 'use client'
-
-import Link from 'next/link';
 import EmailSwitch from "../../_components/userPreferences/EmailSwitch";
 import DeleteAcount from "../../_components/userPreferences/DeleteAccount";
+import { useSession } from 'next-auth/react';
+import { useState, useEffect } from 'react';
+import { User } from '../../../types/definitions';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
 export default function Profile() {
 
-  const name = 'derek'
-  const email = 'derek@test.com'
+  const session = useSession().data;
+  const userId = session?.user?.userid;
 
-  // const users = sql`
-  //   insert into users (name, email) values (${name}, ${email})
-  // `
+  const [checked, setChecked] = useState<boolean>();
+  const [loading, setLoading] = useState<boolean>(true);
+
+
+  async function getStatus(user_id:(string | undefined)) {
+    if (userId !== undefined) {
+    let res = await fetch(`http://localhost:3000/api/getUser/${userId}`)
+    const data: User = await res.json();
+    console.log('data', data)
+    setChecked(data.email_status)
+    setLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    if (userId !== undefined) {
+    getStatus(userId);
+  }}, [userId])
+
+
+  while (loading) {
+    return ( 
+    <div>
+      <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={true}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
+    </div>
+  )}
+
   return (
     <>
       <h1>This is the Profile Page</h1>
       <br></br>
-      <EmailSwitch />
+      <EmailSwitch user_id={userId} status={checked} />
       <br></br>
-      <DeleteAcount />
+      <DeleteAcount user_id={userId} />
     </>
   );
 }

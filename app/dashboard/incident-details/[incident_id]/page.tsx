@@ -8,6 +8,8 @@ import EditDetails from '../../../_components/incident-details/EditDetails';
 import EditForm from '../../../_components/incident-details/EditForm';
 import SnapshotData from '../../../_components/incident-details/SnapshotData/SnapshotData';
 import { SnapshotDataDefinition } from '../../../../types/definitions';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
 
 export default function IncidentDetails({params}: {params: {incident_id: any}}) {
@@ -49,8 +51,16 @@ export default function IncidentDetails({params}: {params: {incident_id: any}}) 
   };
 
   while (loading) {
-    return <div>loading details ....</div>
-  }
+    return ( 
+    <div>
+      <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={true}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
+    </div>
+  )}
 
   while (edit === false) {
 

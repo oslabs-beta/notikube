@@ -6,42 +6,19 @@ import {useState, useEffect} from 'react';
 import { FormControlLabel } from '@mui/material';
 import { alpha, styled } from '@mui/material/styles';
 import { red } from '@mui/material/colors';
-import { useSession } from 'next-auth/react';
-import { User } from '../../../types/definitions';
 
 
-const EmailSwitch = () => {
 
-  const session = useSession().data;
-  const userId = session?.user?.userid;
+const EmailSwitch = (props: {user_id: (string | undefined), status: (boolean | undefined)}) => {
 
-  const [checked, setChecked] = useState<boolean>();
-  const [loading, setLoading] = useState<boolean>(true);
-
-  async function getStatus(user_id:(string | undefined)) {
-    if (userId !== undefined) {
-    console.log('userId', user_id)
-    let res = await fetch(`http://localhost:3000/api/getUser/${userId}`)
-    const data: User = await res.json();
-    console.log('data', data)
-    setChecked(data.email_status)
-    setLoading(false)
-  }
-}
-
-  useEffect(() => {
-    if (userId !== undefined) {
-    getStatus(userId);
-  }},[userId]
-);
-
+  const [checked, setChecked] = useState<(boolean | undefined)>(props.status);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setChecked(event.target.checked)
     console.log('status', checked)
     fetch('http://localhost:3000/api/updateUser/email', {
       method:'POST',
-      body: JSON.stringify({user_id: userId, status: checked})
+      body: JSON.stringify({user_id: props.user_id, status: checked})
     })
   };
 
@@ -57,9 +34,7 @@ const EmailSwitch = () => {
     },
   }));
 
-  // while (loading) {
-  //   return <div>loading ...</div>
-  // }
+
 
   return (
     <FormControlLabel
