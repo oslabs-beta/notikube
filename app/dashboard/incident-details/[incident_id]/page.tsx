@@ -115,7 +115,7 @@ export default function IncidentDetails({params}: {params: {incident_id: any}}) 
           <PermanentDetails date={incidentDetails?.incident_date} incident_type={incidentDetails?.incident_type} />
         <br></br>
           <EditForm incident_id={incident_id} incident_title={incidentDetails?.incident_title} description={incidentDetails?.description} priority_level={incidentDetails?.priority_level} incident_status={incidentDetails?.incident_status} comment={incidentDetails?.comment} incident_assigned_to={incidentDetails?.incident_assigned_to} incident_assigned_by={incidentDetails?.incident_assigned_by} incident_assigned_date={incidentDetails?.incident_assigned_date} incident_due_date={incidentDetails?.incident_due_date} incident_type={incidentDetails?.incident_type} members={incidentDetails?.members} cluster_id={incidentDetails?.cluster_id} updateEdit={updateEdit} incident_date={incidentDetails?.incident_date}/>
-          <button className="text-white bg-primary-500 hover:bg-primary-600 font-medium rounded-lg text-sm px-5 py-3 text-center dark:bg-primary-600 dark:hover:bg-primary-700 w-40 mt-6 shadow-lg focus:outline-none" onClick={() => setEdit(false)}>Cancel</button>
+          <button className="text-white bg-primary-500 hover:bg-primary-600 font-medium rounded-lg text-sm px-5 py-3 text-center dark:bg-primary-600 dark:hover:bg-primary-700 w-40 mt-4 shadow-lg focus:outline-none" onClick={() => setEdit(false)}>Cancel</button>
       </div>
   )
 

@@ -182,16 +182,15 @@ export default function ConnectCluster() {
 
       {/* Table for Clusters associated with Users */}
       <UserClusters clusterName={clusterName} clusterIp={clusterIp} owner={userRole} edit={edit}/>
-      <br></br>
       <div className="flex justify-between">
       <button 
-          className="text-white bg-primary-500 hover:bg-primary-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-3 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 w-36 h-12 mt-6" onClick={changeEdit}>
+          className="text-white bg-primary-500 hover:bg-primary-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-3 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 w-36 h-12 mt-12" onClick={changeEdit}>
           Edit Cluster
       </button>
       <button
           id="defaultModalButton"
           onClick={initiateAdd}
-          className="text-black bg-slate-200 border-black hover:border-black hover:bg-slate-500 hover:text-white focus:ring-white focus:outline-none font-medium rounded-lg text-sm px-5 py-3 text-center dark:bg-slate-600 dark:hover:bg-slate-700 dark:focus:ring-slate-800 mt-4 w-44 shadow-lg"
+          className="text-black bg-slate-200 border-black hover:border-black hover:bg-slate-500 hover:text-white focus:ring-white focus:outline-none font-medium rounded-lg text-sm px-5 py-3 text-center dark:bg-slate-600 dark:hover:bg-slate-700 dark:focus:ring-slate-800 mt-12 w-44 shadow-lg"
           type="button"
         >
           + Add New Cluster
@@ -242,7 +241,7 @@ export default function ConnectCluster() {
       <br></br>
       <UserClusters clusterName={clusterName} clusterIp={clusterIp} owner={userRole} edit={edit}/>
       <div className="inline-flex">
-      <h3 className="mt-5">* Cluster members cannot make changes to cluster name or cluster IP. Only owners can edit cluster details. To be removed from this cluster <span className='mt-5 text-red-600' onClick={removeCluster}>click here</span>.</h3>
+      <h3 className="mt-5">* Cluster members cannot make changes to cluster name or cluster IP. Only owners can edit cluster details. To be removed from this cluster <span className='mt-5 text-red-600 hover:text-blue-700' onClick={removeCluster}>click here</span>.</h3>
       <br></br>
       </div>
     </div>

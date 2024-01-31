@@ -14,6 +14,7 @@ export default function Profile() {
 
   const [checked, setChecked] = useState<boolean>();
   const [loading, setLoading] = useState<boolean>(true);
+  const [user, setUser] = useState<User>();
 
 
   async function getStatus(user_id:(string | undefined)) {
@@ -22,6 +23,7 @@ export default function Profile() {
     const data: User = await res.json();
     console.log('data', data)
     setChecked(data.email_status)
+    setUser(data)
     setLoading(false)
     }
   }
@@ -46,7 +48,7 @@ export default function Profile() {
 
   return (
     <>
-      <h1>This is the Profile Page</h1>
+      <h1>Welcome, {user?.name}</h1>
       <br></br>
       <EmailSwitch user_id={userId} status={checked} />
       <br></br>

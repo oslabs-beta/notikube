@@ -226,7 +226,7 @@ const Table = () => {
        />
       <div className='flex justify-between'>
         <h2 className="mt-2 mb-2">Select a row to view incident details</h2>
-        <h2 className="mt-2 mb-2">Go to <span onClick={() => router.push('http://localhost:3000/dashboard/connect-cluster')} className='font-bold focus:outline-none hover:text-primary-600 '>Connect Cluster</span> page to add additional members</h2>
+        <h2 className="mt-2 mb-2">Go to <span onClick={() => router.push('http://localhost:3000/dashboard/connect-cluster')} className='font-bold focus:outline-none text-primary-600 hover:text-blue-700'>Connect Cluster</span> page to add additional members</h2>
       </div>
     </div>
    )
