@@ -8,7 +8,9 @@ import UserClusters from "../../_components/ConnectClusterPage/UserClusters";
 // ConnectClusterModal is the popup modal that appears when you press 'Add New Cluster'
 import ConnectClusterModal from "../../_components/ConnectClusterPage/ConnectClusterModal";
 import { User } from '../../../types/definitions';
-import EditCluster from '../../_components/ConnectClusterPage/EditCluster'
+import EditCluster from '../../_components/ConnectClusterPage/EditCluster';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
 export default function ConnectCluster() {
 
@@ -113,8 +115,16 @@ export default function ConnectCluster() {
   }
 
   while (loading) {
-    return <div>loading ...</div>
-  }
+    return ( 
+    <div>
+      <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={true}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
+    </div>
+  )}
 
 // if the user is not associated with a cluster, render instructions and the add cluster form
   if (userData?.cluster_id === null) {

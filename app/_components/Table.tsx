@@ -29,7 +29,7 @@ const Table = () => {
 
   async function fetchData(user_id: (string | undefined)) {
     if (user_id !== undefined) {
-    let res = await fetch(`/api/incidents/getAlerts/${user_id}`)
+    let res = await fetch(`/api/incidents/getAlerts/${user_id}`, {cache: 'no-store'})
     const data: [Incident[], UserName[]] = await res.json();
     setIncidentList(data[0]);
     setMemberList(data[1]);
@@ -217,6 +217,7 @@ const Table = () => {
           }
          }}
          onRowSelectionModelChange={(newSelection) => {
+          console.log('row select')
           router.push(`/dashboard/incident-details/${newSelection}`)
          }}
          disableRowSelectionOnClick
