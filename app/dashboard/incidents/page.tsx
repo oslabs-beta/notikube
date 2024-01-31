@@ -1,7 +1,6 @@
 
 import * as React from 'react';
 import Table from '../../_components/Table'
-import AddMemberComponent from '../../_components/AddMember';
 import {redirect} from 'next/navigation';
 import sql from '../../utils/db';
 import {getServerSession} from 'next-auth';

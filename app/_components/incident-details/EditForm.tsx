@@ -6,35 +6,45 @@ import { EditDetailsType, Incident, UserName } from '../../../types/definitions'
 
 const EditForm = (props: EditDetailsType) => {
 
+  // create new empty array to hold members
   let memberArray: Array<string> = [];
-
+  
+  // function to push members from props to member array
   function getMembers(array: Array<UserName>) {
     for (let i = 0; i < array.length; i++) {
       memberArray.push(array[i].name)
     }
   };
 
+  // invoke function to push members from props to member array
   if (props.members !== undefined) {
     getMembers(props.members);
   }
 
   const router = useRouter();
 
+  // function to handle submit when user saves edits
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     const formData = new FormData(event.currentTarget);
 
+    // save old state to body object
     let body: Incident = JSON.parse(JSON.stringify(props));
 
+    // if incident_id, cluster_id, and incident_date on props have data, assign them to body object
     if (props.incident_id !== undefined && props.cluster_id !== undefined && props.incident_date !== undefined) {
       body.incident_id = props.incident_id;
       body.cluster_id = props.cluster_id;
       body.incident_date = props.incident_date;
     }
     
+    // declare newState object and assign it values of body (old state)
     let newState: Incident = body;
 
+    // iterate through body object, comparing values to those of the submitted form
+      // if keys match, but values don't, assign value of form to body
+        // assign matching key:value pairs from body to newState
     for (let key in body) {
       if (key !== 'members' && key !== 'updateEdit') {
       for (let pair of formData.entries()) {
@@ -46,12 +56,12 @@ const EditForm = (props: EditDetailsType) => {
     }
   }
 
-    
+    // update state on Table component with newState values (form values from edit page)
     if (props.updateEdit !== undefined) {
       props.updateEdit(newState);
     };
 
-
+    // send post request with new values from form
     const response = await fetch('/api/incidents/updateDetails',{
       method:'POST',
       body: JSON.stringify(body),
@@ -59,10 +69,11 @@ const EditForm = (props: EditDetailsType) => {
 
   };
 
+  // create variables to hold due date and assigned date values
   let incident_due_date: (string | undefined) = '';
   let incident_assigned_date: (string | undefined) = '';
 
-
+  // if props.incident_due_date or props.incident_assigned_date are empty, assign a placeholder value, otherwise, assign the props value from DB 
   if (props.incident_due_date === '') {
     incident_due_date = 'mm/dd/yyyy'
   } else {
@@ -74,6 +85,7 @@ const EditForm = (props: EditDetailsType) => {
   } else {
     incident_assigned_date = props.incident_assigned_date
   }
+
 
   return (
     <div className="" >
