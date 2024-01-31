@@ -1,10 +1,27 @@
 import * as React from 'react';
 import { FormEvent } from 'react';
 import {useRouter} from 'next/navigation';
-import { EditDetailsType, Incident, UserName } from '../../../types/definitions'
+import { Incident, UserName } from '../../../types/definitions'
 
 
-const EditForm = (props: EditDetailsType) => {
+const EditForm = (props: {
+  incident_title?: string, 
+  priority_level?: string,
+  incident_status?: string,
+  description?: string, 
+  comment?: string,
+  incident_assigned_to?: string,
+  incident_assigned_by?: string,
+  incident_assigned_date?: string,
+  incident_due_date?: string,
+  incident_type?: string,
+  cluster_name?: string,
+  incident_id?: string,
+  cluster_id?: string,
+  updateEdit?: Function,
+  incident_date?: string, 
+  memberProps?: [{name: string, email: string}],
+}) => {
 
   // create new empty array to hold members
   let memberArray: Array<string> = [];
@@ -17,9 +34,12 @@ const EditForm = (props: EditDetailsType) => {
   };
 
   // invoke function to push members from props to member array
-  if (props.members !== undefined) {
-    getMembers(props.members);
+  if (props.memberProps !== undefined) {
+    getMembers(props.memberProps);
   }
+
+  console.log('props members', props.memberProps)
+  console.log('member array', memberArray)
 
   const router = useRouter();
 

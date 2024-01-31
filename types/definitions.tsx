@@ -27,20 +27,13 @@ export type Incident = {
   incident_status: string, 
   comment: string,
   incident_assigned_to: string,
-  metric_data_id?: string,
+  metric_data_id: string,
   cluster_id: string,
   cluster_name: string,
   cluster_ip: string,
   incident_assigned_by: string,
   incident_assigned_date: string,
   incident_due_date: string,
-  members: [
-    {
-    name: string,
-    email: string,
-    }
-  ],
-  updateEdit?: Function,
 }
 
 export type SnapshotDataDefinition = {
