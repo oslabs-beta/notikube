@@ -153,6 +153,7 @@ const Table = () => {
         <p className="px-0 pt-2 mb-2 text-left">{incidentList[0].cluster_name}</p>
         <p className="px-0 pt-2 text-right">Cluster IP Address: {incidentList[0].cluster_ip}</p>
      </div>
+     <br></br>
        <DataGrid
          initialState={{
           sorting: {
@@ -223,7 +224,10 @@ const Table = () => {
          disableRowSelectionOnClick
          checkboxSelection={true}
        />
-      <h2 className="mt-2 mb-2">Select a Row to View Incident Details</h2>
+      <div className='flex justify-between'>
+        <h2 className="mt-2 mb-2">Select a row to view incident details</h2>
+        <h2 className="mt-2 mb-2">Go to <span onClick={() => router.push('http://localhost:3000/dashboard/connect-cluster')} className='font-bold focus:outline-none hover:text-primary-600 '>Connect Cluster</span> page to add additional members</h2>
+      </div>
     </div>
    )
 };

@@ -31,12 +31,8 @@ export default async function Incidents() {
         <h1 className="text-left pl-0 py-0 text-5xl font-extrabold dark:text-white">Incident History</h1>
         </div>
         <div className="self-end justify-end">
-        <AddMemberComponent />
         </div>
       </div>
-      <br></br>
-      <br></br>
-      <br></br>
       <Table />
       </div>
       )
