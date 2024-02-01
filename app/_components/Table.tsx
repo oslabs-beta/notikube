@@ -166,6 +166,8 @@ const Table = () => {
         <p className="px-0 pt-2 text-right">Cluster IP Address: {incidentList[0].cluster_ip}</p>
      </div>
      <br></br>
+     <div className="flex justify-between">
+     <p className="px-0 pt-2 text-right">Double click a cell to edit</p>
      <FormControlLabel
       label='Show Row Colors'
       control={
@@ -176,7 +178,7 @@ const Table = () => {
     />
       }
       />
-    <br></br>
+     </div>
        <DataGrid
          initialState={{
           sorting: {
@@ -194,7 +196,7 @@ const Table = () => {
             color: 'primary.main',
           },
           ".orange": {
-            bgcolor:"#FFD580",
+            bgcolor:"#fa8072",
             "&:hover": {
               bgcolor:"darkgray"
             }
@@ -254,93 +256,95 @@ const Table = () => {
     </div>
    )
    
-} else {
+  } else {
 
-  return (
-    <div>
-     <div className="flex justify-between">
-        <p className="px-0 pt-2 mb-2 text-left">{incidentList[0].cluster_name}</p>
-        <p className="px-0 pt-2 text-right">Cluster IP Address: {incidentList[0].cluster_ip}</p>
-     </div>
-     <br></br>
-     <FormControlLabel
-      label='Show Row Colors'
-      control={
-    <Checkbox
-      checked={coloredRows}
-      onChange={handleCheckChange}
-      inputProps={{ 'aria-label': 'controlled' }}
-    />
-      }
-      />
-      <br></br>
-       <DataGrid
-         initialState={{
-          sorting: {
-            sortModel: [{field: 'incident_date', sort: 'desc'}]
-          },
-          pagination: {paginationModel: {pageSize: 10}},
-         }}
-         pageSizeOptions={[5,10,25,50]}
-         sx={{
-          boxShadow: 2,
-          border: 2,
-          borderColor: 'black',
-          color: 'black',
-          '& .MuiDataGrid-cell:hover': {
-            color: 'primary.main',
-          },
-          ".odd": {
-            bgcolor:"white",
-            "&:hover": {
-              bgcolor:"darkgray"
+    return (
+      <div>
+        <div className="flex justify-between">
+          <p className="px-0 pt-2 mb-2 text-left">{incidentList[0].cluster_name}</p>
+          <p className="px-0 pt-2 text-right">Cluster IP Address: {incidentList[0].cluster_ip}</p>
+        </div>
+          <br></br>
+        <div className="flex justify-between">
+          <p className="px-0 pt-2 text-right">Double click a cell to edit</p>
+          <FormControlLabel
+            label='Show Row Colors'
+            control={
+              <Checkbox
+              checked={coloredRows}
+              onChange={handleCheckChange}
+              inputProps={{ 'aria-label': 'controlled' }}
+              />
             }
-          },
-          ".even": {
-            bgcolor:"#E5E4E2",
-            "&:hover": {
-              bgcolor:"darkgray"
+          />
+        </div>
+          <DataGrid
+            initialState={{
+              sorting: {
+                sortModel: [{field: 'incident_date', sort: 'desc'}]
+              },
+              pagination: {paginationModel: {pageSize: 10}},
+            }}
+            pageSizeOptions={[5,10,25,50]}
+            sx={{
+              boxShadow: 2,
+              border: 2,
+              borderColor: 'black',
+              color: 'black',
+              '& .MuiDataGrid-cell:hover': {
+                color: 'primary.main',
+              },
+              ".odd": {
+                bgcolor:"white",
+                "&:hover": {
+                  bgcolor:"darkgray"
+                }
+              },
+              ".even": {
+                bgcolor:"#E5E4E2",
+                "&:hover": {
+                  bgcolor:"darkgray"
+                }
+              },
+              "& .MuiDataGrid-columnHeaderCheckbox .MuiDataGrid-columnHeaderTitleContainer": {
+                display: "none",   
+              },
+              "& .MuiDataGrid-columnHeaders": {
+                bgcolor: 'white',   
+              },
+              ".column-header": {
+                bgcolor:"white",
+                color:"black"
+              }
+            }}
+            editMode='cell'
+            getRowId={(incidentList) => incidentList.incident_id}
+            rows={incidentList}
+            columns={columns}
+            processRowUpdate={updateTable}
+            onProcessRowUpdateError={(() => console.log('Error processing row update'))}
+            onRowEditStop={(params) => {
+              console.log('params', params);
+            }}
+            onRowSelectionModelChange={(newSelection) => {
+              console.log('row select')
+              router.push(`/dashboard/incident-details/${newSelection}`)
+            }}
+            getRowClassName={(params) =>
+              params.indexRelativeToCurrentPage % 2 === 0 ? 'even' : 'odd'
             }
-          },
-          "& .MuiDataGrid-columnHeaderCheckbox .MuiDataGrid-columnHeaderTitleContainer": {
-              display: "none",   
-          },
-          "& .MuiDataGrid-columnHeaders": {
-              bgcolor: 'white',   
-          },
-          ".column-header": {
-              bgcolor:"white",
-              color:"black"
-          }
-         }}
-         editMode='cell'
-         getRowId={(incidentList) => incidentList.incident_id}
-         rows={incidentList}
-         columns={columns}
-         processRowUpdate={updateTable}
-         onProcessRowUpdateError={(() => console.log('Error processing row update'))}
-         onRowEditStop={(params) => {
-          console.log('params', params);
-         }}
-         onRowSelectionModelChange={(newSelection) => {
-          console.log('row select')
-          router.push(`/dashboard/incident-details/${newSelection}`)
-         }}
-         getRowClassName={(params) =>
-          params.indexRelativeToCurrentPage % 2 === 0 ? 'even' : 'odd'
-          }
-         disableRowSelectionOnClick
-         checkboxSelection={true}
-       />
-      <div className='flex justify-between'>
-        <h2 className="mt-2 mb-2">Select a row to view incident details</h2>
-        <h2 className="mt-2 mb-2">Go to <span onClick={() => router.push('http://localhost:3000/dashboard/connect-cluster')} className='font-bold focus:outline-none text-blue-700 hover:text-primary-600'>Connect Cluster</span> page to add additional members</h2>
+            disableRowSelectionOnClick
+            checkboxSelection={true}
+          />
+        <div className='flex justify-between'>
+          <h2 className="mt-2 mb-2">Select a row to view incident details</h2>
+          <h2 className="mt-2 mb-2">Go to <span onClick={() => router.push('http://localhost:3000/dashboard/connect-cluster')} className='font-bold focus:outline-none text-blue-700 hover:text-primary-600'>Connect Cluster</span> page to add additional members</h2>
+        </div>
       </div>
-    </div>
-   )
-};
+    )
+  }
 
-}
+};
 
 
 
