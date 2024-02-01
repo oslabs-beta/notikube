@@ -118,10 +118,10 @@ const EditForm = (props: {
             <p className="font-bold pb-2 pt-6 text-xl">Priority:</p>
             <select name="priority_level" className="border-2 border-red-800 p-2 pl-4 rounded-md w-1/3">
               <option defaultValue={props.priority_level}>{props.priority_level}</option>
-              <option value="Critical">Critical</option>
-              <option value="Error">Error</option>
-              <option value="Warning">Warning</option>
-              <option value="Info">Info</option>
+              <option value="critical">critical</option>
+              <option value="error">error</option>
+              <option value="warning">warning</option>
+              <option value="info">info</option>
             </select>
             <br></br>
             <p className="font-bold pb-2 pt-6 text-xl">Assigned By:</p>
