@@ -112,17 +112,8 @@ const EditForm = (props: {
       <form onSubmit={onSubmit}>   
         <div className="grid grid-cols-2 gap-8 resize">
           <div className="w-screen">
-            <p className="font-bold pb-2 text-xl">Title:</p>
-            <input name="incident_title" className="border-2 border-red-800 p-2 pl-4 rounded-md w-1/3" defaultValue={props.incident_title} />
-            <br></br>
-            <p className="font-bold pb-2 pt-6 text-xl">Priority:</p>
-            <select name="priority_level" className="border-2 border-red-800 p-2 pl-4 rounded-md w-1/3">
-              <option defaultValue={props.priority_level}>{props.priority_level}</option>
-              <option value="critical">critical</option>
-              <option value="error">error</option>
-              <option value="warning">warning</option>
-              <option value="info">info</option>
-            </select>
+            <p className="font-bold pb-2 pt-6 text-xl">Title:</p>
+            <input name="incident_title" className="border-2 border-red-800 p-2 pl-4 rounded-md w-1/3 text-wrap break-normal" defaultValue={props.incident_title} />
             <br></br>
             <p className="font-bold pb-2 pt-6 text-xl">Assigned By:</p>
             <select name="incident_assigned_by" className="border-2 border-red-800 p-2 pl-4 rounded-md w-1/3">
@@ -133,16 +124,7 @@ const EditForm = (props: {
             </select>
             <br></br>
             <p className="font-bold pb-2 pt-6 text-xl">Due Date:</p>
-            <input name="incident_due_date" className="border-2 border-red-800 p-2 pl-4 rounded-md w-1/3" defaultValue={incident_due_date}/>                
-            <br></br>
-            <p className="font-bold pb-2 pt-6 text-xl">Notes:</p>
-            <textarea name="comment" className="border-2 border-red-800 p-2 pl-4 rounded-md  text-wrap w-1/3 break-normal" defaultValue={props.comment}></textarea>
-            <br></br>
-            <button className="text-white bg-primary-500 hover:bg-primary-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-3 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 w-40 h-12 mt-6 shadow-lg" type="submit">Save</button>
-          </div>
-          <div className="w-screen">
-            <p className="font-bold pb-2 text-xl">Description:</p>
-            <input name="description" className="border-2 border-red-800 p-2 pl-4 rounded-md w-1/3" defaultValue={props.description} />
+            <input name="incident_due_date" className="border-2 border-red-800 p-2 pl-4 rounded-md w-1/3" defaultValue={incident_due_date} />                
             <br></br>
             <p className="font-bold pb-2 pt-6 text-xl">Status:</p>
             <select name="incident_status" className="border-2 border-red-800 p-2 pl-4 rounded-md w-1/3">
@@ -150,6 +132,21 @@ const EditForm = (props: {
               <option value="Open">Open</option>
               <option value="Closed">Closed</option>
               <option value="In Progress">In Progress</option>
+            </select>
+            <br></br>
+            <p className="font-bold pb-2 pt-6 text-xl">Notes:</p>
+            <textarea name="comment" className="border-2 border-red-800 p-2 pl-4 rounded-md  text-wrap w-1/3 break-normal" defaultValue={props.comment}></textarea>
+            <br></br>
+            <button className="text-white bg-primary-500 hover:bg-primary-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-3 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 w-40 h-12 mt-6 shadow-lg" type="submit">Save</button>
+          </div>
+          <div className="w-screen">
+          <p className="font-bold pb-2 pt-6 text-xl">Priority:</p>
+            <select name="priority_level" className="border-2 border-red-800 p-2 pl-4 rounded-md w-1/3">
+              <option defaultValue={props.priority_level}>{props.priority_level}</option>
+              <option value="critical">critical</option>
+              <option value="error">error</option>
+              <option value="warning">warning</option>
+              <option value="info">info</option>
             </select>
             <br></br>
             <p className="font-bold pb-2 pt-6 text-xl">Assigned To:</p>
@@ -162,6 +159,9 @@ const EditForm = (props: {
             <br></br>
             <p className="font-bold pb-2 pt-6 text-xl">Assigned Date:</p>
             <input name="incident_assigned_date" className="border-2 border-red-800 p-2 pl-4 rounded-md w-1/3" defaultValue={incident_assigned_date} />
+            <br></br>
+            <p className="font-bold pb-2 pt-6 text-xl">Description:</p>
+            <textarea name="description" className="border-2 border-red-800 p-2 pl-4 rounded-md w-1/3 text-wrap break-normal" defaultValue={props.description}></textarea> 
             <br></br>
             <br></br>
           </div>

@@ -35,7 +35,7 @@ export default async function Dashboard() {
             </Suspense>
             <Divider>Metrics</Divider>
             <TabGroup className="pl-8 my-4">
-            <div className="">
+            <div className="mb-4">
               <TabList color="red" variant="solid">
                 <Tab>Node CPU</Tab>
                 <Tab>Cluster CPU/Mem</Tab>

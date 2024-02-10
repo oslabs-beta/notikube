@@ -2,19 +2,13 @@
 
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import {
-   DataGrid,
-   GridRowModel,
-   GridColDef,
- } 
- from '@mui/x-data-grid';
+import { DataGrid, GridRowModel, GridColDef } from '@mui/x-data-grid';
+import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent,} from '@mui/material';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { Incident, UserName } from '../../types/definitions';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
-import Checkbox from '@mui/material/Checkbox';
-import { FormControlLabel } from '@mui/material';
 
 
 
@@ -28,7 +22,7 @@ const Table = () => {
   const [incidentList, setIncidentList] = useState<Incident[]>([]);
   const [memberList, setMemberList] = useState<UserName[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [coloredRows, setColoredRows] = useState<boolean>(false);
+  const [rowSort, setRowSort] = useState('none');
 
   async function fetchData(user_id: (string | undefined)) {
     if (user_id !== undefined) {
@@ -67,27 +61,23 @@ const Table = () => {
     fetchData(userId);
   },[userId]);
 
-  function handleCheckChange() {
-    if (coloredRows) {
-      setColoredRows(false)
-    } else {
-      setColoredRows(true)
-    }
+  function handleRowColor(event:SelectChangeEvent) {
+    setRowSort(event.target.value)
   }
 
   const columns: GridColDef[] = [
     {
       field: 'incident_date',
-      headerName: 'Timestamp',
-      minWidth: 225,
+      headerName: '* Timestamp',
+      minWidth: 200,
       type: 'string',
       editable: false,
       headerClassName: 'column-header',
     },
     {
       field: 'incident_type',
-      headerName: 'Type',
-      minWidth: 425,
+      headerName: '* Type',
+      minWidth: 200,
       type: 'string',
       editable: false,
       headerClassName: 'column-header'
@@ -95,7 +85,7 @@ const Table = () => {
     {
       field: 'description',
       headerName: 'Description',
-      minWidth: 275,
+      minWidth: 250,
       type: 'string',
       editable: true,
       headerClassName: 'column-header'
@@ -114,7 +104,7 @@ const Table = () => {
     { 
       field: 'incident_title', 
       headerName: 'Title', 
-      minWidth: 250,
+      minWidth: 200,
       editable: true ,
       type: 'string',
       headerClassName: 'column-header',
@@ -157,8 +147,6 @@ const Table = () => {
     </div>
   )}
 
-  if (coloredRows) {
-
   return (
     <div>
      <div className="flex justify-between">
@@ -166,18 +154,9 @@ const Table = () => {
         <p className="px-0 pt-2 text-right">Cluster IP Address: {incidentList[0].cluster_ip}</p>
      </div>
      <br></br>
-     <div className="flex justify-between">
-     <p className="px-0 pt-2 text-right">Double click a cell to edit</p>
-     <FormControlLabel
-      label='Show Row Colors'
-      control={
-    <Checkbox
-      checked={coloredRows}
-      onChange={handleCheckChange}
-      inputProps={{ 'aria-label': 'controlled' }}
-    />
-      }
-      />
+     <div className="flex justify-between align-bottom">
+        <h2 className="mt-2 mb-2">Select a row to view/edit incident details</h2>
+        <p className="px-0 pt-2 align-bottom text-left">Double click a cell to edit</p>
      </div>
        <DataGrid
          initialState={{
@@ -213,15 +192,27 @@ const Table = () => {
               bgcolor:"darkgray"
             }
           },
+          ".odd": {
+            bgcolor:"white",
+            "&:hover": {
+              bgcolor:"darkgray"
+            }
+          },
+          ".even": {
+            bgcolor:"#F8F8F8",
+            "&:hover": {
+              bgcolor:"darkgray"
+            }
+          },
           "& .MuiDataGrid-columnHeaderCheckbox .MuiDataGrid-columnHeaderTitleContainer": {
-              display: "none",   
+            display: "none",   
           },
           "& .MuiDataGrid-columnHeaders": {
-              bgcolor: 'white',   
+            bgcolor: 'white',   
           },
           ".column-header": {
-              bgcolor:"white",
-              color:"black"
+            bgcolor:"white",
+            color:"black"
           }
          }}
          editMode='cell'
@@ -234,12 +225,28 @@ const Table = () => {
           console.log('params', params);
          }}
          getRowClassName={(params) => {
-          if (params.row.priority_level === 'critical' || params.row.priority_level === 'error') {
-            return "orange"
-          } else if (params.row.priority_level === 'warning') {
-            return "darkblue"
+          if (rowSort  === 'priority') {
+            if (params.row.priority_level === 'critical' || params.row.priority_level === 'error') {
+              return 'orange'
+            } else if (params.row.priority_level === 'warning') {
+              return 'darkblue'
+            } else {
+              return 'blue'
+            }
+          } else if (rowSort === 'status') {
+            if (params.row.incident_status === 'Open') {
+              return 'orange'
+            } else if (params.row.incident_status === 'In Progress') {
+              return 'darkblue'
+            } else {
+              return 'blue'
+            }
           } else {
-            return "blue"
+            if (params.indexRelativeToCurrentPage % 2 === 0) {
+              return 'even'
+            } else {
+              return 'odd'
+            }
           }
          }}
          onRowSelectionModelChange={(newSelection) => {
@@ -249,100 +256,38 @@ const Table = () => {
          disableRowSelectionOnClick
          checkboxSelection={true}
        />
-      <div className='flex justify-between'>
-        <h2 className="mt-2 mb-2">Select a row to view incident details</h2>
+      <div className='flex justify-between mt-4'>
+      <FormControl className='min-w-48' size='small'> 
+      <InputLabel id="row-color" className='mb-2 h-5 w-40'>Row color</InputLabel>
+        <Select
+          sx={{
+            marginTop: 1,
+            marginBottom: 1,
+            border: .5,
+            ".MuiOutlinedInput-notchedOutline": { border: 0 },
+              "&.MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline":{
+                border: 0,
+              },
+              "&.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":{
+                border: 0,
+              },
+          }}
+          labelId="row-color"
+          id="row-color"
+          value={rowSort}
+          label={rowSort}
+          onChange={handleRowColor}
+          disableUnderline={true}
+        >
+          <MenuItem value={'none'}>None</MenuItem>
+          <MenuItem value={'priority'}>By Priority</MenuItem>
+          <MenuItem value={'status'}>By Status</MenuItem>
+        </Select>
+        </FormControl>
         <h2 className="mt-2 mb-2">Go to <span onClick={() => router.push('http://localhost:3000/dashboard/connect-cluster')} className='font-bold focus:outline-none text-blue-700 hover:text-primary-600'>Connect Cluster</span> page to add additional members</h2>
       </div>
     </div>
    )
-   
-  } else {
-
-    return (
-      <div>
-        <div className="flex justify-between">
-          <p className="px-0 pt-2 mb-2 text-left">{incidentList[0].cluster_name}</p>
-          <p className="px-0 pt-2 text-right">Cluster IP Address: {incidentList[0].cluster_ip}</p>
-        </div>
-          <br></br>
-        <div className="flex justify-between">
-          <p className="px-0 pt-2 text-right">Double click a cell to edit</p>
-          <FormControlLabel
-            label='Show Row Colors'
-            control={
-              <Checkbox
-              checked={coloredRows}
-              onChange={handleCheckChange}
-              inputProps={{ 'aria-label': 'controlled' }}
-              />
-            }
-          />
-        </div>
-          <DataGrid
-            initialState={{
-              sorting: {
-                sortModel: [{field: 'incident_date', sort: 'desc'}]
-              },
-              pagination: {paginationModel: {pageSize: 10}},
-            }}
-            pageSizeOptions={[5,10,25,50]}
-            sx={{
-              boxShadow: 2,
-              border: 2,
-              borderColor: 'black',
-              color: 'black',
-              '& .MuiDataGrid-cell:hover': {
-                color: 'primary.main',
-              },
-              ".odd": {
-                bgcolor:"white",
-                "&:hover": {
-                  bgcolor:"darkgray"
-                }
-              },
-              ".even": {
-                bgcolor:"#E5E4E2",
-                "&:hover": {
-                  bgcolor:"darkgray"
-                }
-              },
-              "& .MuiDataGrid-columnHeaderCheckbox .MuiDataGrid-columnHeaderTitleContainer": {
-                display: "none",   
-              },
-              "& .MuiDataGrid-columnHeaders": {
-                bgcolor: 'white',   
-              },
-              ".column-header": {
-                bgcolor:"white",
-                color:"black"
-              }
-            }}
-            editMode='cell'
-            getRowId={(incidentList) => incidentList.incident_id}
-            rows={incidentList}
-            columns={columns}
-            processRowUpdate={updateTable}
-            onProcessRowUpdateError={(() => console.log('Error processing row update'))}
-            onRowEditStop={(params) => {
-              console.log('params', params);
-            }}
-            onRowSelectionModelChange={(newSelection) => {
-              console.log('row select')
-              router.push(`/dashboard/incident-details/${newSelection}`)
-            }}
-            getRowClassName={(params) =>
-              params.indexRelativeToCurrentPage % 2 === 0 ? 'even' : 'odd'
-            }
-            disableRowSelectionOnClick
-            checkboxSelection={true}
-          />
-        <div className='flex justify-between'>
-          <h2 className="mt-2 mb-2">Select a row to view incident details</h2>
-          <h2 className="mt-2 mb-2">Go to <span onClick={() => router.push('http://localhost:3000/dashboard/connect-cluster')} className='font-bold focus:outline-none text-blue-700 hover:text-primary-600'>Connect Cluster</span> page to add additional members</h2>
-        </div>
-      </div>
-    )
-  }
 
 };
 

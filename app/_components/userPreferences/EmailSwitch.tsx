@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import Switch from '@mui/material/Switch';
-import {useState, useEffect} from 'react';
+import { useState } from 'react';
 import { FormControlLabel } from '@mui/material';
 import { alpha, styled } from '@mui/material/styles';
 import { red } from '@mui/material/colors';
