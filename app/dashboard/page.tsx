@@ -10,6 +10,7 @@ import { redirect } from "next/navigation"
 import { authOptions } from '../api/auth/[...nextauth]/route';
 import { getServerSession } from 'next-auth';
 import { Tab, TabList, TabGroup, TabPanel, TabPanels, Divider } from "@tremor/react";
+import React from 'react';
 
 export const metadata: Metadata = {
   title: 'Dashboard',

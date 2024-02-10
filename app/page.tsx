@@ -7,6 +7,7 @@ import SecondInfoSection from "./_components/landingPage/secondInfoSection";
 import TeamInfoSection from "./_components/landingPage/teamInfoSection";
 import MediumArticleSection from "./_components/landingPage/mediumSection";
 import Footer from "./_components/landingPage/footerSection";
+import React from 'react';
 
 export default function LandingPage() {
   return (

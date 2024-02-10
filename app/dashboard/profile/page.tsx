@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import { User } from '../../../types/definitions';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
+import React from 'react';
 
 export default function Profile() {
 
