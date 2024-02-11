@@ -21,7 +21,7 @@ export async function NodeCPUHealth({ cluster_ip }: { cluster_ip: string }) {
 
     return (
       <div>
-        <Title className="text-center py-3">CPU Utilization By Node</Title>
+        <Title data-cy='node-cpu' className="py-4">CPU Utilization By Node</Title>
         <div id='NodeCPUHealth-row-1' className='display: inline-flex py-4'>
           {nodeCircles}
         </div>
@@ -44,7 +44,7 @@ export async function PodHealth({ cluster_ip }: { cluster_ip: string }) {
     const chartData1 = numByNamePodsResult.map((n: NameSpacePods) => { return { name: n.metric.namespace, 'Number of Pods': Number(n.value[1]) } })
     return (
       <div id='PodHealth-row-1' className='display: block py-4'>
-        <Card>
+        <Card data-cy='pod-name'>
           <Title>Number of Pods</Title>
           <Subtitle>By Namespace</Subtitle>
           <BarChart
@@ -76,7 +76,7 @@ export async function PodRestartHealth({ cluster_ip }: { cluster_ip: string }) {
     const chartData2 = restartByNamePodsResult.map((n: NameSpacePods) => { return { name: n.metric.namespace, 'Number of Restarted Pods': Number(n.value[1]) } })
     return (
       <div id='podRestartHealth-row-1' className='display: block py-4'>
-        <Card>
+        <Card data-cy='pod-restart'>
           <Title>Number of restarted pods per namespace</Title>
           <Subtitle>By Namepace ~ 5 Minutes</Subtitle>
           <BarChart
@@ -111,7 +111,7 @@ export async function ClusterHealth({ cluster_ip }: { cluster_ip: string }) {
     return (
       <div>
         <section id='cluster-health' className='display: inline-flex py-4 space-x-5'>
-          <Card className="max-w-lg  mx-auto" decoration="top" decorationColor="red">
+          <Card data-cy='cluster-summary' className="max-w-lg  mx-auto" decoration="top" decorationColor="red">
             <Text className="p-2">Ready Nodes</Text>
             <Metric className="p-2">{numOfReadyNodesResult}</Metric>
           </Card>

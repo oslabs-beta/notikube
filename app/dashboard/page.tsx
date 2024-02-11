@@ -36,11 +36,11 @@ export default async function Dashboard() {
             <Divider>Metrics</Divider>
             <TabGroup className="pl-8 my-4">
               <TabList color="red" variant="solid">
-                <Tab>Node CPU</Tab>
-                <Tab>Cluster CPU/Mem</Tab>
-                <Tab>Pod By NameSpace</Tab>
-                <Tab>Pod Restarts</Tab>
-                <Tab>Cluster Summary</Tab>
+                <Tab data-cy='node-cpu-tab'>Node CPU</Tab>
+                <Tab data-cy='cluster-cpu-tab'>Cluster CPU/Mem</Tab>
+                <Tab data-cy='pod-name-tab'>Pod By NameSpace</Tab>
+                <Tab data-cy='pod-restart-tab'>Pod Restarts</Tab>
+                <Tab data-cy='cluster-summary-tab'>Cluster Summary</Tab>
               </TabList>
               <TabPanels >
                 <TabPanel>

@@ -8,7 +8,7 @@ export default function CPUMemCircle({ cpu, memory }: { cpu: number, memory: num
     
   return (
     <div className="space-y-3 py-5">
-    <Card className="max-w-sm mx-auto flex" decoration="top" decorationColor="red">
+    <Card data-cy='cluster-cpu' className="max-w-sm mx-auto flex" decoration="top" decorationColor="red">
         <div>
         <p className="p-4 text-slate-500 text-sm text-center font-mono">Cluster Memory Usage</p>
           <ProgressCircle

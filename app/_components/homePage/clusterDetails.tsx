@@ -5,8 +5,8 @@ export default async function clusterDetails({ cluster_name, cluster_ip }: { clu
   return (
     <div>
       <div className="flex justify-between">
-        <p className="py-2 text-left">{cluster_name}</p>
-        <p className="px-8 text-right">Cluster IP Address: {cluster_ip}</p>
+        <p className="py-2 text-left" data-cy='header-cluster-name'>{cluster_name}</p>
+        <p className="px-8 text-right" data-cy='header-cluster-ip'>Cluster IP Address: {cluster_ip}</p>
       </div>
       <Divider>Alerts</Divider>
     </div>
