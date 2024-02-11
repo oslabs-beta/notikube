@@ -27,18 +27,31 @@ export type Incident = {
   incident_status: string, 
   comment: string,
   incident_assigned_to: string,
-  metric_data_id: string,
+  metric_data_id?: string,
   cluster_id: string,
   cluster_name: string,
-  incident_assigned_by?: string,
-  incident_assigned_date?: string,
-  incident_due_date?: string,
-  members?: [
+  cluster_ip: string,
+  incident_assigned_by: string,
+  incident_assigned_date: string,
+  incident_due_date: string,
+  members: [
     {
     name: string,
     email: string,
     }
   ],
+  updateEdit?: Function,
+}
+
+export type SnapshotDataDefinition = {
+  metric_data_id: string, 
+  incident_id: string, 
+  ready_nodes: string, 
+  unhealthy_nodes: string, 
+  ready_pods: string, 
+  unhealthy_pods: string, 
+  cluster_memory_usage: string, 
+  cluster_cpu_usage: string
 }
 
 export type User = {
@@ -49,10 +62,11 @@ export type User = {
   slack: string,
   cluster_id?: string,
   cluster_name?: string,
+  cluster_owner: boolean,
 }
 
 export type Email = {
-  email: string,
+  email?: string,
 }
 
 export type TableData = {
@@ -79,4 +93,33 @@ export type ClusterRes = {
 export type UserName = {
   name: string,
   email: string,
+}
+
+export type EditDetailsType = {
+  incident_title?: string, 
+  priority_level?: string,
+  incident_status?: string,
+  description?: string, 
+  comment?: string,
+  incident_assigned_to?: string,
+  incident_assigned_by?: string,
+  incident_assigned_date?: string,
+  incident_due_date?: string,
+  incident_type?: string,
+  cluster_name?: string,
+  members?: [
+    {
+    name: string,
+    email: string,
+    }
+  ],
+  incident_id?: string,
+  cluster_id?: string,
+  updateEdit?: Function,
+  incident_date?: string,
+}
+
+export type PermanentDetailsType = {
+  date?: string,
+  incident_type?: string,  
 }

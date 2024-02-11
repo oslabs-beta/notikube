@@ -15,14 +15,17 @@ export async function POST(req: any) {
 
   try {
     // This checks whether the logged in user has an associated cluster_id
-    const verifyUserCluster = await sql`SELECT cluster_id FROM users WHERE user_id = ${user_id}`
-    if (verifyUserCluster[0].cluster_id !== null) {
-      return NextResponse.json({ error: 'Error: You already have a cluster associated with your account!' }, { status: 400 })
+    if (user_id !== undefined) {
+      const verifyUserCluster = await sql`SELECT cluster_id FROM users WHERE user_id = ${user_id}`
+    
+      if (verifyUserCluster[0].cluster_id !== null) {
+        return NextResponse.json({ error: 'Error: You already have a cluster associated with your account!' }, { status: 400 })
+      }
     }
 
     // This checks whether the submitted cluster_ip from the popup modal already exists
     const verifyClusterIp = await sql`SELECT cluster_ip from clusters WHERE cluster_ip = ${clusterIp}`
-    console.log(verifyClusterIp)
+
     if (verifyClusterIp.length !== 0) {
       console.log('clusterip already exists!')
       return NextResponse.json({ error: 'Error: This clusterIp already exists!' }, { status: 400 })
@@ -35,11 +38,16 @@ export async function POST(req: any) {
     }
 
     // This grabs the cluster_id and sends it back to the user so that cluster_id is associated with the user
-    const grabClusterId = await sql`INSERT INTO clusters (cluster_name, cluster_ip) VALUES (${clusterName}, ${clusterIp}) RETURNING cluster_id`
+    const grabClusterId = await sql`
+      INSERT INTO clusters (cluster_name, cluster_ip) VALUES (${clusterName}, ${clusterIp}) RETURNING cluster_id`
+
     const clusterId = grabClusterId[0].cluster_id
 
     // This inserts into users cluster_ip
-    const addClusterToUser = await sql`UPDATE users SET cluster_id=${clusterId} WHERE user_id=${user_id}`
+    if (user_id !== undefined) {
+      const addClusterToUser = await sql`
+      UPDATE users SET cluster_id=${clusterId}, cluster_owner=TRUE WHERE user_id=${user_id}`
+    }
 
     // If all the checks have passed, return true boolean
     return NextResponse.json({newCluster: true});
