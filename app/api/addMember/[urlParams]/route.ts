@@ -22,7 +22,7 @@ export async function GET(request: NextRequest, {params}: {params: {urlParams: a
 
         if (user[0] !== undefined) {
         await sql `
-        update users set cluster_id=${idValues[0]} where email=${idValues[1]};
+        update users set cluster_id=${idValues[0]}, cluster_owner=FALSE where email=${idValues[1]};
         `
         return NextResponse.redirect('http://localhost:3000/auth/login');
         } else {
