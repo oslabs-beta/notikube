@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import sql from "../../utils/db";
 import { Incident } from "../../../types/definitions";
 import { numOfReadyNodes, numOfUnhealthyNodes, numOfReadyPods, numOfUnhealthyPods, clusterMemoryUsage, clusterCpuUsage10mAvg } from "../../lib/queries";
+import checkRules from "../../lib/rules/rules";
 
 export async function POST(req: NextRequest) {
     try {
@@ -29,6 +30,9 @@ export async function POST(req: NextRequest) {
         const newIncident = await sql`INSERT INTO incidents (cluster_id, incident_type, description, priority_level, incident_title, incident_status) VALUES (${clusterId}, ${incident_type}, ${incident_description}, ${priority_level}, ${incident_title}, ${incident_status}) RETURNING *;`
         console.log('newIncident:', newIncident)
         const newIncidentId = newIncident[0]['incident_id']
+
+        // Check configurations/rules
+        const configurationCheck = await checkRules(newIncident[0]['cluster_id'])
 
         // Retrieving IP Address from db for PromQL queries for the metric snapshot 
         const clusterInformation = await sql`SELECT * FROM clusters WHERE cluster_id=${clusterId}`
