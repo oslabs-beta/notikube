@@ -6,6 +6,11 @@ import bcrypt from 'bcrypt'
 
 export const authOptions: NextAuthOptions = {
     providers: [
+        GithubProvider({
+            clientId: process.env.GITHUB_ID as string,
+            clientSecret: process.env.GITHUB_SECRET as string
+          }),
+
         CredentialsProvider({
             name: 'credentials',
             credentials: {},
@@ -54,6 +59,19 @@ export const authOptions: NextAuthOptions = {
                 console.log(e)
                 return
             } 
+        },
+
+        async signIn({profile, account}) {
+            if (account?.provider == 'credentials') {
+                return true
+            }
+            console.log(profile)
+            let res = await sql`SELECT * FROM users WHERE email=${profile.email}`
+            if (!res.length) {
+                await sql`INSERT INTO users (name, email) VALUES (${profile.name}, ${profile.email}) RETURNING *;`
+            }
+
+            return true
         }
     }
 }

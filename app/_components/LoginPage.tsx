@@ -34,6 +34,7 @@ const LoginPage = () => {
       });
 
       if (res.error) {
+        console.log(res.error)
         alert("User not found!");
         return;
       }
@@ -42,6 +43,11 @@ const LoginPage = () => {
     catch(e) {
       console.log(e)
     }
+  }
+
+  const handleGithubLogin = (e: React.MouseEvent) => {
+    e.preventDefault();
+    signIn('github')
   }
 
   return (
@@ -56,7 +62,7 @@ const LoginPage = () => {
           </div>
           <div className="flex flex-col justify-center">
             <h3 className="text-center text-2xl py-6">Login</h3>
-            <button className="flex justify-center">
+            <button className="flex justify-center" onClick={handleGithubLogin}>
               <Image src={githubLogo} alt="Github" width={25} />
               <p className='text-lg px-3'>Github</p>
             </button>
