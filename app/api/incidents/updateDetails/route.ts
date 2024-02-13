@@ -5,7 +5,13 @@ import { Incident, Email } from '../../../../types/definitions';
 
 export async function POST(req: NextRequest, res: NextResponse) {
 
+  let redirectURL = '';
+  process.env.NODE_ENV === 'development' ? redirectURL = 'http://localhost:3000/auth/login' : 
+  redirectURL = 'http://www.notikube.com/auth/login'
+
   const data = await req.json();
+
+  try {
 
   // look up who the incident was previously assigned to
   const assignedTo: Incident[] = await sql`
@@ -29,7 +35,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
         'NotiKube: You have been assigned a new incident',
         `You have been assigned a new NotiKube incident: <b>${data.incident_title}</b>.
         <br><br> 
-        Please <a href="http://localhost:3000/auth/login">log in</a> to your NotiKube account and navigate to the Incidents page for more details.`
+        Please <a href=${redirectURL}>log in</a> to your NotiKube account and navigate to the Incidents page for more details.`
       )
     }
   }
@@ -40,5 +46,12 @@ export async function POST(req: NextRequest, res: NextResponse) {
   `
 
   return NextResponse.json({response: 'successfully updated incident'});
+
+  } catch(err) {
+    console.log('error', err)
+    return NextResponse.json({
+        message: `Error updating incident details.`
+    });
+}
 
 };

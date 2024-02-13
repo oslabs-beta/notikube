@@ -10,6 +10,7 @@ import { authOptions } from "../../api/auth/[...nextauth]/route";
 
 export default async function Incidents() {
 
+  
   const session = await getServerSession(authOptions);
   const user_id = session?.user.userid;
 
@@ -17,7 +18,7 @@ export default async function Incidents() {
   const cluster_id = await sql`
     select cluster_id from users where user_id=${user_id}
   `
-  if (cluster_id[0].cluster_id === null) redirect('http://localhost:3000/dashboard/connect-cluster')
+  if (cluster_id[0].cluster_id === null) redirect('/dashboard/connect-cluster')
 
   }
 

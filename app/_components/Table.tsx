@@ -24,6 +24,9 @@ const Table = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [rowSort, setRowSort] = useState('none');
 
+  let redirectURL = '';
+  process.env.NODE_ENV === 'development' ? redirectURL = 'http://localhost:3000/dashboard/connect-cluster' : redirectURL = 'http://www.notikube.com/dashboard/connect-cluster'
+
   async function fetchData(user_id: (string | undefined)) {
     if (user_id !== undefined) {
     let res = await fetch(`/api/incidents/getAlerts/${user_id}`, {cache: 'no-store'})
@@ -284,7 +287,7 @@ const Table = () => {
           <MenuItem value={'status'}>By Status</MenuItem>
         </Select>
         </FormControl>
-        <h2 className="mt-2 mb-2">Go to <span onClick={() => router.push('http://localhost:3000/dashboard/connect-cluster')} className='font-bold focus:outline-none text-blue-700 hover:text-primary-600'>Connect Cluster</span> page to add additional members</h2>
+        <h2 className="mt-2 mb-2">Go to <span onClick={() => router.push(redirectURL)} className='font-bold focus:outline-none text-blue-700 hover:text-primary-600'>Connect Cluster</span> page to add additional members</h2>
       </div>
     </div>
    )

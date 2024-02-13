@@ -17,14 +17,19 @@ export async function POST(req: NextRequest, res: NextResponse) {
     data.status = true;
   }
 
-  console.log('email status', data.status)
-  console.log('user_id', data.user_id)
+  try {
 
     await sql`
       update users set email_status=${data.status} where user_id=${data.user_id}
     `
 
-
     return NextResponse.json({message: 'success'})
 
+    } catch(err) {
+      console.log('error', err)
+      return NextResponse.json({
+          message: `Error updating email preferences.`
+      });
 }
+
+};

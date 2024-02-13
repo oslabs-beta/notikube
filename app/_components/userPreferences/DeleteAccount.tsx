@@ -10,7 +10,7 @@ const DeleteAccount = (props: {user_id: (string | undefined)}) => {
 
     function handleClick() {
         if (confirm('Deleting user account will remove all data associated with this account. This action cannot be undone. Do you wish to continue deleting your account?')) {
-            fetch('http://localhost:3000/api/updateUser/removeAccount', {
+            fetch('/api/updateUser/removeAccount', {
                 method: 'POST',
                 body: JSON.stringify({user_id: props.user_id})
             })

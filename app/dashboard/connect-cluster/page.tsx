@@ -99,7 +99,7 @@ export default function ConnectCluster() {
   // function to handle the delete cluster button
   const deleteCluster = () => {
     if (confirm('Deleting this cluster will remove all previous cluster incidents and all members will lose access to the cluster. Are you sure you want to delete this cluster?')) {
-    fetch(`http://localhost:3000/api/updateCluster/delete/${userData?.cluster_id}`)
+    fetch(`/api/updateCluster/delete/${userData?.cluster_id}`)
     let newUserData = JSON.parse(JSON.stringify(userData))
     newUserData.cluster_id = null;
     setUserData(newUserData)
@@ -109,7 +109,7 @@ export default function ConnectCluster() {
   const removeCluster = () => {
     console.log('remove cluster')
     if (confirm('Removing this cluster will revoke your access to all cluster incidents and details. To regain access to incidents and cluster details, you must be invited to rejoin the cluster by the cluster owner. Are you sure you want to remove this cluster?')) {
-      fetch(`http://localhost:3000/api/updateUser/removeCluster/${userId}`)
+      fetch(`/api/updateUser/removeCluster/${userId}`)
       alert('Cluster removed')
       window.location.reload();
     }

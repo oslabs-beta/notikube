@@ -7,6 +7,8 @@ export async function GET(request: NextRequest, {params}: {params: {incident_id:
 
   const { incident_id } = params;
 
+  try {
+
   const incidentDetails: Incident[] = await sql`
     select * from incidents where incident_id=${incident_id}
   `
@@ -24,4 +26,10 @@ export async function GET(request: NextRequest, {params}: {params: {incident_id:
 
   return NextResponse.json({incidentDetails: incidentDetails, snapshotData: snapshotData, memberProps: members});
   
-}
+  } catch(err) {
+    console.log('error', err)
+    return NextResponse.json({
+        message: `Error retrieving incident details.`
+    });
+  }
+};

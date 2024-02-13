@@ -23,7 +23,7 @@ export default function IncidentDetails({params}: {params: {incident_id: any}}) 
 
   async function fetchIncident() {
     if (incident_id !== undefined) {
-    let res = await fetch(`http://localhost:3000/api/incidents/incidentDetails/${incident_id}`)
+    let res = await fetch(`/api/incidents/incidentDetails/${incident_id}`)
     const data: {incidentDetails: Incident[], snapshotData: SnapshotDataDefinition, memberProps: [{name:string, email:string}]} = await res.json();
     setIncidentDetails(data.incidentDetails[0]);
     setMembers(data.memberProps)

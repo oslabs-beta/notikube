@@ -6,11 +6,11 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
     const data = await req.json();
 
+    try {
+
     const user = await sql`
       delete from users where user_id=${data.user_id} returning users.name
     `
-    console.log('user.name', user[0].name)
-
     await sql`
       update incidents set incident_assigned_to='' where incident_assigned_to=${user[0].name} 
     `
@@ -20,4 +20,11 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
     return NextResponse.json({message: 'success'})
 
+    } catch(err) {
+      console.log('error', err)
+      return NextResponse.json({
+          message: `Error removing user account.`
+      });
 }
+
+};

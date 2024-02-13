@@ -38,9 +38,6 @@ const EditForm = (props: {
     getMembers(props.memberProps);
   }
 
-  console.log('props members', props.memberProps)
-  console.log('member array', memberArray)
-
   const router = useRouter();
 
   // function to handle submit when user saves edits

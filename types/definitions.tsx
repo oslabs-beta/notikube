@@ -57,6 +57,7 @@ export type User = {
   cluster_name?: string,
   cluster_owner: boolean,
   email_status: boolean,
+  account_created: string,
 }
 
 export type Email = {
