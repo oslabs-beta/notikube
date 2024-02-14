@@ -1,4 +1,4 @@
-import { Card, Text, Metric, Title, BarChart, Subtitle } from "@tremor/react";
+import { Card, Text, Metric, Title, BarChart, Subtitle, ProgressCircle } from "@tremor/react";
 import {
   numOfReadyNodes,
   numByNamePods,
@@ -7,9 +7,12 @@ import {
   cpuUtilByNode,
   numOfReadyPods,
   numOfUnhealthyPods,
+  clusterMemoryUsage,
+  clusterCpuUsage10mAvg
 } from "../../lib/queries";
 import { NameSpacePods, CircleNode } from "../../../types/definitions";
 import NodeCircle from "./nodeCircle";
+import CPUMemCircle from "./cpuMemCircle";
 
 export async function NodeCPUHealth({ cluster_ip }: { cluster_ip: string }) {
   try {
@@ -18,8 +21,8 @@ export async function NodeCPUHealth({ cluster_ip }: { cluster_ip: string }) {
 
     return (
       <div>
-        <Title className="text-center">CPU Utilization By Node</Title>
-        <div id='NodeCPUHealth-row-1' className='display: inline-flex py-4'>
+        <Title className="text-left pt-3">CPU Utilization By Node</Title>
+        <div id='NodeCPUHealth-row-1' className='display: inline-flex pb-4 pt-1'>
           {nodeCircles}
         </div>
       </div>
@@ -29,7 +32,7 @@ export async function NodeCPUHealth({ cluster_ip }: { cluster_ip: string }) {
     console.log('Error - NodeCPUHealth:', e)
     return (
       <div>
-        <Title className="text-center">Data Error</Title>
+        <Title className="text-center m-10 ml-5">Data Error</Title>
       </div>
     )
   }
@@ -61,7 +64,7 @@ export async function PodHealth({ cluster_ip }: { cluster_ip: string }) {
     console.log('Error - PodHealth:', e)
     return (
       <div>
-        <Title className="text-center">Data Error</Title>
+        <Title className="text-center m-10 ml-5">Data Error</Title>
       </div>
     )
   }
@@ -93,7 +96,7 @@ export async function PodRestartHealth({ cluster_ip }: { cluster_ip: string }) {
     console.log('Error - PodRestartHealth:', e)
     return (
       <div>
-        <Title className="text-center">Data Error</Title>
+        <Title className="text-center m-10 ml-5">Data Error</Title>
       </div>
     )
   }
@@ -132,7 +135,28 @@ export async function ClusterHealth({ cluster_ip }: { cluster_ip: string }) {
     console.log('Error - ClusterHealth:', e)
     return (
       <div>
-        <Title className="text-center">Data Error</Title>
+        <Title className="text-center m-10 ml-5">Data Error</Title>
+      </div>
+    )
+  }
+}
+
+export async function ClusterCPUMem({ cluster_ip }: { cluster_ip: string }){
+  try{
+    const memory = await clusterMemoryUsage(cluster_ip);
+    const cpu = await clusterCpuUsage10mAvg(cluster_ip);
+
+    return(
+      <div className="display: inline-flex">
+        <CPUMemCircle cpu={Number(cpu)} memory={Number(memory)}/>
+      </div>
+    )
+  }
+  catch (e) {
+    console.log('Error - clusterCPUMem:', e)
+    return (
+      <div>
+        <Title className="text-center m-10 ml-5">Data Error</Title>
       </div>
     )
   }

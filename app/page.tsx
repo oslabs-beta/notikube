@@ -1,11 +1,13 @@
-import Navbar from "./_components/LandingPage/Navbar";
-import TitleSection from "./_components/LandingPage/TitleSection";
-import CoreTechSection from "./_components/LandingPage/CoreTechSection";
-import FirstInfoSection from "./_components/LandingPage/FirstInfoSection";
-import SecondInfoSection from "./_components/LandingPage/SecondInfoSection";
-import TeamInfoSection from "./_components/LandingPage/TeamInfoSection";
-import MediumArticleSection from "./_components/LandingPage/MediumSection";
-import Footer from "./_components/LandingPage/FooterSection";
+// import Navbar from "./_components/LandingPage/Navbar";
+import Navbar from './_components/landingPage/navbar';
+import TitleSection from "./_components/landingPage/titleSection";
+import CoreTechSection from "./_components/landingPage/coreTechSection";
+import FirstInfoSection from "./_components/landingPage/firstinfoSection";
+import SecondInfoSection from "./_components/landingPage/secondInfoSection";
+import TeamInfoSection from "./_components/landingPage/teamInfoSection";
+import MediumArticleSection from "./_components/landingPage/mediumSection";
+import Footer from "./_components/landingPage/footerSection";
+import React from 'react';
 
 export default function LandingPage() {
   return (
