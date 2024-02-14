@@ -46,14 +46,14 @@ const Signup = () => {
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 w-full">
+    <div className="grid grid-cols-1 sm:grid-cols-2 w-full bg-white dark:bg-gray-900">
       <div className="flex flex-col justify-center">
         <form className="max-w-[400px] w-full mx-auto bg-white p-4">
           <div className="flex justify-center text-4xl font-bold text-center py-6 pr-8">
-            <Link href={"/"}>
+            <Link href={'/'}>
               <Image className="px-5" src={Logo} alt="logo" width={55} />
             </Link>
-            <span>NotiKube</span>
+            <span className="self-center">NotiKube</span>
           </div>
           <h3 className="text-center text-2xl py-6">Sign Up</h3>
           <div className="flex flex-col py-2">
@@ -69,7 +69,7 @@ const Signup = () => {
             <label>Email</label>
             <input
               className="rounded"
-              type="text"
+              type="email"
               placeholder="johndoe@gmail.com"
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -78,7 +78,7 @@ const Signup = () => {
             <label>Password</label>
             <input
               className="rounded"
-              type="text"
+              type="password"
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
@@ -89,7 +89,7 @@ const Signup = () => {
             onClick={(e: any) => submit(e)}
           />
           <p>
-            Already have an account?{" "}
+            Already have an account?{' '}
             <Link
               className="text-NotikubeRed hover:text-primary-300"
               href="/auth/login"
