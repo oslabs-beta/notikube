@@ -21,8 +21,8 @@ export async function NodeCPUHealth({ cluster_ip }: { cluster_ip: string }) {
 
     return (
       <div>
-        <Title className="text-center py-3">CPU Utilization By Node</Title>
-        <div id='NodeCPUHealth-row-1' className='display: inline-flex py-4'>
+        <Title className="text-left pt-3">CPU Utilization By Node</Title>
+        <div id='NodeCPUHealth-row-1' className='display: inline-flex pb-4 pt-1'>
           {nodeCircles}
         </div>
       </div>

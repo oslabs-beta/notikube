@@ -1,5 +1,6 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import React from 'react';
 
 export default function ConnectClusterModal({
   isModalVisible,

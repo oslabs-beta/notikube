@@ -6,7 +6,11 @@ import { TableData, ClusterRes } from '../../../../../types/definitions';
 
 export async function GET(request: NextRequest, {params}: {params: {user_id: string}}) {
 
+  console.log('envorionment', process.env.NODE_ENV)
+
   const { user_id } = params; 
+
+  try {
 
   const cluster_id: ClusterRes[] = await sql`
     select cluster_id from users where user_id=${user_id}
@@ -19,5 +23,12 @@ export async function GET(request: NextRequest, {params}: {params: {user_id: str
     `
 
   return NextResponse.json([incidents, members]);
+
+  } catch(err) {
+    console.log('error', err)
+    return NextResponse.json({
+        message: `Error retrieving alerts.`
+    });
+}
   
 };

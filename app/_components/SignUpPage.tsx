@@ -4,10 +4,10 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';;
-import { useState } from 'react';
+import { useState, MouseEvent } from 'react';
 // import { useNavigate } from 'react-router-dom';
 import SignUpImage from '../../public/assets/NotiKubeSignUp.svg'
-import Logo from '../../public/assets/logo.svg'
+import Logo from '../../public/assets/logo.svg';
 
 const Signup = () => {
   const [fullName, setFullName] = useState('');
@@ -86,7 +86,7 @@ const Signup = () => {
             className="rounded border w-full my-5 py-2 bg-NotikubeRed hover:bg-primary-300 cursor-pointer text-white"
             type="submit"
             value="Submit"
-            onClick={(e) => submit(e)}
+            onClick={(e: any) => submit(e)}
           />
           <p>
             Already have an account?{" "}
