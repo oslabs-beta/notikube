@@ -1,7 +1,6 @@
 
 import * as React from 'react';
 import Table from '../../_components/Table'
-import AddMemberComponent from '../../_components/AddMember';
 import {redirect} from 'next/navigation';
 import sql from '../../utils/db';
 import {getServerSession} from 'next-auth';
@@ -11,6 +10,7 @@ import { authOptions } from "../../api/auth/[...nextauth]/route";
 
 export default async function Incidents() {
 
+  
   const session = await getServerSession(authOptions);
   const user_id = session?.user.userid;
 
@@ -18,7 +18,7 @@ export default async function Incidents() {
   const cluster_id = await sql`
     select cluster_id from users where user_id=${user_id}
   `
-  if (cluster_id[0].cluster_id === null) redirect('http://localhost:3000/dashboard/connect-cluster')
+  if (cluster_id[0].cluster_id === null) redirect('/dashboard/connect-cluster')
 
   }
 
@@ -31,12 +31,8 @@ export default async function Incidents() {
         <h1 className="text-left pl-0 py-0 text-5xl font-extrabold dark:text-white">Incident History</h1>
         </div>
         <div className="self-end justify-end">
-        <AddMemberComponent />
         </div>
       </div>
-      <br></br>
-      <br></br>
-      <br></br>
       <Table />
       </div>
       )

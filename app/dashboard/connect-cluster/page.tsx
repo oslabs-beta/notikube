@@ -8,7 +8,10 @@ import UserClusters from "../../_components/ConnectClusterPage/UserClusters";
 // ConnectClusterModal is the popup modal that appears when you press 'Add New Cluster'
 import ConnectClusterModal from "../../_components/ConnectClusterPage/ConnectClusterModal";
 import { User } from '../../../types/definitions';
-import EditCluster from '../../_components/ConnectClusterPage/EditCluster'
+import EditCluster from '../../_components/ConnectClusterPage/EditCluster';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
+import AddMemberClient from "../../_components/AddMemberClient";
 
 export default function ConnectCluster() {
 
@@ -96,7 +99,7 @@ export default function ConnectCluster() {
   // function to handle the delete cluster button
   const deleteCluster = () => {
     if (confirm('Deleting this cluster will remove all previous cluster incidents and all members will lose access to the cluster. Are you sure you want to delete this cluster?')) {
-    fetch(`http://localhost:3000/api/updateCluster/delete/${userData?.cluster_id}`)
+    fetch(`/api/updateCluster/delete/${userData?.cluster_id}`)
     let newUserData = JSON.parse(JSON.stringify(userData))
     newUserData.cluster_id = null;
     setUserData(newUserData)
@@ -106,15 +109,23 @@ export default function ConnectCluster() {
   const removeCluster = () => {
     console.log('remove cluster')
     if (confirm('Removing this cluster will revoke your access to all cluster incidents and details. To regain access to incidents and cluster details, you must be invited to rejoin the cluster by the cluster owner. Are you sure you want to remove this cluster?')) {
-      fetch(`http://localhost:3000/api/updateUser/removeCluster/${userId}`)
+      fetch(`/api/updateUser/removeCluster/${userId}`)
       alert('Cluster removed')
       window.location.reload();
     }
   }
 
   while (loading) {
-    return <div>loading ...</div>
-  }
+    return ( 
+    <div>
+      <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={true}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
+    </div>
+  )}
 
 // if the user is not associated with a cluster, render instructions and the add cluster form
   if (userData?.cluster_id === null) {
@@ -153,14 +164,7 @@ export default function ConnectCluster() {
         <h1 className="text-left py-5 text-5xl font-extrabold dark:text-white">
           Your Cluster
         </h1>
-        <button
-          id="defaultModalButton"
-          onClick={initiateAdd}
-          className="text-black bg-slate-200 border-black hover:border-black hover:bg-slate-500 hover:text-white focus:ring-white focus:outline-none font-medium rounded-lg text-sm px-5 py-3 text-center dark:bg-slate-600 dark:hover:bg-slate-700 dark:focus:ring-slate-800 mt-4 w-44 shadow-lg"
-          type="button"
-        >
-          + Add New Cluster
-        </button>
+        <AddMemberClient />  
       </div>
       <br></br>
       <br></br>
@@ -178,12 +182,19 @@ export default function ConnectCluster() {
 
       {/* Table for Clusters associated with Users */}
       <UserClusters clusterName={clusterName} clusterIp={clusterIp} owner={userRole} edit={edit}/>
-      <br></br>
       <div className="flex justify-between">
       <button 
-          className="text-white bg-primary-500 hover:bg-primary-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-3 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 w-36 h-12 mt-6" onClick={changeEdit}>
+          className="text-white bg-primary-500 hover:bg-primary-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-3 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 w-36 h-12 mt-12" onClick={changeEdit}>
           Edit Cluster
-          </button>
+      </button>
+      <button
+          id="defaultModalButton"
+          onClick={initiateAdd}
+          className="text-black bg-slate-200 border-black hover:border-black hover:bg-slate-500 hover:text-white focus:ring-white focus:outline-none font-medium rounded-lg text-sm px-5 py-3 text-center dark:bg-slate-600 dark:hover:bg-slate-700 dark:focus:ring-slate-800 mt-12 w-44 shadow-lg"
+          type="button"
+        >
+          + Add New Cluster
+      </button>
           </div>
       <button
           id="defaultModalButton"
@@ -221,13 +232,16 @@ export default function ConnectCluster() {
   return (
 
     <div>
-      <h1 className="text-left py-5 text-5xl font-extrabold dark:text-white">
+      <div className="flex justify-between items-center">
+        <h1 className="text-left py-5 text-5xl font-extrabold dark:text-white">
           Your Cluster
         </h1>
+      <AddMemberClient />
+      </div>
       <br></br>
       <UserClusters clusterName={clusterName} clusterIp={clusterIp} owner={userRole} edit={edit}/>
       <div className="inline-flex">
-      <h3 className="mt-5">* Cluster members cannot make changes to cluster name or cluster IP. Only owners can edit cluster details. To be removed from this cluster <span className='mt-5 text-red-600' onClick={removeCluster}>click here</span>.</h3>
+      <h3 className="mt-5">* Cluster members cannot make changes to cluster name or cluster IP. Only owners can edit cluster details. To be removed from this cluster <span className='mt-5 text-red-600 hover:text-blue-700' onClick={removeCluster}>click here</span>.</h3>
       <br></br>
       </div>
     </div>

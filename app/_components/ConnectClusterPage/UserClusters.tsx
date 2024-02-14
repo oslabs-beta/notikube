@@ -1,10 +1,7 @@
 "use client"
-
-import { useEffect, useState } from "react";
-import EditCluster from "../../_components/ConnectClusterPage/EditCluster";
+import React from 'react';
 
 export default function UserClusters(props: { owner?: string; clusterName: string; clusterIp: string; edit: string }) {
-
 
   return (
     <div className="w-full overflow-x-auto shadow-lg sm:rounded-lg">

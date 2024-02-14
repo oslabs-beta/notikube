@@ -1,5 +1,6 @@
 // Components
-import Sidebar from "../_components/Sidebar/Sidebar"
+import Sidebar from "../_components/Sidebar/Sidebar";
+import React from 'react';
 
 export default function Layout ({ children } : {children : React.ReactNode }) {
 
