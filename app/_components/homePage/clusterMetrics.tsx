@@ -1,3 +1,4 @@
+import React from 'react'
 import { Card, Text, Metric, Title, BarChart, Subtitle, ProgressCircle } from "@tremor/react";
 import {
   numOfReadyNodes,

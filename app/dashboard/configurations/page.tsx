@@ -18,7 +18,7 @@ export default function Rules(){
     const [error, setError] = useState('')
     const [team, setTeam] = useState([])
     const [rule, setRule] = useState({
-        user_id: userId,
+        user_id: 'b9b3b029-13ed-47e2-b9ae-4f321bd77224',
         rule_title: '',
         rule_type: '',
         rule_assign: '',
@@ -74,7 +74,8 @@ export default function Rules(){
     }
 
     //create a new rule
-    async function newRule(){
+    async function newRule(e: React.FormEvent){
+      e.preventDefault()
       try{
         let res = await fetch('/api/configurations/new-rule', {
             method: "POST",
@@ -83,11 +84,11 @@ export default function Rules(){
         });
         const data = await res.json();
         console.log('DATA RECIEVED:', data)
-        if(data.error === 'Sorry, cluster can only have one rule per type'){
+        if(data === 'Sorry, cluster can only have one rule per type'){
             setError('Sorry, cluster can only have one rule per type')
         }
-        else if(data.message === 'rule successfully added'){
-            redirect('/dashboard/configurations')
+        else if(data === 'rule successfully added'){
+            setRuleModal(false)
         }
       }
       catch(e){
@@ -313,7 +314,3 @@ export default function Rules(){
           //  <td className="px-10 py-5 text-right font-semibold text-gray-900">{props.owner}
           //  </td>
           //</tr> */}
-
-//TO DO: Currently, the page seems to re-render after hitting 'save rule' even though it successfully hits the new-rule backend. The issue is not being able to tell the user that their 'saved rule' may not have been successful. 
-// See api/configurations for all API route handlers
-// Need to also update alertmanager API with auto assign and notify functionality.
