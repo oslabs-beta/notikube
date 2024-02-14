@@ -218,7 +218,6 @@ export async function activeCluster(ip: string) {
           throw new Error(`Failed to fetch data from Prometheus. Status: ${response.status}`);
       }
       const responseData = await response.json()
-      //console.log('active cluster:', responseData.data.result)
       const result = responseData.data.result;
       return result.length > 0;
   }
