@@ -10,6 +10,7 @@ import { redirect } from "next/navigation"
 import { authOptions } from '../api/auth/[...nextauth]/route';
 import { getServerSession } from 'next-auth';
 import { Tab, TabList, TabGroup, TabPanel, TabPanels, Divider } from "@tremor/react";
+import React from 'react';
 
 export const metadata: Metadata = {
   title: 'Dashboard',
@@ -35,6 +36,7 @@ export default async function Dashboard() {
             </Suspense>
             <Divider>Metrics</Divider>
             <TabGroup className="pl-8 my-4">
+            <div className="mb-4">
               <TabList color="red" variant="solid">
                 <Tab>Node CPU</Tab>
                 <Tab>Cluster CPU/Mem</Tab>
@@ -42,6 +44,7 @@ export default async function Dashboard() {
                 <Tab>Pod Restarts</Tab>
                 <Tab>Cluster Summary</Tab>
               </TabList>
+            </div>
               <TabPanels >
                 <TabPanel>
                   <Suspense fallback={<LoadingSpinner />}>
@@ -70,9 +73,9 @@ export default async function Dashboard() {
                 </TabPanel>
               </TabPanels>
             </TabGroup>
+            </div>
           </div>
         </div>
-      </div>
     );
   }
   catch (error) {

@@ -5,6 +5,8 @@ export async function GET(request: NextRequest, {params}: {params: {id: string}}
 
     const {id} = params;
 
+    try {
+
     const user = await sql`
       update users set cluster_id=NULL where user_id=${id} returning users.name
     `
@@ -13,4 +15,12 @@ export async function GET(request: NextRequest, {params}: {params: {id: string}}
     `
 
     return NextResponse.json({status: 'successfully removed cluster from user table'})
+
+    } catch(err) {
+      console.log('error', err)
+      return NextResponse.json({
+          message: `Error deleting cluster.`
+      });
 }
+
+};

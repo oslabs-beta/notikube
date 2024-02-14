@@ -15,6 +15,7 @@
     "@emotion/react": "latest",
     "@emotion/styled": "latest",
     "@heroicons/react": "^1.0.6",
+    "@mui/icons-material": "^5.15.7",
     "@mui/material": "^5.15.3",
     "@mui/x-data-grid": "latest",
     "@tremor/react": "^3.13.1",

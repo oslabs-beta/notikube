@@ -1,6 +1,7 @@
 "use client"
 
 import { FormEvent } from 'react';
+import React from 'react';
 
 export default function EditCluster (props: {clusterName:string, clusterIp:string, cluster_id?:string, change_cluster: Function, change_edit: Function}) {
 
