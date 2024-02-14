@@ -23,10 +23,9 @@ const Signup = () => {
 
   const router = useRouter()
 
-  async function submit(e: Event) {
+  async function submit(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
     e.preventDefault();
     if (fullName == "" || email == "" || password == "") {
-      // return alert("Fill in all of the fields!");
       setShowFieldsError(true)
       return
     }
