@@ -6,6 +6,7 @@ import { useSession } from 'next-auth/react';
 import { Button, Label, TextInput, Select, Card } from 'flowbite-react';
 import Image from 'next/image'
 import {redirect} from "next/navigation"
+import { unstable_noStore as noStore } from 'next/cache';
 import { Alert } from 'flowbite-react';
 
 
@@ -27,7 +28,7 @@ export default function SetRule() {
 
     async function getTeam(user_id: string | undefined){
         if (user_id !== undefined){
-           fetch(`http://localhost:3000/api/configurations/get-team/${user_id}`)
+           fetch(`/api/configurations/get-team/${user_id}`)
             .then(res => res.json())
             .then(teamOptions => {
                 setTeam(teamOptions)
@@ -37,23 +38,25 @@ export default function SetRule() {
     }
 
     async function newRule(){
-        fetch('http://localhost:3000/api/configurations/new-rule', {
-            method: 'POST',
-            body: JSON.stringify(rule)
-        })
-        .then(res => res.json())
-        .then(res => {
-            console.log('new rule response', res.message)
-            if(res.message === 'Sorry, cluster can only have one rule per type'){
-                setError('Sorry, cluster can only have one rule per type')
-            }
-            if(res.message === 'rule successfully added'){
-                redirect('/dashboard/configurations')
-            }
-        })
-        .catch(e => {
-            console.log('newRule: error setting new rule:', e)
-        })
+      noStore();
+      try{
+        let res = await fetch('/api/configurations/new-rule', {
+            method: "POST",
+            body: JSON.stringify(rule),
+            headers: {"Content-Type": "application/json"},
+        });
+        const data = await res.json();
+        console.log('DATA RECIEVED:', data)
+        if(data.error === 'Sorry, cluster can only have one rule per type'){
+            setError('Sorry, cluster can only have one rule per type')
+        }
+        else if(data.message === 'rule successfully added'){
+            redirect('/dashboard/configurations')
+        }
+      }
+      catch(e){
+        console.error('newRule: error setting new rule:', e);
+        }
     }
 
     function NextFormOptions({alertType} : { alertType: string}){
