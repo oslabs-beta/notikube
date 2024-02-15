@@ -6,4 +6,11 @@ declare module "next-auth" {
             userid: string
         } & DefaultSession["user"]
     }
+
+    interface User {}
+
+    interface Account{}
+
+    interface Profile {}
+
 }

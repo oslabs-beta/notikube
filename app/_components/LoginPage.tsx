@@ -21,7 +21,6 @@ const LoginPage = () => {
 
   async function submit(e: React.MouseEvent) {
     e.preventDefault();
-    //Use the alert snackbar here
     if (email == "" || password == "") {
       setShowFieldsError(true)
       return;
@@ -33,8 +32,8 @@ const LoginPage = () => {
 
     try {
       const res: any = await signIn("credentials", {
-        email,
-        password,
+        email: email,
+        password: password,
         redirect: false,
       });
 
