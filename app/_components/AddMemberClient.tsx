@@ -20,7 +20,9 @@ export default function AddMemberClient() {
       method: 'POST',
       body: JSON.stringify(body),
     })
-    alert(`Invitation sent to ${body.email}`)
+    const res = await response.json();
+    console.log(res);
+    alert(`Invitation sent to ${body.email}`);
     window.location.reload();
   }
 
