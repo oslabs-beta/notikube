@@ -22,7 +22,7 @@ export default function Profile() {
   const [imageUrl, setImageUrl] = useState<string>("https://png2.cleanpng.com/sh/00663d74b8b97254f9a0df3226bae67f/L0KzQYm3V8IzN5R2kJH0aYP2gLBuTgV0baMyiOR4ZnnvdX65UME5NZpzReVyZ3j3Pcb6hgIua5Dzftd7ZX7mdX7smQBwNWZnTac9Y0C8SYjqgBUzNmY5TqUANUW0QYa6UsMyPmc9Sag7MUixgLBu/kisspng-user-profile-2018-in-sight-user-conference-expo-5b554c0997cce2.5463555115323166816218.png")
 
   // if user has uploaded a profile picture, overwrite default url in state
-  if (user?.profile_picture_url) setImageUrl(user.profile_picture_url)
+  // if (user?.profile_picture_url) setImageUrl(user.profile_picture_url)
 
   // read month, day, year from timestamp of account creation and then reformat it to more readable version mm//dd/yyy
   let timeStamp = user?.account_created.slice(0,10)
