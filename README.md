@@ -33,14 +33,14 @@ Check out our [website](https://notikube.com) and medium article
 - NotiKube requires a working Kubernetes cluster with Prometheus installed, if you need help setting that up we have provided instructions below to get started. Otherwise, please 
   skip ahead to **Expose prometheus-server** and **Notikube webhook** as those are necessary steps in order to use NotiKube successfully.
 
-### Set up a cluster
+### 1. Set up a cluster
 - See the guides below to help you set it up.
   - [Amazon Web Services](https://docs.aws.amazon.com/eks/latest/userguide/sample-deployment.html) deployment guide
   - [Azure](https://learn.microsoft.com/en-us/azure/aks/learn/quick-kubernetes-deploy-cli) deployment guide
   - [Google Cloud Platform](https://cloud.google.com/kubernetes-engine/docs/quickstarts/deploy-app-container-image) deployment guide
   - [Minikube](https://kubernetes.io/docs/tutorials/hello-minikube/) 
 
-### Install Prometheus
+### 2. Install Prometheus
 - To pull metrics from your Kubernetes cluster and set up alerts, we will use Prometheus.
 - Helm is a package manager for Kubernetes and simplifies the process of installing Prometheus into your cluster.
   
@@ -68,7 +68,7 @@ helm install prometheus prometheus-community/prometheus
 ```
 - Promtheus is now installed!
 
-### Expose prometheus-server
+### 3. Expose prometheus-server
 - In order for NotiKube to properly pull your cluster's metrics you'll need to expose your prometheus server's exernal IP address.
 - You may need change the service type for your prometheus-server from clusterIP to LoadBalancer.
 ```
@@ -80,7 +80,7 @@ kubectl patch svc prometheus-server -p '{"spec": {"type":"LoadBalancer"}}'
 kubectl get services  
 ```
 
-### Notikube webhook
+### 4. Notikube webhook
 - To connect your prometheus alert manager to Notikube we need to set up a new webhook....
 
 ## Meet the team
