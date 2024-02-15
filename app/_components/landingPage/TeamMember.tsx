@@ -10,7 +10,13 @@ interface TeamMemberProps {
   role: string;
 }
 
-const TeamMember: React.FC<TeamMemberProps> = ({ name, avatarSrc, githubLink, linkedinLink, role }) => {
+const TeamMember: React.FC<TeamMemberProps> = ({
+  name,
+  avatarSrc,
+  githubLink,
+  linkedinLink,
+  role,
+}) => {
   return (
     <div className="text-center text-gray-500 dark:text-gray-400">
       <Image

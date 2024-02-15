@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "target": "ES6",
+    "lib": ["dom", "dom.iterable", "esnext", "ESNext.String", "ES2021"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -22,6 +22,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/_components/landingPage/github.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/_components/LandingPage/github.jsx", "app/utils/db.js"],
   "exclude": ["node_modules"]
 }
