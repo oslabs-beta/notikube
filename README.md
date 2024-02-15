@@ -40,7 +40,7 @@ Check out our [website](https://notikube.com) and medium article
   - [Google Cloud Platform](https://cloud.google.com/kubernetes-engine/docs/quickstarts/deploy-app-container-image) deployment guide
   - [Minikube](https://kubernetes.io/docs/tutorials/hello-minikube/) 
 
-### Install prometheus
+### Install Prometheus
 - To pull metrics from your Kubernetes cluster and set up alerts, we will use Prometheus.
 - Helm is a package manager for Kubernetes and simplifies the process of installing Prometheus into your cluster.
   
