@@ -39,14 +39,17 @@ Check out our [website](https://notikube.com) and medium article
 - NotiKube requires a working Kubernetes cluster with Prometheus installed, if you need help setting that up we have provided instructions below to get started. Otherwise, please 
   skip ahead to **Expose prometheus-server** and **Notikube webhook** as those are necessary steps in order to use NotiKube successfully.
 
-### 1. Set up a cluster
+### 1. Create an account
+- Head to [notikube.com](notikube.com) and sign-up for a new account then come back to this document
+  
+### 2. Set up a cluster
 - See the guides below to help you set it up.
   - [Amazon Web Services](https://docs.aws.amazon.com/eks/latest/userguide/sample-deployment.html) deployment guide
   - [Azure](https://learn.microsoft.com/en-us/azure/aks/learn/quick-kubernetes-deploy-cli) deployment guide
   - [Google Cloud Platform](https://cloud.google.com/kubernetes-engine/docs/quickstarts/deploy-app-container-image) deployment guide
   - [Minikube](https://kubernetes.io/docs/tutorials/hello-minikube/) 
 
-### 2. Install Prometheus
+### 3. Install Prometheus
 - To pull metrics from your Kubernetes cluster and set up alerts, we will use Prometheus.
 - Helm is a package manager for Kubernetes and simplifies the process of installing Prometheus into your cluster.
   
@@ -74,7 +77,7 @@ helm install prometheus prometheus-community/prometheus
 ```
 - Promtheus is now installed!
 
-### 3. Expose prometheus-server
+### 4. Expose prometheus-server
 - In order for NotiKube to properly pull your cluster's metrics you'll need to expose your prometheus server's exernal IP address.
 - You may need change the service type for your prometheus-server from clusterIP to LoadBalancer.
 ```
@@ -86,7 +89,7 @@ kubectl patch svc prometheus-server -p '{"spec": {"type":"LoadBalancer"}}'
 kubectl get services  
 ```
 
-### 4. Notikube webhook
+### 5. Notikube webhook
 - Once you have your prometheus-server exposed, you can connect your prometheus alert manager to Notikube
 - Make sure you create an account with Notikube before you continue with this step
 - On your terminal, enter the following
@@ -132,6 +135,8 @@ groups:
       description: <DESCRIPTION>
 ```
 - Enter Esc and ":x" to save and exit
+
+Head back to [notikube](notikube.com), sign-in, add your prometheus-server external IP address in the 'connect cluster' page, and then you are all set!
 
 ## Meet the team
 - Jesse Chou - [GitHub](https://github.com/jesse-chou/) | [LinkedIn](https://www.linkedin.com/in/jesse-chou/)
