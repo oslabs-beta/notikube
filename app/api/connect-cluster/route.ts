@@ -1,7 +1,7 @@
 import { NextResponse} from 'next/server';
 import sql from '../../utils/db';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '../auth/[...nextauth]/route'
+import { authOptions } from '../auth/[...nextauth]/authOptions'
 import { activeCluster } from '../../lib/queries';
 
 export async function POST(req: any) {  

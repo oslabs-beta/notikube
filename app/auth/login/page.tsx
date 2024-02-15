@@ -1,7 +1,7 @@
 import LoginPage from "../../_components/LoginPage";
 import { getServerSession } from "next-auth";
 import {redirect} from "next/navigation";
-import {authOptions} from "../../api/auth/[...nextauth]/route";
+import {authOptions} from "../../api/auth/[...nextauth]/authOptions";
 import React from 'react';
 
 export default async function Login() {

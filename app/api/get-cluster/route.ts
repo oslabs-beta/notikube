@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import sql from "../../utils/db";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../auth/[...nextauth]/route";
+import { authOptions } from "../auth/[...nextauth]/authOptions";
 
 export async function GET(req: any) {
   // This grabs the user id from the current logged in user
