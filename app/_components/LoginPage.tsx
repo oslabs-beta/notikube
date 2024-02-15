@@ -9,16 +9,20 @@ import LogInImage from "../../public/assets/NotiKubeLogin.svg";
 import { SignInResponse, signIn } from "next-auth/react";
 import Logo from "../../public/assets/logo.svg"
 import githubLogo from "../../public/assets/github-mark.svg"
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
 const LoginPage = () => {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showFieldsError, setShowFieldsError] = useState(false)
+  const [showUserNotFound, setShowUserNotFound] = useState(false)
 
   async function submit(e: React.MouseEvent) {
     e.preventDefault();
-    //Use the alert snackbar here
     if (email == "" || password == "") {
+      setShowFieldsError(true)
       return;
     }
     const params = {
@@ -28,13 +32,14 @@ const LoginPage = () => {
 
     try {
       const res: any = await signIn("credentials", {
-        email,
-        password,
+        email: email,
+        password: password,
         redirect: false,
       });
 
       if (res.error) {
-        alert("User not found!");
+        console.log(res.error)
+        setShowUserNotFound(true)
         return;
       }
       router.replace('/dashboard')
@@ -44,7 +49,35 @@ const LoginPage = () => {
     }
   }
 
+  const handleGithubLogin = (e: React.MouseEvent) => {
+    e.preventDefault();
+    signIn('github')
+  }
+
   return (
+    <>
+    <Snackbar open={showFieldsError} autoHideDuration={6000} onClose={() => setShowFieldsError(false)} anchorOrigin={{vertical: 'top', horizontal: 'center'}}>
+          <Alert
+            onClose={() => setShowFieldsError(false)}
+            severity="error"
+            variant="filled"
+            sx={{ width: '100%' }}
+          >
+            Please fill in all of the fields!
+          </Alert>
+    </Snackbar>
+
+    <Snackbar open={showUserNotFound} autoHideDuration={6000} onClose={() => setShowUserNotFound(false)} anchorOrigin={{vertical: 'top', horizontal: 'center'}}>
+          <Alert
+            onClose={() => setShowUserNotFound(false)}
+            severity="error"
+            variant="filled"
+            sx={{ width: '100%' }}
+          >
+            User not found!
+          </Alert>
+    </Snackbar>
+
     <div className="grid grid-cols-1 sm:grid-cols-2 w-full">
       <div className="flex flex-col justify-center"> 
         <form className="max-w-[400px] w-full mx-auto bg-white p-4">
@@ -56,7 +89,7 @@ const LoginPage = () => {
           </div>
           <div className="flex flex-col justify-center">
             <h3 className="text-center text-2xl py-6">Login</h3>
-            <button className="flex justify-center">
+            <button className="flex justify-center" onClick={handleGithubLogin}>
               <Image src={githubLogo} alt="Github" width={25} />
               <p className='text-lg px-3'>Github</p>
             </button>
@@ -103,6 +136,7 @@ const LoginPage = () => {
         <Image className="w-full h-screen p-6" src={LogInImage} alt="Login" />
       </div>
     </div>
+    </>
   );
 };
 

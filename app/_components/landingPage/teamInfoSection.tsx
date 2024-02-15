@@ -32,7 +32,7 @@ export default function TeamInfoSection() {
         "https://ca.slack-edge.com/T04VCTELHPX-U050F0D9T71-9da884f90254-512",
       githubLink: "https://github.com/apiraam96",
       linkedinLink:
-        "https://www.linkedin.com/in/apiraam-selvabaskaran-2427b8162/",
+        "https://www.linkedin.com/in/apiraam-selvabaskaran/",
       role: "Software Engineer",
     },
     {

@@ -7,19 +7,27 @@ import { useRouter } from 'next/navigation';;
 import { useState, MouseEvent } from 'react';
 // import { useNavigate } from 'react-router-dom';
 import SignUpImage from '../../public/assets/NotiKubeSignUp.svg'
-import Logo from '../../public/assets/logo.svg';
+import Logo from '../../public/assets/logo.svg'
+import { Toast } from 'flowbite-react';
+import { HiExclamation} from 'react-icons/hi';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
 const Signup = () => {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showFieldsError, setShowFieldsError] = useState(false)
+  const [showUserExistsError, setShowUserExistsError] = useState(false)
+  const [showUserCreated, setShowUserCreated] = useState(false)
 
   const router = useRouter()
 
-  async function submit(e: Event) {
+  async function submit(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
     e.preventDefault();
     if (fullName == "" || email == "" || password == "") {
-      return alert("Fill in all of the fields!");
+      setShowFieldsError(true)
+      return
     }
     const params = {
       fullName: fullName,
@@ -37,16 +45,55 @@ const Signup = () => {
 
     const data = await res.json();
     if (data.newUser) {
-      alert('New User created!')
-      router.push('/auth/login')
+      setShowUserCreated(true)
       }
     else {
-      alert('User already exists')
+      setShowUserExistsError(true)
     }
   }
 
+  const RouteToLogin = () => {
+    setShowUserCreated(false)
+    router.push('/auth/login')
+  }
+
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 w-full bg-white dark:bg-gray-900">
+    <>
+
+        <Snackbar open={showFieldsError} autoHideDuration={6000} onClose={() => setShowFieldsError(false)} anchorOrigin={{vertical: 'top', horizontal: 'center'}}>
+          <Alert
+            onClose={() => setShowFieldsError(false)}
+            severity="error"
+            variant="filled"
+            sx={{ width: '100%' }}
+          >
+            Please fill in all of the fields!
+          </Alert>
+      </Snackbar>
+
+      <Snackbar open={showUserExistsError} autoHideDuration={6000} onClose={() => setShowUserExistsError(false)} anchorOrigin={{vertical: 'top', horizontal: 'center'}}>
+          <Alert
+            onClose={() => setShowUserExistsError(false)}
+            severity="error"
+            variant="filled"
+            sx={{ width: '100%' }}
+          >
+            User already exists!
+          </Alert>
+      </Snackbar>
+
+      <Snackbar open={showUserCreated} autoHideDuration={6000} onClose={() => RouteToLogin()} anchorOrigin={{vertical: 'top', horizontal: 'center'}}>
+          <Alert
+            onClose={() => RouteToLogin()}
+            severity="success"
+            variant="filled"
+            sx={{ width: '100%' }}
+          >
+            New user created!
+          </Alert>
+      </Snackbar>
+
+    <div className="grid grid-cols-1 sm:grid-cols-2 w-full">
       <div className="flex flex-col justify-center">
         <form className="max-w-[400px] w-full mx-auto bg-white p-4">
           <div className="flex justify-center text-4xl font-bold text-center py-6 pr-8">
@@ -107,6 +154,8 @@ const Signup = () => {
         />
       </div>
     </div>
+    </>
+    
   );
 };
 
