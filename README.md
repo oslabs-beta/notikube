@@ -1,6 +1,10 @@
 # NotiKube
 
-Welcome to NotiKube! A platform that gives you the power to manage the lifecycle of your Kubernetes cluster's Prometheus alerts while having access to the most important health metrics, all in one view. Getting set up is easy, see instructions below on how to get started. Once the webhook is set up, the alerts of your choosing can be sent directly to NotiKube where they become "incidents". All of your incidents can be edited directly in the table or for a more granular view, select one and check out the incident's details. NotiKube gives you the power to manage your team's most important alerts so you can get your cluster back to full health in no time. 
+Welcome to NotiKube! A platform that gives you the power to manage the lifecycle of your Kubernetes cluster's Prometheus alerts while having access to the most important health metrics, all in one view. 
+
+Getting set up is easy, see instructions below on how to get started. Once the webhook is set up, the alerts of your choosing can be sent directly to NotiKube where they become "incidents". All of your incidents can be edited directly in the table or for a more granular view, select one and check out the incident's details. 
+
+NotiKube gives you the power to manage your team's most important alerts so you can get your cluster back to full health in no time. 
 
 Check out our [website](https://notikube.com) and medium article 
 
