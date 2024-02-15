@@ -137,6 +137,7 @@ groups:
 - Enter Esc and ":x" to save and exit
 
 Head back to [notikube](notikube.com), sign-in, add your prometheus-server external IP address in the 'connect cluster' page, and then you are all set!
+- Please note that the app should only be used in light mode at this time. Dark mode will be fixed in future versions.
 
 ## Meet the team
 - Jesse Chou - [GitHub](https://github.com/jesse-chou/) | [LinkedIn](https://www.linkedin.com/in/jesse-chou/)
