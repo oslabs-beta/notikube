@@ -33,14 +33,14 @@ Check out our [website](https://notikube.com) and medium article
 - NotiKube requires a working Kubernetes cluster with Prometheus installed, if you need help setting that up we have provided instructions below to get started. Otherwise, please 
   skip ahead to **Expose prometheus-server** and **Notikube webhook** as those are necessary steps in order to use NotiKube successfully.
 
-### Set up a cluster,
+### Set up a cluster
 - See the guides below to help you set it up.
   - [Amazon Web Services](https://docs.aws.amazon.com/eks/latest/userguide/sample-deployment.html) deployment guide
   - [Azure](https://learn.microsoft.com/en-us/azure/aks/learn/quick-kubernetes-deploy-cli) deployment guide
   - [Google Cloud Platform](https://cloud.google.com/kubernetes-engine/docs/quickstarts/deploy-app-container-image) deployment guide
   - [Minikube](https://kubernetes.io/docs/tutorials/hello-minikube/) 
 
-### Install Prometheus
+### Install prometheus
 - To pull metrics from your Kubernetes cluster and set up alerts, we will use Prometheus.
 - Helm is a package manager for Kubernetes and simplifies the process of installing Prometheus into your cluster.
   
@@ -80,10 +80,10 @@ kubectl patch svc prometheus-server -p '{"spec": {"type":"LoadBalancer"}}'
 kubectl get services  
 ```
 
-### Notikube Webhook
+### Notikube webhook
 - To connect your prometheus alert manager to Notikube we need to set up a new webhook....
 
-## Meet The Team
+## Meet the team
 - Jesse Chou - [GitHub](https://github.com/jesse-chou/) | [LinkedIn](https://www.linkedin.com/in/jesse-chou/)
 - Dane Smith  - [GitHub](https://github.com/danealexandersmith) | [LinkedIn](https://www.linkedin.com/in/danealexandersmith/)
 - Derek Coughlan  - [GitHub](https://github.com/derekcoughlan) | [LinkedIn](https://www.linkedin.com/in/derekcoughlan/)
@@ -96,5 +96,3 @@ kubectl get services
    - Create and work off of your own feature branch.
    - Create a pull request with a detailed description of your changes using our template to merge your feature branch into dev.
    - We will review and get back to you!
-
-## License
