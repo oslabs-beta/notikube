@@ -15,7 +15,7 @@ export default async function homeAlerts({ cluster_ip }: { cluster_ip: string })
             <h5 className="mb-2 text-2xl whitespace-nowrap font-bold tracking-tight text-gray-900 dark:text-white">Total Incidents</h5>
             <p className="font-normal text-3xl text-gray-700 dark:text-gray-400">{totalAlerts}</p>
           </Link>
-          <Link href="/dashboard/incidents" className="block m-2 max-w-sm w-80 p-10 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+          <Link href="/dashboard/incidents" data-cy='total-open-alerts' className="block m-2 max-w-sm w-80 p-10 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
             <h5 className="mb-2 text-2xl whitespace-nowrap font-bold tracking-tight text-gray-900 dark:text-white">Open Incidents</h5>
             <p className="font-normal text-3xl text-gray-700 dark:text-gray-400">{totalOpenAlerts}</p>
           </Link>

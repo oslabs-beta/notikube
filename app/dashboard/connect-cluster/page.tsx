@@ -107,7 +107,7 @@ export default function ConnectCluster() {
 }
 
   const removeCluster = () => {
-    console.log('remove cluster')
+
     if (confirm('Removing this cluster will revoke your access to all cluster incidents and details. To regain access to incidents and cluster details, you must be invited to rejoin the cluster by the cluster owner. Are you sure you want to remove this cluster?')) {
       fetch(`/api/updateUser/removeCluster/${userId}`)
       alert('Cluster removed')

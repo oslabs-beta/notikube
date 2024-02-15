@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function NotiKubeLogo() {
   return (
-    <div>
+    <div className="py-5">
       <Link href="/dashboard" className="flex items-center ps-10 mb-5">
         <Image
           src="/assets/logo.svg"
@@ -12,7 +12,7 @@ export default function NotiKubeLogo() {
           width={20}
           height={20}
         />
-        <span className="self-center text-xl font whitespace-nowrap dark:text-white">
+        <span className="self-center text-xl font-bold whitespace-nowrap dark:text-white">
           NotiKube
         </span>
       </Link>

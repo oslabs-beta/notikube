@@ -15,11 +15,14 @@ const EmailSwitch = (props: {user_id: (string | undefined), status: (boolean | u
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setChecked(event.target.checked)
-    console.log('status', checked)
     fetch('/api/updateUser/email', {
       method:'POST',
       body: JSON.stringify({user_id: props.user_id, status: checked})
     })
+    .then((res) => {
+      return res.json()
+    })
+    .then((res) => console.log(res))
   };
 
   const RedSwitch = styled(Switch)(({ theme }) => ({

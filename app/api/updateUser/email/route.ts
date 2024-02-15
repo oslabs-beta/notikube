@@ -3,13 +3,10 @@ import sql from '../../../utils/db';
 
 
 export async function POST(req: NextRequest, res: NextResponse) {
-  console.log('email route')
 
   let data = await req.json();
 
   let emailStatus: (string | undefined) = undefined;
-
-  console.log('data.status', data.status)
 
   if (data.status === true) {
     data.status = false;
@@ -23,7 +20,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
       update users set email_status=${data.status} where user_id=${data.user_id}
     `
 
-    return NextResponse.json({message: 'success'})
+    return NextResponse.json({message: 'successfully updated email preferences'})
 
     } catch(err) {
       console.log('error', err)

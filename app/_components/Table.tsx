@@ -253,7 +253,6 @@ const Table = () => {
           }
          }}
          onRowSelectionModelChange={(newSelection) => {
-          console.log('row select')
           router.push(`/dashboard/incident-details/${newSelection}`)
          }}
          disableRowSelectionOnClick
@@ -280,7 +279,7 @@ const Table = () => {
           value={rowSort}
           label={rowSort}
           onChange={handleRowColor}
-          disableUnderline={true}
+          //disableUnderline={true}
         >
           <MenuItem value={'none'}>None</MenuItem>
           <MenuItem value={'priority'}>By Priority</MenuItem>

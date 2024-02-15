@@ -58,6 +58,7 @@ export type User = {
   cluster_owner: boolean,
   email_status: boolean,
   account_created: string,
+  profile_picture_url?: string,
 }
 
 export type Email = {

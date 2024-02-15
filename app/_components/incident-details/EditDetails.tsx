@@ -5,8 +5,6 @@ import { EditDetailsType } from '../../../types/definitions'
 
 const EditDetails = (props: EditDetailsType) => {
 
-  console.log('incident assigned', props.incident_assigned_date)
-
   return (
     <div className="resize">
       <div className="grid grid-cols-2 gap-8 resize">

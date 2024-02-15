@@ -83,6 +83,8 @@ const EditForm = (props: {
       method:'POST',
       body: JSON.stringify(body),
     })
+    let res = await response.json();
+    console.log(res);
 
   };
 
