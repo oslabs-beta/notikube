@@ -48,7 +48,8 @@ export default function Profile() {
   }}, [userId])
 
   // Emmanuel, if you add your upload photo function here, then use the commented out setImageUrl function to set the response image url in state, that's all you need to do on this page
-  function addImage(){
+  function addImage(event: React.MouseEvent<HTMLButtonElement>){
+    event.preventDefault()
     console.log('add image')
     // setImageUrl(urlFromResponse)
   }
@@ -73,11 +74,11 @@ export default function Profile() {
       <div className="relative">
       <div className="flex justify-center h-60 object-scale-down p-8 hover:contrast-50 delay-50">
       <img className="" alt="default profile image" src={imageUrl}></img>
-      <div className="absolute w-full h-full text-center text-black text-lg font-semibold pt-20 opacity-0 hover:opacity-100 hover:contrast-100 delay-50" onClick={addImage}>Upload Photo</div>
+      <div className="absolute w-full h-full text-center align-middle text-black text-lg font-semibold opacity-0 hover:opacity-100 hover:contrast-100 delay-50 pt-20" onClick={addImage}>Upload Photo</div>
       </div>
       </div>
       <div className="flex justify-center">
-      <h2 className="text-xl font-normal pb-4 text-left">{user?.name}</h2>
+      <h2 className="text-xl font-normal pb-4 pt-10 text-left">{user?.name}</h2>
       </div>
       <div className="flex justify-center">
       <h2 className="text-xl font-normal pb-4 text-left">{user?.email}</h2>
