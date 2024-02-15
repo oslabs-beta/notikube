@@ -74,7 +74,7 @@ helm install prometheus prometheus-community/prometheus
 ```
 kubectl patch svc prometheus-server -p '{"spec": {"type":"LoadBalancer"}}' 
 ```
-  - If you don't have kubectl, the kubernetes command-line tool, insalled check out this guide: https://kubernetes.io/docs/tasks/tools/
+  - If you don't have kubectl, the kubernetes command-line tool, insalled check out this [guide](https://kubernetes.io/docs/tasks/tools/)
 - Grab your prometheus-server's external IP address for your Notikube account
 ```
 kubectl get services  
