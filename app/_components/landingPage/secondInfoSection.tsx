@@ -6,7 +6,7 @@ export default function SecondInfoSection() {
       <div className="gap-16 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-16 lg:px-6 lg:text-left">
         <div className="grid gap-4 mt-8">
           <Image
-            className="w-full rounded-lg"
+            className="w-full rounded-lg shadow-xl"
             src="/landingPage/Incidents.png"
             width={2000}
             height={2000}
@@ -14,7 +14,7 @@ export default function SecondInfoSection() {
           />
         </div>
         <div className="font-light text-gray-500 sm:text-lg dark:text-gray-400">
-          <h2 className="mb-4 mt-4 text-4xl font-extrabold text-gray-900 dark:text-white">
+          <h2 className="mb-4 mt-10 text-4xl font-extrabold text-gray-900 dark:text-white">
             Track Your Incidents
           </h2>
           <p className="mb-4">

@@ -13,7 +13,7 @@ export default function CoreTechSection() {
             { logo: "kubernetes.svg", link: "https://kubernetes.io/" },
             { logo: "docker.svg", link: "https://www.docker.com/" },
             { logo: "prometheus.svg", link: "https://prometheus.io/" },
-            { logo: "grafana.svg", link: "https://grafana.com/" },
+            { logo: "nextjs.svg", link: "https://nextjs.org/" },
           ].map((tech, index) => (
             <Link
               key={index}
