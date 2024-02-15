@@ -25,7 +25,8 @@ Check out our [website](https://notikube.com) and medium article
 - [Contribution guidelines](#contribution-guidelines)
 
 ## Features
-- Dashboard 
+- Dashboard
+<p><img src='./public/assets/B6ECE698-6479-4408-AE55-D508EAC466C0_1_201_a.jpeg' width="800" height="auto"/></p>
 - Incidents Table
 - Incidents Details
 
