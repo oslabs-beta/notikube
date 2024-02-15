@@ -111,7 +111,7 @@ receivers:
 ```
 kubectl edit configmaps prometheus-server
 ```
-- CLick 'i' to insert
+- Click 'i' to insert
 - In the alerting_rules.yml file, you can add your specific alerts based on the template provided here
 ```
 groups:
