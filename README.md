@@ -35,7 +35,7 @@ Check out our [website](https://notikube.com) and medium article
 - Incident Details
 <p><img src='./public/assets/B745C95B-C732-497D-AA07-31DC3050B42B_1_201_a.jpeg' width="800" height="auto"/></p>
 
-## Getting started:
+## Getting started
 - NotiKube requires a working Kubernetes cluster with Prometheus installed, if you need help setting that up we have provided instructions below to get started. Otherwise, please 
   skip ahead to **Expose prometheus-server** and **Notikube webhook** as those are necessary steps in order to use NotiKube successfully.
 
