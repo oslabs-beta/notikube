@@ -25,10 +25,15 @@ Check out our [website](https://notikube.com) and medium article
 - [Contribution guidelines](#contribution-guidelines)
 
 ## Features
+
 - Dashboard
 <p><img src='./public/assets/B6ECE698-6479-4408-AE55-D508EAC466C0_1_201_a.jpeg' width="800" height="auto"/></p>
+
 - Incidents Table
-- Incidents Details
+<p><img src='./public/assets/D4D6FB4C-FC8E-4353-BACE-F9CFD262BEC7_1_201_a.jpeg' width="800" height="auto"/></p>
+
+- Incident Details
+<p><img src='./public/assets/B745C95B-C732-497D-AA07-31DC3050B42B_1_201_a.jpeg' width="800" height="auto"/></p>
 
 ## Getting started:
 - NotiKube requires a working Kubernetes cluster with Prometheus installed, if you need help setting that up we have provided instructions below to get started. Otherwise, please 
