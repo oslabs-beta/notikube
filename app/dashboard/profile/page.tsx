@@ -72,7 +72,7 @@ export default function Profile() {
   <div className="flex justify-center">
     <div className="border-2 border-black shadow-2xl rounded-xl w-auto h-fit p-12">
       <div className="relative">
-      <div className="flex justify-center h-60 object-scale-down p-8 hover:contrast-50 delay-50">
+      <div className="flex justify-center h-60 object-scale-down p-8">
       <img className="" alt="default profile image" src={imageUrl}></img>
       <div className="absolute w-full h-full text-center align-middle text-black text-lg font-semibold opacity-0 hover:opacity-100 hover:contrast-100 delay-50 pt-20" onClick={addImage}>Upload Photo</div>
       </div>
