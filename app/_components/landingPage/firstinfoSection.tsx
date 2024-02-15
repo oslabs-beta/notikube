@@ -8,7 +8,7 @@ export default function FirstInfoSection() {
           <div className="gap-16 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-8 lg:px-6 lg:text-left">
             <div className="font-light text-gray-500 sm:text-lg dark:text-gray-400">
               <h2 className="mb-4 text-4xl font-extrabold text-gray-900 dark:text-white">
-                Monitor Your Alerts Alongside Cluster Health
+                Monitor Your Incidents Alongside Cluster Health
               </h2>
               <p className="mb-4">
                 See the most critical incident metrics pulled directly from
@@ -21,8 +21,8 @@ export default function FirstInfoSection() {
             </div>
             <div className="grid gap-4 mt-8">
               <Image
-                className="w-full rounded-lg"
-                src="/landingPage/Dashboard.png"
+                className="w-full rounded-lg shadow-xl"
+                src='/landingPage/Dashboard.png'
                 width={2000}
                 height={2000}
                 alt="dashboard"

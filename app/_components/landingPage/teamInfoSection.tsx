@@ -22,7 +22,7 @@ export default function TeamInfoSection() {
       name: "Emmanuel Ikhalea",
       avatarSrc:
         "https://ca.slack-edge.com/T04VCTELHPX-U05AZ9KR9A9-8ffcc9718ee7-512",
-      githubLink: "#",
+      githubLink: "https://github.com/DeveloperIkhalea",
       linkedinLink: "https://www.linkedin.com/in/emmanuel-ikhalea-222781178/",
       role: "Software Engineer",
     },

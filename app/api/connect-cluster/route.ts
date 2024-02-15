@@ -1,7 +1,7 @@
 import { NextResponse} from 'next/server';
 import sql from '../../utils/db';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '../../api/auth/[...nextauth]/route'
+import { authOptions } from '../auth/[...nextauth]/route'
 import { activeCluster } from '../../lib/queries';
 
 export async function POST(req: any) {  
@@ -16,10 +16,12 @@ export async function POST(req: any) {
   try {
     // This checks whether the logged in user has an associated cluster_id
     if (user_id !== undefined) {
+      if (user_id !== undefined) {
       const verifyUserCluster = await sql`SELECT cluster_id FROM users WHERE user_id = ${user_id}`
     
-      if (verifyUserCluster[0].cluster_id !== null) {
-        return NextResponse.json({ error: 'Error: You already have a cluster associated with your account!' }, { status: 400 })
+        if (verifyUserCluster[0].cluster_id !== null) {
+          return NextResponse.json({ error: 'Error: You already have a cluster associated with your account!' }, { status: 400 })
+      }
       }
     }
 
