@@ -25,22 +25,31 @@ Check out our [website](https://notikube.com) and medium article
 - [Contribution guidelines](#contribution-guidelines)
 
 ## Features
-- Dashboard 
-- Incidents Table
-- Incidents Details
 
-## Getting started:
+- Dashboard
+<p><img src='./public/assets/B6ECE698-6479-4408-AE55-D508EAC466C0_1_201_a.jpeg' width="800" height="auto"/></p>
+
+- Incidents Table
+<p><img src='./public/assets/D4D6FB4C-FC8E-4353-BACE-F9CFD262BEC7_1_201_a.jpeg' width="800" height="auto"/></p>
+
+- Incident Details
+<p><img src='./public/assets/B745C95B-C732-497D-AA07-31DC3050B42B_1_201_a.jpeg' width="800" height="auto"/></p>
+
+## Getting started
 - NotiKube requires a working Kubernetes cluster with Prometheus installed, if you need help setting that up we have provided instructions below to get started. Otherwise, please 
   skip ahead to **Expose prometheus-server** and **Notikube webhook** as those are necessary steps in order to use NotiKube successfully.
 
-### 1. Set up a cluster
+### 1. Create an account
+- Head to [notikube.com](notikube.com) and sign-up for a new account then come back to this document
+  
+### 2. Set up a cluster
 - See the guides below to help you set it up.
   - [Amazon Web Services](https://docs.aws.amazon.com/eks/latest/userguide/sample-deployment.html) deployment guide
   - [Azure](https://learn.microsoft.com/en-us/azure/aks/learn/quick-kubernetes-deploy-cli) deployment guide
   - [Google Cloud Platform](https://cloud.google.com/kubernetes-engine/docs/quickstarts/deploy-app-container-image) deployment guide
   - [Minikube](https://kubernetes.io/docs/tutorials/hello-minikube/) 
 
-### 2. Install Prometheus
+### 3. Install Prometheus
 - To pull metrics from your Kubernetes cluster and set up alerts, we will use Prometheus.
 - Helm is a package manager for Kubernetes and simplifies the process of installing Prometheus into your cluster.
   
@@ -68,7 +77,7 @@ helm install prometheus prometheus-community/prometheus
 ```
 - Promtheus is now installed!
 
-### 3. Expose prometheus-server
+### 4. Expose prometheus-server
 - In order for NotiKube to properly pull your cluster's metrics you'll need to expose your prometheus server's exernal IP address.
 - You may need change the service type for your prometheus-server from clusterIP to LoadBalancer.
 ```
@@ -80,7 +89,7 @@ kubectl patch svc prometheus-server -p '{"spec": {"type":"LoadBalancer"}}'
 kubectl get services  
 ```
 
-### 4. Notikube webhook
+### 5. Notikube webhook
 - Once you have your prometheus-server exposed, you can connect your prometheus alert manager to Notikube
 - Make sure you create an account with Notikube before you continue with this step
 - On your terminal, enter the following
@@ -127,12 +136,15 @@ groups:
 ```
 - Enter Esc and ":x" to save and exit
 
+Head back to [notikube](notikube.com), sign-in, add your prometheus-server external IP address in the 'connect cluster' page, and then you are all set!
+- Please note that the app should only be used in light mode at this time. Dark mode will be fixed in future versions.
+
 ## Meet the team
 - Jesse Chou - [GitHub](https://github.com/jesse-chou/) | [LinkedIn](https://www.linkedin.com/in/jesse-chou/)
 - Dane Smith  - [GitHub](https://github.com/danealexandersmith) | [LinkedIn](https://www.linkedin.com/in/danealexandersmith/)
 - Derek Coughlan  - [GitHub](https://github.com/derekcoughlan) | [LinkedIn](https://www.linkedin.com/in/derekcoughlan/)
 - Emmanuel Ikhalea  - [GitHub](https://github.com/DeveloperIkhalea) | [LinkedIn](https://www.linkedin.com/in/emmanuel-ikhalea-222781178/)
-- Apiraam Selvaskbaran  - [GitHub](https://github.com/apiraam96) | [LinkedIn](https://www.linkedin.com/in/apiraam-selvabaskaran-2427b8162/)
+- Apiraam Selvaskbaran  - [GitHub](https://github.com/apiraam96) | [LinkedIn](https://www.linkedin.com/in/apiraam-selvabaskaran/)
 
 ## Contribution guidelines
 - Contributions play a vital role in the open-source community. If you'd like to make a contribution to NotiKube please follow the steps below.
