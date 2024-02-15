@@ -81,7 +81,51 @@ kubectl get services
 ```
 
 ### 4. Notikube webhook
-- To connect your prometheus alert manager to Notikube we need to set up a new webhook....
+- Once you have your prometheus-server exposed, you can connect your prometheus alert manager to Notikube
+- Make sure you create an account with Notikube before you continue with this step
+- On your terminal, enter the following
+```
+kubectl edit configmaps prometheus-alertmanager
+```
+- Click 'i' to insert
+- In the alertmanager.yml file, insert the following
+```
+route:
+  group_wait: 10s
+  group_interval: 30s
+  repeat_interval: 30m
+  routes:
+    - receiver: "notikube"
+      group_wait: 10s
+      continue: true
+receivers:
+  - name: "notikube"
+    webhook_configs:
+    - url: 'https://notikube.com/api/alertmanager?email=<INSERT EMAIL HERE>'
+      send_resolved: true
+```
+- IMPORTANT: Make sure that you follow the URL guidelines carefully
+- Enter Esc and ":x" to save and exit
+
+- To access the alerting rules, enter the following in your terminal
+```
+kubectl edit configmaps prometheus-server
+```
+- CLick 'i' to insert
+- In the alerting_rules.yml file, you can add your specific alerts based on the template provided here
+```
+groups:
+- name: example
+  rules:
+  - alert: <INSERT ALERT NAME>
+    expr: <INSERT TRIGGERING EVENT>
+    labels:
+      severity: <critical/warning/error/info>
+    annotations:
+      summary: <SUMMARY>
+      description: <DESCRIPTION>
+```
+- Enter Esc and ":x" to save and exit
 
 ## Meet the team
 - Jesse Chou - [GitHub](https://github.com/jesse-chou/) | [LinkedIn](https://www.linkedin.com/in/jesse-chou/)
