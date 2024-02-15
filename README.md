@@ -30,7 +30,7 @@ Check out our [website](https://notikube.com) and medium article
 <p><img src='./public/assets/dashboard-demo.gif' width="800" height="auto"/></p>
 
 - Incidents Table
-<p><img src='./public/assets/D4D6FB4C-FC8E-4353-BACE-F9CFD262BEC7_1_201_a.jpeg' width="800" height="auto"/></p>
+<p><img src='./public/assets/table-demo.gif' width="800" height="auto"/></p>
 
 - Incident Details
 <p><img src='./public/assets/B745C95B-C732-497D-AA07-31DC3050B42B_1_201_a.jpeg' width="800" height="auto"/></p>
