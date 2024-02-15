@@ -48,7 +48,7 @@ export default function Profile() {
   }}, [userId])
 
   // Emmanuel, if you add your upload photo function here, then use the commented out setImageUrl function to set the response image url in state, that's all you need to do on this page
-  function addImage(event: React.MouseEvent<HTMLButtonElement>){
+  function addImage(event: React.MouseEvent){
     event.preventDefault()
     console.log('add image')
     // setImageUrl(urlFromResponse)
