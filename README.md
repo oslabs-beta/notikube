@@ -59,9 +59,9 @@ Check out our [website](https://notikube.com) and medium article
   ./get_helm.sh
   
 - Get the official prometheus community helm chart and make sure it's up to date
-  ```
-  helm repo add prometheus-community https://prometheus-community.github.io/helm-charts \ helm repo update 
-  ```
+```
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts \ helm repo update 
+```
 - Install the helm chart into your cluster
 ```
 helm install prometheus prometheus-community/prometheus
