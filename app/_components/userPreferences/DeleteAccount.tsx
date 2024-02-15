@@ -14,6 +14,10 @@ const DeleteAccount = (props: {user_id: (string | undefined)}) => {
                 method: 'POST',
                 body: JSON.stringify({user_id: props.user_id})
             })
+            .then((res) => {
+                return res.json();
+            })
+            .then((res) => console.log(res))
             signOut();
         }
     }

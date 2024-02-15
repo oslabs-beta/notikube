@@ -16,11 +16,14 @@ export default function EditCluster (props: {clusterName:string, clusterIp:strin
     body.cluster_id = props.cluster_id
 
     if (body !== undefined) {
-    const response = await fetch('/api/updateCluster/edit', {
+      const response = await fetch('/api/updateCluster/edit', {
       method: 'POST',
       body: JSON.stringify(body),
-    })
-  }
+      })
+      let res = await response.json()
+      console.log(res)
+    }
+
 
   props.change_cluster(body.cluster_name, body.cluster_ip);
 

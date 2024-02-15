@@ -22,8 +22,6 @@ export default async function Incidents() {
 
   }
 
-
-
   return (
     <div style={{width: '100%', margin:0, padding:0 }}>
       <div className="flex justify-between">

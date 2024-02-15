@@ -47,7 +47,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
 
     )
   } 
-} 
+  } 
 
   return NextResponse.json({message: 'successfullly invited user'});
   
