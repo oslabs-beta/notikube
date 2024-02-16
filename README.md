@@ -33,7 +33,7 @@ Check out our [website](https://notikube.com) and medium article
   - Get a snapshot of your cluster's 'incidents' plus critical metrics
 <p><img src='./public/assets/dash-demo-v2.gif' width="800" height="auto"/></p>
 
-- Incidents Table
+- Incidents History
   - View, sort, and filter all incidents while directly editting cells within the table
 <p><img src='./public/assets/table-demo.gif' width="800" height="auto"/></p>
 
