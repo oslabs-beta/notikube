@@ -34,7 +34,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
 
   if (data.email) {
     console.log('sending email to: ', data.email)
-    sendMail(
+    await sendMail(
       data.email,
       `NotiKube: Invitation to Join ${user[0].name}\'s Cluster`,
       `You have been invited to join <b>${user[0].name}</b>\'s NotiKube team: <b><i>${user[0].cluster_name}</i></b>.<br><br>

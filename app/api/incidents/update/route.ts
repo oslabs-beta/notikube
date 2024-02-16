@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
 
     console.log('sending mail to:', email[0].email)
 
-    sendMail(
+    await sendMail(
       email[0].email,
       'NotiKube: You have been assigned a new incident',
       `You have been assigned a new NotiKube incident: <b>${incident.incident_title}</b>.
