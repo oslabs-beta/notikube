@@ -31,7 +31,7 @@ Check out our [website](https://notikube.com) and medium article
 
 - Dashboard
   - Get a snapshot of your cluster's 'incidents' plus critical metrics
-<p><img src='./public/assets/dashboard-demo.gif' width="800" height="auto"/></p>
+<p><img src='./public/assets/dash-demo-v2.gif' width="800" height="auto"/></p>
 
 - Incidents Table
   - View, sort, and filter all incidents while directly editting cells within the table
