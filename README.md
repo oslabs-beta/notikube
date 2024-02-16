@@ -31,12 +31,12 @@ Check out our [website](https://notikube.com) and medium article
 <p><img src='./public/assets/dashboard-demo.gif' width="800" height="auto"/></p>
 
 - Incidents Table
-  - View, sort, and filter all incidents and directly edit cells within the table
+  - View, sort, and filter all incidents while directly editting cells within the table
 <p><img src='./public/assets/table-demo.gif' width="800" height="auto"/></p>
 
 - Incident Details
   - View cluster metrics at the time of the incident and update any field to track progress
-<p><img src='./public/assets/B745C95B-C732-497D-AA07-31DC3050B42B_1_201_a.jpeg' width="800" height="auto"/></p>
+<p><img src='./public/assets/details-demo.gif' width="800" height="auto"/></p>
 
 ## Getting started
 - NotiKube requires a working Kubernetes cluster with Prometheus installed, if you need help setting that up we have provided instructions below to get started. Otherwise, please 
