@@ -39,7 +39,7 @@ Check out our [website](https://notikube.com) and [medium article](https://mediu
 
 - Incident Details
   - View cluster metrics at the time of the incident and update any field to track progress
-<p><img src='./public/assets/details-demo.gif' width="800" height="auto"/></p>
+<p><img src='./public/assets/details-demo-v3.gif' width="800" height="auto"/></p>
 
 ## Getting started
 - NotiKube requires a working Kubernetes cluster with Prometheus installed, if you need help setting that up we have provided instructions below to get started. Otherwise, please 
