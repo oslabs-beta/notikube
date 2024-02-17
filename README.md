@@ -9,7 +9,7 @@ Getting set up is easy, see instructions below on how to get started. Once the w
 
 NotiKube gives you the power to manage your team's most important alerts so you can get your cluster back to full health in no time. 
 
-Check out our [website](https://notikube.com) and medium article 
+Check out our [website](https://notikube.com) and [medium article](https://medium.com/@jessechou7/notikube-incident-management-for-kubernetes-clusters-bab416fbf584) 
 
 <div align="center">
 	<code><img width="50" src="https://user-images.githubusercontent.com/25181517/202896760-337261ed-ee92-4979-84c4-d4b829c7355d.png" alt="Tailwind CSS" title="Tailwind CSS"/></code>
