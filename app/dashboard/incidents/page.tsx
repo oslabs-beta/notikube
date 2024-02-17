@@ -4,7 +4,7 @@ import Table from '../../_components/Table'
 import {redirect} from 'next/navigation';
 import sql from '../../utils/db';
 import {getServerSession} from 'next-auth';
-import { authOptions } from "../../api/auth/[...nextauth]/route";
+import { authOptions } from "../../api/auth/[...nextauth]/authOptions";
 
 
 

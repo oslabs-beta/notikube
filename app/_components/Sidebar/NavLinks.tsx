@@ -1,7 +1,7 @@
 import DashboardSideBar from "./SideBarList/DashboardSidebar";
 import IncidentsSideBar from "./SideBarList/IncidentsSidebar";
 import ConnectClusterSideBar from "./SideBarList/ConnectClusterSidebar";
-import ConfigurationsSidebar from "./SideBarList/ConfigurationsSidebar";
+// import ConfigurationsSidebar from "./SideBarList/ConfigurationsSidebar";
 
 export default function NavLinks() {
   return (
@@ -19,9 +19,10 @@ export default function NavLinks() {
           <ConnectClusterSideBar />
         </li>
 
-        <li>
+        {/* COMMENT BACK IN WHEN DEREK FINISHES CONFIGURATION PAGE */}
+        {/* <li>
           <ConfigurationsSidebar />
-        </li>
+        </li> */}
       </ul>
     </>
   );

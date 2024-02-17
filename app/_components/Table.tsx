@@ -150,6 +150,12 @@ const Table = () => {
     </div>
   )}
 
+  if (incidentList.length === 0) {
+    return (
+      <div className='mt-6 text-xl'>Congratulations, you have no incidents!</div>
+    )
+  }
+
   return (
     <div>
      <div className="flex justify-between">

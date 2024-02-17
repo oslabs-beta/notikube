@@ -7,7 +7,7 @@ import LoadingSpinner from '../_components/homePage/loadingSpinner';
 import { Suspense } from 'react'
 import type { Metadata } from "next";
 import { redirect } from "next/navigation"
-import { authOptions } from '../api/auth/[...nextauth]/route';
+import { authOptions } from '../api/auth/[...nextauth]/authOptions';
 import { getServerSession } from 'next-auth';
 import { Tab, TabList, TabGroup, TabPanel, TabPanels, Divider } from "@tremor/react";
 import React from 'react';
