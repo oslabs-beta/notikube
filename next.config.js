@@ -3,6 +3,9 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
+        hostname: 'utfs.io'
+      },
+      {
         protocol: 'https',
         hostname: 'ca.slack-edge.com',
         port: '',

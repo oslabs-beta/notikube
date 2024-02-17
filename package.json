@@ -20,6 +20,7 @@
     "@mui/x-data-grid": "latest",
     "@tremor/react": "^3.13.1",
     "@types/node-fetch": "^2.6.11",
+    "@uploadthing/react": "^6.2.2",
     "aws-sdk": "^2.1539.0",
     "bcrypt": "^5.1.1",
     "cookie-parser": "^1.4.6",
@@ -39,6 +40,7 @@
     "react": "^18",
     "react-dom": "^18",
     "swr": "^2.2.4",
+    "uploadthing": "^6.3.3",
     "urlencode": "^2.0.0"
   },
   "devDependencies": {

@@ -131,3 +131,13 @@ button:focus-visible {
   color: white;
   font-style: bold;
 }
+
+.userImage {
+  display: flex;
+  border: 1px solid black;
+  width: 9rem;
+  height: 10rem;
+  justify-content: center;
+  align-content: center;
+  border-radius: 50%;
+}

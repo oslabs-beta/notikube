@@ -4,8 +4,10 @@ import DeleteAcount from "../../_components/userPreferences/DeleteAccount";
 import { useSession } from 'next-auth/react';
 import { useState, useEffect } from 'react';
 import { User } from '../../../types/definitions';
+import Image from "next/image";
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
+import { UploadButton } from "../../utils/uploadthings";
 import React from 'react';
 
 export default function Profile() {
@@ -19,10 +21,15 @@ export default function Profile() {
   // set user details in state
   const [user, setUser] = useState<User>();
   // set state for default profile picture
-  const [imageUrl, setImageUrl] = useState<string>("https://png2.cleanpng.com/sh/00663d74b8b97254f9a0df3226bae67f/L0KzQYm3V8IzN5R2kJH0aYP2gLBuTgV0baMyiOR4ZnnvdX65UME5NZpzReVyZ3j3Pcb6hgIua5Dzftd7ZX7mdX7smQBwNWZnTac9Y0C8SYjqgBUzNmY5TqUANUW0QYa6UsMyPmc9Sag7MUixgLBu/kisspng-user-profile-2018-in-sight-user-conference-expo-5b554c0997cce2.5463555115323166816218.png")
+  const [imageUrl, setImageUrl] = useState<string>("")
 
   // if user has uploaded a profile picture, overwrite default url in state
-  if (user?.profile_picture_url) setImageUrl(user.profile_picture_url)
+  // if (user?.profile_picture_url) setImageUrl(user.profile_picture_url)
+  // if (user?.profile_picture_url !== null && user?.profile_picture_url !== undefined) {
+
+  //   setImageUrl(user.profile_picture_url);
+
+  // }
 
   // read month, day, year from timestamp of account creation and then reformat it to more readable version mm//dd/yyy
   let timeStamp = user?.account_created.slice(0,10)
@@ -31,16 +38,51 @@ export default function Profile() {
   let year = user?.account_created.slice(0,4)
   timeStamp = month + '/' + day + '/' + year;
 
+  const profileImage = imageUrl.length ? imageUrl : "/assets/user.png";
+
+
+  function done (imgUrl:string) {
+    console.log(imgUrl);
+    insertProfileImageUrl(imgUrl);
+  }
+
+  const insertProfileImageUrl = (url:string) => {
+    setImageUrl(url);
+    console.log("in here");
+    // alert("in here");
+     fetch("/api/profile", {
+      method: "POST",
+      body: JSON.stringify({url : url}),
+      headers: {"Content-Type": "application/json" },
+    })
+    .then((res) => res.json())
+    .then((data) => console.log(data))
+    .catch((err) => console.log(err));
+  
+
+  
+}
+
   // function to fetch user data and store it in state
   async function getStatus(user_id:(string | undefined)) {
+
     if (userId !== undefined) {
     let res = await fetch(`/api/getUser/${userId}`)
     const data: User = await res.json();
     setChecked(data.email_status)
     setUser(data)
     setLoading(false)
+    // if (data.profile_picture_url !== null && data.profile_picture_url !== undefined) {
+
+    //   setImageUrl(data.profile_picture_url);
+  
+    // }
     }
+
+
   }
+
+  
   // invoke function to get user data
   useEffect(() => {
     if (userId !== undefined) {
@@ -70,13 +112,35 @@ export default function Profile() {
   return (
   <>
   <div className="flex justify-center">
+ 
     <div className="border-2 border-black shadow-2xl rounded-xl w-auto h-fit p-12">
       <div className="relative">
       <div className="flex justify-center h-60 object-scale-down p-8">
-      <img className="" alt="default profile image" src={imageUrl}></img>
-      <div className="absolute w-full h-full text-center align-middle text-black text-lg font-semibold opacity-0 hover:opacity-100 hover:contrast-100 delay-50 pt-20" onClick={addImage}>Upload Photo</div>
+      <Image
+     className="userImage mx-auto"
+      alt='user profile'
+      src={profileImage}
+      width= {100}
+      height= {120}
+      />
+      <div className="absolute w-full h-full pt-20 opacity-0 hover:opacity-100 flex-col items-center justify-between p-2 ">
+      <UploadButton
+      appearance={{
+        button: "ut-ready:bg-red-500 ut-uploading:cursor-not-allowed rounded-lg bg-grey-500 text-black bg-none p-4",
+      }}
+        endpoint="imageUploader"
+        onClientUploadComplete={ async (res) => {
+          done(res[0].url)    
+        }}
+        onUploadError={(error: Error) => {
+          // Do something with the error.
+          alert(`ERROR! ${error.message}`);
+        }}
+      />
+    </div>
       </div>
       </div>
+     
       <div className="flex justify-center">
       <h2 className="text-xl font-normal pb-4 pt-10 text-left">{user?.name}</h2>
       </div>
