@@ -31,10 +31,10 @@ Check out our [website](https://notikube.com) and [medium article](https://mediu
 
 - Dashboard
   - Get a snapshot of your cluster's 'incidents' plus critical metrics
-<p><img src='./public/assets/dash-demo-v2.gif' width="800" height="auto"/></p>
+<p><img src='./public/assets/dash-demo-v3.gif' width="800" height="auto"/></p>
 
 - Incidents History
-  - View, sort, and filter all incidents while directly editting cells within the table
+  - View, sort, and filter all incidents while directly editing cells within the table
 <p><img src='./public/assets/table-demo.gif' width="800" height="auto"/></p>
 
 - Incident Details
@@ -46,7 +46,7 @@ Check out our [website](https://notikube.com) and [medium article](https://mediu
   skip ahead to **Expose prometheus-server** and **Notikube webhook** as those are necessary steps in order to use NotiKube successfully.
 
 ### 1. Create an account
-- Head to [notikube.com](notikube.com) and sign-up for a new account then come back to this document
+- Head to [notikube.com](notikube.com) and sign up for a new account then come back to this document
   
 ### 2. Set up a cluster
 - See the guides below to help you set it up.
@@ -73,7 +73,7 @@ Check out our [website](https://notikube.com) and [medium article](https://mediu
   chmod 700 get_helm.sh
   ./get_helm.sh
   
-- Get the official prometheus community helm chart and make sure it's up to date
+- Get the official Prometheus community helm chart and make sure it's up to date
 ```
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts \ helm repo update 
 ```
@@ -81,26 +81,26 @@ helm repo add prometheus-community https://prometheus-community.github.io/helm-c
 ```
 helm install prometheus prometheus-community/prometheus
 ```
-- Promtheus is now installed!
+- Prometheus is now installed!
 
 ### 4. Expose prometheus-server
-- In order for NotiKube to properly pull your cluster's metrics you'll need to expose your prometheus server's exernal IP address.
-- You may need change the service type for your prometheus-server from clusterIP to LoadBalancer.
+- In order for NotiKube to properly pull your cluster's metrics you'll need to expose your Prometheus server's external IP address.
+- You may need to change the service type for your prometheus-server from clusterIP to LoadBalancer.
 ```
 kubectl patch svc prometheus-server -p '{"spec": {"type":"LoadBalancer"}}' 
 ```
-  - If you don't have kubectl, the kubernetes command-line tool, insalled check out this [guide](https://kubernetes.io/docs/tasks/tools/)
+  - If you don't have kubectl, the Kubernetes command-line tool, installed check out this [guide](https://kubernetes.io/docs/tasks/tools/)
 - Grab your prometheus-server's external IP address for your Notikube account
 ```
 kubectl get services  
 ```
 
 ### 5. Notikube webhook
-- Once you have your prometheus-server exposed, you can connect your prometheus alert manager to Notikube
+- Once you have your prometheus-server exposed, you can connect your Prometheus alert manager to Notikube
 - Make sure you create an account with Notikube before you continue with this step
 - On your terminal, enter the following
 ```
-kubectl edit configmaps prometheus-alertmanager
+kubectl edit config maps prometheus-alertmanager
 ```
 - Click 'i' to insert
 - In the alertmanager.yml file, insert the following
@@ -124,7 +124,7 @@ receivers:
 
 - To access the alerting rules, enter the following in your terminal
 ```
-kubectl edit configmaps prometheus-server
+kubectl edit config maps prometheus-server
 ```
 - Click 'i' to insert
 - In the alerting_rules.yml file, you can add your specific alerts based on the template provided here
@@ -142,7 +142,7 @@ groups:
 ```
 - Enter Esc and ":x" to save and exit
 
-Head back to [notikube](notikube.com), sign-in, add your prometheus-server external IP address in the 'connect cluster' page, and then you are all set!
+Head back to [notikube](notikube.com), sign in, add your prometheus-server external IP address in the 'connect cluster' page, and then you are all set!
 
 ## Meet the team
 - Jesse Chou - [GitHub](https://github.com/jesse-chou/) | [LinkedIn](https://www.linkedin.com/in/jesse-chou/)
@@ -152,8 +152,8 @@ Head back to [notikube](notikube.com), sign-in, add your prometheus-server exter
 - Apiraam Selvabaskaran  - [GitHub](https://github.com/apiraam96) | [LinkedIn](https://www.linkedin.com/in/apiraam-selvabaskaran/)
 
 ## Contribution guidelines
-- Contributions play a vital role in the open-source community. If you'd like to make a contribution to NotiKube please follow the steps below.
+- Contributions play a vital role in the open-source community. If you'd like to contribute to NotiKube please follow the steps below.
    - Fork the project.
-   - Create and work off of your own feature branch.
+   - Create and work off of your feature branch.
    - Create a pull request with a detailed description of your changes using our template to merge your feature branch into dev.
-   - We will review and get back to you!
+   - We will review it and get back to you!
