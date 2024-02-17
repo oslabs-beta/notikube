@@ -80,7 +80,7 @@ const LoginPage = () => {
 
     <div className="grid grid-cols-1 sm:grid-cols-2 w-full">
       <div className="flex flex-col justify-center"> 
-        <form className="max-w-[400px] w-full mx-auto bg-white p-4">
+        <div className="max-w-[400px] w-full mx-auto bg-white p-4">
           <div className="flex justify-center text-4xl font-bold text-center py-6 pr-8">
             <Link href={"/"}>
               <Image className="px-5" src={Logo} alt="logo" width={55} />
@@ -95,6 +95,7 @@ const LoginPage = () => {
             </button>
           </div>
           <hr className="my-5" />
+          <form>
           <div className="flex flex-col py-2">
             <label>Email</label>
             <input
@@ -121,6 +122,7 @@ const LoginPage = () => {
             onClick={(e) => submit(e)}
             value="Submit"
           />
+          </form>
           <p>
             Don&apos;t have an account?{" "}
             <Link
@@ -130,7 +132,7 @@ const LoginPage = () => {
               Create an account here
             </Link>
           </p>
-        </form>
+        </div>
       </div>
       <div className="hidden bg-gray-100 sm:block">
         <Image className="w-full h-screen p-6" src={LogInImage} alt="Login" />
