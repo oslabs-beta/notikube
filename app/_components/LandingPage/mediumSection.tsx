@@ -19,7 +19,7 @@ export default function MediumArticleSection() {
             tackling and how we landed on the idea
           </p>
           <Link
-            href="#"
+            href="https://medium.com/@jessechou7/notikube-incident-management-for-kubernetes-clusters-bab416fbf584"
             className="inline-flex items-center font-medium text-primary-600 hover:text-primary-800 dark:text-primary-500 dark:hover:text-primary-700"
           >
             Learn more

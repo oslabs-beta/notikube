@@ -9,7 +9,7 @@ Getting set up is easy, see instructions below on how to get started. Once the w
 
 NotiKube gives you the power to manage your team's most important alerts so you can get your cluster back to full health in no time. 
 
-Check out our [website](https://notikube.com) and medium article 
+Check out our [website](https://notikube.com) and [medium article](https://medium.com/@jessechou7/notikube-incident-management-for-kubernetes-clusters-bab416fbf584) 
 
 <div align="center">
 	<code><img width="50" src="https://user-images.githubusercontent.com/25181517/202896760-337261ed-ee92-4979-84c4-d4b829c7355d.png" alt="Tailwind CSS" title="Tailwind CSS"/></code>
@@ -149,7 +149,7 @@ Head back to [notikube](notikube.com), sign-in, add your prometheus-server exter
 - Dane Smith  - [GitHub](https://github.com/danealexandersmith) | [LinkedIn](https://www.linkedin.com/in/danealexandersmith/)
 - Derek Coughlan  - [GitHub](https://github.com/derekcoughlan) | [LinkedIn](https://www.linkedin.com/in/derekcoughlan/)
 - Emmanuel Ikhalea  - [GitHub](https://github.com/DeveloperIkhalea) | [LinkedIn](https://www.linkedin.com/in/emmanuel-ikhalea-222781178/)
-- Apiraam Selvaskbaran  - [GitHub](https://github.com/apiraam96) | [LinkedIn](https://www.linkedin.com/in/apiraam-selvabaskaran/)
+- Apiraam Selvabaskaran  - [GitHub](https://github.com/apiraam96) | [LinkedIn](https://www.linkedin.com/in/apiraam-selvabaskaran/)
 
 ## Contribution guidelines
 - Contributions play a vital role in the open-source community. If you'd like to make a contribution to NotiKube please follow the steps below.
